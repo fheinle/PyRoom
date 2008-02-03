@@ -1,0 +1,170 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PyRoom\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2008-02-03 16:36+0100\n"
+"Last-Translator: Bruno Bord <bruno@jehaisleprintemps.ne>\n"
+"Language-Team: Bruno Bord <bruno@jehaisleprintemps.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+
+#: writeroom.py:75
+msgid "* Unnamed *"
+msgstr "* Inconnu *"
+
+#: writeroom.py:78
+msgid ""
+"PyRoom - an adaptation of write room\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord\n"
+"\n"
+"This program is free software: you can redistribute it and/or modify it under\n"
+"the terms of the GNU General Public License as published by the Free Software\n"
+"Foundation, either version 3 of the License, or (at your option) any later\n"
+"version.\n"
+"\n"
+"Usage:\n"
+"------\n"
+"\n"
+"pyroom.py [-style] file1 file2 ...\n"
+"style can be either 'blue', 'green', 'darkgreen'\n"
+"\n"
+"\n"
+"Commands:\n"
+"---------\n"
+"Control-H: Show help in a new buffer\n"
+"Control-I: Show buffer information\n"
+"Control-L: Toggle line number\n"
+"Control-N: Create a new buffer\n"
+"Control-O: Open a file in a new buffer\n"
+"Control-Q: Quit\n"
+"Control-S: Save current buffer\n"
+"Control-Shift-S: Save current buffer as\n"
+"Control-W: Close buffer and exit if it was the last buffer\n"
+"Control-Y: Redo last typing\n"
+"Control-Z: Undo last typing\n"
+"Control-Left: Switch to previous buffer\n"
+"Control-Right: Switch to next buffer\n"
+"Control-Plus: Increases font size\n"
+"Control-Minus: Decreases font size\n"
+"\n"
+"Warnings:\n"
+"---------\n"
+"No autosave.\n"
+"No question whether to close a modified buffer or not\n"
+msgstr ""
+"PyRoom - une adapation de write room\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord\n"
+"\n"
+"This program is free software: you can redistribute it and/or modify it under\n"
+"the terms of the GNU General Public License as published by the Free Software\n"
+"Foundation, either version 3 of the License, or (at your option) any later\n"
+"version.\n"
+"\n"
+"Utilisation :\n"
+"------\n"
+"\n"
+"pyroom.py [-style] file1 file2 ...\n"
+"le style peut être 'blue', 'green', 'darkgreen'\n"
+"\n"
+"\n"
+"Commandes :\n"
+"---------\n"
+"Control-H: Affiche l'aide dans un nouveau tampon\n"
+"Control-I: Montre les infos du tampon\n"
+"Control-L: Basculer l'affichage des numéros de ligne\n"
+"Control-N: Créer un nouveau tampon\n"
+"Control-O: Ouvrir un nouveau fichier\n"
+"Control-Q: Quitter\n"
+"Control-S: Enregistrer le tampon courant\n"
+"Control-Shift-S: Enregistrer sous...\n"
+"Control-W: Fermer le tampon en cours, et sortir si celui-ci était le dernier tampon\n"
+"Control-Y: Refaire la dernière frappe\n"
+"Control-Z: Annuler la dernière frappe\n"
+"Control-Gauche: Basculer vers le tampon précédent\n"
+"Control-Droit: Basculer vers le tampon suivant\n"
+"Control-Plus: Augmenter la taille de la police\n"
+"Control-Minus: Diminuer la taille de la police\n"
+"\n"
+"Alertes :\n"
+"---------\n"
+"Pas de sauvegarde automatique.\n"
+"Le programme ne pose pas de question quand on ferme un tampon modifié ou non.\n"
+
+#: writeroom.py:224
+msgid "Welcome to PyRoom 1.0, type Control-H for help"
+msgstr "Bienvenue dans la PyRoom 1.0, tapez Ctrl-H pour l'aide"
+
+#: writeroom.py:316
+#, python-format
+msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
+msgstr "Passage au tampon %(buffer_id)d (%(buffer_name)s)"
+
+#: writeroom.py:404
+msgid " (modified)"
+msgstr "(modifié)"
+
+#: writeroom.py:407
+#, python-format
+msgid "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), %(word_count)d word(s), %(lines)d line(s)"
+msgstr "Tampon %(buffer_id)d : %(buffer_name)s%(status)s, %(char_count)d octet(s), %(word_count)d mot(s), %(lines)d lignes(s)"
+
+#: writeroom.py:440
+msgid "No more undo!"
+msgstr "Plus rien à annuler !"
+
+#: writeroom.py:449
+msgid "No more redo!"
+msgstr "Plus rien à refaire !"
+
+#: writeroom.py:478
+#, python-format
+msgid "File %s open"
+msgstr "Fichier %s ouvert"
+
+#: writeroom.py:481
+#, python-format
+msgid ""
+"Unable to open %(filename)s\n"
+" %(traceback)s\n"
+msgstr ""
+"Impossible d'ouvrir le fichier %(filename)s\n"
+"%(traceback)s\n"
+
+#: writeroom.py:486
+#, python-format
+msgid "Failed to open %s"
+msgstr "Échec dans l'ouverture de %s"
+
+#: writeroom.py:490
+#: writeroom.py:525
+msgid "Closed, no files selected"
+msgstr "Fermé, pas de fichier sélectionné"
+
+#: writeroom.py:505
+#, python-format
+msgid "File %s saved"
+msgstr "Fichier %s enregistré"
+
+#: writeroom.py:535
+msgid "Font size increased"
+msgstr "Taille de la police augmentée"
+
+#: writeroom.py:542
+msgid "Font size decreased"
+msgstr "Taille de la police diminuée"
+
+#: writeroom.py:573
+#, python-format
+msgid "Unable to open %s\n"
+msgstr "Impossible d'ouvrir %s\n"
+
+#: writeroom.py:575
+#, python-format
+msgid "Unable to open %(filename)s %(traceback)s"
+msgstr "Impossible d'ouvrir le fichier %(filename)s %(traceback)s"
+
