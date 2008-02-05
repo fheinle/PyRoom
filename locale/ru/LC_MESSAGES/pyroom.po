@@ -1,0 +1,182 @@
+# Russian translation for pyroom
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the pyroom package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pyroom\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-01-31 20:39+0100\n"
+"PO-Revision-Date: 2008-02-05 00:02+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Russian <ru@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2008-02-05 23:08+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: pyroom.py:75
+msgid "* Unnamed *"
+msgstr "* Без названия *"
+
+#: pyroom.py:78
+msgid ""
+"PyRoom - an adaptation of write room\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord\n"
+"\n"
+"This program is free software: you can redistribute it and/or modify it "
+"under\n"
+"the terms of the GNU General Public License as published by the Free "
+"Software\n"
+"Foundation, either version 3 of the License, or (at your option) any later\n"
+"version.\n"
+"\n"
+"Usage:\n"
+"------\n"
+"\n"
+"pyroom.py [-style] file1 file2 ...\n"
+"style can be either 'blue', 'green', 'darkgreen'\n"
+"\n"
+"\n"
+"Commands:\n"
+"---------\n"
+"Control-H: Show help in a new buffer\n"
+"Control-I: Show buffer information\n"
+"Control-L: Toggle line number\n"
+"Control-N: Create a new buffer\n"
+"Control-O: Open a file in a new buffer\n"
+"Control-Q: Quit\n"
+"Control-S: Save current buffer\n"
+"Control-Shift-S: Save current buffer as\n"
+"Control-W: Close buffer and exit if it was the last buffer\n"
+"Control-Y: Redo last typing\n"
+"Control-Z: Undo last typing\n"
+"Control-Left: Switch to previous buffer\n"
+"Control-Right: Switch to next buffer\n"
+"Control-Plus: Increases font size\n"
+"Control-Minus: Decreases font size\n"
+"\n"
+"Warnings:\n"
+"---------\n"
+"No autosave.\n"
+"No question whether to close a modified buffer or not\n"
+msgstr ""
+"PyRoom - программа писательской комнаты\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord\n"
+"\n"
+"This program is free software: you can redistribute it and/or modify it "
+"under\n"
+"the terms of the GNU General Public License as published by the Free "
+"Software\n"
+"Foundation, either version 3 of the License, or (at your option) any later\n"
+"version.\n"
+"\n"
+"Запуск:\n"
+"------\n"
+"\n"
+"pyroom.py [-style] file1 file2 ...\n"
+"style может быть одним из следующих 'blue', 'green', 'darkgreen'\n"
+"\n"
+"\n"
+"Команды:\n"
+"---------\n"
+"Ctrl-H: Показать справку в новом буфере\n"
+"Ctrl-I: Показать информацию о буфере\n"
+"Ctrl-L: Показать/скрыть номера строк\n"
+"Ctrl-N: Создать новый буфер\n"
+"Ctrl-O: Открыть файл в новом буфере\n"
+"Ctrl-Q: Выход\n"
+"Ctrl-S: Сохранить текущий буфер\n"
+"Ctrl-Shift-S: Сохранить текущий буфер как...\n"
+"Ctrl-W: Закрыть буфер и выйти из программы\n"
+"Ctrl-Y: Восстановить последнее\n"
+"Ctrl-Z: Отменить последнее\n"
+"Ctrl-Влево: Перейти к предыдущему буферу\n"
+"Ctrl-Вправо: Перейти к следующему буферу\n"
+"Ctrl-Плюс: Увеличить размер шрифта\n"
+"Ctrl-Минус: Уменьшить размер шрифта\n"
+"\n"
+"Предупреждения:\n"
+"---------\n"
+"Нет автосохранения.\n"
+"Нет подтверждающих вопросов при выходе из несохранённого буфера\n"
+
+#: pyroom.py:224
+msgid "Welcome to PyRoom 1.0, type Control-H for help"
+msgstr "Добро пожаловать в PyRoom 1.0, нажмите Ctrl-H для справки"
+
+#: pyroom.py:316
+#, python-format
+msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
+msgstr "Перейти к буферу %(buffer_id)d (%(buffer_name)s)"
+
+#: pyroom.py:404
+msgid " (modified)"
+msgstr " (изменён)"
+
+#: pyroom.py:407
+#, python-format
+msgid ""
+"Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), "
+"%(word_count)d word(s), %(lines)d line(s)"
+msgstr ""
+"Буфер %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d байт(ов), "
+"%(word_count)d слов(а), %(lines)d строк(и)"
+
+#: pyroom.py:440
+msgid "No more undo!"
+msgstr "Невозможно отменить"
+
+#: pyroom.py:449
+msgid "No more redo!"
+msgstr "Невозможно восстановить"
+
+#: pyroom.py:478
+#, python-format
+msgid "File %s open"
+msgstr "Файл %s открыт"
+
+#: pyroom.py:481
+#, python-format
+msgid ""
+"Unable to open %(filename)s\n"
+" %(traceback)s\n"
+msgstr ""
+"Невозможно открыть %(filename)s\n"
+"%(traceback)s\n"
+
+#: pyroom.py:486
+#, python-format
+msgid "Failed to open %s"
+msgstr "Не удалось открыть %s"
+
+#: pyroom.py:490 pyroom.py:525
+msgid "Closed, no files selected"
+msgstr "Закрыт, файлы не выбраны"
+
+#: pyroom.py:505
+#, python-format
+msgid "File %s saved"
+msgstr "Файл %s сохранён"
+
+#: pyroom.py:535
+msgid "Font size increased"
+msgstr "Размер шрифта увеличен"
+
+#: pyroom.py:542
+msgid "Font size decreased"
+msgstr "Размер шрифта уменьшен"
+
+#: pyroom.py:573
+#, python-format
+msgid "Unable to open %s\n"
+msgstr "Невозможно открыть %s\n"
+
+#: pyroom.py:575
+#, python-format
+msgid "Unable to open %(filename)s %(traceback)s"
+msgstr "Невозможно открыть %(filename)s %(traceback)s"

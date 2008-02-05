@@ -1,0 +1,181 @@
+# Portuguese translation for pyroom
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the pyroom package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pyroom\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2008-01-31 20:39+0100\n"
+"PO-Revision-Date: 2008-02-05 12:50+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Portuguese <pt@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2008-02-05 23:08+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: pyroom.py:75
+msgid "* Unnamed *"
+msgstr "* Sem Nome *"
+
+#: pyroom.py:78
+msgid ""
+"PyRoom - an adaptation of write room\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord\n"
+"\n"
+"This program is free software: you can redistribute it and/or modify it "
+"under\n"
+"the terms of the GNU General Public License as published by the Free "
+"Software\n"
+"Foundation, either version 3 of the License, or (at your option) any later\n"
+"version.\n"
+"\n"
+"Usage:\n"
+"------\n"
+"\n"
+"pyroom.py [-style] file1 file2 ...\n"
+"style can be either 'blue', 'green', 'darkgreen'\n"
+"\n"
+"\n"
+"Commands:\n"
+"---------\n"
+"Control-H: Show help in a new buffer\n"
+"Control-I: Show buffer information\n"
+"Control-L: Toggle line number\n"
+"Control-N: Create a new buffer\n"
+"Control-O: Open a file in a new buffer\n"
+"Control-Q: Quit\n"
+"Control-S: Save current buffer\n"
+"Control-Shift-S: Save current buffer as\n"
+"Control-W: Close buffer and exit if it was the last buffer\n"
+"Control-Y: Redo last typing\n"
+"Control-Z: Undo last typing\n"
+"Control-Left: Switch to previous buffer\n"
+"Control-Right: Switch to next buffer\n"
+"Control-Plus: Increases font size\n"
+"Control-Minus: Decreases font size\n"
+"\n"
+"Warnings:\n"
+"---------\n"
+"No autosave.\n"
+"No question whether to close a modified buffer or not\n"
+msgstr ""
+"PyRoom - uma adaptação do write room\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord\n"
+"\n"
+"Este programa é software livre: pode redistribuílo e/ou modifica-lo sobre os "
+"termos da GNU General Public License como publicada pela Free Software\n"
+"Foundation, quer na versão 3 da Licença, ou (se desejar) a qualquer versão "
+"posterior.\n"
+"\n"
+"Uso:\n"
+"------\n"
+"\n"
+"pyroom.py [-estilo] file1 file2 ...\n"
+"estilo pode ser 'blue', 'green', 'darkgreen' (respectivamente azul, verde e "
+"verde escuro)\n"
+"\n"
+"\n"
+"Comandos:\n"
+"---------\n"
+"Control-H: Mostra a ajuda num novo buffer\n"
+"Control-I: Mostra informações sobre o buffer information\n"
+"Control-L: Mostrar/Não Mostrar números das linhas\n"
+"Control-N: Criar um novo buffer\n"
+"Control-O: Abrir ficheiro num novo buffer\n"
+"Control-Q: Sair\n"
+"Control-S: Gravar o buffer actual\n"
+"Control-Shift-S: Gravar o buffer actual como\n"
+"Control-W: Fechar o buffer e sair se este era o último buffer\n"
+"Control-Y: Refazer\n"
+"Control-Z: Desfazer\n"
+"Control-Left: Mudar para o buffer anterior\n"
+"Control-Right: Mudar para o próximo buffer\n"
+"Control-Plus: Aumentar o tamanho do texto\n"
+"Control-Minus: Diminuir o tamanho do texto\n"
+"\n"
+"Avisos:\n"
+"---------\n"
+"Não grava automaticamente.\n"
+"Não pergunta antes de fechar um buffer modificado\n"
+
+#: pyroom.py:224
+msgid "Welcome to PyRoom 1.0, type Control-H for help"
+msgstr "Bem vindo ao PyRoom 1.0, tecle Control-H para ver a ajuda"
+
+#: pyroom.py:316
+#, python-format
+msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
+msgstr "Mudando para o buffer %(buffer_id)d (%(buffer_name)s)"
+
+#: pyroom.py:404
+msgid " (modified)"
+msgstr " (modificado)"
+
+#: pyroom.py:407
+#, python-format
+msgid ""
+"Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), "
+"%(word_count)d word(s), %(lines)d line(s)"
+msgstr ""
+"Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), "
+"%(word_count)d palavra(s), %(lines)d linha(s)"
+
+#: pyroom.py:440
+msgid "No more undo!"
+msgstr "Não é possível recuar mais!"
+
+#: pyroom.py:449
+msgid "No more redo!"
+msgstr "Não é possível refazer mais!"
+
+#: pyroom.py:478
+#, python-format
+msgid "File %s open"
+msgstr "Ficheiro %s aberto"
+
+#: pyroom.py:481
+#, python-format
+msgid ""
+"Unable to open %(filename)s\n"
+" %(traceback)s\n"
+msgstr ""
+"Não foi possível abrir %(filename)s\n"
+" %(traceback)s\n"
+
+#: pyroom.py:486
+#, python-format
+msgid "Failed to open %s"
+msgstr "Falha ao abrir %s"
+
+#: pyroom.py:490 pyroom.py:525
+msgid "Closed, no files selected"
+msgstr "Fechado, nenhum ficheiro seleccionado"
+
+#: pyroom.py:505
+#, python-format
+msgid "File %s saved"
+msgstr "Ficheiro %s gravado"
+
+#: pyroom.py:535
+msgid "Font size increased"
+msgstr "Tamanho de letra aumentado"
+
+#: pyroom.py:542
+msgid "Font size decreased"
+msgstr "Tamanho de letra diminuido"
+
+#: pyroom.py:573
+#, python-format
+msgid "Unable to open %s\n"
+msgstr "Não é possível abir %s\n"
+
+#: pyroom.py:575
+#, python-format
+msgid "Unable to open %(filename)s %(traceback)s"
+msgstr "Não foi possível abrir %(filename)s %(traceback)s"
