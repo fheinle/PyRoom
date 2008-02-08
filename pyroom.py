@@ -476,14 +476,24 @@ class PyRoom:
                 f.close()
                 self.status.set_text(_('File %s open')
                          % buffer.filename)
-            except:
-                buffer.set_text(_('''Unable to open %(filename)s
- %(traceback)s
-'''
-                                 % {'filename': buffer.filename,
-                                'traceback': traceback.format_exc()}))
+            except IOError, (errno, strerror):
+                errortext = '''Unable to open %(filename)s.''' % {'filename': buffer.filename}
+                if errno == 2:
+                  errortext += ' The file does not exist.'
+                elif errno == 13:
+                  errortext += ' You do not have permission to open the file.'
+                buffer.set_text(_(errortext))
+                print ('''Unable to open %(filename)s. %(traceback)s'''
+                  % {'filename': buffer.filename, 'traceback': traceback.format_exc()})
                 self.status.set_text(_('Failed to open %s')
                          % buffer.filename)
+                buffer.filename = FILE_UNNAMED
+            except:
+                buffer.set_text(_('Unable to open %s\n'
+                                 % buffer.filename))
+                print ('''Unable to open %(filename)s. %(traceback)s'''
+                                 % {'filename': buffer.filename,
+                                'traceback': traceback.format_exc()})
                 buffer.filename = FILE_UNNAMED
         else:
             self.status.set_text(_('Closed, no files selected'))
@@ -568,13 +578,23 @@ if __name__ == '__main__':
                     buffer.set_text(unicode(f.read(), 'utf-8'))
                     buffer.end_not_undoable_action()
                     f.close()
-                except:
-                    buffer.set_text(_('Unable to open %s\n'
-                                     % buffer.filename))
-                    buffer.set_text(_('Unable to open %(filename)s %(traceback)s')
+                except IOError, (errno, strerror):
+                    errortext = '''Unable to open %(filename)s.''' % {'filename': buffer.filename}
+                    if errno == 13:
+                        errortext += ' You do not have permission to open the file.'
+                    buffer.set_text(_(errortext))
+                    print ('''Unable to open %(filename)s. %(traceback)s'''
                                      % {'filename': buffer.filename,
                                     'traceback': traceback.format_exc()})
                     buffer.filename = FILE_UNNAMED
+                except:
+                    buffer.set_text(_('Unable to open %s\n'
+                                     % buffer.filename))
+                    print ('''Unable to open %(filename)s. %(traceback)s'''
+                                     % {'filename': buffer.filename,
+                                    'traceback': traceback.format_exc()})
+                    buffer.filename = FILE_UNNAMED
+
         pyroom.set_buffer(0)
         pyroom.close_buffer()
     gtk.main()
