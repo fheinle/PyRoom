@@ -248,6 +248,7 @@ class PyRoom:
             gtk.keysyms.y: self.redo,
             gtk.keysyms.z: self.undo,
             gtk.keysyms.plus: self.plus,
+            gtk.keysyms.equal: self.plus,
             gtk.keysyms.minus: self.minus,
             }
         if event.state & gtk.gdk.CONTROL_MASK:
