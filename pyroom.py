@@ -87,7 +87,7 @@ version.
 Usage:
 ------
 
-pyroom.py [-style] file1 file2 ...
+Usage: pyroom [-v] [--style={style name}] file1 file2
 style can be either 'blue', 'green', 'darkgreen'
 
 
@@ -566,7 +566,7 @@ if __name__ == '__main__':
         args, files = getopt.getopt(sys.argv[1:],'v', ['style='])
     except getopt.GetoptError:
     # Print help information
-        print "Usage: pyroom [-v] [--style={style name}]"
+        print "Usage: pyroom [-v] [--style={style name}] file1 file2"
         sys.exit(2)
 
     for arg, val in args:
