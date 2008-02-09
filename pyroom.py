@@ -575,15 +575,6 @@ if __name__ == '__main__':
         elif arg == '--style':
             style = val
 
-    # Look for style and file on command line
-#    for arg in sys.argv[1:]:
-#        if arg[0] == '-':
-#            t = arg[1:]
-#            if styles.has_key(arg[1:]):
-#                style = arg[1:]
-#        else:
-#            files.append(arg)
-
     # Create relevant buffers for file and load them
     pyroom = PyRoom(verbose, styles[style])
     if len(files):
