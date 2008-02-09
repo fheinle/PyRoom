@@ -31,6 +31,7 @@ import gtk
 import pango
 import gtksourceview
 import gettext
+import getopt
 
 gettext.install('pyroom', 'locale')
 
@@ -169,9 +170,10 @@ class PyRoom:
     buffers = []
     current = 0
 
-    def __init__(self, style):
+    def __init__(self, verbose, style):
 
         self.style = style
+        self.verbose = verbose
 
         # Main window
 
@@ -479,21 +481,23 @@ class PyRoom:
             except IOError, (errno, strerror):
                 errortext = '''Unable to open %(filename)s.''' % {'filename': buffer.filename}
                 if errno == 2:
-                  errortext += ' The file does not exist.'
+                    errortext += ' The file does not exist.'
                 elif errno == 13:
-                  errortext += ' You do not have permission to open the file.'
+                    errortext += ' You do not have permission to open the file.'
                 buffer.set_text(_(errortext))
-                print ('''Unable to open %(filename)s. %(traceback)s'''
-                  % {'filename': buffer.filename, 'traceback': traceback.format_exc()})
+                if verbose:
+                    print ('''Unable to open %(filename)s. %(traceback)s'''
+                        % {'filename': buffer.filename, 'traceback': traceback.format_exc()})
                 self.status.set_text(_('Failed to open %s')
-                         % buffer.filename)
+                    % buffer.filename)
                 buffer.filename = FILE_UNNAMED
             except:
                 buffer.set_text(_('Unable to open %s\n'
                                  % buffer.filename))
-                print ('''Unable to open %(filename)s. %(traceback)s'''
-                                 % {'filename': buffer.filename,
-                                'traceback': traceback.format_exc()})
+                if verbose:
+                    print ('''Unable to open %(filename)s. %(traceback)s'''
+                        % {'filename': buffer.filename,
+                        'traceback': traceback.format_exc()})
                 buffer.filename = FILE_UNNAMED
         else:
             self.status.set_text(_('Closed, no files selected'))
@@ -553,19 +557,35 @@ class PyRoom:
 
 if __name__ == '__main__':
     style = 'green'
+    verbose = False
     files = []
 
+
+    # Get commandline args
+    try:
+        args, files = getopt.getopt(sys.argv[1:],'v', ['style='])
+    except getopt.GetoptError:
+    # Print help information
+        print "Usage: pyroom [-v] [--style={style name}]"
+        sys.exit(2)
+
+    for arg, val in args:
+        if arg == '-v':
+            verbose = True
+        elif arg == '--style':
+            style = val
+
     # Look for style and file on command line
-    for arg in sys.argv[1:]:
-        if arg[0] == '-':
-            t = arg[1:]
-            if styles.has_key(arg[1:]):
-                style = arg[1:]
-        else:
-            files.append(arg)
+#    for arg in sys.argv[1:]:
+#        if arg[0] == '-':
+#            t = arg[1:]
+#            if styles.has_key(arg[1:]):
+#                style = arg[1:]
+#        else:
+#            files.append(arg)
 
     # Create relevant buffers for file and load them
-    pyroom = PyRoom(styles[style])
+    pyroom = PyRoom(verbose, styles[style])
     if len(files):
         for filename in files:
             buffer = pyroom.new_buffer()
@@ -583,16 +603,18 @@ if __name__ == '__main__':
                     if errno == 13:
                         errortext += ' You do not have permission to open the file.'
                     buffer.set_text(_(errortext))
-                    print ('''Unable to open %(filename)s. %(traceback)s'''
-                                     % {'filename': buffer.filename,
-                                    'traceback': traceback.format_exc()})
+                    if verbose:
+                        print ('''Unable to open %(filename)s. %(traceback)s'''
+                                         % {'filename': buffer.filename,
+                                         'traceback': traceback.format_exc()})
                     buffer.filename = FILE_UNNAMED
                 except:
                     buffer.set_text(_('Unable to open %s\n'
                                      % buffer.filename))
-                    print ('''Unable to open %(filename)s. %(traceback)s'''
-                                     % {'filename': buffer.filename,
-                                    'traceback': traceback.format_exc()})
+                    if verbose:
+                        print ('''Unable to open %(filename)s. %(traceback)s'''
+                                         % {'filename': buffer.filename,
+                                        'traceback': traceback.format_exc()})
                     buffer.filename = FILE_UNNAMED
 
         pyroom.set_buffer(0)
