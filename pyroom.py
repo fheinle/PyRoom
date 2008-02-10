@@ -103,8 +103,8 @@ Control-Shift-S: Save current buffer as
 Control-W: Close buffer and exit if it was the last buffer
 Control-Y: Redo last typing
 Control-Z: Undo last typing
-Control-Left: Switch to previous buffer
-Control-Right: Switch to next buffer
+Control-Page Up: Switch to previous buffer
+Control-Page Down: Switch to next buffer
 Control-Plus: Increases font size
 Control-Minus: Decreases font size
 
@@ -235,8 +235,8 @@ class PyRoom:
         """ key press event dispatcher """
 
         bindings = {
-            gtk.keysyms.Left: self.prev_buffer,
-            gtk.keysyms.Right: self.next_buffer,
+            gtk.keysyms.Page_Up: self.prev_buffer,
+            gtk.keysyms.Page_Down: self.next_buffer,
             gtk.keysyms.h: self.show_help,
             gtk.keysyms.H: self.show_help,
             gtk.keysyms.i: self.show_info,
