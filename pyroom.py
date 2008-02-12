@@ -178,8 +178,11 @@ class PyRoom:
         # Main window
 
         self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
+        #self.gdk = gtk.gdk.Window(parent = self.window, width=600, height = 600, window_type= gtk.gdk.WINDOW_TOPLEVEL)
         self.window.set_name('PyRoom')
-        self.window.fullscreen()
+        self.window.set_title("PyRoom")
+
+        
         self.window.connect('delete_event', self.delete_event)
         self.window.connect('destroy', self.destroy)
 
@@ -221,9 +224,10 @@ class PyRoom:
         self.status.set_alignment(0.0, 0.5)
         self.status.set_justify(gtk.JUSTIFY_LEFT)
         self.apply_style()
-        self.window.show_all()
         self.status.set_text(
             _('Welcome to PyRoom 1.0, type Control-H for help'))
+        self.window.show_all()
+        self.window.fullscreen()
 
     def delete_event(self, widget, event, data=None):
         """ Quit """
