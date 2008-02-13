@@ -3,7 +3,7 @@
 # ------------------------------------------------------------------------------
 # PyRoom - A clone of WriteRoom
 # Copyright (c) 2007 Nicolas P. Rougier & NoWhereMan
-# Copyright (c) 2008 Bruno Bord
+# Copyright (c) 2008 The Pyroom Team - See AUTHORS file for more information
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -182,7 +182,7 @@ class PyRoom:
         self.window.set_name('PyRoom')
         self.window.set_title("PyRoom")
 
-        
+
         self.window.connect('delete_event', self.delete_event)
         self.window.connect('destroy', self.destroy)
 
