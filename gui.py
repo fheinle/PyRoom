@@ -3,12 +3,25 @@ import gtk
 import pango
 import gtksourceview
 import restore_session
+import gtk.glade
+import styles
+
+styleslist = ['green','darkgreen','blue','c64','locontrast','cupid','banker']
+
 class GUI:
     def __init__(self, style):
 
         self.status = FadeLabel()
         self.style = style
 
+        # Preferences UI
+        self.wTree = gtk.glade.XML("preferences.glade", "dialog-preferences")
+        self.window = self.wTree.get_widget("dialog-preferences")
+        self.fontpreference = self.wTree.get_widget("fontbutton")
+        self.colorpreference = self.wTree.get_widget("colorbutton")
+        self.bgpreference = self.wTree.get_widget("bgbutton")
+        self.borderpreference = self.wTree.get_widget("borderbutton")
+        self.presetscombobox = self.wTree.get_widget("presetscombobox")
 
         # Main window
 
@@ -45,11 +58,19 @@ class GUI:
         self.vbox.set_property('resize-mode', gtk.RESIZE_PARENT)
         self.vbox.show_all()
 
+
+        for i in styleslist:
+            self.presetscombobox.append_text(i)
+        self.presetscombobox.set_active(0)
+
+        dic = { 
+                "on_MainWindow_destroy" : self.QuitEvent,
+                "on_button-ok_clicked" : self.set_preferences,
+                "on_button-close_clicked" : self.kill_preferences
+                }
+        self.wTree.signal_autoconnect(dic)
+
         # Status
-
-
-
-
         self.hbox = gtk.HBox()
         self.hbox.set_spacing(12)
         self.hbox.pack_end(self.status, True, True, 0)
@@ -152,3 +173,30 @@ class GUI:
         self.fixed.move(self.vbox, int(((1 - self.style['size'][0]) * w)/ 2),
             int(((1 - self.style['size'][1]) * h) / 2))
         self.textbox.set_border_width(self.style['padding'])
+
+        ## Preferences UI methods
+    def set_preferences(self, widget, data=None):
+        self.fontname = self.fontpreference.get_font_name()
+        self.fontsize = int(self.fontname[-2:])
+        self.colorname = gtk.gdk.Color.to_string(self.colorpreference.get_color())
+        self.bgname = gtk.gdk.Color.to_string(self.bgpreference.get_color())
+        self.bordername = gtk.gdk.Color.to_string(self.borderpreference.get_color())
+        self.preset = self.presetscombobox.get_active_text()
+
+        if self.preset == 'Custom':
+            pass
+        else:
+            self.apply_style(styles.styles[self.preset])
+        self.dlg.hide()
+
+    def QuitEvent(self, widget, data=None):
+    	print "Exiting..."
+    	gtk.main_quit()
+    	return False
+    	
+    def showpreferences(self):
+		self.dlg = self.wTree.get_widget("dialog-preferences")
+		self.dlg.show()
+
+    def kill_preferences(self, widget, data=None):
+        self.dlg.hide()
