@@ -94,7 +94,7 @@ styles = {
         'name' : 'amber',
         'background' : '#151000',
         'foreground' : '#AE8400',
-        'lines' : '#AE8400',
+        'lines' : '#5E4803',
         'border' : '#151000',
         'info' : '#AE8400',
         'font' : 'DejaVu Sans Mono',
