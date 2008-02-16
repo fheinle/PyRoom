@@ -58,7 +58,6 @@ class GUI:
         self.vbox.set_property('resize-mode', gtk.RESIZE_PARENT)
         self.vbox.show_all()
 
-
         for i in styleslist:
             self.presetscombobox.append_text(i)
         self.presetscombobox.set_active(0)
@@ -77,7 +76,7 @@ class GUI:
         self.vbox.pack_end(self.hbox, False, False, 0)
         self.status.set_alignment(0.0, 0.5)
         self.status.set_justify(gtk.JUSTIFY_LEFT)
-        self.apply_style()
+
 
     def quit(self):
         """ quit pyroom """
@@ -182,7 +181,14 @@ class GUI:
         self.bgname = gtk.gdk.Color.to_string(self.bgpreference.get_color())
         self.bordername = gtk.gdk.Color.to_string(self.borderpreference.get_color())
         self.preset = self.presetscombobox.get_active_text()
-
+        gtk.rc_parse_string("""
+	    style "pyroom-colored-cursor" {
+        GtkTextView::cursor-color = '"""
+                             + self.style['foreground']
+                             + """'
+        }
+        class "GtkWidget" style "pyroom-colored-cursor"
+	    """)
         if self.preset == 'Custom':
             pass
         else:
