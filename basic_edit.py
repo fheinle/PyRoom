@@ -6,9 +6,31 @@ from gui import GUI
 
 import restore_session #Allows a session to be restored with "-s"
 import check_unsaved #Checks that a buffer is unmodified before closing
-
+import styles
 
 FILE_UNNAMED = _('* Unnamed *')
+
+USAGE = _('Usage: pyroom [-v] [--style={style name}] file1 file2')
+
+STYLES = ', '.join(style for style in styles.styles)
+
+KEY_BINDINGS = '\n'.join([
+_('Control-H: Show help in a new buffer'),
+_('Control-I: Show buffer information'),
+_('Control-L: Toggle line number'),
+_('Control-N: Create a new buffer'),
+_('Control-O: Open a file in a new buffer'),
+_('Control-Q: Quit'),
+_('Control-S: Save current buffer'),
+_('Control-Shift-S: Save current buffer as'),
+_('Control-W: Close buffer and exit if it was the last buffer'),
+_('Control-Y: Redo last typing'),
+_('Control-Z: Undo last typing'),
+_('Control-Page Up: Switch to previous buffer'),
+_('Control-Page Down: Switch to next buffer'),
+_('Control-Plus: Increases font size'),
+_('Control-Minus: Decreases font size'),]
+)
 
 HELP = \
     _("""PyRoom - an adaptation of write room
@@ -23,34 +45,19 @@ version.
 Usage:
 ------
 
-Usage: pyroom [-v] [--style={style name}] file1 file2
-style can be either 'blue', 'green', 'darkgreen', 'banker', 'cupid'
-                    'locontrast', 'c64'
+%s
+style can be either: %s
 
 
 Commands:
 ---------
-Control-H: Show help in a new buffer
-Control-I: Show buffer information
-Control-L: Toggle line number
-Control-N: Create a new buffer
-Control-O: Open a file in a new buffer
-Control-Q: Quit
-Control-S: Save current buffer
-Control-Shift-S: Save current buffer as
-Control-W: Close buffer and exit if it was the last buffer
-Control-Y: Redo last typing
-Control-Z: Undo last typing
-Control-Page Up: Switch to previous buffer
-Control-Page Down: Switch to next buffer
-Control-Plus: Increases font size
-Control-Minus: Decreases font size
+%s
 
 Warnings:
 ---------
 No autosave.
 No question whether to close a modified buffer or not
-""")
+""" % (USAGE, STYLES, KEY_BINDINGS))
 
 class BasicEdit():
     def __init__(self,style,verbose, ret):
