@@ -66,9 +66,9 @@ class BasicEdit():
         restore_session.open_session(self, ret)
         self.textbox.connect('key-press-event', self.key_press_event)
         self.status.set_text(
-            _('Welcome to PyRoom 1.0, type Control-H for help'))  
+            _('Welcome to PyRoom 1.0, type Control-H for help'))
         self.window.show_all()
-        self.window.fullscreen()     
+        self.window.fullscreen()
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
 
@@ -112,9 +112,9 @@ class BasicEdit():
             if bindings.has_key(event.keyval):
                 bindings[event.keyval]()
                 return True
-        return False 
+        return False
 
-        
+
     current = 0
     buffers = []
     def show_info(self):
@@ -181,14 +181,14 @@ class BasicEdit():
                 self.status.set_text(_('File %s open')
                          % buffer.filename)
             except IOError, (errno, strerror):
-                errortext = '''Unable to open %(filename)s.''' % {'filename': buffer.filename}
+                errortext = _('Unable to open %(filename)s.' % {'filename': buffer.filename})
                 if errno == 2:
-                    errortext += ' The file does not exist.'
+                    errortext += _(' The file does not exist.')
                 elif errno == 13:
-                    errortext += ' You do not have permission to open the file.'
+                    errortext += _(' You do not have permission to open the file.')
                 buffer.set_text(_(errortext))
                 if verbose:
-                    print ('''Unable to open %(filename)s. %(traceback)s'''
+                    print ('Unable to open %(filename)s. %(traceback)s'
                         % {'filename': buffer.filename, 'traceback': traceback.format_exc()})
                 self.status.set_text(_('Failed to open %s')
                     % buffer.filename)
@@ -197,7 +197,7 @@ class BasicEdit():
                 buffer.set_text(_('Unable to open %s\n'
                                  % buffer.filename))
                 if verbose:
-                    print ('''Unable to open %(filename)s. %(traceback)s'''
+                    print ('Unable to open %(filename)s. %(traceback)s'
                         % {'filename': buffer.filename,
                         'traceback': traceback.format_exc()})
                 buffer.filename = FILE_UNNAMED
@@ -226,7 +226,7 @@ class BasicEdit():
 
         buffer = self.buffers[self.current]
         chooser = gtk.FileChooserDialog('PyRoom', self.window,
-                gtk.FILE_CHOOSER_ACTION_SAVE, 
+                gtk.FILE_CHOOSER_ACTION_SAVE,
                 buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
                 gtk.STOCK_SAVE, gtk.RESPONSE_OK))
         chooser.set_default_response(gtk.RESPONSE_OK)
@@ -243,7 +243,7 @@ class BasicEdit():
     # BB
 
 
-        
+
     def word_count(self, buffer):
         """ Word count in a text buffer """
 
@@ -317,12 +317,11 @@ class BasicEdit():
         else:
             self.current = len(self.buffers) - 1
         self.set_buffer(self.current)
-        
+
     def quit(self):
         #Add any functions that you want to take place here before pyRoom quits
         check_unsaved.save_unsaved_on_exit(self)
         restore_session.save_session(self)
         self.gui.quit()
 
-
-
+# EOF

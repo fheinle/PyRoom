@@ -13,7 +13,7 @@ def open_session(self, ret):
         opensession = open("session", "r")
         files_open = []
         for line in opensession:
-            if line != "* Unnamed *\n":
+            if line != _("* Unnamed *\n"):
                 files_open.append(line)
 
 
@@ -34,15 +34,15 @@ def open_session(self, ret):
                 self.status.set_text(_('File %s open')
                             % buffer.filename)
             except IOError, (errno, strerror):
-                errortext = '''Unable to open %(filename)s.''' % {'filename': buffer.filename}
+                errortext = _('Unable to open %(filename)s.' % {'filename': buffer.filename})
                 if errno == 2:
-                    errortext += ' The file does not exist.'
+                    errortext += _(' The file does not exist.')
                 elif errno == 13:
-                    errortext += ' You do not have permission to open the file.'
+                    errortext += _(' You do not have permission to open the file.')
                 buffer.set_text(_(errortext))
                 if verbose:
-                    print ('''Unable to open %(filename)s. %(traceback)s'''
-                        % {'filename': buffer.filename, 'traceback': traceback.format_exc()})
+                    print (_('Unable to open %(filename)s. %(traceback)s'
+                        % {'filename': buffer.filename, 'traceback': traceback.format_exc()}))
                 self.status.set_text(_('Failed to open %s')
                     % buffer.filename)
                 buffer.filename = FILE_UNNAMED
@@ -50,9 +50,9 @@ def open_session(self, ret):
                 buffer.set_text(_('Unable to open %s\n'
                                     % buffer.filename))
                 if verbose:
-                    print ('''Unable to open %(filename)s. %(traceback)s'''
+                    print (_('Unable to open %(filename)s. %(traceback)s'
                         % {'filename': buffer.filename,
-                        'traceback': traceback.format_exc()})
+                        'traceback': traceback.format_exc()}))
                 buffer.filename = FILE_UNNAMED
 
-        
+# EOF

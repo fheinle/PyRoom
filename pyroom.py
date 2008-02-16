@@ -48,7 +48,7 @@ if __name__ == '__main__':
         args, files = getopt.getopt(sys.argv[1:],'vs', ['style='])
     except getopt.GetoptError:
     # Print help information
-        print "Usage: pyroom [-v] [-s] [--style={style name}] file1 file2"
+        print _("Usage: pyroom [-v] [-s] [--style={style name}] file1 file2")
         sys.exit(2)
     style_true = False
     for arg, val in args:
@@ -77,22 +77,23 @@ if __name__ == '__main__':
                 except IOError, (errno, strerror):
                     errortext = '''Unable to open %(filename)s.''' % {'filename': buffer.filename}
                     if errno == 13:
-                        errortext += ' You do not have permission to open the file.'
+                        errortext += _(' You do not have permission to open the file.')
                     buffer.set_text(_(errortext))
                     if verbose:
-                        print ('''Unable to open %(filename)s. %(traceback)s'''
-                                         % {'filename': buffer.filename,
-                                         'traceback': traceback.format_exc()})
+                        print (_('Unable to open %(filename)s. %(traceback)s'
+                                 % {'filename': buffer.filename,
+                                 'traceback': traceback.format_exc()})
+                        )
                     buffer.filename = FILE_UNNAMED
                 except:
                     buffer.set_text(_('Unable to open %s\n'
                                      % buffer.filename))
                     if verbose:
-                        print ('''Unable to open %(filename)s. %(traceback)s'''
-                                         % {'filename': buffer.filename,
-                                        'traceback': traceback.format_exc()})
+                        print (_('Unable to open %(filename)s. %(traceback)s'
+                                % {'filename': buffer.filename,
+                                'traceback': traceback.format_exc()}))
                     buffer.filename = FILE_UNNAMED
-        
+
         pyroom.set_buffer(0)
         pyroom.close_buffer()
 

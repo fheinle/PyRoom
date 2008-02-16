@@ -49,7 +49,7 @@ class GUI:
 
 
 
-        
+
         self.hbox = gtk.HBox()
         self.hbox.set_spacing(12)
         self.hbox.pack_end(self.status, True, True, 0)
@@ -70,15 +70,15 @@ class GUI:
     def destroy(self, widget, data=None):
         """ Quit """
         gtk.main_quit()
-        
+
     def scroll_event(self, widget, event):
-        """\" Scroll event dispatcher """
+        """ Scroll event dispatcher """
 
         if event.direction == gtk.gdk.SCROLL_UP:
             self.scroll_up()
         elif event.direction == gtk.gdk.SCROLL_DOWN:
             self.scroll_down()
-            
+
     def scroll_down(self):
         """ Scroll window down """
 
@@ -109,7 +109,7 @@ class GUI:
         self.style['fontsize'] -= 1
         self.apply_style()
         self.status.set_text(_('Font size decreased'))
-        
+
     def apply_style(self, style=None):
         """ """
 
@@ -152,5 +152,3 @@ class GUI:
         self.fixed.move(self.vbox, int(((1 - self.style['size'][0]) * w)/ 2),
             int(((1 - self.style['size'][1]) * h) / 2))
         self.textbox.set_border_width(self.style['padding'])
-
-

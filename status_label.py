@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#Includes the class for status label. 
+#Includes the class for status label.
 
 import gobject
 import gtk
@@ -50,3 +50,5 @@ class FadeLabel(gtk.Label):
             return True
         self.idle = 0
         return False
+
+# EOF
