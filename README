@@ -1,0 +1,74 @@
+====== PyRoom Project ======
+
+PyRoom is a fullscreen simple text editor, without a toolbar, a menubar or anything that would distract the user from his most important task: writing.
+
+===== Dependencies =====
+
+PyRoom depends on Python, PyGTK and gtksourceview. Please refer to your system documentation for information on how to install these modules if they're not currently available.
+
+===== Installing and Running =====
+
+PyRoom is not currently packaged, so if you want to get the latest chunk of code, you'll have to type the following commands in a console:
+
+  $ bzr branch http://bazaar.launchpad.net/~brunobord/pyroom/trunk pyroom
+  $ cd pyroom
+  $ python pyroom.py
+
+==== Usage ====
+
+=== Running PyRoom ===
+
+To run PyRoom, type:
+
+  $ python pyroom.py
+
+To run pyroom and instruct it to load some existing files, type:
+
+  $ python pyroom.py /path/to/file1 /other/path/to/file2
+
+===Graphical Styles===
+
+The default style is "green", which is a green text color in a black background. You can change the chosen style by typing:
+
+  $ python pyroom.py [--style={style name}]
+
+For instance:
+
+  $ python pyroom.py --style=blue
+
+At the time of writing, the available styles are:
+  * blue
+  * green
+  * darkgreen
+
+=== Example Usage ===
+
+For example, to load PyRoom and instruct it to use the "darkgreen" style and to load the files "article.txt" and "blogpost.txt", type the following:
+
+  $ python pyroom.py --style=darkgreen article.txt blog.txt
+
+==== Key Bindings ====
+
+There are a few keys allowing you to perform a few useful commands:
+
+  * Control-H: Show help in a new buffer
+  * Control-I: Show buffer information
+  * Control-L: Toggle line number
+  * Control-N: Create a new buffer
+  * Control-O: Open a file in a new buffer
+  * Control-Q: Quit
+  * Control-S: Save current buffer
+  * Control-Shift-S: Save current buffer as
+  * Control-W: Close buffer and exit if it was the last buffer
+  * Control-Y: Redo last typing
+  * Control-Z: Undo last typing
+  * Control-Page Up: Switch to previous buffer
+  * Control-Page Down: Switch to next buffer
+  * Control-Plus: Increases font size
+  * Control-Minus: Decreases font size
+
+===== Want to know more? =====
+
+  * Pyroom Website: http://pyroom.org
+  * Pyroom project page on Launchpad: https://launchpad.net/pyroom
+  * Pyroom Wiki: http://wiki.pyroom.org/doku.php
