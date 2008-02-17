@@ -14,6 +14,7 @@ class Preferences():
         self.bgpreference = self.wTree.get_widget("bgbutton")
         self.borderpreference = self.wTree.get_widget("borderbutton")
         self.presetscombobox = self.wTree.get_widget("presetscombobox")
+        self.linenumbers = self.wTree.get_widget("linescheck")
         self.graphical = gui
         self.window.set_transient_for(self.graphical.window)
 
@@ -25,6 +26,7 @@ class Preferences():
                 "on_MainWindow_destroy" : self.QuitEvent,
                 "on_button-ok_clicked" : self.set_preferences,
                 "on_button-close_clicked" : self.kill_preferences,
+                "on_linescheck_toggled" : self.togglelines
                 }
         self.wTree.signal_autoconnect(dic)
         self.presetscombobox.connect('changed', self.presetchanged)
@@ -61,6 +63,10 @@ class Preferences():
     def show(self):
 		self.dlg = self.wTree.get_widget("dialog-preferences")
 		self.dlg.show()
+		
+    def togglelines(self, widget):
+        b = not self.graphical.textbox.get_show_line_numbers()
+        self.graphical.textbox.set_show_line_numbers(b)        
 
     def QuitEvent(self, widget, data=None):
     	print "Exiting..."

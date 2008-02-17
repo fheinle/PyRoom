@@ -57,7 +57,6 @@ class GUI():
         self.status.set_justify(gtk.JUSTIFY_LEFT)
         self.apply_style()
 
-
     def quit(self):
         """ quit pyroom """
 

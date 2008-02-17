@@ -76,6 +76,7 @@ class BasicEdit():
         self.textbox.connect('key-press-event', self.key_press_event)
         self.status.set_text(
             _('Welcome to PyRoom 1.0, type Control-H for help'))
+
         self.window.show_all()
         self.window.fullscreen()
     def key_press_event(self, widget, event):

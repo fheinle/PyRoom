@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.0 on Sun Feb 17 12:32:04 2008 -->
+<!--Generated with glade3 3.4.1 on Sun Feb 17 15:46:25 2008 -->
 <glade-interface>
   <widget class="GtkDialog" id="dialog-preferences">
     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -48,6 +48,7 @@
                     <property name="label" translatable="yes">Display line numbers</property>
                     <property name="response_id">0</property>
                     <property name="draw_indicator">True</property>
+                    <signal name="toggled" handler="on_linescheck_toggled"/>
                   </widget>
                   <packing>
                     <property name="position">1</property>
