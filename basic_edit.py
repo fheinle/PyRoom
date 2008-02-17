@@ -1,5 +1,6 @@
 import gtk
 import gtksourceview
+import ConfigParser
 
 from status_label import FadeLabel
 from gui import GUI
@@ -61,19 +62,22 @@ No question whether to close a modified buffer or not
 """ % (USAGE, STYLES, KEY_BINDINGS))
 
 class BasicEdit():
-    def __init__(self,style,verbose, ret):
-        self.ret = ret
+    def __init__(self,style,verbose):
+
         self.style = style
         self.gui = GUI(style)
-        self.preferences = Preferences(self.gui,style,verbose, ret)
+        self.preferences = Preferences(self.gui,style,verbose)
         self.status = self.gui.status
         self.window = self.gui.window
         self.textbox = self.gui.textbox
-
+        self.config = ConfigParser.ConfigParser()
+        self.config.read("example.conf")
 
         self.new_buffer()
-        restore_session.open_session(self, ret)
+        restore_session.open_session(self)
         self.textbox.connect('key-press-event', self.key_press_event)
+        self.textbox.set_show_line_numbers(int(self.config.get("style","linenumber")))
+        self.gui.apply_style()
         self.status.set_text(
             _('Welcome to PyRoom 1.0, type Control-H for help'))
 
