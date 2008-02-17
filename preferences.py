@@ -15,6 +15,7 @@ class Preferences():
         self.borderpreference = self.wTree.get_widget("borderbutton")
         self.presetscombobox = self.wTree.get_widget("presetscombobox")
         self.graphical = gui
+        self.window.set_transient_for(self.graphical.window)
 
         for i in styleslist:
             self.presetscombobox.append_text(i)
@@ -52,7 +53,7 @@ class Preferences():
         active = self.presetscombobox.get_active_text()
         if active == 'Custom':
             getcustomdata()
-        #here i will format the custom dictionary and apply_style it, once we have the conf thing working, it writes to the ~/.pyroom/custom.css
+            print self.fontname, self.fontsize, self.colorname, self.bgname, self.bordername
         else:
             self.graphical.apply_style(styles.styles[active])
             self.graphical.apply_style(styles.styles[active])

@@ -76,7 +76,6 @@ class BasicEdit():
         self.textbox.connect('key-press-event', self.key_press_event)
         self.status.set_text(
             _('Welcome to PyRoom 1.0, type Control-H for help'))
-        self.hello=self.gui.apply_style()
         self.window.show_all()
         self.window.fullscreen()
     def key_press_event(self, widget, event):
@@ -329,49 +328,6 @@ class BasicEdit():
         else:
             self.current = len(self.buffers) - 1
         self.set_buffer(self.current)
-
-    def apply_style(self, style=None):
-        """ """
-
-        if style:
-            self.style = style
-        self.window.modify_bg(gtk.STATE_NORMAL,
-                              gtk.gdk.color_parse(self.style['background'
-                              ]))
-        self.textbox.modify_bg(gtk.STATE_NORMAL,
-                               gtk.gdk.color_parse(self.style['background'
-                               ]))
-        self.textbox.modify_base(gtk.STATE_NORMAL,
-                                 gtk.gdk.color_parse(self.style['background'
-                                 ]))
-        self.textbox.modify_text(gtk.STATE_NORMAL,
-                                 gtk.gdk.color_parse(self.style['foreground'
-                                 ]))
-        self.textbox.modify_fg(gtk.STATE_NORMAL,
-                               gtk.gdk.color_parse(self.style['lines']))
-        self.status.active_color = self.style['foreground']
-        self.status.inactive_color = self.style['background']
-        self.boxout.modify_bg(gtk.STATE_NORMAL,
-                              gtk.gdk.color_parse(self.style['border']))
-        font_and_size = '%s %d' % (self.style['font'],
-                                   self.style['fontsize'])
-        self.textbox.modify_font(pango.FontDescription(font_and_size))
-
-        gtk.rc_parse_string("""
-	    style "pyroom-colored-cursor" {
-        GtkTextView::cursor-color = '"""
-                             + self.style['foreground']
-                             + """'
-        }
-        class "GtkWidget" style "pyroom-colored-cursor"
-	    """)
-        (w, h) = (gtk.gdk.screen_width(), gtk.gdk.screen_height())
-        width = int(self.style['size'][0] * w)
-        height = int(self.style['size'][1] * h)
-        self.vbox.set_size_request(width, height)
-        self.fixed.move(self.vbox, int(((1 - self.style['size'][0]) * w)/ 2),
-            int(((1 - self.style['size'][1]) * h) / 2))
-        self.textbox.set_border_width(self.style['padding'])
 
     def quit(self):
         #Add any functions that you want to take place here before pyRoom quits
