@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
         pyroom.set_buffer(0)
         pyroom.close_buffer()
-    pyroom.hello
+
     gtk.main()
 
 # EOF
