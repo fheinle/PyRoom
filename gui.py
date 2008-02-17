@@ -55,7 +55,7 @@ class GUI():
         self.vbox.pack_end(self.hbox, False, False, 0)
         self.status.set_alignment(0.0, 0.5)
         self.status.set_justify(gtk.JUSTIFY_LEFT)
-        self.apply_style()
+
 
     def quit(self):
         """ quit pyroom """

@@ -1,4 +1,4 @@
-
+import ConfigParser
 def save_session(self):
     """saves open filenames to a file called session"""
     name = open("session", "w")
@@ -7,7 +7,10 @@ def save_session(self):
         name.write(buffer.filename + "\n")
     name.close()
 
-def open_session(self, ret):
+def open_session(self):
+    config = ConfigParser.ConfigParser()
+    config.read("example.conf")
+    ret = config.get("editor","session")
     """opens session from session file"""
     if ret:
         opensession = open("session", "r")

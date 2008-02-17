@@ -7,7 +7,7 @@ from status_label import FadeLabel
 styleslist = ['green','darkgreen','blue','c64','locontrast','cupid','banker']
 
 class Preferences():
-    def __init__(self,gui,style,verbose, ret):
+    def __init__(self,gui,style,verbose):
         self.wTree = gtk.glade.XML("preferences.glade", "dialog-preferences")
         self.window = self.wTree.get_widget("dialog-preferences")
         self.fontpreference = self.wTree.get_widget("fontbutton")
@@ -16,7 +16,8 @@ class Preferences():
         self.borderpreference = self.wTree.get_widget("borderbutton")
         self.presetscombobox = self.wTree.get_widget("presetscombobox")
         self.linenumbers = self.wTree.get_widget("linescheck")
-        self.graphical = gui
+        self.graphical = Fade
+
         self.window.set_transient_for(self.graphical.window)
 
         for i in styleslist:

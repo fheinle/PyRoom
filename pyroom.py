@@ -31,23 +31,25 @@ import gtk
 import gettext
 import getopt
 gettext.install('pyroom', 'locale')
-
+import ConfigParser
 from basic_edit import BasicEdit
 # Some styles
 
 from styles import styles
 if __name__ == '__main__':
-    style = 'green'
-    verbose = True
-    ret = False
-    files = []
 
+    verbose = True
+
+    files = []
+    config = ConfigParser.ConfigParser()
+    config.read("example.conf")
+    style = config.get("style","theme")
     # Get commandline args
     try:
-        args, files = getopt.getopt(sys.argv[1:],'vs', ['style='])
+        args, files = getopt.getopt(sys.argv[1:],'v', ['style='])
     except getopt.GetoptError:
     # Print help information
-        print _("Usage: pyroom [-v] [-s] [--style={style name}] file1 file2")
+        print _("Usage: pyroom [-v] [--style={style name}] file1 file2")
         sys.exit(2)
     style_true = False
     for arg, val in args:
@@ -56,11 +58,10 @@ if __name__ == '__main__':
         elif arg == '--style':
             if val in styles:
                 style = val
-        elif arg == '-s':
-            ret = True
+
 
     # Create relevant buffers for file and load them
-    pyroom = BasicEdit(styles[style],verbose, ret)
+    pyroom = BasicEdit(styles[style],verbose)
     if len(files):
         for filename in files:
             buffer = pyroom.new_buffer()
