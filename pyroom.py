@@ -42,7 +42,6 @@ if __name__ == '__main__':
     ret = False
     files = []
 
-
     # Get commandline args
     try:
         args, files = getopt.getopt(sys.argv[1:],'vs', ['style='])

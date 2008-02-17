@@ -3,6 +3,7 @@ import gtksourceview
 
 from status_label import FadeLabel
 from gui import GUI
+from preferences import Preferences
 
 import restore_session #Allows a session to be restored with "-s"
 import check_unsaved #Checks that a buffer is unmodified before closing
@@ -64,6 +65,7 @@ class BasicEdit():
         self.ret = ret
         self.style = style
         self.gui = GUI(style)
+        self.preferences = Preferences(self.gui,style,verbose, ret)
         self.status = self.gui.status
         self.window = self.gui.window
         self.textbox = self.gui.textbox
@@ -76,7 +78,7 @@ class BasicEdit():
             _('Welcome to PyRoom 1.0, type Control-H for help'))
         self.hello=self.gui.apply_style()
         self.window.show_all()
-#        self.window.fullscreen()
+        self.window.fullscreen()
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
 
@@ -93,8 +95,8 @@ class BasicEdit():
             gtk.keysyms.N: self.new_buffer,
             gtk.keysyms.o: self.open_file,
             gtk.keysyms.O: self.open_file,
-            gtk.keysyms.p: self.gui.showpreferences,
-            gtk.keysyms.P: self.gui.showpreferences,
+            gtk.keysyms.p: self.preferences.show,
+            gtk.keysyms.P: self.preferences.show,
             gtk.keysyms.q: self.quit,
             gtk.keysyms.Q: self.quit,
             gtk.keysyms.s: self.save_file,
