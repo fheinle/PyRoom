@@ -31,7 +31,7 @@ import gtk
 import gettext
 import getopt
 gettext.install('pyroom', 'locale')
-import configparser
+import ConfigParser
 from basic_edit import BasicEdit
 # Some styles
 
