@@ -2,6 +2,7 @@ import gtk
 import gtk.glade
 import styles
 from status_label import FadeLabel
+import ConfigParser
 
 # this will be changed when styles are stored in external files
 styleslist = ['green','darkgreen','blue','c64','locontrast','cupid','banker']
@@ -16,13 +17,22 @@ class Preferences():
         self.borderpreference = self.wTree.get_widget("borderbutton")
         self.presetscombobox = self.wTree.get_widget("presetscombobox")
         self.linenumbers = self.wTree.get_widget("linescheck")
-        self.graphical = Fade
-
+        self.graphical = gui
+        self.config = ConfigParser.ConfigParser()
+        self.config.read("example.conf")
+        self.activestyle = self.config.get("style","theme")
         self.window.set_transient_for(self.graphical.window)
 
+        self.stylesvalues = { 'Custom' : 0 }
+        self.startingvalue = 1
+
         for i in styleslist:
+            self.stylesvalues['%s' % (i)] = self.startingvalue
+            self.startingvalue = self.startingvalue + 1
+            i = i.capitalize()
             self.presetscombobox.append_text(i)
-        self.presetscombobox.set_active(0)
+        self.presetscombobox.set_active(self.stylesvalues[self.activestyle])
+        self.presetchanged(self.presetscombobox)
 
         dic = {
                 "on_MainWindow_destroy" : self.QuitEvent,
@@ -48,25 +58,43 @@ class Preferences():
 
         self.preset = self.presetscombobox.get_active_text()
         self.dlg.hide()
+        f = open("example.conf", "w")
+        self.config.write(f)
 
     def customchanged(self, widget):
         self.presetscombobox.set_active(0)
-        self.presetchanged()
+        self.presetchanged(widget)
 
     def presetchanged(self, widget):
-        active = self.presetscombobox.get_active_text()
-        if active == 'Custom':
+        active = self.presetscombobox.get_active_text().lower()
+        if active == 'Custom' or active == 'custom':
             self.getcustomdata()
-            print self.fontname, self.fontsize, self.colorname, self.bgname, self.bordername
+            customstyle = {
+                'Custom': {
+                    'name': 'custom',
+                    'background': self.bgname,
+                    'foreground': self.colorname,
+                    'lines': self.bordername,
+                    'border': self.bordername,
+                    'info': self.colorname,
+                    'font': self.fontname,
+                    'fontsize': self.fontsize,
+                    'padding': 6,
+                    'size': [0.6, 0.95],
+            }}
+            self.graphical.apply_style(customstyle['Custom'])
+            self.graphical.apply_style(customstyle['Custom'])
+            self.graphical.status.set_text(_('Style Changed to %s' % (active)))
         else:
             self.graphical.apply_style(styles.styles[active])
             self.graphical.apply_style(styles.styles[active])
-            style = styles.styles[active]
-            self.fontname = style['font'] + ' ' + str(style['fontsize'])
+            self.style = styles.styles[active]
+            self.fontname = self.style['font'] + ' ' + str(self.style['fontsize'])
             self.fontpreference.set_font_name(self.fontname)
-            self.colorpreference.set_color(gtk.gdk.color_parse(style['foreground']))
-            self.bgpreference.set_color(gtk.gdk.color_parse(style['background']))
-            self.borderpreference.set_color(gtk.gdk.color_parse(['border']))
+            self.config.set("style","theme",active)
+            self.colorpreference.set_color(gtk.gdk.color_parse(self.style['foreground']))
+            self.bgpreference.set_color(gtk.gdk.color_parse(self.style['background']))
+            self.borderpreference.set_color(gtk.gdk.color_parse(self.style['border']))
             self.graphical.status.set_text(_('Style Changed to %s' % (active)))
     	
     def show(self):
