@@ -31,17 +31,19 @@ import gtk
 import gettext
 import getopt
 gettext.install('pyroom', 'locale')
-
+import configparser
 from basic_edit import BasicEdit
 # Some styles
 
 from styles import styles
 if __name__ == '__main__':
-    style = 'green'
+
     verbose = True
     ret = False
     files = []
-
+    config = ConfigParser.ConfigParser()
+    config.read("example.conf")
+    style = config.get("style","theme")
     # Get commandline args
     try:
         args, files = getopt.getopt(sys.argv[1:],'vs', ['style='])
