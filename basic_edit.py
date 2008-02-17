@@ -1,7 +1,6 @@
 import gtk
 import gtksourceview
 
-from status_label import FadeLabel
 from gui import GUI
 from preferences import Preferences
 

@@ -1,6 +1,7 @@
 import gtk
 import gtk.glade
 import styles
+from status_label import FadeLabel
 
 # this will be changed when styles are stored in external files
 styleslist = ['green','darkgreen','blue','c64','locontrast','cupid','banker']
@@ -54,11 +55,18 @@ class Preferences():
     def presetchanged(self, widget):
         active = self.presetscombobox.get_active_text()
         if active == 'Custom':
-            getcustomdata()
+            self.getcustomdata()
             print self.fontname, self.fontsize, self.colorname, self.bgname, self.bordername
         else:
             self.graphical.apply_style(styles.styles[active])
             self.graphical.apply_style(styles.styles[active])
+            style = styles.styles[active]
+            self.fontname = style['font'] + ' ' + str(style['fontsize'])
+            self.fontpreference.set_font_name(self.fontname)
+            self.colorpreference.set_color(gtk.gdk.color_parse(style['foreground']))
+            self.bgpreference.set_color(gtk.gdk.color_parse(style['background']))
+            self.borderpreference.set_color(gtk.gdk.color_parse(['border']))
+            self.graphical.status.set_text(_('Style Changed to %s' % (active)))
     	
     def show(self):
 		self.dlg = self.wTree.get_widget("dialog-preferences")
