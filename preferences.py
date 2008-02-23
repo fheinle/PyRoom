@@ -1,5 +1,6 @@
 import gtk
 import gtk.glade
+import os.path
 import styles
 from status_label import FadeLabel
 import ConfigParser
@@ -15,11 +16,17 @@ class Preferences():
         self.colorpreference = self.wTree.get_widget("colorbutton")
         self.bgpreference = self.wTree.get_widget("bgbutton")
         self.borderpreference = self.wTree.get_widget("borderbutton")
+        self.paddingpreference = self.wTree.get_widget("paddingtext")
+        self.heightpreference = self.wTree.get_widget("heighttext")
+        self.widthpreference = self.wTree.get_widget("widthtext")
         self.presetscombobox = self.wTree.get_widget("presetscombobox")
         self.linenumbers = self.wTree.get_widget("linescheck")
         self.graphical = gui
         self.config = ConfigParser.ConfigParser()
+        self.customfile = ConfigParser.ConfigParser()
         self.config.read("example.conf")
+        self.customfile.read("%s/.pyroom/custom.style" % (os.path.expanduser("~")))
+        self.custom = self.customfile.items("style")
         self.activestyle = self.config.get("style","theme")
         self.window.set_transient_for(self.graphical.window)
 
@@ -34,6 +41,7 @@ class Preferences():
         self.presetscombobox.set_active(self.stylesvalues[self.activestyle])
         self.presetchanged(self.presetscombobox)
 
+        # Connecting interface's signals
         dic = {
                 "on_MainWindow_destroy" : self.QuitEvent,
                 "on_button-ok_clicked" : self.set_preferences,
@@ -46,16 +54,26 @@ class Preferences():
         self.colorpreference.connect('color-set', self.customchanged)
         self.bgpreference.connect('color-set', self.customchanged)
         self.borderpreference.connect('color-set', self.customchanged)
+        self.paddingpreference.connect('value-changed', self.customchanged)
+        self.heightpreference.connect('value-changed', self.customchanged)
+        self.widthpreference.connect('value-changed', self.customchanged)
 
     def getcustomdata(self):
         self.fontname = self.fontpreference.get_font_name()
         self.fontsize = int(self.fontname[-2:])
+        self.fontname = self.fontname[:-2]
         self.colorname = gtk.gdk.Color.to_string(self.colorpreference.get_color())
         self.bgname = gtk.gdk.Color.to_string(self.bgpreference.get_color())
         self.bordername = gtk.gdk.Color.to_string(self.borderpreference.get_color())
+        self.paddingname = self.paddingpreference.get_value_as_int()
+        self.heightname = self.heightpreference.get_value()
+        self.widthname = self.widthpreference.get_value()
 
     def set_preferences(self, widget, data=None):
-
+#        if active == 'Custom' or active == 'custom':
+#             writing custom style to ~/.pyroom/custom.style
+#            save = open("~/.pyroom/custom.style")
+            
         self.preset = self.presetscombobox.get_active_text()
         self.dlg.hide()
         f = open("example.conf", "w")
@@ -67,6 +85,7 @@ class Preferences():
 
     def presetchanged(self, widget):
         active = self.presetscombobox.get_active_text().lower()
+        activeid = self.presetscombobox.get_active()
         if active == 'Custom' or active == 'custom':
             self.getcustomdata()
             customstyle = {
@@ -79,8 +98,8 @@ class Preferences():
                     'info': self.colorname,
                     'font': self.fontname,
                     'fontsize': self.fontsize,
-                    'padding': 6,
-                    'size': [0.6, 0.95],
+                    'padding': self.paddingname,
+                    'size': [self.widthname, self.heightname],
             }}
             self.graphical.apply_style(customstyle['Custom'])
             self.graphical.apply_style(customstyle['Custom'])
@@ -95,7 +114,11 @@ class Preferences():
             self.colorpreference.set_color(gtk.gdk.color_parse(self.style['foreground']))
             self.bgpreference.set_color(gtk.gdk.color_parse(self.style['background']))
             self.borderpreference.set_color(gtk.gdk.color_parse(self.style['border']))
+            self.paddingpreference.set_value(self.style['padding'])
+            self.widthpreference.set_value(self.style['size'][0])
+            self.heightpreference.set_value(self.style['size'][1])
             self.graphical.status.set_text(_('Style Changed to %s' % (active)))
+            self.presetscombobox.set_active(activeid)
     	
     def show(self):
 		self.dlg = self.wTree.get_widget("dialog-preferences")
