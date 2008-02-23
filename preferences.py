@@ -23,7 +23,7 @@ class Preferences():
         self.linenumbers = self.wTree.get_widget("linescheck")
         self.graphical = gui
         self.config = ConfigParser.ConfigParser()
-        self.customfile = ConfigParser.ConfigParser()
+#        self.customfile = ConfigParser.ConfigParser()
         self.config.read("example.conf")
 #        self.customfile.read("%s/.pyroom/custom.style" % (os.path.expanduser("~")))
 #        self.custom = self.customfile.items("style")
@@ -46,9 +46,9 @@ class Preferences():
                 "on_MainWindow_destroy" : self.QuitEvent,
                 "on_button-ok_clicked" : self.set_preferences,
                 "on_button-close_clicked" : self.kill_preferences,
-                "on_linescheck_toggled" : self.togglelines
                 }
         self.wTree.signal_autoconnect(dic)
+        self.linenumbers.connect('toggled', self.togglelines)
         self.presetscombobox.connect('changed', self.presetchanged)
         self.fontpreference.connect('font-set', self.customchanged)
         self.colorpreference.connect('color-set', self.customchanged)

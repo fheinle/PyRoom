@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.0 on Sat Feb 23 14:36:57 2008 -->
+<!--Generated with glade3 3.4.0 on Sat Feb 23 15:16:26 2008 -->
 <glade-interface>
   <widget class="GtkDialog" id="dialog-preferences">
     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -28,11 +28,11 @@
                 <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
                 <child>
                   <widget class="GtkLabel" id="label1">
-                    <property name="width_request">97</property>
+                    <property name="width_request">203</property>
                     <property name="height_request">20</property>
                     <property name="visible">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Autosave&lt;/b&gt;</property>
+                    <property name="label" translatable="yes">&lt;b&gt;Autosave&lt;/b&gt; not implemented</property>
                     <property name="use_markup">True</property>
                   </widget>
                   <packing>
@@ -85,11 +85,11 @@
                 </child>
                 <child>
                   <widget class="GtkLabel" id="label8">
-                    <property name="width_request">100</property>
+                    <property name="width_request">219</property>
                     <property name="height_request">20</property>
                     <property name="visible">True</property>
                     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                    <property name="label" translatable="yes">&lt;b&gt;Spellchecking&lt;/b&gt;</property>
+                    <property name="label" translatable="yes">&lt;b&gt;Spellchecking&lt;/b&gt; not implemented</property>
                     <property name="use_markup">True</property>
                   </widget>
                   <packing>
@@ -128,7 +128,7 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkCheckButton" id="checkbutton5">
+                  <widget class="GtkCheckButton" id="linescheck">
                     <property name="width_request">157</property>
                     <property name="height_request">20</property>
                     <property name="visible">True</property>
