@@ -25,8 +25,8 @@ class Preferences():
         self.config = ConfigParser.ConfigParser()
         self.customfile = ConfigParser.ConfigParser()
         self.config.read("example.conf")
-        self.customfile.read("%s/.pyroom/custom.style" % (os.path.expanduser("~")))
-        self.custom = self.customfile.items("style")
+#        self.customfile.read("%s/.pyroom/custom.style" % (os.path.expanduser("~")))
+#        self.custom = self.customfile.items("style")
         self.activestyle = self.config.get("style","theme")
         self.window.set_transient_for(self.graphical.window)
 

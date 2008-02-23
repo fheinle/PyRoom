@@ -1,4 +1,5 @@
 import ConfigParser
+import os
 def save_session(self):
     """saves open filenames to a file called session"""
     name = open("session", "w")
@@ -13,6 +14,10 @@ def open_session(self):
     ret = config.get("editor","session")
     """opens session from session file"""
     if ret:
+        try:
+            open("session", "r")
+        except IOError:
+            os.system("touch session")
         opensession = open("session", "r")
         files_open = []
         for line in opensession:
