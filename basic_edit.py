@@ -7,6 +7,7 @@ from gui import GUI
 from preferences import Preferences
 
 import restore_session #Allows a session to be restored with "-s"
+import autosave
 
 import styles
 
@@ -80,7 +81,7 @@ class BasicEdit():
         self.gui.apply_style()
         self.status.set_text(
             _('Welcome to PyRoom 1.0, type Control-H for help'))
-
+        autosave.autosave_init(self) #autosave timer object
         self.window.show_all()
         self.window.fullscreen()
         
@@ -406,6 +407,7 @@ class BasicEdit():
     def quit(self):
         #Add any functions that you want to take place here before pyRoom quits
         restore_session.save_session(self)
+        autosave.autosave_quit(self)
         self.gui.quit()
 
 # EOF

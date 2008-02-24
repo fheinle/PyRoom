@@ -33,6 +33,7 @@ import getopt
 gettext.install('pyroom', 'locale')
 import ConfigParser
 from basic_edit import BasicEdit
+import autosave
 # Some styles
 
 if __name__ == '__main__':
@@ -45,18 +46,20 @@ if __name__ == '__main__':
     style = config.get("visual","theme")
     # Get commandline args
     try:
-        args, files = getopt.getopt(sys.argv[1:],'v', ['style='])
+        args, files = getopt.getopt(sys.argv[1:],'vC', ['style=','autosave_time='])
     except getopt.GetoptError:
     # Print help information
         print _("Usage: pyroom [-v] [--style={style name}] file1 file2")
         sys.exit(2)
     style_true = False
+    autosave.autosave_time=3  ## if no autosave option is passed on command line set autosave every 3 minues
     for arg, val in args:
         if arg == '-v':
             verbose = True
         elif arg == '--style':
                 style = val
-
+        elif arg == '--autosave_time':
+            autosave.autosave_time=int(val) #set autosave timeout on user request
 
     # Create relevant buffers for file and load them
     pyroom = BasicEdit(style,verbose)
