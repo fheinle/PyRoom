@@ -1,0 +1,12 @@
+[theme]
+name = cupid
+background = #12000B
+foreground = #D68C8B
+linenumbers = #733B44
+border = #12000B
+info = #DEB8A6
+font = DejaVu Sans Mono
+fontsize = 9
+padding = 8
+width = 0.45 
+height = 0.75

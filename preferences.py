@@ -28,9 +28,9 @@ class Preferences():
 #        self.customfile = ConfigParser.ConfigParser()
         self.config.read("example.conf")
 #        self.customfile.read("%s/.pyroom/custom.style" % (os.path.expanduser("~")))
-#        self.custom = self.customfile.items("style")
-        self.activestyle = self.config.get("style","theme")
-        self.linesstate = self.config.get("style","linenumber")
+#        self.custom = self.customfile.items("visual")
+        self.activestyle = self.config.get("visual","theme")
+        self.linesstate = self.config.get("visual","linenumber")
         self.autosavestate = self.config.get("editor","autosave")
         self.autosavetime = self.config.get("editor","autosavetime")
         self.spellcheckstate = self.config.get("editor","spellcheck")
@@ -100,7 +100,7 @@ class Preferences():
         else:
             self.spellcheckpref = 0
             
-        self.config.set("style","linenumber",self.linenumberspref)
+        self.config.set("visual","linenumber",self.linenumberspref)
         self.config.set("editor","autosave",self.autosavepref)
         self.config.set("editor","spellcheck",self.spellcheckpref)
         
@@ -139,7 +139,7 @@ class Preferences():
             self.style = styles.styles[active]
             self.fontname = self.style['font'] + ' ' + str(self.style['fontsize'])
             self.fontpreference.set_font_name(self.fontname)
-            self.config.set("style","theme",active)
+            self.config.set("visual","theme",active)
             self.colorpreference.set_color(gtk.gdk.color_parse(self.style['foreground']))
             self.bgpreference.set_color(gtk.gdk.color_parse(self.style['background']))
             self.borderpreference.set_color(gtk.gdk.color_parse(self.style['border']))

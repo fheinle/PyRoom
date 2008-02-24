@@ -35,7 +35,6 @@ import ConfigParser
 from basic_edit import BasicEdit
 # Some styles
 
-from styles import styles
 if __name__ == '__main__':
 
     verbose = True
@@ -43,7 +42,7 @@ if __name__ == '__main__':
     files = []
     config = ConfigParser.ConfigParser()
     config.read("example.conf")
-    style = config.get("style","theme")
+    style = config.get("visual","theme")
     # Get commandline args
     try:
         args, files = getopt.getopt(sys.argv[1:],'v', ['style='])
@@ -56,12 +55,11 @@ if __name__ == '__main__':
         if arg == '-v':
             verbose = True
         elif arg == '--style':
-            if val in styles:
                 style = val
 
 
     # Create relevant buffers for file and load them
-    pyroom = BasicEdit(styles[style],verbose)
+    pyroom = BasicEdit(style,verbose)
     if len(files):
         for filename in files:
             buffer = pyroom.new_buffer()
