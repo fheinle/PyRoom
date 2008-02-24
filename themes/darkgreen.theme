@@ -1,0 +1,12 @@
+[theme]
+name = darkgreen
+background = #000000
+foreground = #007700
+linenumbers= #001100
+border = #001100
+info = #007700
+font = Droid Sans Mono
+fontsize = 12
+padding = 6
+width = 0.6
+height = 0.95

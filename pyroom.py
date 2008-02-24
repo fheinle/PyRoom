@@ -35,7 +35,6 @@ import ConfigParser
 from basic_edit import BasicEdit
 # Some styles
 
-from styles import styles
 if __name__ == '__main__':
 
     verbose = True
@@ -56,12 +55,11 @@ if __name__ == '__main__':
         if arg == '-v':
             verbose = True
         elif arg == '--style':
-            if val in styles:
                 style = val
 
 
     # Create relevant buffers for file and load them
-    pyroom = BasicEdit(styles[style],verbose)
+    pyroom = BasicEdit(style,verbose)
     if len(files):
         for filename in files:
             buffer = pyroom.new_buffer()
