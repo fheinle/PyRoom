@@ -1,0 +1,13 @@
+[theme]
+info = #AE8400
+foreground = #3426b2d83426
+height = 0.95
+name = custom
+linenumbers = #5E4803
+padding = 6
+width = 0.6
+fontsize = 12
+background = #e9c912151215
+font = Droid Sans Mono 
+border = #000033330000
+
