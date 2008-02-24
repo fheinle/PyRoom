@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.0 on Sat Feb 23 15:16:26 2008 -->
+<!--Generated with glade3 3.4.0 on Sat Feb 23 16:56:20 2008 -->
 <glade-interface>
   <widget class="GtkDialog" id="dialog-preferences">
     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -41,7 +41,7 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkCheckButton" id="checkbutton3">
+                  <widget class="GtkCheckButton" id="autosavetext">
                     <property name="width_request">155</property>
                     <property name="height_request">20</property>
                     <property name="visible">True</property>
@@ -98,7 +98,7 @@
                   </packing>
                 </child>
                 <child>
-                  <widget class="GtkCheckButton" id="checkbutton4">
+                  <widget class="GtkCheckButton" id="spellchecktext">
                     <property name="width_request">181</property>
                     <property name="height_request">25</property>
                     <property name="visible">True</property>

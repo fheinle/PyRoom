@@ -21,6 +21,8 @@ class Preferences():
         self.widthpreference = self.wTree.get_widget("widthtext")
         self.presetscombobox = self.wTree.get_widget("presetscombobox")
         self.linenumbers = self.wTree.get_widget("linescheck")
+        self.autosave = self.wTree.get_widget("autosavetext")
+        self.spellcheck = self.wTree.get_widget("spellchecktext")
         self.graphical = gui
         self.config = ConfigParser.ConfigParser()
 #        self.customfile = ConfigParser.ConfigParser()
@@ -28,6 +30,17 @@ class Preferences():
 #        self.customfile.read("%s/.pyroom/custom.style" % (os.path.expanduser("~")))
 #        self.custom = self.customfile.items("style")
         self.activestyle = self.config.get("style","theme")
+        self.linesstate = self.config.get("style","linenumber")
+        self.autosavestate = self.config.get("editor","autosave")
+        self.autosavetime = self.config.get("editor","autosavetime")
+        self.spellcheckstate = self.config.get("editor","spellcheck")
+        self.linesstate = int(self.linesstate)
+        self.autosavestate = int(self.autosavestate)
+        self.spellcheckstate = int(self.spellcheckstate)
+
+        self.linenumbers.set_active(self.linesstate)
+        self.autosave.set_active(self.autosavestate)
+        self.spellcheck.set_active(self.spellcheckstate)
         self.window.set_transient_for(self.graphical.window)
 
         self.stylesvalues = { 'Custom' : 0 }
@@ -70,11 +83,27 @@ class Preferences():
         self.widthname = self.widthpreference.get_value()
 
     def set_preferences(self, widget, data=None):
-#        if active == 'Custom' or active == 'custom':
-#             writing custom style to ~/.pyroom/custom.style
-#            save = open("~/.pyroom/custom.style")
+        self.linenumberspref = self.linenumbers.get_active()
+        self.autosavepref = self.autosave.get_active()
+        self.spellcheckpref = self.spellcheck.get_active()
+
+        if self.linenumberspref == True:
+            self.linenumberspref = 1
+        else:
+            self.linenumberspref = 0
+        if self.autosavepref == True:
+            self.autosavepref = 1
+        else:
+            self.autosavepref = 0
+        if self.spellcheckpref == True:
+            self.spellcheckpref = 1
+        else:
+            self.spellcheckpref = 0
             
-        self.preset = self.presetscombobox.get_active_text()
+        self.config.set("style","linenumber",self.linenumberspref)
+        self.config.set("editor","autosave",self.autosavepref)
+        self.config.set("editor","spellcheck",self.spellcheckpref)
+        
         self.dlg.hide()
         f = open("example.conf", "w")
         self.config.write(f)
@@ -93,7 +122,7 @@ class Preferences():
                     'name': 'custom',
                     'background': self.bgname,
                     'foreground': self.colorname,
-                    'lines': self.bordername,
+                    'lines': self.colorname,
                     'border': self.bordername,
                     'info': self.colorname,
                     'font': self.fontname,
