@@ -304,8 +304,12 @@ class BasicEdit():
         return buffer
         
     def close_dialog(self):
-        self.dialog.show()
-        
+        buffer = self.buffers[self.current]
+        if buffer.can_undo() or buffer.can_redo():
+            self.dialog.show()
+        else:
+            self.close_buffer()
+            
     def cancel_dialog(self, widget, data=None):
         self.dialog.hide()
         
@@ -315,8 +319,11 @@ class BasicEdit():
         
     def save_dialog(self,widget,data=None):
         self.dialog.hide()
-        self.save_file()
-        self.close_buffer()
+        try:
+            self.save_file()
+            self.close_buffer()
+        except:
+            pass
         
     def close_buffer(self):
         """ Close current buffer """
