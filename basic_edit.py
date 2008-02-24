@@ -84,7 +84,7 @@ class BasicEdit():
         self.window.show_all()
         self.window.fullscreen()
         
-        #Defines the glade file functions for use on exit
+        #Defines the glade file functions for use on closing a buffer
         self.wTree = gtk.glade.XML("preferences.glade", "SaveBuffer")
         self.dialog = self.wTree.get_widget("SaveBuffer")
         self.dialog.set_transient_for(self.window)
@@ -94,6 +94,17 @@ class BasicEdit():
                 "on_button-save_clicked" : self.save_dialog,
                 }
         self.wTree.signal_autoconnect(dic)
+        
+        #Defines the glade file functions for use on exit
+        self.aTree = gtk.glade.XML("preferences.glade", "QuitSave")
+        self.quitdialog = self.aTree.get_widget("QuitSave")
+        self.quitdialog.set_transient_for(self.window)
+        dic = {
+                "on_button-close2_clicked" : self.quit_quit,
+                "on_button-cancel2_clicked" : self.cancel_quit,
+                "on_button-save2_clicked" : self.save_quit,
+                }
+        self.aTree.signal_autoconnect(dic)        
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
 
@@ -112,8 +123,8 @@ class BasicEdit():
             gtk.keysyms.O: self.open_file,
             gtk.keysyms.p: self.preferences.show,
             gtk.keysyms.P: self.preferences.show,
-            gtk.keysyms.q: self.quit,
-            gtk.keysyms.Q: self.quit,
+            gtk.keysyms.q: self.dialog_quit,
+            gtk.keysyms.Q: self.dialog_quit,
             gtk.keysyms.s: self.save_file,
             gtk.keysyms.S: self.save_file,
             gtk.keysyms.w: self.close_dialog,
@@ -367,10 +378,37 @@ class BasicEdit():
         else:
             self.current = len(self.buffers) - 1
         self.set_buffer(self.current)
+    def dialog_quit(self):
+        count = 0
+        ret = False
+        for buffer in self.buffers:
+            if buffer.can_undo() or buffer.can_redo():
+                count = count + 1
+        if count > 0:
+            self.quitdialog.show()
+        else:
+            self.quit()
+    def cancel_quit(self,widget, data=None):
+        self.quitdialog.hide()
+        
+    def save_quit(self, widget, data=None):
+        self.quitdialog.hide()
+        try:
+            for buffer in self.buffers:
+                if buffer.can_undo() or buffer.can_redo():
+                        if buffer.filename == FILE_UNNAMED:
+                            self.save_file_as()
+                        else:
+                            self.save_file()
+            self.quit()
+        except:
+            pass
 
+    def quit_quit(self,widget,data=None):
+        self.quitdialog.hide()
+        self.quit()
     def quit(self):
         #Add any functions that you want to take place here before pyRoom quits
-
         restore_session.save_session(self)
         self.gui.quit()
 
