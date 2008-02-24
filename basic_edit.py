@@ -7,7 +7,7 @@ from gui import GUI
 from preferences import Preferences
 
 import restore_session #Allows a session to be restored with "-s"
-import check_unsaved #Checks that a buffer is unmodified before closing
+
 import styles
 
 FILE_UNNAMED = _('* Unnamed *')
