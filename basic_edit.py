@@ -115,8 +115,7 @@ class BasicEdit():
             gtk.keysyms.H: self.show_help,
             gtk.keysyms.i: self.show_info,
             gtk.keysyms.I: self.show_info,
-            gtk.keysyms.l: self.toggle_lines,
-            gtk.keysyms.L: self.toggle_lines,
+
             gtk.keysyms.n: self.new_buffer,
             gtk.keysyms.N: self.new_buffer,
             gtk.keysyms.o: self.open_file,
@@ -132,10 +131,7 @@ class BasicEdit():
             gtk.keysyms.y: self.redo,
             gtk.keysyms.Y: self.redo,
             gtk.keysyms.z: self.undo,
-            gtk.keysyms.Z: self.undo,
-            gtk.keysyms.plus: self.gui.plus,
-            gtk.keysyms.equal: self.gui.plus,
-            gtk.keysyms.minus: self.gui.minus,
+            gtk.keysyms.Z: self.undo
             }
         if event.state & gtk.gdk.CONTROL_MASK:
 
