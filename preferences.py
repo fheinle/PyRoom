@@ -164,9 +164,8 @@ class Preferences():
             else:
                 theme = theme = "./themes/" + active + ".theme"
                 self.graphical.config.read(theme)
-                self.graphical.apply_style(styles.styles[active])
-                self.graphical.apply_style(styles.styles[active])
-                self.style = styles.styles[active]
+                self.graphical.apply_style()
+                self.graphical.apply_style()
                 self.fontname = self.graphical.config.get("theme","font") + ' ' + self.graphical.config.get("theme","fontsize")
                 self.fontpreference.set_font_name(self.fontname)
                 self.config.set("visual","theme",active)
