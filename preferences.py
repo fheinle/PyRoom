@@ -5,9 +5,14 @@ import styles
 from status_label import FadeLabel
 import ConfigParser
 
-# this will be changed when styles are stored in external files
-styleslist = ['green','darkgreen','blue','c64','locontrast','cupid','banker']
-
+# Getting the theme files and cleaning up the list, i use custom first so that it always have the index 0 in the list
+themeslist = []
+rawthemeslist = os.listdir("themes/")
+for i in rawthemeslist:
+    if i[-5:] == 'theme' and i != 'custom.theme':
+        i = i[:-6]
+        themeslist.append(i)
+    
 class Preferences():
     def __init__(self,gui,style,verbose):
         self.wTree = gtk.glade.XML("preferences.glade", "dialog-preferences")
@@ -25,11 +30,10 @@ class Preferences():
         self.spellcheck = self.wTree.get_widget("spellchecktext")
         self.graphical = gui
         self.config = ConfigParser.ConfigParser()
-#        self.customfile = ConfigParser.ConfigParser()
+        self.customfile = ConfigParser.ConfigParser()
+        self.customfile.read("themes/custom.theme")
         self.config.read("example.conf")
-#        self.customfile.read("%s/.pyroom/custom.style" % (os.path.expanduser("~")))
-#        self.custom = self.customfile.items("visual")
-        self.activestyle = self.config.get("visual","theme")
+        activestyle = self.config.get("visual","theme")
         self.linesstate = self.config.get("visual","linenumber")
         self.autosavestate = self.config.get("editor","autosave")
         self.autosavetime = self.config.get("editor","autosavetime")
@@ -46,12 +50,12 @@ class Preferences():
         self.stylesvalues = { 'Custom' : 0 }
         self.startingvalue = 1
 
-        for i in styleslist:
+        for i in themeslist:
             self.stylesvalues['%s' % (i)] = self.startingvalue
             self.startingvalue = self.startingvalue + 1
             i = i.capitalize()
             self.presetscombobox.append_text(i)
-        self.presetscombobox.set_active(self.stylesvalues[self.activestyle])
+        self.presetscombobox.set_active(self.stylesvalues[activestyle])
         self.presetchanged(self.presetscombobox)
 
         # Connecting interface's signals
@@ -104,6 +108,17 @@ class Preferences():
         self.config.set("editor","autosave",self.autosavepref)
         self.config.set("editor","spellcheck",self.spellcheckpref)
         
+        if self.presetscombobox.get_active_text().lower() == 'custom':
+            c = open("themes/custom.theme", "w")
+            self.customfile.set("theme","background",self.bgname)
+            self.customfile.set("theme","foreground",self.colorname)
+            self.customfile.set("theme","border",self.bordername)
+            self.customfile.set("theme","font",self.fontname)
+            self.customfile.set("theme","fontsize",self.fontsize)
+            self.customfile.set("theme","padding",self.paddingname)
+            self.customfile.set("theme","width",self.widthname)
+            self.customfile.set("theme","height",self.heightname)
+            self.customfile.write(c)
         self.dlg.hide()
         f = open("example.conf", "w")
         self.config.write(f)
@@ -130,22 +145,24 @@ class Preferences():
                     'padding': self.paddingname,
                     'size': [self.widthname, self.heightname],
             }}
-            self.graphical.apply_style(customstyle['Custom'])
-            self.graphical.apply_style(customstyle['Custom'])
+            self.graphical.apply_style(customstyle['Custom'],'custom')
+            self.graphical.apply_style(customstyle['Custom'],'custom')
             self.graphical.status.set_text(_('Style Changed to %s' % (active)))
         else:
+            theme = theme = "./themes/" + active + ".theme"
+            self.graphical.config.read(theme)
             self.graphical.apply_style(styles.styles[active])
             self.graphical.apply_style(styles.styles[active])
             self.style = styles.styles[active]
-            self.fontname = self.style['font'] + ' ' + str(self.style['fontsize'])
+            self.fontname = self.graphical.config.get("theme","font") + ' ' + self.graphical.config.get("theme","fontsize")
             self.fontpreference.set_font_name(self.fontname)
             self.config.set("visual","theme",active)
-            self.colorpreference.set_color(gtk.gdk.color_parse(self.style['foreground']))
-            self.bgpreference.set_color(gtk.gdk.color_parse(self.style['background']))
-            self.borderpreference.set_color(gtk.gdk.color_parse(self.style['border']))
-            self.paddingpreference.set_value(self.style['padding'])
-            self.widthpreference.set_value(self.style['size'][0])
-            self.heightpreference.set_value(self.style['size'][1])
+            self.colorpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","foreground")))
+            self.bgpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","background")))
+            self.borderpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","border")))
+            self.paddingpreference.set_value(float(self.graphical.config.get("theme","padding")))
+            self.widthpreference.set_value(float(self.graphical.config.get("theme","width")))
+            self.heightpreference.set_value(float(self.graphical.config.get("theme","height")))
             self.graphical.status.set_text(_('Style Changed to %s' % (active)))
             self.presetscombobox.set_active(activeid)
     	
