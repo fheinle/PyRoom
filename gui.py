@@ -1,11 +1,9 @@
 from status_label import FadeLabel
-import gtk
 
+import gtk
 import pango
 import gtksourceview
-
 import gtk.glade
-
 import ConfigParser
 
 class GUI():
