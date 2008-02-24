@@ -1,7 +1,6 @@
 import gtk
 import gtk.glade
 import os.path
-import styles
 from status_label import FadeLabel
 import ConfigParser
 

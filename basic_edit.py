@@ -7,13 +7,10 @@ from preferences import Preferences
 
 import restore_session #Allows a session to be restored with "-s"
 import check_unsaved #Checks that a buffer is unmodified before closing
-import styles
 
 FILE_UNNAMED = _('* Unnamed *')
 
 USAGE = _('Usage: pyroom [-v] [--style={style name}] file1 file2')
-
-STYLES = ', '.join(style for style in styles.styles)
 
 KEY_BINDINGS = '\n'.join([
 _('Control-H: Show help in a new buffer'),
@@ -47,7 +44,6 @@ Usage:
 ------
 
 %s
-style can be either: %s
 
 
 Commands:
@@ -58,7 +54,7 @@ Warnings:
 ---------
 No autosave.
 No question whether to close a modified buffer or not
-""" % (USAGE, STYLES, KEY_BINDINGS))
+""" % (USAGE, KEY_BINDINGS))
 
 class BasicEdit():
     def __init__(self,style,verbose):
