@@ -76,7 +76,6 @@ class BasicEdit():
         restore_session.open_session(self)
         self.textbox.connect('key-press-event', self.key_press_event)
         self.textbox.set_show_line_numbers(int(self.config.get("visual","linenumber")))
-        self.gui.apply_style()
         self.status.set_text(
             _('Welcome to PyRoom 1.0, type Control-H for help'))
 
@@ -92,8 +91,6 @@ class BasicEdit():
             gtk.keysyms.H: self.show_help,
             gtk.keysyms.i: self.show_info,
             gtk.keysyms.I: self.show_info,
-            gtk.keysyms.l: self.toggle_lines,
-            gtk.keysyms.L: self.toggle_lines,
             gtk.keysyms.n: self.new_buffer,
             gtk.keysyms.N: self.new_buffer,
             gtk.keysyms.o: self.open_file,
@@ -110,9 +107,6 @@ class BasicEdit():
             gtk.keysyms.Y: self.redo,
             gtk.keysyms.z: self.undo,
             gtk.keysyms.Z: self.undo,
-            gtk.keysyms.plus: self.gui.plus,
-            gtk.keysyms.equal: self.gui.plus,
-            gtk.keysyms.minus: self.gui.minus,
             }
         if event.state & gtk.gdk.CONTROL_MASK:
 

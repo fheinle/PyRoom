@@ -57,13 +57,14 @@ class GUI():
         self.config = ConfigParser.ConfigParser()
         self.conf = ConfigParser.ConfigParser()
         self.conf.read("example.conf")
-        theme = "./themes/" + self.conf.get("visual","theme") + ".theme"
+        if self.style:
+            theme = "./themes/" + style + ".theme"
+        else:
+            theme = "./themes/" + self.conf.get("visual","theme") + ".theme"
         self.config.read(theme)
-
 
     def quit(self):
         """ quit pyroom """
-
         gtk.main_quit()
 
     def delete_event(self, widget, event, data=None):
@@ -99,20 +100,6 @@ class GUI():
         else:
             adj.value = 0
 
-    def plus(self):
-        """ Increases the font size"""
-        fontsize = str(float(self.config.get("theme","fontsize"))+1)
-        self.config.set("theme","fontsize",fontsize)
-        self.apply_style('','custom')
-        self.status.set_text(_('Font size increased'))
-
-    def minus(self):
-        """ Decreases the font size"""
-        fontsize = str(float(self.config.get("theme","fontsize"))-1)
-        self.config.set("theme","fontsize",fontsize)
-        self.apply_style('','custom')
-        self.status.set_text(_('Font size decreased'))
-
     def apply_style(self, style=None, mode='normal'):
         if mode == 'normal':
             self.window.modify_bg(gtk.STATE_NORMAL,
@@ -124,7 +111,7 @@ class GUI():
             self.textbox.modify_text(gtk.STATE_NORMAL,
                                      gtk.gdk.color_parse(self.config.get("theme","foreground")))
             self.textbox.modify_fg(gtk.STATE_NORMAL,
-                                   gtk.gdk.color_parse(self.config.get("theme","linenumbers")))
+                                   gtk.gdk.color_parse(self.config.get("theme","foreground")))
             self.status.active_color = self.config.get("theme","foreground")
             self.status.inactive_color = self.config.get("theme","background")
             self.boxout.modify_bg(gtk.STATE_NORMAL,

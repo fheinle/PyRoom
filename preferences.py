@@ -15,6 +15,7 @@ for i in rawthemeslist:
     
 class Preferences():
     def __init__(self,gui,style,verbose):
+        self.style = style
         self.wTree = gtk.glade.XML("preferences.glade", "dialog-preferences")
         self.window = self.wTree.get_widget("dialog-preferences")
         self.fontpreference = self.wTree.get_widget("fontbutton")
@@ -33,7 +34,7 @@ class Preferences():
         self.customfile = ConfigParser.ConfigParser()
         self.customfile.read("themes/custom.theme")
         self.config.read("example.conf")
-        activestyle = self.config.get("visual","theme")
+        self.activestyle = self.config.get("visual","theme")
         self.linesstate = self.config.get("visual","linenumber")
         self.autosavestate = self.config.get("editor","autosave")
         self.autosavetime = self.config.get("editor","autosavetime")
@@ -47,7 +48,7 @@ class Preferences():
         self.spellcheck.set_active(self.spellcheckstate)
         self.window.set_transient_for(self.graphical.window)
 
-        self.stylesvalues = { 'Custom' : 0 }
+        self.stylesvalues = { 'custom' : 0 }
         self.startingvalue = 1
 
         for i in themeslist:
@@ -55,8 +56,8 @@ class Preferences():
             self.startingvalue = self.startingvalue + 1
             i = i.capitalize()
             self.presetscombobox.append_text(i)
-        self.presetscombobox.set_active(self.stylesvalues[activestyle])
-        self.presetchanged(self.presetscombobox)
+        self.presetscombobox.set_active(self.stylesvalues[self.activestyle])
+        self.presetchanged(self.presetscombobox,'initial')
 
         # Connecting interface's signals
         dic = {
@@ -87,6 +88,7 @@ class Preferences():
         self.widthname = self.widthpreference.get_value()
 
     def set_preferences(self, widget, data=None):
+        self.getcustomdata()
         self.linenumberspref = self.linenumbers.get_active()
         self.autosavepref = self.autosave.get_active()
         self.spellcheckpref = self.spellcheck.get_active()
@@ -127,44 +129,56 @@ class Preferences():
         self.presetscombobox.set_active(0)
         self.presetchanged(widget)
 
-    def presetchanged(self, widget):
-        active = self.presetscombobox.get_active_text().lower()
-        activeid = self.presetscombobox.get_active()
-        if active == 'Custom' or active == 'custom':
-            self.getcustomdata()
-            customstyle = {
-                'Custom': {
-                    'name': 'custom',
-                    'background': self.bgname,
-                    'foreground': self.colorname,
-                    'lines': self.colorname,
-                    'border': self.bordername,
-                    'info': self.colorname,
-                    'font': self.fontname,
-                    'fontsize': self.fontsize,
-                    'padding': self.paddingname,
-                    'size': [self.widthname, self.heightname],
-            }}
-            self.graphical.apply_style(customstyle['Custom'],'custom')
-            self.graphical.apply_style(customstyle['Custom'],'custom')
-            self.graphical.status.set_text(_('Style Changed to %s' % (active)))
-        else:
-            theme = theme = "./themes/" + active + ".theme"
-            self.graphical.config.read(theme)
-            self.graphical.apply_style(styles.styles[active])
-            self.graphical.apply_style(styles.styles[active])
-            self.style = styles.styles[active]
+    def presetchanged(self, widget, mode=None):
+        if mode == 'initial':
+            self.graphical.apply_style(self.style,'normal')
             self.fontname = self.graphical.config.get("theme","font") + ' ' + self.graphical.config.get("theme","fontsize")
             self.fontpreference.set_font_name(self.fontname)
-            self.config.set("visual","theme",active)
             self.colorpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","foreground")))
             self.bgpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","background")))
             self.borderpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","border")))
             self.paddingpreference.set_value(float(self.graphical.config.get("theme","padding")))
             self.widthpreference.set_value(float(self.graphical.config.get("theme","width")))
             self.heightpreference.set_value(float(self.graphical.config.get("theme","height")))
-            self.graphical.status.set_text(_('Style Changed to %s' % (active)))
-            self.presetscombobox.set_active(activeid)
+        else:
+            active = self.presetscombobox.get_active_text().lower()
+            activeid = self.presetscombobox.get_active()
+            if activeid == 0:
+                self.getcustomdata()
+                customstyle = {
+                    'Custom': {
+                        'name': 'custom',
+                        'background': self.bgname,
+                        'foreground': self.colorname,
+                        'lines': self.colorname,
+                        'border': self.bordername,
+                        'info': self.colorname,
+                        'font': self.fontname,
+                        'fontsize': self.fontsize,
+                        'padding': self.paddingname,
+                        'size': [self.widthname, self.heightname],
+                }}
+                self.graphical.apply_style(customstyle['Custom'],'custom')
+                self.graphical.apply_style(customstyle['Custom'],'custom')
+                self.config.set("visual","theme",active)
+                self.graphical.status.set_text(_('Style Changed to %s' % (active)))
+            else:
+                theme = theme = "./themes/" + active + ".theme"
+                self.graphical.config.read(theme)
+                self.graphical.apply_style(styles.styles[active])
+                self.graphical.apply_style(styles.styles[active])
+                self.style = styles.styles[active]
+                self.fontname = self.graphical.config.get("theme","font") + ' ' + self.graphical.config.get("theme","fontsize")
+                self.fontpreference.set_font_name(self.fontname)
+                self.config.set("visual","theme",active)
+                self.colorpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","foreground")))
+                self.bgpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","background")))
+                self.borderpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","border")))
+                self.paddingpreference.set_value(float(self.graphical.config.get("theme","padding")))
+                self.widthpreference.set_value(float(self.graphical.config.get("theme","width")))
+                self.heightpreference.set_value(float(self.graphical.config.get("theme","height")))
+                self.graphical.status.set_text(_('Style Changed to %s' % (active)))
+                self.presetscombobox.set_active(activeid)
     	
     def show(self):
 		self.dlg = self.wTree.get_widget("dialog-preferences")
