@@ -1,4 +1,5 @@
 import gtk
+import gtk.glade
 import gtksourceview
 import ConfigParser
 
@@ -82,6 +83,17 @@ class BasicEdit():
 
         self.window.show_all()
         self.window.fullscreen()
+        
+        #Defines the glade file functions for use on exit
+        self.wTree = gtk.glade.XML("preferences.glade", "SaveBuffer")
+        self.dialog = self.wTree.get_widget("SaveBuffer")
+        self.dialog.set_transient_for(self.window)
+        dic = {
+                "on_button-close_clicked" : self.unsave_dialog,
+                "on_button-cancel_clicked" : self.cancel_dialog,
+                "on_button-save_clicked" : self.save_dialog,
+                }
+        self.wTree.signal_autoconnect(dic)
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
 
@@ -104,8 +116,8 @@ class BasicEdit():
             gtk.keysyms.Q: self.quit,
             gtk.keysyms.s: self.save_file,
             gtk.keysyms.S: self.save_file,
-            gtk.keysyms.w: self.close_buffer,
-            gtk.keysyms.W: self.close_buffer,
+            gtk.keysyms.w: self.close_dialog,
+            gtk.keysyms.W: self.close_dialog,
             gtk.keysyms.y: self.redo,
             gtk.keysyms.Y: self.redo,
             gtk.keysyms.z: self.undo,
@@ -290,10 +302,26 @@ class BasicEdit():
         buffer.place_cursor(buffer.get_start_iter())
         self.next_buffer()
         return buffer
-
+        
+    def close_dialog(self):
+        self.dialog.show()
+        
+    def cancel_dialog(self, widget, data=None):
+        self.dialog.hide()
+        
+    def unsave_dialog(self, widget, data =None):
+        self.dialog.hide()
+        self.close_buffer()
+        
+    def save_dialog(self,widget,data=None):
+        self.dialog.hide()
+        self.save_file()
+        self.close_buffer()
+        
     def close_buffer(self):
         """ Close current buffer """
-        check_unsaved.check_unsaved_buffer(self)
+
+
         if len(self.buffers) > 1:
 
             self.buffers.pop(self.current)
@@ -335,7 +363,7 @@ class BasicEdit():
 
     def quit(self):
         #Add any functions that you want to take place here before pyRoom quits
-        check_unsaved.save_unsaved_on_exit(self)
+
         restore_session.save_session(self)
         self.gui.quit()
 
