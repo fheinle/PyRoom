@@ -1,11 +1,11 @@
 from status_label import FadeLabel
 import gtk
-import sys
+
 import pango
 import gtksourceview
-import restore_session
+
 import gtk.glade
-import styles
+
 import ConfigParser
 
 class GUI():
@@ -61,7 +61,7 @@ class GUI():
         self.conf.read("example.conf")
         theme = "./themes/" + self.conf.get("style","theme") + ".theme"
         self.config.read(theme)
-        self.config.write(sys.stdout)
+
 
     def quit(self):
         """ quit pyroom """
