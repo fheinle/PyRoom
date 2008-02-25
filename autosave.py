@@ -7,6 +7,7 @@ import sys
 elapsaed_time=0 #seconds elapsed couner
 autosave_time=3 #the timeout time in minutes
 temp_folder= "/var/tmp/pyroom" #the temp folder
+timeout_id = 0
 
 FILE_UNNAMED = _('* Unnamed *')  ##repeted definition delete if possible
 
@@ -17,6 +18,7 @@ def autosave_init(self, mill=1000):
     #global autosave_time
     #global temp_folder
 
+    global timeout_id 
     timeout_id=gobject.timeout_add(mill,timeout, self)
     elapsed_time=0  ## init the elapsed_time_var
     #temp_folder=tempfolder
@@ -32,7 +34,7 @@ def save_file(filename, text):
 
 def autosave_quit(self):
     "dispose the internal timer"
-    gobject.source_remove(timout_id)
+    gobject.source_remove(timeout_id)
 
 def autosave_file(self, buffer_id):
 	"""AutoSave the Buffer to temp folder"""
