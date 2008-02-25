@@ -8,7 +8,7 @@ def save_session(self):
         name.write(buffer.filename + "\n")
     name.close()
 
-def open_session(self):
+def open_session(self, verbose):
     config = ConfigParser.ConfigParser()
     config.read("example.conf")
     ret = config.get("editor","session")

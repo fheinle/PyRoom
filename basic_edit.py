@@ -75,7 +75,7 @@ class BasicEdit():
         self.config.read("example.conf")
 
         self.new_buffer()
-        restore_session.open_session(self)
+        restore_session.open_session(self, verbose)
         self.textbox.connect('key-press-event', self.key_press_event)
         self.textbox.set_show_line_numbers(int(self.config.get("visual","linenumber")))
         self.gui.apply_style()
