@@ -71,11 +71,8 @@ class BasicEdit():
         self.config.read("example.conf")
 
         self.new_buffer()
-<<<<<<< TREE
         restore_session.open_session(self,verbose)
-=======
 
->>>>>>> MERGE-SOURCE
         self.textbox.connect('key-press-event', self.key_press_event)
         self.textbox.set_show_line_numbers(int(self.config.get("visual","linenumber")))
         self.status.set_text(
@@ -450,11 +447,6 @@ class BasicEdit():
         self.quit()
     def quit(self):
         #Add any functions that you want to take place here before pyRoom quits
-<<<<<<< TREE
-        restore_session.save_session(self, self.verbose)
-=======
-
->>>>>>> MERGE-SOURCE
         autosave.autosave_quit(self)
         self.gui.quit()
 
