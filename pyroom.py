@@ -29,6 +29,7 @@ import gobject
 import gtk
 import gettext
 import getopt
+import traceback
 gettext.install('pyroom', 'locale')
 import ConfigParser
 from basic_edit import BasicEdit
@@ -64,12 +65,14 @@ if __name__ == '__main__':
     # Create relevant buffers for file and load them
     pyroom = BasicEdit(style,verbose)
     try:
+        buffnum = 0
         if len(files):
             for filename in files:
                 pyroom.open_file(filename)
+                buffnum += 1
 
-        pyroom.set_buffer(0)
-        pyroom.close_buffer()
+        pyroom.set_buffer(buffnum)
+#        pyroom.close_buffer()
         gtk.main()
     except PyroomError, e:
         # To change the format of the error text, edit pyroom_error
