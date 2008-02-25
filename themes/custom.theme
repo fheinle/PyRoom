@@ -1,0 +1,13 @@
+[theme]
+info = #AE8400
+foreground = #9c9c9c9cffff
+height = 0.75
+name = custom
+linenumbers = #5E4803
+padding = 8
+width = 0.45
+fontsize = 12
+background = #101000009c9c
+font = Dingbats 
+border = #101000009c9c
+

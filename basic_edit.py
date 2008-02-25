@@ -8,14 +8,11 @@ from preferences import Preferences
 
 import restore_session #Allows a session to be restored with "-s"
 import autosave
-
-import styles
+import check_unsaved #Checks that a buffer is unmodified before closing
 
 FILE_UNNAMED = _('* Unnamed *')
 
 USAGE = _('Usage: pyroom [-v] [--style={style name}] file1 file2')
-
-STYLES = ', '.join(style for style in styles.styles)
 
 KEY_BINDINGS = '\n'.join([
 _('Control-H: Show help in a new buffer'),
@@ -49,7 +46,6 @@ Usage:
 ------
 
 %s
-style can be either: %s
 
 
 Commands:
@@ -60,7 +56,7 @@ Warnings:
 ---------
 No autosave.
 No question whether to close a modified buffer or not
-""" % (USAGE, STYLES, KEY_BINDINGS))
+""" % (USAGE, KEY_BINDINGS))
 
 class BasicEdit():
     def __init__(self,style,verbose):
@@ -78,7 +74,6 @@ class BasicEdit():
         restore_session.open_session(self, verbose)
         self.textbox.connect('key-press-event', self.key_press_event)
         self.textbox.set_show_line_numbers(int(self.config.get("visual","linenumber")))
-        self.gui.apply_style()
         self.status.set_text(
             _('Welcome to PyRoom 1.0, type Control-H for help'))
         autosave.autosave_init(self) #autosave timer object
@@ -116,7 +111,6 @@ class BasicEdit():
             gtk.keysyms.H: self.show_help,
             gtk.keysyms.i: self.show_info,
             gtk.keysyms.I: self.show_info,
-
             gtk.keysyms.n: self.new_buffer,
             gtk.keysyms.N: self.new_buffer,
             gtk.keysyms.o: self.open_file,
