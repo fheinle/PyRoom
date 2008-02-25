@@ -3,6 +3,7 @@ import gtk.glade
 import os.path
 from status_label import FadeLabel
 import ConfigParser
+from pyroom_error import PyroomError
 
 # Getting the theme files and cleaning up the list, i use custom first so that it always have the index 0 in the list
 themeslist = []
@@ -41,6 +42,7 @@ class Preferences():
         self.linesstate = int(self.linesstate)
         self.autosavestate = int(self.autosavestate)
         self.spellcheckstate = int(self.spellcheckstate)
+        self.verbose = verbose
 
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
@@ -121,8 +123,16 @@ class Preferences():
             self.customfile.set("theme","height",self.heightname)
             self.customfile.write(c)
         self.dlg.hide()
-        f = open("example.conf", "w")
-        self.config.write(f)
+        try:
+            f = open("example.conf", "w")
+            self.config.write(f)
+        except:
+            e = PyroomError(_("Could not save preferences file."))
+            self.graphical.error.set_text(str(e))
+            if self.verbose:
+                print str(e)
+                print e.traceback
+            
 
     def customchanged(self, widget):
         self.presetscombobox.set_active(0)

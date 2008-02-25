@@ -2,7 +2,7 @@ import gtk
 import gtk.glade
 import gtksourceview
 import ConfigParser
-
+from pyroom_error import PyroomError
 from gui import GUI
 from preferences import Preferences
 
@@ -60,9 +60,9 @@ No question whether to close a modified buffer or not
 
 class BasicEdit():
     def __init__(self,style,verbose):
-
         self.style = style
-        self.gui = GUI(style)
+        self.verbose = verbose
+        self.gui = GUI(style,verbose)
         self.preferences = Preferences(self.gui,style,verbose)
         self.status = self.gui.status
         self.window = self.gui.window
@@ -71,12 +71,16 @@ class BasicEdit():
         self.config.read("example.conf")
 
         self.new_buffer()
+<<<<<<< TREE
+        restore_session.open_session(self,verbose)
+=======
 
+>>>>>>> MERGE-SOURCE
         self.textbox.connect('key-press-event', self.key_press_event)
         self.textbox.set_show_line_numbers(int(self.config.get("visual","linenumber")))
         self.status.set_text(
             _('Welcome to PyRoom 1.0, type Control-H for help'))
-        autosave.autosave_init(self) #autosave timer object
+        autosave.autosave_init(self,self.gui) #autosave timer object
         self.window.show_all()
         self.window.fullscreen()
         
@@ -197,8 +201,45 @@ class BasicEdit():
 
         res = chooser.run()
         if res == gtk.RESPONSE_OK:
+            try:
+                buffer = self.new_buffer()
+                buffer.filename = chooser.get_filename()
+                try:
+                    f = open(buffer.filename, 'r')
+                    buffer = self.buffers[self.current]
+                    buffer.begin_not_undoable_action()
+                    utf8 = unicode(f.read(), 'utf-8')
+                    buffer.set_text(utf8)
+                    buffer.end_not_undoable_action()
+                    f.close()
+                    self.status.set_text(_('File %s open')
+                             % buffer.filename)
+                except IOError, (errno, strerror):
+                    errortext = _('Unable to open %(filename)s.' % {'filename': buffer.filename})
+                    if errno == 2:
+                        errortext += _(' The file does not exist.')
+                    elif errno == 13:
+                        errortext += _(' You do not have permission to open the file.')
+                    raise PyroomError(errortext)
+                    buffer.filename = FILE_UNNAMED
+                except:
+                    raise PyroomError(_('Unable to open %s\n'
+                                     % buffer.filename))
+                    buffer.filename = FILE_UNNAMED
+            except PyroomError, e:
+                self.gui.error.set_text(str(e))
+                if self.verbose:
+                    print str(e)
+                    print e.traceback
+        else:
+            self.status.set_text(_('Closed, no files selected'))
+        chooser.destroy()
+
+    def open_file(self, filename):
+        """ Open specified file """
+        try:
             buffer = self.new_buffer()
-            buffer.filename = chooser.get_filename()
+            buffer.filename = filename
             try:
                 f = open(buffer.filename, 'r')
                 buffer = self.buffers[self.current]
@@ -215,40 +256,49 @@ class BasicEdit():
                     errortext += _(' The file does not exist.')
                 elif errno == 13:
                     errortext += _(' You do not have permission to open the file.')
-                buffer.set_text(_(errortext))
-                if verbose:
-                    print ('Unable to open %(filename)s. %(traceback)s'
-                        % {'filename': buffer.filename, 'traceback': traceback.format_exc()})
-                self.status.set_text(_('Failed to open %s')
-                    % buffer.filename)
+                raise PyroomError(errortext)
                 buffer.filename = FILE_UNNAMED
             except:
-                buffer.set_text(_('Unable to open %s\n'
+                raise PyroomError(_('Unable to open %s\n'
                                  % buffer.filename))
-                if verbose:
-                    print ('Unable to open %(filename)s. %(traceback)s'
-                        % {'filename': buffer.filename,
-                        'traceback': traceback.format_exc()})
                 buffer.filename = FILE_UNNAMED
-        else:
-            self.status.set_text(_('Closed, no files selected'))
-        chooser.destroy()
+        except PyroomError, e:
+            self.gui.error.set_text(str(e))
+            if self.verbose:
+                print str(e)
+                print e.traceback
 
     def save_file(self):
-        """ Save file """
-
-        buffer = self.buffers[self.current]
-        if buffer.filename != FILE_UNNAMED:
-            f = open(buffer.filename, 'w')
-            txt = buffer.get_text(buffer.get_start_iter(),
-                                  buffer.get_end_iter())
-            f.write(txt)
-            f.close()
-            buffer.begin_not_undoable_action()
-            buffer.end_not_undoable_action()
-            self.status.set_text(_('File %s saved') % buffer.filename)
-        else:
-            self.save_file_as()
+       """ Save file """
+       try:
+           try:
+               buffer = self.buffers[self.current]
+               if buffer.filename != FILE_UNNAMED:
+                   f = open(buffer.filename, 'w')
+                   txt = buffer.get_text(buffer.get_start_iter(),
+                                         buffer.get_end_iter())
+                   f.write(txt)
+                   f.close()
+                   buffer.begin_not_undoable_action()
+                   buffer.end_not_undoable_action()
+                   self.status.set_text(_('File %s saved') % buffer.filename)
+               else:
+                   self.save_file_as()
+           except IOError, (errno, strerror):
+               errortext = _('Unable to save %(filename)s.' % {'filename': buffer.filename})
+               if errno == 13:
+                   errortext += _(' You do not have permission to write to the file.')
+               raise PyroomError(errortext)
+               buffer.filename = FILE_UNNAMED
+           except:
+               raise PyroomError(_('Unable to save %s\n'
+                                % buffer.filename))
+               buffer.filename = FILE_UNNAMED
+       except PyroomError, e: 
+            self.gui.error.set_text(str(e))
+            if self.verbose:
+                print str(e)
+                print e.traceback
 
     def save_file_as(self):
         """ Save file as """
@@ -400,7 +450,11 @@ class BasicEdit():
         self.quit()
     def quit(self):
         #Add any functions that you want to take place here before pyRoom quits
+<<<<<<< TREE
+        restore_session.save_session(self, self.verbose)
+=======
 
+>>>>>>> MERGE-SOURCE
         autosave.autosave_quit(self)
         self.gui.quit()
 

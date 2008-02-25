@@ -3,6 +3,7 @@ import os
 import tempfile
 import string
 import sys
+from pyroom_error import PyroomError
 
 elapsaed_time=0 #seconds elapsed couner
 autosave_time=3 #the timeout time in minutes
@@ -12,28 +13,34 @@ timeout_id = 0
 FILE_UNNAMED = _('* Unnamed *')  ##repeted definition delete if possible
 
 #def autosave_init(self,mill=1000,autosavetime=3, tempfolder="/var/tmp/pyroom"):
-def autosave_init(self, mill=1000):
+def autosave_init(self, agui, mill=1000):
     """Init the internal autosave timer"""
     global elapsed_time
     #global autosave_time
     #global temp_folder
 
-    global timeout_id 
+    global timeout_id
+    global gui
+    gui = agui
     timeout_id=gobject.timeout_add(mill,timeout, self)
     elapsed_time=0  ## init the elapsed_time_var
     #temp_folder=tempfolder
     #autosave_time=autosavetime
 
 def save_file(filename, text):
-	"""Save File Atom Function
-       (if they are integrated remove this code)
-    """
-	out_file = open(filename,"w")
-	out_file.write(text)
-	out_file.close()
+    try:
+        out_file = open(filename,"w")
+        out_file.write(text)
+        out_file.close()
+    except:
+        x = PyroomError(_("Could not autosave file %s") % filename)
+        self.error.set_text(str(x)) 
+        if self.verbose:
+            print str(e)
+            print e.traceback
 
 def autosave_quit(self):
-    "dispose the internal timer"
+    """dispose the internal timer"""
     gobject.source_remove(timeout_id)
 
 def autosave_file(self, buffer_id):

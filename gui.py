@@ -1,5 +1,6 @@
 from status_label import FadeLabel
 
+from pyroom_error import PyroomError
 import gtk
 import pango
 import gtksourceview
@@ -7,9 +8,10 @@ import gtk.glade
 import ConfigParser
 
 class GUI():
-    def __init__(self, style):
-
+    def __init__(self, style, verbose):
+        self.verbose = verbose
         self.status = FadeLabel()
+        self.error = FadeLabel()
         self.style = style
 
         # Main window
@@ -47,6 +49,14 @@ class GUI():
         self.vbox.set_property('resize-mode', gtk.RESIZE_PARENT)
         self.vbox.show_all()
 
+        # Error
+        self.hbox2 = gtk.HBox()
+        self.hbox2.set_spacing(12)
+        self.hbox2.pack_end(self.error, True, True, 0)
+        self.vbox.pack_end(self.hbox2, False, False, 0)
+        self.error.set_alignment(0.0, 0.5)
+        self.error.set_justify(gtk.JUSTIFY_LEFT)
+
         # Status
         self.hbox = gtk.HBox()
         self.hbox.set_spacing(12)
@@ -54,6 +64,8 @@ class GUI():
         self.vbox.pack_end(self.hbox, False, False, 0)
         self.status.set_alignment(0.0, 0.5)
         self.status.set_justify(gtk.JUSTIFY_LEFT)
+
+
         self.config = ConfigParser.ConfigParser()
         self.conf = ConfigParser.ConfigParser()
         self.conf.read("example.conf")
@@ -114,6 +126,8 @@ class GUI():
                                    gtk.gdk.color_parse(self.config.get("theme","foreground")))
             self.status.active_color = self.config.get("theme","foreground")
             self.status.inactive_color = self.config.get("theme","background")
+            self.error.active_color = self.config.get("theme","foreground")
+            self.error.inactive_color = self.config.get("theme","background")
             self.boxout.modify_bg(gtk.STATE_NORMAL,
                                   gtk.gdk.color_parse(self.config.get("theme","border")))
             font_and_size = '%s %d' % (self.config.get("theme","font"),

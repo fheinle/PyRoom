@@ -23,7 +23,6 @@
 #
 # ------------------------------------------------------------------------------
 
-import traceback
 import sys
 import os.path
 import gobject
@@ -34,6 +33,7 @@ gettext.install('pyroom', 'locale')
 import ConfigParser
 from basic_edit import BasicEdit
 import autosave
+from pyroom_error import PyroomError
 # Some styles
 
 if __name__ == '__main__':
@@ -63,40 +63,22 @@ if __name__ == '__main__':
 
     # Create relevant buffers for file and load them
     pyroom = BasicEdit(style,verbose)
-    if len(files):
-        for filename in files:
-            buffer = pyroom.new_buffer()
-            buffer.filename = filename
-            if os.path.exists(filename):
-                try:
-                    print "Automatically opened %s" %(filename)
-                    f = open(filename, 'r')
-                    buffer.begin_not_undoable_action()
-                    buffer.set_text(unicode(f.read(), 'utf-8'))
-                    buffer.end_not_undoable_action()
-                    f.close()
-                except IOError, (errno, strerror):
-                    errortext = '''Unable to open %(filename)s.''' % {'filename': buffer.filename}
-                    if errno == 13:
-                        errortext += _(' You do not have permission to open the file.')
-                    buffer.set_text(_(errortext))
-                    if verbose:
-                        print (_('Unable to open %(filename)s. %(traceback)s'
-                                 % {'filename': buffer.filename,
-                                 'traceback': traceback.format_exc()})
-                        )
-                    buffer.filename = FILE_UNNAMED
-                except:
-                    buffer.set_text(_('Unable to open %s\n'
-                                     % buffer.filename))
-                    if verbose:
-                        print (_('Unable to open %(filename)s. %(traceback)s'
-                                % {'filename': buffer.filename,
-                                'traceback': traceback.format_exc()}))
-                    buffer.filename = FILE_UNNAMED
+    try:
+        if len(files):
+            for filename in files:
+                pyroom.open_file(filename)
 
         pyroom.set_buffer(0)
         pyroom.close_buffer()
-    gtk.main()
+        gtk.main()
+    except PyroomError, e:
+        # To change the format of the error text, edit pyroom_error
+        pyroom.gui.error.set_text(str(e))
+        if verbose:
+            print str(e)
+            print e.traceback
+    except:
+        print traceback.format_exc()
+
 
 # EOF
