@@ -70,7 +70,7 @@ class BasicEdit():
         self.config = ConfigParser.ConfigParser()
         self.config.read("example.conf")
 
-        self.new_buffer()
+#        self.new_buffer()
 
         self.textbox.connect('key-press-event', self.key_press_event)
         self.textbox.set_show_line_numbers(int(self.config.get("visual","linenumber")))
