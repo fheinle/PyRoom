@@ -68,7 +68,7 @@ if __name__ == '__main__':
         buffnum = 0
         if len(files):
             for filename in files:
-                pyroom.open_file(filename)
+                pyroom.open_file_no_chooser(filename)
                 buffnum += 1
 
         pyroom.set_buffer(buffnum)

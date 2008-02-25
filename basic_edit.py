@@ -231,7 +231,7 @@ class BasicEdit():
             self.status.set_text(_('Closed, no files selected'))
         chooser.destroy()
 
-    def open_file(self, filename):
+    def open_file_no_chooser(self, filename):
         """ Open specified file """
         try:
             buffer = self.new_buffer()
