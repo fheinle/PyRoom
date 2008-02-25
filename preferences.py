@@ -15,7 +15,7 @@ for i in rawthemeslist:
 class Preferences():
     def __init__(self,gui,style,verbose):
         self.style = style
-        self.wTree = gtk.glade.XML("preferences.glade", "dialog-preferences")
+        self.wTree = gtk.glade.XML("interface.glade", "dialog-preferences")
         self.window = self.wTree.get_widget("dialog-preferences")
         self.fontpreference = self.wTree.get_widget("fontbutton")
         self.colorpreference = self.wTree.get_widget("colorbutton")
