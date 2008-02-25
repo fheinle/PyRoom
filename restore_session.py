@@ -1,5 +1,7 @@
 import ConfigParser
+import traceback
 import os
+FILE_UNNAMED = _('* Unnamed *')
 def save_session(self):
     """saves open filenames to a file called session"""
     name = open("session", "w")
