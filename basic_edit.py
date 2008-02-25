@@ -8,7 +8,7 @@ from preferences import Preferences
 
 import restore_session #Allows a session to be restored with "-s"
 import autosave
-import check_unsaved #Checks that a buffer is unmodified before closing
+#import check_unsaved #Checks that a buffer is unmodified before closing
 
 FILE_UNNAMED = _('* Unnamed *')
 
@@ -81,7 +81,7 @@ class BasicEdit():
         self.window.fullscreen()
         
         #Defines the glade file functions for use on closing a buffer
-        self.wTree = gtk.glade.XML("preferences.glade", "SaveBuffer")
+        self.wTree = gtk.glade.XML("interface.glade", "SaveBuffer")
         self.dialog = self.wTree.get_widget("SaveBuffer")
         self.dialog.set_transient_for(self.window)
         dic = {
@@ -92,7 +92,7 @@ class BasicEdit():
         self.wTree.signal_autoconnect(dic)
         
         #Defines the glade file functions for use on exit
-        self.aTree = gtk.glade.XML("preferences.glade", "QuitSave")
+        self.aTree = gtk.glade.XML("interface.glade", "QuitSave")
         self.quitdialog = self.aTree.get_widget("QuitSave")
         self.quitdialog.set_transient_for(self.window)
         dic = {
