@@ -39,7 +39,7 @@ from pyroom_error import PyroomError
 
 if __name__ == '__main__':
 
-    verbose = True
+    verbose = False
 
     files = []
     config = ConfigParser.ConfigParser()
