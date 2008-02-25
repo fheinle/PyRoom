@@ -4,6 +4,7 @@ import os.path
 from status_label import FadeLabel
 import ConfigParser
 from pyroom_error import PyroomError
+import autosave
 
 # Getting the theme files and cleaning up the list, i use custom first so that it always have the index 0 in the list
 themeslist = []
@@ -28,6 +29,7 @@ class Preferences():
         self.presetscombobox = self.wTree.get_widget("presetscombobox")
         self.linenumbers = self.wTree.get_widget("linescheck")
         self.autosave = self.wTree.get_widget("autosavetext")
+        self.autosave_spinbutton = self.wTree.get_widget("spinbutton2")
         self.spellcheck = self.wTree.get_widget("spellchecktext")
         self.graphical = gui
         self.config = ConfigParser.ConfigParser()
@@ -36,8 +38,10 @@ class Preferences():
         self.config.read("example.conf")
         self.activestyle = self.config.get("visual","theme")
         self.linesstate = self.config.get("visual","linenumber")
-        self.autosavestate = self.config.get("editor","autosave")
-        self.autosavetime = self.config.get("editor","autosavetime")
+        self.autosavestate = self.config.get("editor","autosave") 
+        #self.autosavetime = self.config.get("editor","autosavetime")
+        self.autosavetime=autosave.autosave_time
+        self.autosave_spinbutton.set_value(float(self.autosavetime))
         self.spellcheckstate = self.config.get("editor","spellcheck")
         self.linesstate = int(self.linesstate)
         self.autosavestate = int(self.autosavestate)
@@ -109,8 +113,10 @@ class Preferences():
             
         self.config.set("visual","linenumber",self.linenumberspref)
         self.config.set("editor","autosave",self.autosavepref)
-        self.config.set("editor","spellcheck",self.spellcheckpref)
-        
+        autosave.autosave_time=self.autosave_spinbutton.get_value_as_int() ## apply the autosave time settings
+        self.config.set("editor","autosavetime",autosave.autosave_time)
+        #print autosave.autosave_time,self.autosave_spinbutton.get_value_as_int() ## Debug
+        self.config.set("editor","spellcheck",self.spellcheckpref)        
         if self.presetscombobox.get_active_text().lower() == 'custom':
             c = open("themes/custom.theme", "w")
             self.customfile.set("theme","background",self.bgname)

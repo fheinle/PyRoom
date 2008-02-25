@@ -66,7 +66,7 @@ def timeout(self):
 
     if (int(autosave_time)!=0):
         elapsed_time=elapsed_time+1
-        #print "elapsed time = %d , autosave_time = %d" % (elapsed_time, int(autosave_time)*60)
+        #less exam  print "elapsed time = %d , autosave_time = %d" % (elapsed_time, int(autosave_time)*60)   #(debug)
         if (elapsed_time>=(int(autosave_time)*60)):
             for buffer in self.buffers:
                 #print "saving buffer" + str(buffer)

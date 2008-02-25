@@ -45,6 +45,8 @@ if __name__ == '__main__':
     config = ConfigParser.ConfigParser()
     config.read("example.conf")
     style = config.get("visual","theme")
+    ##autosave.autosave_time=3  ## if no autosave option is passed on command line set autosave every 3 minues
+    autosave.autosave_time=config.get("editor","autosavetime")
     # Get commandline args
     try:
         args, files = getopt.getopt(sys.argv[1:],'vC', ['style=','autosave_time='])
@@ -53,7 +55,6 @@ if __name__ == '__main__':
         print _("Usage: pyroom [-v] [--style={style name}] file1 file2")
         sys.exit(2)
     style_true = False
-    autosave.autosave_time=3  ## if no autosave option is passed on command line set autosave every 3 minues
     for arg, val in args:
         if arg == '-v':
             verbose = True
