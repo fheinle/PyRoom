@@ -6,7 +6,7 @@ import ConfigParser
 from gui import GUI
 from preferences import Preferences
 
-import restore_session #Allows a session to be restored with "-s"
+
 import autosave
 #import check_unsaved #Checks that a buffer is unmodified before closing
 
@@ -71,7 +71,7 @@ class BasicEdit():
         self.config.read("example.conf")
 
         self.new_buffer()
-        restore_session.open_session(self, verbose)
+
         self.textbox.connect('key-press-event', self.key_press_event)
         self.textbox.set_show_line_numbers(int(self.config.get("visual","linenumber")))
         self.status.set_text(
@@ -400,7 +400,7 @@ class BasicEdit():
         self.quit()
     def quit(self):
         #Add any functions that you want to take place here before pyRoom quits
-        restore_session.save_session(self)
+
         autosave.autosave_quit(self)
         self.gui.quit()
 
