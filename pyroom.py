@@ -73,7 +73,8 @@ if __name__ == '__main__':
                 buffnum += 1
 
         pyroom.set_buffer(buffnum)
-#        pyroom.close_buffer()
+        pyroom.status.set_text(
+            _('Welcome to PyRoom 1.0, type Control-H for help'))
         gtk.main()
     except PyroomError, e:
         # To change the format of the error text, edit pyroom_error
