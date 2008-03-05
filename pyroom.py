@@ -45,7 +45,6 @@ if __name__ == '__main__':
     config = ConfigParser.ConfigParser()
     config.read("example.conf")
     style = config.get("visual","theme")
-    ##autosave.autosave_time=3  ## if no autosave option is passed on command line set autosave every 3 minues
     autosave.autosave_time=config.get("editor","autosavetime")
     # Get commandline args
     try:
@@ -74,7 +73,7 @@ if __name__ == '__main__':
 
         pyroom.set_buffer(buffnum)
         pyroom.status.set_text(
-            _('Welcome to PyRoom 1.0, type Control-H for help'))
+            _('Welcome to PyRoom 0.2b, type Control-H for help'))
         gtk.main()
     except PyroomError, e:
         # To change the format of the error text, edit pyroom_error

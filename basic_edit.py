@@ -2,13 +2,11 @@ import gtk
 import gtk.glade
 import gtksourceview
 import ConfigParser
+
 from pyroom_error import PyroomError
 from gui import GUI
 from preferences import Preferences
-
-
 import autosave
-#import check_unsaved #Checks that a buffer is unmodified before closing
 
 FILE_UNNAMED = _('* Unnamed *')
 
@@ -17,7 +15,6 @@ USAGE = _('Usage: pyroom [-v] [--style={style name}] file1 file2')
 KEY_BINDINGS = '\n'.join([
 _('Control-H: Show help in a new buffer'),
 _('Control-I: Show buffer information'),
-_('Control-L: Toggle line number'),
 _('Control-N: Create a new buffer'),
 _('Control-O: Open a file in a new buffer'),
 _('Control-Q: Quit'),
@@ -27,9 +24,7 @@ _('Control-W: Close buffer and exit if it was the last buffer'),
 _('Control-Y: Redo last typing'),
 _('Control-Z: Undo last typing'),
 _('Control-Page Up: Switch to previous buffer'),
-_('Control-Page Down: Switch to next buffer'),
-_('Control-Plus: Increases font size'),
-_('Control-Minus: Decreases font size'),]
+_('Control-Page Down: Switch to next buffer'),]
 )
 
 HELP = \
@@ -52,10 +47,6 @@ Commands:
 ---------
 %s
 
-Warnings:
----------
-No autosave.
-No question whether to close a modified buffer or not
 """ % (USAGE, KEY_BINDINGS))
 
 class BasicEdit():
@@ -67,6 +58,7 @@ class BasicEdit():
         self.status = self.gui.status
         self.window = self.gui.window
         self.textbox = self.gui.textbox
+
         self.config = ConfigParser.ConfigParser()
         self.config.read("example.conf")
 
@@ -74,9 +66,9 @@ class BasicEdit():
 
         self.textbox.connect('key-press-event', self.key_press_event)
         self.textbox.set_show_line_numbers(int(self.config.get("visual","linenumber")))
-        self.status.set_text(
-            _('Welcome to PyRoom 1.0, type Control-H for help'))
+
         autosave.autosave_init(self,self.gui) #autosave timer object
+
         self.window.show_all()
         self.window.fullscreen()
         
@@ -338,6 +330,7 @@ class BasicEdit():
         buffer.begin_not_undoable_action()
         buffer.set_text(HELP)
         buffer.end_not_undoable_action()
+        self.status.set_text("Displaying help. Press control W to exit and continue editing your document.")
 
     def new_buffer(self):
         """ Create a new buffer """
@@ -415,6 +408,7 @@ class BasicEdit():
         else:
             self.current = len(self.buffers) - 1
         self.set_buffer(self.current)
+
     def dialog_quit(self):
         count = 0
         ret = False
@@ -448,5 +442,4 @@ class BasicEdit():
         #Add any functions that you want to take place here before pyRoom quits
         autosave.autosave_quit(self)
         self.gui.quit()
-
 # EOF
