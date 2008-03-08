@@ -36,6 +36,7 @@ from basic_edit import BasicEdit
 import autosave
 from pyroom_error import PyroomError
 # Some styles
+__VERSION__ = '0.2'
 
 if __name__ == '__main__':
 
@@ -72,8 +73,9 @@ if __name__ == '__main__':
                 buffnum += 1
 
         pyroom.set_buffer(buffnum)
+
         pyroom.status.set_text(
-            _('Welcome to PyRoom 0.2b, type Control-H for help'))
+            _('Welcome to Pyroom %s, type Control-H for help' % __VERSION__))
         gtk.main()
     except PyroomError, e:
         # To change the format of the error text, edit pyroom_error
