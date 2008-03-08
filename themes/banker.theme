@@ -1,0 +1,12 @@
+[theme]
+name = banker
+background = #111D00
+foreground = #DED291
+linenumbers = #7D9635
+border = #111D00
+info = #7D9635
+font = DejaVu Sans Mono
+fontsize = 9
+padding = 8
+width = 0.45 
+height = 0.75

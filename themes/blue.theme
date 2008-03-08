@@ -1,0 +1,12 @@
+[theme]
+name = blue
+background = #0000ff
+foreground = #ffffff
+linenumbers = #5555ff
+border = #3333ff
+info = #ffffff
+font = Droid Sans Mono
+fontsize =12
+padding = 6
+width = 0.6
+height = 0.95

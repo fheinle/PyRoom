@@ -1,23 +1,20 @@
 import gtk
+import gtk.glade
 import gtksourceview
+import ConfigParser
 
-from status_label import FadeLabel
+from pyroom_error import PyroomError
 from gui import GUI
-
-import restore_session #Allows a session to be restored with "-s"
-import check_unsaved #Checks that a buffer is unmodified before closing
-import styles
+from preferences import Preferences
+import autosave
 
 FILE_UNNAMED = _('* Unnamed *')
 
 USAGE = _('Usage: pyroom [-v] [--style={style name}] file1 file2')
 
-STYLES = ', '.join(style for style in styles.styles)
-
 KEY_BINDINGS = '\n'.join([
 _('Control-H: Show help in a new buffer'),
 _('Control-I: Show buffer information'),
-_('Control-L: Toggle line number'),
 _('Control-N: Create a new buffer'),
 _('Control-O: Open a file in a new buffer'),
 _('Control-Q: Quit'),
@@ -27,9 +24,7 @@ _('Control-W: Close buffer and exit if it was the last buffer'),
 _('Control-Y: Redo last typing'),
 _('Control-Z: Undo last typing'),
 _('Control-Page Up: Switch to previous buffer'),
-_('Control-Page Down: Switch to next buffer'),
-_('Control-Plus: Increases font size'),
-_('Control-Minus: Decreases font size'),]
+_('Control-Page Down: Switch to next buffer'),]
 )
 
 HELP = \
@@ -46,36 +41,58 @@ Usage:
 ------
 
 %s
-style can be either: %s
 
 
 Commands:
 ---------
 %s
 
-Warnings:
----------
-No autosave.
-No question whether to close a modified buffer or not
-""" % (USAGE, STYLES, KEY_BINDINGS))
+""" % (USAGE, KEY_BINDINGS))
 
 class BasicEdit():
-    def __init__(self,style,verbose, ret):
-        self.ret = ret
+    def __init__(self,style,verbose):
         self.style = style
-        self.gui = GUI(style)
+        self.verbose = verbose
+        self.gui = GUI(style,verbose)
+        self.preferences = Preferences(self.gui,style,verbose)
         self.status = self.gui.status
         self.window = self.gui.window
         self.textbox = self.gui.textbox
 
+        self.config = ConfigParser.ConfigParser()
+        self.config.read("example.conf")
 
         self.new_buffer()
-        restore_session.open_session(self, ret)
+
         self.textbox.connect('key-press-event', self.key_press_event)
-        self.status.set_text(
-            _('Welcome to PyRoom 1.0, type Control-H for help'))
+        self.textbox.set_show_line_numbers(int(self.config.get("visual","linenumber")))
+
+        autosave.autosave_init(self,self.gui) #autosave timer object
+
         self.window.show_all()
         self.window.fullscreen()
+        
+        #Defines the glade file functions for use on closing a buffer
+        self.wTree = gtk.glade.XML("interface.glade", "SaveBuffer")
+        self.dialog = self.wTree.get_widget("SaveBuffer")
+        self.dialog.set_transient_for(self.window)
+        dic = {
+                "on_button-close_clicked" : self.unsave_dialog,
+                "on_button-cancel_clicked" : self.cancel_dialog,
+                "on_button-save_clicked" : self.save_dialog,
+                }
+        self.wTree.signal_autoconnect(dic)
+        
+        #Defines the glade file functions for use on exit
+        self.aTree = gtk.glade.XML("interface.glade", "QuitSave")
+        self.quitdialog = self.aTree.get_widget("QuitSave")
+        self.quitdialog.set_transient_for(self.window)
+        dic = {
+                "on_button-close2_clicked" : self.quit_quit,
+                "on_button-cancel2_clicked" : self.cancel_quit,
+                "on_button-save2_clicked" : self.save_quit,
+                }
+        self.aTree.signal_autoconnect(dic)        
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
 
@@ -86,25 +103,22 @@ class BasicEdit():
             gtk.keysyms.H: self.show_help,
             gtk.keysyms.i: self.show_info,
             gtk.keysyms.I: self.show_info,
-            gtk.keysyms.l: self.toggle_lines,
-            gtk.keysyms.L: self.toggle_lines,
             gtk.keysyms.n: self.new_buffer,
             gtk.keysyms.N: self.new_buffer,
             gtk.keysyms.o: self.open_file,
             gtk.keysyms.O: self.open_file,
-            gtk.keysyms.q: self.quit,
-            gtk.keysyms.Q: self.quit,
+            gtk.keysyms.p: self.preferences.show,
+            gtk.keysyms.P: self.preferences.show,
+            gtk.keysyms.q: self.dialog_quit,
+            gtk.keysyms.Q: self.dialog_quit,
             gtk.keysyms.s: self.save_file,
             gtk.keysyms.S: self.save_file,
-            gtk.keysyms.w: self.close_buffer,
-            gtk.keysyms.W: self.close_buffer,
+            gtk.keysyms.w: self.close_dialog,
+            gtk.keysyms.W: self.close_dialog,
             gtk.keysyms.y: self.redo,
             gtk.keysyms.Y: self.redo,
             gtk.keysyms.z: self.undo,
-            gtk.keysyms.Z: self.undo,
-            gtk.keysyms.plus: self.gui.plus,
-            gtk.keysyms.equal: self.gui.plus,
-            gtk.keysyms.minus: self.gui.minus,
+            gtk.keysyms.Z: self.undo
             }
         if event.state & gtk.gdk.CONTROL_MASK:
 
@@ -175,8 +189,45 @@ class BasicEdit():
 
         res = chooser.run()
         if res == gtk.RESPONSE_OK:
+            try:
+                buffer = self.new_buffer()
+                buffer.filename = chooser.get_filename()
+                try:
+                    f = open(buffer.filename, 'r')
+                    buffer = self.buffers[self.current]
+                    buffer.begin_not_undoable_action()
+                    utf8 = unicode(f.read(), 'utf-8')
+                    buffer.set_text(utf8)
+                    buffer.end_not_undoable_action()
+                    f.close()
+                    self.status.set_text(_('File %s open')
+                             % buffer.filename)
+                except IOError, (errno, strerror):
+                    errortext = _('Unable to open %(filename)s.' % {'filename': buffer.filename})
+                    if errno == 2:
+                        errortext += _(' The file does not exist.')
+                    elif errno == 13:
+                        errortext += _(' You do not have permission to open the file.')
+                    raise PyroomError(errortext)
+                    buffer.filename = FILE_UNNAMED
+                except:
+                    raise PyroomError(_('Unable to open %s\n'
+                                     % buffer.filename))
+                    buffer.filename = FILE_UNNAMED
+            except PyroomError, e:
+                self.gui.error.set_text(str(e))
+                if self.verbose:
+                    print str(e)
+                    print e.traceback
+        else:
+            self.status.set_text(_('Closed, no files selected'))
+        chooser.destroy()
+
+    def open_file_no_chooser(self, filename):
+        """ Open specified file """
+        try:
             buffer = self.new_buffer()
-            buffer.filename = chooser.get_filename()
+            buffer.filename = filename
             try:
                 f = open(buffer.filename, 'r')
                 buffer = self.buffers[self.current]
@@ -193,40 +244,49 @@ class BasicEdit():
                     errortext += _(' The file does not exist.')
                 elif errno == 13:
                     errortext += _(' You do not have permission to open the file.')
-                buffer.set_text(_(errortext))
-                if verbose:
-                    print ('Unable to open %(filename)s. %(traceback)s'
-                        % {'filename': buffer.filename, 'traceback': traceback.format_exc()})
-                self.status.set_text(_('Failed to open %s')
-                    % buffer.filename)
+                raise PyroomError(errortext)
                 buffer.filename = FILE_UNNAMED
             except:
-                buffer.set_text(_('Unable to open %s\n'
+                raise PyroomError(_('Unable to open %s\n'
                                  % buffer.filename))
-                if verbose:
-                    print ('Unable to open %(filename)s. %(traceback)s'
-                        % {'filename': buffer.filename,
-                        'traceback': traceback.format_exc()})
                 buffer.filename = FILE_UNNAMED
-        else:
-            self.status.set_text(_('Closed, no files selected'))
-        chooser.destroy()
+        except PyroomError, e:
+            self.gui.error.set_text(str(e))
+            if self.verbose:
+                print str(e)
+                print e.traceback
 
     def save_file(self):
-        """ Save file """
-
-        buffer = self.buffers[self.current]
-        if buffer.filename != FILE_UNNAMED:
-            f = open(buffer.filename, 'w')
-            txt = buffer.get_text(buffer.get_start_iter(),
-                                  buffer.get_end_iter())
-            f.write(txt)
-            f.close()
-            buffer.begin_not_undoable_action()
-            buffer.end_not_undoable_action()
-            self.status.set_text(_('File %s saved') % buffer.filename)
-        else:
-            self.save_file_as()
+       """ Save file """
+       try:
+           try:
+               buffer = self.buffers[self.current]
+               if buffer.filename != FILE_UNNAMED:
+                   f = open(buffer.filename, 'w')
+                   txt = buffer.get_text(buffer.get_start_iter(),
+                                         buffer.get_end_iter())
+                   f.write(txt)
+                   f.close()
+                   buffer.begin_not_undoable_action()
+                   buffer.end_not_undoable_action()
+                   self.status.set_text(_('File %s saved') % buffer.filename)
+               else:
+                   self.save_file_as()
+           except IOError, (errno, strerror):
+               errortext = _('Unable to save %(filename)s.' % {'filename': buffer.filename})
+               if errno == 13:
+                   errortext += _(' You do not have permission to write to the file.')
+               raise PyroomError(errortext)
+               buffer.filename = FILE_UNNAMED
+           except:
+               raise PyroomError(_('Unable to save %s\n'
+                                % buffer.filename))
+               buffer.filename = FILE_UNNAMED
+       except PyroomError, e: 
+            self.gui.error.set_text(str(e))
+            if self.verbose:
+                print str(e)
+                print e.traceback
 
     def save_file_as(self):
         """ Save file as """
@@ -270,6 +330,7 @@ class BasicEdit():
         buffer.begin_not_undoable_action()
         buffer.set_text(HELP)
         buffer.end_not_undoable_action()
+        self.status.set_text("Displaying help. Press control W to exit and continue editing your document.")
 
     def new_buffer(self):
         """ Create a new buffer """
@@ -282,10 +343,33 @@ class BasicEdit():
         buffer.place_cursor(buffer.get_start_iter())
         self.next_buffer()
         return buffer
-
+        
+    def close_dialog(self):
+        buffer = self.buffers[self.current]
+        if buffer.can_undo() or buffer.can_redo():
+            self.dialog.show()
+        else:
+            self.close_buffer()
+            
+    def cancel_dialog(self, widget, data=None):
+        self.dialog.hide()
+        
+    def unsave_dialog(self, widget, data =None):
+        self.dialog.hide()
+        self.close_buffer()
+        
+    def save_dialog(self,widget,data=None):
+        self.dialog.hide()
+        try:
+            self.save_file()
+            self.close_buffer()
+        except:
+            pass
+        
     def close_buffer(self):
         """ Close current buffer """
-        check_unsaved.check_unsaved_buffer(self)
+
+
         if len(self.buffers) > 1:
 
             self.buffers.pop(self.current)
@@ -325,10 +409,37 @@ class BasicEdit():
             self.current = len(self.buffers) - 1
         self.set_buffer(self.current)
 
+    def dialog_quit(self):
+        count = 0
+        ret = False
+        for buffer in self.buffers:
+            if buffer.can_undo() or buffer.can_redo():
+                count = count + 1
+        if count > 0:
+            self.quitdialog.show()
+        else:
+            self.quit()
+    def cancel_quit(self,widget, data=None):
+        self.quitdialog.hide()
+        
+    def save_quit(self, widget, data=None):
+        self.quitdialog.hide()
+        try:
+            for buffer in self.buffers:
+                if buffer.can_undo() or buffer.can_redo():
+                        if buffer.filename == FILE_UNNAMED:
+                            self.save_file_as()
+                        else:
+                            self.save_file()
+            self.quit()
+        except:
+            pass
+
+    def quit_quit(self,widget,data=None):
+        self.quitdialog.hide()
+        self.quit()
     def quit(self):
         #Add any functions that you want to take place here before pyRoom quits
-        check_unsaved.save_unsaved_on_exit(self)
-        restore_session.save_session(self)
+        autosave.autosave_quit(self)
         self.gui.quit()
-
 # EOF

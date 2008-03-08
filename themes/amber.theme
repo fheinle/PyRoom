@@ -1,0 +1,12 @@
+[theme]
+name = amber
+background = #151000
+foreground = #AE8400
+linenumbers = #5E4803
+border = #151000
+info = #AE8400
+font = DejaVu Sans Mono
+fontsize = 9
+padding = 8
+width = 0.45 
+height = 0.75

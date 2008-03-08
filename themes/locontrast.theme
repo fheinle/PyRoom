@@ -1,0 +1,12 @@
+[theme]
+name = locontrast
+background = #6F6F6F
+foreground = #212121
+linenumbers = #2F455B
+border = #6F6F6F
+info = #C44700
+font = DejaVu Sans Mono
+fontsize = 9
+padding = 8
+width = 0.45
+height = 0.75
