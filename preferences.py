@@ -50,9 +50,10 @@ class PyroomConfig():
         # Copy themes
         theme_source_dir = os.path.join(self.pyroom_absolute_path, 'themes/')
         for theme_file in os.listdir(theme_source_dir):
-            shutil.copy(
-                os.path.join(theme_source_dir, theme_file),
-                os.path.join(self.conf_dir, "themes/"))
+            if theme_file != 'custom.theme':
+                shutil.copy(
+                    os.path.join(theme_source_dir, theme_file),
+                    os.path.join(self.conf_dir, "themes/"))
 
     def read_themes_list(self):
         # Getting the theme files and cleaning up the list, i use custom first so that it always have the index 0 in the list
