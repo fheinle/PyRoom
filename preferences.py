@@ -230,7 +230,7 @@ class Preferences():
                 self.config.set("visual","theme",active)
                 self.graphical.status.set_text(_('Style Changed to %s' % (active)))
             else:
-                theme = theme = "./themes/" + active + ".theme"
+                theme =  os.path.join(self.pyroom_config.conf_dir, "themes/", active + ".theme")
                 self.graphical.config.read(theme)
                 self.graphical.apply_style()
                 self.graphical.apply_style()
