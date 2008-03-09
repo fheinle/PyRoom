@@ -29,8 +29,7 @@ class Preferences():
         self.presetscombobox = self.wTree.get_widget("presetscombobox")
         self.linenumbers = self.wTree.get_widget("linescheck")
         self.autosave = self.wTree.get_widget("autosavetext")
-        self.autosave_spinbutton = self.wTree.get_widget("spinbutton2")
-        self.spellcheck = self.wTree.get_widget("spellchecktext")
+        self.autosave_spinbutton = self.wTree.get_widget("autosavetime")
         self.graphical = gui
         self.config = ConfigParser.ConfigParser()
         self.customfile = ConfigParser.ConfigParser()
@@ -39,18 +38,20 @@ class Preferences():
         self.activestyle = self.config.get("visual","theme")
         self.linesstate = self.config.get("visual","linenumber")
         self.autosavestate = self.config.get("editor","autosave") 
-        #self.autosavetime = self.config.get("editor","autosavetime")
-        self.autosavetime=autosave.autosave_time
+        self.autosavetime = self.config.get("editor","autosavetime")
+        if self.autosavestate == 1:
+            autosave.autosave_time = self.autosavetime
+        else:
+            autosave.autosave_time = 0
         self.autosave_spinbutton.set_value(float(self.autosavetime))
-        self.spellcheckstate = self.config.get("editor","spellcheck")
         self.linesstate = int(self.linesstate)
         self.autosavestate = int(self.autosavestate)
-        self.spellcheckstate = int(self.spellcheckstate)
         self.verbose = verbose
 
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
-        self.spellcheck.set_active(self.spellcheckstate)
+        self.toggleautosave(self.autosave)
+        
         self.window.set_transient_for(self.graphical.window)
 
         self.stylesvalues = { 'custom' : 0 }
@@ -72,6 +73,8 @@ class Preferences():
                 }
         self.wTree.signal_autoconnect(dic)
         self.linenumbers.connect('toggled', self.togglelines)
+        self.autosave.connect('toggled', self.toggleautosave)
+        self.autosave_spinbutton.connect('value-changed', self.toggleautosave)
         self.presetscombobox.connect('changed', self.presetchanged)
         self.fontpreference.connect('font-set', self.customchanged)
         self.colorpreference.connect('color-set', self.customchanged)
@@ -96,8 +99,6 @@ class Preferences():
         self.getcustomdata()
         self.linenumberspref = self.linenumbers.get_active()
         self.autosavepref = self.autosave.get_active()
-        self.spellcheckpref = self.spellcheck.get_active()
-
         if self.linenumberspref == True:
             self.linenumberspref = 1
         else:
@@ -106,17 +107,12 @@ class Preferences():
             self.autosavepref = 1
         else:
             self.autosavepref = 0
-        if self.spellcheckpref == True:
-            self.spellcheckpref = 1
-        else:
-            self.spellcheckpref = 0
             
         self.config.set("visual","linenumber",self.linenumberspref)
         self.config.set("editor","autosave",self.autosavepref)
         autosave.autosave_time=self.autosave_spinbutton.get_value_as_int() ## apply the autosave time settings
         self.config.set("editor","autosavetime",autosave.autosave_time)
         #print autosave.autosave_time,self.autosave_spinbutton.get_value_as_int() ## Debug
-        self.config.set("editor","spellcheck",self.spellcheckpref)        
         if self.presetscombobox.get_active_text().lower() == 'custom':
             c = open("themes/custom.theme", "w")
             self.customfile.set("theme","background",self.bgname)
@@ -205,7 +201,16 @@ class Preferences():
 		
     def togglelines(self, widget):
         b = not self.graphical.textbox.get_show_line_numbers()
-        self.graphical.textbox.set_show_line_numbers(b)        
+        self.graphical.textbox.set_show_line_numbers(b)
+
+    def toggleautosave(self, widget):
+        z = self.autosave.get_active()
+        if z == True:
+            self.autosave_spinbutton.set_sensitive(True)
+            autosave.autosave_time = self.autosave_spinbutton.get_value_as_int()
+        else:
+            self.autosave_spinbutton.set_sensitive(False)
+            autosave.autosave_time = 0
 
     def QuitEvent(self, widget, data=None):
     	print "Exiting..."
