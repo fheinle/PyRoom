@@ -66,6 +66,7 @@ class PyroomConfig():
 class Preferences():
     def __init__(self, gui, style, verbose, pyroom_config):
         self.style = style
+        self.pyroom_config = pyroom_config
         self.wTree = gtk.glade.XML(os.path.join(pyroom_config.pyroom_absolute_path, "interface.glade"), "dialog-preferences")
         self.window = self.wTree.get_widget("dialog-preferences")
         self.fontpreference = self.wTree.get_widget("fontbutton")
@@ -83,9 +84,9 @@ class Preferences():
         self.graphical = gui
 
         self.customfile = ConfigParser.ConfigParser()
-        self.customfile.read(os.path.join(pyroom_config.conf_dir, "themes/custom.theme"))
+        self.customfile.read(os.path.join(self.pyroom_config.conf_dir, "themes/custom.theme"))
 
-        self.config = pyroom_config.config
+        self.config = self.pyroom_config.config
 
         self.activestyle = self.config.get("visual","theme")
         self.linesstate = self.config.get("visual","linenumber")
@@ -107,7 +108,7 @@ class Preferences():
         self.stylesvalues = { 'custom' : 0 }
         self.startingvalue = 1
 
-        for i in pyroom_config.themeslist:
+        for i in self.pyroom_config.themeslist:
             self.stylesvalues['%s' % (i)] = self.startingvalue
             self.startingvalue = self.startingvalue + 1
             i = i.capitalize()
@@ -169,7 +170,7 @@ class Preferences():
         #print autosave.autosave_time,self.autosave_spinbutton.get_value_as_int() ## Debug
         self.config.set("editor","spellcheck",self.spellcheckpref)
         if self.presetscombobox.get_active_text().lower() == 'custom':
-            c = open(os.path.join(pyroom_config.conf_dir, "themes/custom.theme"), "w")
+            c = open(os.path.join(self.pyroom_config.conf_dir, "themes/custom.theme"), "w")
             self.customfile.set("theme","background",self.bgname)
             self.customfile.set("theme","foreground",self.colorname)
             self.customfile.set("theme","border",self.bordername)
@@ -181,7 +182,7 @@ class Preferences():
             self.customfile.write(c)
         self.dlg.hide()
         try:
-            f = open(os.path.join(pyroom_config.conf_dir, "pyroom.conf"), "w")
+            f = open(os.path.join(self.pyroom_config.conf_dir, "pyroom.conf"), "w")
             self.config.write(f)
         except:
             e = PyroomError(_("Could not save preferences file."))
