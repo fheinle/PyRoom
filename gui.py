@@ -5,6 +5,7 @@ import gtk
 import pango
 import gtksourceview
 import gtk.glade
+import ConfigParser
 import os
 
 class GUI():
@@ -66,11 +67,11 @@ class GUI():
         self.status.set_justify(gtk.JUSTIFY_LEFT)
 
 
-        self.config = pyroom_config.config
+        self.config = ConfigParser.ConfigParser()
         if self.style:
             theme = os.path.join(pyroom_config.conf_dir, 'themes', style + ".theme")
         else:
-            theme = os.path.join(pyroom_config.conf_dir, 'themes', self.conf.get("visual","theme") + ".theme")
+            theme = os.path.join(pyroom_config.conf_dir, 'themes', pyroom_config.config.get("visual","theme") + ".theme")
         self.config.read(theme)
 
     def quit(self):
