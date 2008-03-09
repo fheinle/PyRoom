@@ -181,7 +181,7 @@ class Preferences():
             self.customfile.write(c)
         self.dlg.hide()
         try:
-            f = open("example.conf", "w")
+            f = open(os.path.join(pyroom_config.conf_dir, "pyroom.conf"), "w")
             self.config.write(f)
         except:
             e = PyroomError(_("Could not save preferences file."))
