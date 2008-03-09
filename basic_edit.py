@@ -1,12 +1,12 @@
 import gtk
 import gtk.glade
 import gtksourceview
-import ConfigParser
 
 from pyroom_error import PyroomError
 from gui import GUI
 from preferences import Preferences
 import autosave
+import os
 
 FILE_UNNAMED = _('* Unnamed *')
 
@@ -51,17 +51,15 @@ Commands:
 """ % (USAGE, KEY_BINDINGS))
 
 class BasicEdit():
-    def __init__(self,style,verbose):
+    def __init__(self, style, verbose, pyroom_config):
         self.style = style
         self.verbose = verbose
-        self.gui = GUI(style,verbose)
-        self.preferences = Preferences(self.gui,style,verbose)
+        self.config = pyroom_config.config
+        self.gui = GUI(style,verbose, pyroom_config)
+        self.preferences = Preferences(gui=self.gui, style=style, verbose=verbose, pyroom_config=pyroom_config)
         self.status = self.gui.status
         self.window = self.gui.window
         self.textbox = self.gui.textbox
-
-        self.config = ConfigParser.ConfigParser()
-        self.config.read("example.conf")
 
         self.new_buffer()
 
@@ -74,7 +72,7 @@ class BasicEdit():
         self.window.fullscreen()
 
         #Defines the glade file functions for use on closing a buffer
-        self.wTree = gtk.glade.XML("interface.glade", "SaveBuffer")
+        self.wTree = gtk.glade.XML(os.path.join(pyroom_config.pyroom_absolute_path, "interface.glade"), "SaveBuffer")
         self.dialog = self.wTree.get_widget("SaveBuffer")
         self.dialog.set_transient_for(self.window)
         dic = {
@@ -85,7 +83,7 @@ class BasicEdit():
         self.wTree.signal_autoconnect(dic)
 
         #Defines the glade file functions for use on exit
-        self.aTree = gtk.glade.XML("interface.glade", "QuitSave")
+        self.aTree = gtk.glade.XML(os.path.join(pyroom_config.pyroom_absolute_path, "interface.glade"), "QuitSave")
         self.quitdialog = self.aTree.get_widget("QuitSave")
         self.quitdialog.set_transient_for(self.window)
         dic = {

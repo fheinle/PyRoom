@@ -31,21 +31,21 @@ import gettext
 import getopt
 import traceback
 gettext.install('pyroom', 'locale')
-import ConfigParser
 from basic_edit import BasicEdit
 import autosave
 from pyroom_error import PyroomError
-# Some styles
+
+#PYROOM_PATH = os.path.dirname(os.path.abspath(__file__))
+from preferences import PyroomConfig
+pyroom_config = PyroomConfig()
 
 if __name__ == '__main__':
 
     verbose = False
 
     files = []
-    config = ConfigParser.ConfigParser()
-    config.read("example.conf")
-    style = config.get("visual","theme")
-    autosave.autosave_time=config.get("editor","autosavetime")
+    style = pyroom_config.config.get("visual","theme")
+    autosave.autosave_time = pyroom_config.config.get("editor","autosavetime")
     # Get commandline args
     try:
         args, files = getopt.getopt(sys.argv[1:],'vC', ['style=','autosave_time='])
@@ -58,12 +58,12 @@ if __name__ == '__main__':
         if arg == '-v':
             verbose = True
         elif arg == '--style':
-                style = val
+            style = val
         elif arg == '--autosave_time':
             autosave.autosave_time=int(val) #set autosave timeout on user request
 
     # Create relevant buffers for file and load them
-    pyroom = BasicEdit(style,verbose)
+    pyroom = BasicEdit(style=style, verbose=verbose, pyroom_config=pyroom_config)
     try:
         buffnum = 0
         if len(files):
