@@ -10,7 +10,7 @@ import shutil
 
 DEFAULT_CONF = """
 [visual]
-theme = cupid
+theme = green
 linenumber = 0
 
 [editor]
