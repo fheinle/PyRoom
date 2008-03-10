@@ -15,7 +15,6 @@ linenumber = 0
 
 [editor]
 session = True
-spellcheck = 0
 autosavetime = 2
 autosave = 0
 """
