@@ -41,14 +41,14 @@ version.
 Usage:
 ------
 
-%s
+%(USAGE)s
 
 
 Commands:
 ---------
-%s
+%(KEY_BINDINGS)s
 
-""" % (USAGE, KEY_BINDINGS))
+""" % {'USAGE' : USAGE, 'KEY_BINDINGS' : KEY_BINDINGS})
 
 class BasicEdit():
     def __init__(self, style, verbose, pyroom_config):

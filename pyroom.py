@@ -28,6 +28,8 @@ import os.path
 import gobject
 import gtk
 import gettext
+import locale
+locale.setlocale(locale.LC_ALL, '')
 import getopt
 import traceback
 gettext.install('pyroom', 'locale')

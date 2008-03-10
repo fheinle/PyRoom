@@ -60,7 +60,7 @@ def autosave_file(self, buffer_id):
             #print buff_path, buff_name #(debug)
             buffer.tmp_filename=tempfile.mkstemp(suffix="",prefix=buff_name+"_tmp_",dir=temp_folder,text=True)[1]
     save_file(buffer.tmp_filename, buffer.get_text(buffer.get_start_iter(),buffer.get_end_iter())) #really saves the fil
-    self.status.set_text(_('AutoSaving Buffer %d, to temp file %s') % (buffer_id, buffer.tmp_filename)) #inform the user of the saving operation
+    self.status.set_text(_('AutoSaving Buffer %(buffer_id)d, to temp file %(buffer_tmp_filename)s') % {'buffer_id' : buffer_id, 'buffer_tmp_filename' : buffer.tmp_filename}) #inform the user of the saving operation
 
 def timeout(self):
     "the Timer Function"
