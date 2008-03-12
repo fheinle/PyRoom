@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2008-03-12 20:37+0100\n"
+"POT-Creation-Date: 2008-03-12 21:37+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -194,4 +194,110 @@ msgstr ""
 #: pyroom.py:79
 #, python-format
 msgid "Welcome to Pyroom %s, type Control-H for help"
+msgstr ""
+
+#: interface.glade:8
+msgid "Pyroom Preferences"
+msgstr ""
+
+#: interface.glade:40
+msgid "<b>Autosave</b>"
+msgstr ""
+
+#: interface.glade:73
+msgid "Autosave files every "
+msgstr ""
+
+#: interface.glade:99
+msgid " minutes."
+msgstr ""
+
+#: interface.glade:135
+msgid "<b>Line Numbering</b>"
+msgstr ""
+
+#: interface.glade:163
+msgid "Use Line Numbering"
+msgstr ""
+
+#: interface.glade:191
+msgid "General"
+msgstr ""
+
+#: interface.glade:208
+msgid "<b>Themes</b>"
+msgstr ""
+
+#: interface.glade:241
+msgid "Presets:"
+msgstr ""
+
+#: interface.glade:252
+msgid "Custom"
+msgstr ""
+
+#: interface.glade:309
+msgid "Font:"
+msgstr ""
+
+#: interface.glade:321
+msgid "Background color:"
+msgstr ""
+
+#: interface.glade:336
+msgid "Border color:"
+msgstr ""
+
+#: interface.glade:350
+msgid "Text color:"
+msgstr ""
+
+#: interface.glade:364
+msgid "Padding:"
+msgstr ""
+
+#: interface.glade:378
+msgid "Height:"
+msgstr ""
+
+#: interface.glade:391
+msgid "Width:"
+msgstr ""
+
+#: interface.glade:565
+msgid "Theme"
+msgstr ""
+
+#: interface.glade:589 interface.glade:685 interface.glade:785
+msgid "gtk-cancel"
+msgstr ""
+
+#: interface.glade:601
+msgid "gtk-ok"
+msgstr ""
+
+#: interface.glade:622 interface.glade:722
+msgid "Save changes?"
+msgstr ""
+
+#: interface.glade:650
+msgid ""
+"<b>Warning!</b>\n"
+"You are about to close your current document leaving unsaved changes. If you "
+"continue, any changes will be lost."
+msgstr ""
+
+#: interface.glade:671 interface.glade:771
+msgid "Close without saving"
+msgstr ""
+
+#: interface.glade:700 interface.glade:800
+msgid "gtk-save"
+msgstr ""
+
+#: interface.glade:750
+msgid ""
+"<b>Warning!</b>\n"
+"You are about to quit leaving documents with unsaved changes. If you "
+"continue, you will loose any changes that you have made."
 msgstr ""
