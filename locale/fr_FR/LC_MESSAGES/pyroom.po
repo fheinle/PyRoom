@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PyRoom\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2008-03-12 21:18+0100\n"
+"PO-Revision-Date: 2008-03-12 21:32+0100\n"
 "Last-Translator: Bruno Bord <bruno@jehaisleprintemps.ne>\n"
 "Language-Team: Bruno Bord <bruno@jehaisleprintemps.net>\n"
 "MIME-Version: 1.0\n"
@@ -19,69 +19,69 @@ msgstr "* Inconnu *"
 #: autosave.py:37
 #, python-format
 msgid "Could not autosave file %s"
-msgstr ""
+msgstr "Impossible d'enregistrer le fichier %s"
 
 #: autosave.py:63
-#, fuzzy, python-format
+#, python-format
 msgid "AutoSaving Buffer %(buffer_id)d, to temp file %(buffer_tmp_filename)s"
-msgstr "Passage au document %(buffer_id)d (%(buffer_name)s)"
+msgstr "Sauvegarde automatique du document %(buffer_id)d vers le fichier temporaire (%(buffer_tmp_filename)s)"
 
 #: basic_edit.py:13
 #: pyroom.py:56
 msgid "Usage: pyroom [-v] [--style={style name}] file1 file2"
-msgstr ""
+msgstr "Utilisation : pyroom [-v] [--style={nom style}] fichier1 fichier2"
 
 #: basic_edit.py:16
 msgid "Control-H: Show help in a new buffer"
-msgstr ""
+msgstr "Ctrl-H : Afficher l'aide dans un nouveau document"
 
 #: basic_edit.py:17
 msgid "Control-I: Show buffer information"
-msgstr ""
+msgstr "Ctrl-I : Montrer les informations du document"
 
 #: basic_edit.py:18
 msgid "Control-P: Shows Preferences dialog"
-msgstr ""
+msgstr "Ctrl-P : Montrer la fenêtre des préférences"
 
 #: basic_edit.py:19
 msgid "Control-N: Create a new buffer"
-msgstr ""
+msgstr "Ctrl-N : Créer un nouveau document"
 
 #: basic_edit.py:20
 msgid "Control-O: Open a file in a new buffer"
-msgstr ""
+msgstr "Ctrl-O : Ouvrir un nouveau fichier"
 
 #: basic_edit.py:21
 msgid "Control-Q: Quit"
-msgstr ""
+msgstr "Ctrl-Q : Quitter"
 
 #: basic_edit.py:22
 msgid "Control-S: Save current buffer"
-msgstr ""
+msgstr "Ctrl-S : Enregistrer le document courant"
 
 #: basic_edit.py:23
 msgid "Control-Shift-S: Save current buffer as"
-msgstr ""
+msgstr "Ctrl-Shift-S : Enregistrer le document sous"
 
 #: basic_edit.py:24
 msgid "Control-W: Close buffer and exit if it was the last buffer"
-msgstr ""
+msgstr "Ctrl-W : Fermer le document courant et quitter si c'est le dernier ouvert"
 
 #: basic_edit.py:25
 msgid "Control-Y: Redo last typing"
-msgstr ""
+msgstr "Ctrl-Y : Refaire la dernière frappe"
 
 #: basic_edit.py:26
 msgid "Control-Z: Undo last typing"
-msgstr ""
+msgstr "Ctrl-Z : Annuler la dernière frappe"
 
 #: basic_edit.py:27
 msgid "Control-Page Up: Switch to previous buffer"
-msgstr ""
+msgstr "Ctrl-Page Haut : Basculer vers le document précédent"
 
 #: basic_edit.py:28
 msgid "Control-Page Down: Switch to next buffer"
-msgstr ""
+msgstr "Ctrl-Page Bas : Basculer vers le document suivant"
 
 #: basic_edit.py:32
 #, python-format
@@ -132,19 +132,19 @@ msgstr "Fichier %s ouvert"
 
 #: basic_edit.py:205
 #: basic_edit.py:241
-#, fuzzy, python-format
+#, python-format
 msgid "Unable to open %(filename)s."
-msgstr "Impossible d'ouvrir le fichier %(filename)s %(traceback)s"
+msgstr "Impossible d'ouvrir le fichier %(filename)s."
 
 #: basic_edit.py:207
 #: basic_edit.py:243
 msgid " The file does not exist."
-msgstr ""
+msgstr "Le fichier n'existe pas."
 
 #: basic_edit.py:209
 #: basic_edit.py:245
 msgid " You do not have permission to open the file."
-msgstr ""
+msgstr "Vous n'avez pas la permission d'ouvrir le fichier."
 
 #: basic_edit.py:213
 #: basic_edit.py:249
@@ -163,18 +163,18 @@ msgid "File %s saved"
 msgstr "Fichier %s enregistré"
 
 #: basic_edit.py:275
-#, fuzzy, python-format
+#, python-format
 msgid "Unable to save %(filename)s."
-msgstr "Impossible d'ouvrir le fichier %(filename)s %(traceback)s"
+msgstr "Impossible d'ouvrir le fichier %(filename)s."
 
 #: basic_edit.py:277
 msgid " You do not have permission to write to the file."
-msgstr ""
+msgstr "Vous n'avez pas la permission d'enregistrer le fichier."
 
 #: basic_edit.py:281
-#, fuzzy, python-format
+#, python-format
 msgid "Unable to save %s\n"
-msgstr "Impossible d'ouvrir %s\n"
+msgstr "Impossible d'enregistrer %s\n"
 
 #: basic_edit.py:389
 #, python-format
@@ -183,16 +183,16 @@ msgstr "Passage au document %(buffer_id)d (%(buffer_name)s)"
 
 #: preferences.py:183
 msgid "Could not save preferences file."
-msgstr ""
+msgstr "Impossible d'enregistrer le fichier des préférences."
 
 #: preferences.py:226
 #: preferences.py:241
 #, python-format
 msgid "Style Changed to %s"
-msgstr ""
+msgstr "Style changé en %s"
 
 #: pyroom.py:79
-#, fuzzy, python-format
+#, python-format
 msgid "Welcome to Pyroom %s, type Control-H for help"
-msgstr "Bienvenue dans la PyRoom 1.0, tapez Ctrl-H pour l'aide"
+msgstr "Bienvenue dans la PyRoom %s, tapez Ctrl-H pour l'aide"
 
