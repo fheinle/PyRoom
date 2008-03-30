@@ -119,8 +119,12 @@ class GUI():
                                    gtk.gdk.color_parse(self.config.get("theme","background")))
             self.textbox.modify_base(gtk.STATE_NORMAL,
                                      gtk.gdk.color_parse(self.config.get("theme","background")))
+            self.textbox.modify_base(gtk.STATE_SELECTED,
+                                     gtk.gdk.color_parse(self.config.get("theme","foreground")))
             self.textbox.modify_text(gtk.STATE_NORMAL,
                                      gtk.gdk.color_parse(self.config.get("theme","foreground")))
+            self.textbox.modify_text(gtk.STATE_SELECTED,
+                                     gtk.gdk.color_parse('#000000'))
             self.textbox.modify_fg(gtk.STATE_NORMAL,
                                    gtk.gdk.color_parse(self.config.get("theme","foreground")))
             self.status.active_color = self.config.get("theme","foreground")
@@ -156,8 +160,12 @@ class GUI():
                                    gtk.gdk.color_parse(self.style['background']))
             self.textbox.modify_base(gtk.STATE_NORMAL,
                                      gtk.gdk.color_parse(self.style['background']))
+            self.textbox.modify_base(gtk.STATE_NORMAL,
+                                     gtk.gdk.color_parse(self.style['foreground']))
             self.textbox.modify_text(gtk.STATE_NORMAL,
                                      gtk.gdk.color_parse(self.style['foreground']))
+            self.textbox.modify_text(gtk.STATE_SELECTED,
+                                     gtk.gdk.color_parse('#000000'))
             self.textbox.modify_fg(gtk.STATE_NORMAL,
                                    gtk.gdk.color_parse(self.style['foreground']))
             self.status.active_color = self.style['foreground']
