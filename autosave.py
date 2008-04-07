@@ -5,7 +5,8 @@ import string
 import sys
 from pyroom_error import PyroomError
 
-elapsaed_time=0 #seconds elapsed couner
+
+elapsed_time=0 #seconds elapsed couner
 autosave_time=3 #the timeout time in minutes
 temp_folder= "/var/tmp/pyroom" #the temp folder
 timeout_id = 0
@@ -44,20 +45,22 @@ def autosave_quit(self):
     gobject.source_remove(timeout_id)
 
 def autosave_file(self, buffer_id):
-	"""AutoSave the Buffer to temp folder"""
-	buffer=self.buffers[buffer_id]
-	if not os.path.exists(temp_folder):  #chech if the path exists
-	    os.mkdir(temp_folder)    
+    """AutoSave the Buffer to temp folder"""
+    buffer=self.buffers[buffer_id]
+    if not os.path.exists(temp_folder):  #chech if the path exists
+        os.mkdir(temp_folder)   
 
-	if buffer.tmp_filename==None:
-	    if buffer.filename==FILE_UNNAMED:
-		buffer.tmp_filename=tempfile.mkstemp(suffix="",prefix="noname_"+"tmp_",dir=temp_folder,text=True)[1]
-	    else:
-		buff_path,buff_name=os.path.split(buffer.filename)
-		#print buff_path, buff_name #(debug)
-		buffer.tmp_filename=tempfile.mkstemp(suffix="",prefix=buff_name+"_tmp_",dir=temp_folder,text=True)[1]
-	save_file(buffer.tmp_filename, buffer.get_text(buffer.get_start_iter(),buffer.get_end_iter())) #really saves the fil
-	self.status.set_text(_('AutoSaving Buffer %d, to temp file %s') % (buffer_id, buffer.tmp_filename)) #inform the user of the saving operation
+    try:
+        buffer.tmp_filename
+    except AttributeError:
+        if buffer.filename==FILE_UNNAMED:
+	        buffer.tmp_filename = tempfile.mkstemp(suffix="",prefix="noname_"+"tmp_",dir=temp_folder,text=True)[1]
+        else:
+            buff_path,buff_name=os.path.split(buffer.filename)
+            #print buff_path, buff_name #(debug)
+            buffer.tmp_filename=tempfile.mkstemp(suffix="",prefix=buff_name+"_tmp_",dir=temp_folder,text=True)[1]
+    save_file(buffer.tmp_filename, buffer.get_text(buffer.get_start_iter(),buffer.get_end_iter())) #really saves the fil
+    self.status.set_text(_('AutoSaving Buffer %(buffer_id)d, to temp file %(buffer_tmp_filename)s') % {'buffer_id' : buffer_id, 'buffer_tmp_filename' : buffer.tmp_filename}) #inform the user of the saving operation
 
 def timeout(self):
     "the Timer Function"
@@ -72,10 +75,8 @@ def timeout(self):
                 #print "saving buffer" + str(buffer)
                 autosave_file(self,self.buffers.index(buffer))
             elapsed_time=0
-        return True # coninue repeat timeout event
+        return True # continue repeat timeout event
     else:
-        print "Autosave Feature Disabled"
-        self.status.set_text(_('AutoSaving Feature disabled')) #inform the user of the autosave disabled
         return False #stop timeout event
 
 def kill_tempfile(killfile):

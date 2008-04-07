@@ -1,12 +1,12 @@
 import gtk
 import gtk.glade
 import gtksourceview
-import ConfigParser
 
 from pyroom_error import PyroomError
 from gui import GUI
 from preferences import Preferences
 import autosave
+import os
 
 FILE_UNNAMED = _('* Unnamed *')
 
@@ -15,6 +15,7 @@ USAGE = _('Usage: pyroom [-v] [--style={style name}] file1 file2')
 KEY_BINDINGS = '\n'.join([
 _('Control-H: Show help in a new buffer'),
 _('Control-I: Show buffer information'),
+_('Control-P: Shows Preferences dialog'),
 _('Control-N: Create a new buffer'),
 _('Control-O: Open a file in a new buffer'),
 _('Control-Q: Quit'),
@@ -40,27 +41,25 @@ version.
 Usage:
 ------
 
-%s
+%(USAGE)s
 
 
 Commands:
 ---------
-%s
+%(KEY_BINDINGS)s
 
-""" % (USAGE, KEY_BINDINGS))
+""" % {'USAGE' : USAGE, 'KEY_BINDINGS' : KEY_BINDINGS})
 
 class BasicEdit():
-    def __init__(self,style,verbose):
+    def __init__(self, style, verbose, pyroom_config):
         self.style = style
         self.verbose = verbose
-        self.gui = GUI(style,verbose)
-        self.preferences = Preferences(self.gui,style,verbose)
+        self.config = pyroom_config.config
+        self.gui = GUI(style,verbose, pyroom_config)
+        self.preferences = Preferences(gui=self.gui, style=style, verbose=verbose, pyroom_config=pyroom_config)
         self.status = self.gui.status
         self.window = self.gui.window
         self.textbox = self.gui.textbox
-
-        self.config = ConfigParser.ConfigParser()
-        self.config.read("example.conf")
 
         self.new_buffer()
 
@@ -71,9 +70,9 @@ class BasicEdit():
 
         self.window.show_all()
         self.window.fullscreen()
-        
+
         #Defines the glade file functions for use on closing a buffer
-        self.wTree = gtk.glade.XML("interface.glade", "SaveBuffer")
+        self.wTree = gtk.glade.XML(os.path.join(pyroom_config.pyroom_absolute_path, "interface.glade"), "SaveBuffer")
         self.dialog = self.wTree.get_widget("SaveBuffer")
         self.dialog.set_transient_for(self.window)
         dic = {
@@ -82,9 +81,9 @@ class BasicEdit():
                 "on_button-save_clicked" : self.save_dialog,
                 }
         self.wTree.signal_autoconnect(dic)
-        
+
         #Defines the glade file functions for use on exit
-        self.aTree = gtk.glade.XML("interface.glade", "QuitSave")
+        self.aTree = gtk.glade.XML(os.path.join(pyroom_config.pyroom_absolute_path, "interface.glade"), "QuitSave")
         self.quitdialog = self.aTree.get_widget("QuitSave")
         self.quitdialog.set_transient_for(self.window)
         dic = {
@@ -92,7 +91,7 @@ class BasicEdit():
                 "on_button-cancel2_clicked" : self.cancel_quit,
                 "on_button-save2_clicked" : self.save_quit,
                 }
-        self.aTree.signal_autoconnect(dic)        
+        self.aTree.signal_autoconnect(dic)
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
 
@@ -282,7 +281,7 @@ class BasicEdit():
                raise PyroomError(_('Unable to save %s\n'
                                 % buffer.filename))
                buffer.filename = FILE_UNNAMED
-       except PyroomError, e: 
+       except PyroomError, e:
             self.gui.error.set_text(str(e))
             if self.verbose:
                 print str(e)
@@ -343,21 +342,21 @@ class BasicEdit():
         buffer.place_cursor(buffer.get_start_iter())
         self.next_buffer()
         return buffer
-        
+
     def close_dialog(self):
         buffer = self.buffers[self.current]
         if buffer.can_undo() or buffer.can_redo():
             self.dialog.show()
         else:
             self.close_buffer()
-            
+
     def cancel_dialog(self, widget, data=None):
         self.dialog.hide()
-        
+
     def unsave_dialog(self, widget, data =None):
         self.dialog.hide()
         self.close_buffer()
-        
+
     def save_dialog(self,widget,data=None):
         self.dialog.hide()
         try:
@@ -365,7 +364,7 @@ class BasicEdit():
             self.close_buffer()
         except:
             pass
-        
+
     def close_buffer(self):
         """ Close current buffer """
 
@@ -421,7 +420,7 @@ class BasicEdit():
             self.quit()
     def cancel_quit(self,widget, data=None):
         self.quitdialog.hide()
-        
+
     def save_quit(self, widget, data=None):
         self.quitdialog.hide()
         try:

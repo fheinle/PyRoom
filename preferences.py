@@ -1,23 +1,73 @@
 import gtk
 import gtk.glade
-import os.path
+import os
 from status_label import FadeLabel
-import ConfigParser
 from pyroom_error import PyroomError
 import autosave
+import ConfigParser
+import shutil
 
-# Getting the theme files and cleaning up the list, i use custom first so that it always have the index 0 in the list
-themeslist = []
-rawthemeslist = os.listdir("themes/")
-for i in rawthemeslist:
-    if i[-5:] == 'theme' and i != 'custom.theme':
-        i = i[:-6]
-        themeslist.append(i)
-    
+
+DEFAULT_CONF = """
+[visual]
+theme = green
+linenumber = 0
+
+[editor]
+session = True
+autosavetime = 2
+autosave = 0
+"""
+
+class PyroomConfig():
+    """Fetches (and/or) builds basic configuration files/dirs."""
+
+    def __init__(self):
+        self.pyroom_absolute_path = os.path.dirname(os.path.abspath(__file__))
+        home = os.getenv("HOME")
+        self.conf_dir = os.path.join(home, '.pyroom')
+        self.conf_file = os.path.join(self.conf_dir, 'pyroom.conf')
+        self.build_default_conf()
+        self.config = ConfigParser.ConfigParser()
+        self.config.read(self.conf_file)
+        self.themeslist = self.read_themes_list()
+
+    def build_default_conf(self):
+        """builds necessary default conf.
+        * makes directories if not here,
+        * copies theme data
+        * builds the default conf file
+        """
+        if not os.path.isdir(self.conf_dir):
+            os.mkdir(self.conf_dir)
+        if not os.path.isdir(os.path.join(self.conf_dir, 'themes')):
+            os.mkdir(os.path.join(self.conf_dir, 'themes'))
+        if not os.path.isfile(self.conf_file):
+            fd = open(self.conf_file, "w")
+            fd.write(DEFAULT_CONF)
+            fd.close()
+        # Copy themes
+        theme_source_dir = os.path.join(self.pyroom_absolute_path, 'themes/')
+        for theme_file in os.listdir(theme_source_dir):
+            if theme_file != 'custom.theme':
+                shutil.copy(
+                    os.path.join(theme_source_dir, theme_file),
+                    os.path.join(self.conf_dir, "themes/"))
+
+    def read_themes_list(self):
+        # Getting the theme files and cleaning up the list, i use custom first so that it always have the index 0 in the list
+        themeslist = []
+        rawthemeslist = os.listdir(os.path.join(self.conf_dir, "themes/"))
+        for themefile in rawthemeslist:
+            if themefile.endswith('theme') and themefile != 'custom.theme':
+                themeslist.append(themefile[:-6])
+        return themeslist
+
 class Preferences():
-    def __init__(self,gui,style,verbose):
+    def __init__(self, gui, style, verbose, pyroom_config):
         self.style = style
-        self.wTree = gtk.glade.XML("interface.glade", "dialog-preferences")
+        self.pyroom_config = pyroom_config
+        self.wTree = gtk.glade.XML(os.path.join(pyroom_config.pyroom_absolute_path, "interface.glade"), "dialog-preferences")
         self.window = self.wTree.get_widget("dialog-preferences")
         self.fontpreference = self.wTree.get_widget("fontbutton")
         self.colorpreference = self.wTree.get_widget("colorbutton")
@@ -29,40 +79,43 @@ class Preferences():
         self.presetscombobox = self.wTree.get_widget("presetscombobox")
         self.linenumbers = self.wTree.get_widget("linescheck")
         self.autosave = self.wTree.get_widget("autosavetext")
-        self.autosave_spinbutton = self.wTree.get_widget("spinbutton2")
-        self.spellcheck = self.wTree.get_widget("spellchecktext")
+        self.autosave_spinbutton = self.wTree.get_widget("autosavetime")
         self.graphical = gui
-        self.config = ConfigParser.ConfigParser()
+
         self.customfile = ConfigParser.ConfigParser()
-        self.customfile.read("themes/custom.theme")
-        self.config.read("example.conf")
+        self.customfile.read(os.path.join(self.pyroom_config.conf_dir, "themes/custom.theme"))
+
+        self.config = self.pyroom_config.config
+
         self.activestyle = self.config.get("visual","theme")
         self.linesstate = self.config.get("visual","linenumber")
         self.autosavestate = self.config.get("editor","autosave") 
-        #self.autosavetime = self.config.get("editor","autosavetime")
-        self.autosavetime=autosave.autosave_time
+        self.autosavetime = self.config.get("editor","autosavetime")
+        if self.autosavestate == 1:
+            autosave.autosave_time = self.autosavetime
+        else:
+            autosave.autosave_time = 0
         self.autosave_spinbutton.set_value(float(self.autosavetime))
-        self.spellcheckstate = self.config.get("editor","spellcheck")
         self.linesstate = int(self.linesstate)
         self.autosavestate = int(self.autosavestate)
-        self.spellcheckstate = int(self.spellcheckstate)
         self.verbose = verbose
 
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
-        self.spellcheck.set_active(self.spellcheckstate)
+        self.toggleautosave(self.autosave)
+        
         self.window.set_transient_for(self.graphical.window)
 
         self.stylesvalues = { 'custom' : 0 }
         self.startingvalue = 1
 
-        for i in themeslist:
+        for i in self.pyroom_config.themeslist:
             self.stylesvalues['%s' % (i)] = self.startingvalue
             self.startingvalue = self.startingvalue + 1
             i = i.capitalize()
             self.presetscombobox.append_text(i)
         self.presetscombobox.set_active(self.stylesvalues[self.activestyle])
-        self.presetchanged(self.presetscombobox,'initial')
+        self.presetchanged(self.presetscombobox, 'initial')
 
         # Connecting interface's signals
         dic = {
@@ -72,6 +125,8 @@ class Preferences():
                 }
         self.wTree.signal_autoconnect(dic)
         self.linenumbers.connect('toggled', self.togglelines)
+        self.autosave.connect('toggled', self.toggleautosave)
+        self.autosave_spinbutton.connect('value-changed', self.toggleautosave)
         self.presetscombobox.connect('changed', self.presetchanged)
         self.fontpreference.connect('font-set', self.customchanged)
         self.colorpreference.connect('color-set', self.customchanged)
@@ -85,9 +140,9 @@ class Preferences():
         self.fontname = self.fontpreference.get_font_name()
         self.fontsize = int(self.fontname[-2:])
         self.fontname = self.fontname[:-2]
-        self.colorname = gtk.gdk.Color.to_string(self.colorpreference.get_color())
-        self.bgname = gtk.gdk.Color.to_string(self.bgpreference.get_color())
-        self.bordername = gtk.gdk.Color.to_string(self.borderpreference.get_color())
+        self.colorname = self.format_rgb(gtk.gdk.Color.to_string(self.colorpreference.get_color()))
+        self.bgname = self.format_rgb(gtk.gdk.Color.to_string(self.bgpreference.get_color()))
+        self.bordername = self.format_rgb(gtk.gdk.Color.to_string(self.borderpreference.get_color()))
         self.paddingname = self.paddingpreference.get_value_as_int()
         self.heightname = self.heightpreference.get_value()
         self.widthname = self.widthpreference.get_value()
@@ -96,8 +151,6 @@ class Preferences():
         self.getcustomdata()
         self.linenumberspref = self.linenumbers.get_active()
         self.autosavepref = self.autosave.get_active()
-        self.spellcheckpref = self.spellcheck.get_active()
-
         if self.linenumberspref == True:
             self.linenumberspref = 1
         else:
@@ -106,19 +159,13 @@ class Preferences():
             self.autosavepref = 1
         else:
             self.autosavepref = 0
-        if self.spellcheckpref == True:
-            self.spellcheckpref = 1
-        else:
-            self.spellcheckpref = 0
-            
         self.config.set("visual","linenumber",self.linenumberspref)
         self.config.set("editor","autosave",self.autosavepref)
         autosave.autosave_time=self.autosave_spinbutton.get_value_as_int() ## apply the autosave time settings
         self.config.set("editor","autosavetime",autosave.autosave_time)
         #print autosave.autosave_time,self.autosave_spinbutton.get_value_as_int() ## Debug
-        self.config.set("editor","spellcheck",self.spellcheckpref)        
         if self.presetscombobox.get_active_text().lower() == 'custom':
-            c = open("themes/custom.theme", "w")
+            c = open(os.path.join(self.pyroom_config.conf_dir, "themes/custom.theme"), "w")
             self.customfile.set("theme","background",self.bgname)
             self.customfile.set("theme","foreground",self.colorname)
             self.customfile.set("theme","border",self.bordername)
@@ -130,7 +177,7 @@ class Preferences():
             self.customfile.write(c)
         self.dlg.hide()
         try:
-            f = open("example.conf", "w")
+            f = open(os.path.join(self.pyroom_config.conf_dir, "pyroom.conf"), "w")
             self.config.write(f)
         except:
             e = PyroomError(_("Could not save preferences file."))
@@ -138,7 +185,7 @@ class Preferences():
             if self.verbose:
                 print str(e)
                 print e.traceback
-            
+
 
     def customchanged(self, widget):
         self.presetscombobox.set_active(0)
@@ -178,7 +225,7 @@ class Preferences():
                 self.config.set("visual","theme",active)
                 self.graphical.status.set_text(_('Style Changed to %s' % (active)))
             else:
-                theme = theme = "./themes/" + active + ".theme"
+                theme =  os.path.join(self.pyroom_config.conf_dir, "themes/", active + ".theme")
                 self.graphical.config.read(theme)
                 self.graphical.apply_style()
                 self.graphical.apply_style()
@@ -193,14 +240,28 @@ class Preferences():
                 self.heightpreference.set_value(float(self.graphical.config.get("theme","height")))
                 self.graphical.status.set_text(_('Style Changed to %s' % (active)))
                 self.presetscombobox.set_active(activeid)
-    	
+
     def show(self):
 		self.dlg = self.wTree.get_widget("dialog-preferences")
 		self.dlg.show()
-		
+
+    def format_rgb(self,color):
+        color = color[0:3]+color[5:7]+color[11:13]
+        color = color.upper()
+        return color
+        
     def togglelines(self, widget):
         b = not self.graphical.textbox.get_show_line_numbers()
-        self.graphical.textbox.set_show_line_numbers(b)        
+        self.graphical.textbox.set_show_line_numbers(b)
+
+    def toggleautosave(self, widget):
+        z = self.autosave.get_active()
+        if z == True:
+            self.autosave_spinbutton.set_sensitive(True)
+            autosave.autosave_time = self.autosave_spinbutton.get_value_as_int()
+        else:
+            self.autosave_spinbutton.set_sensitive(False)
+            autosave.autosave_time = 0
 
     def QuitEvent(self, widget, data=None):
     	print "Exiting..."

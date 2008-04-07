@@ -6,9 +6,10 @@ import pango
 import gtksourceview
 import gtk.glade
 import ConfigParser
+import os
 
 class GUI():
-    def __init__(self, style, verbose):
+    def __init__(self, style, verbose, pyroom_config):
         self.verbose = verbose
         self.status = FadeLabel()
         self.error = FadeLabel()
@@ -67,12 +68,10 @@ class GUI():
 
 
         self.config = ConfigParser.ConfigParser()
-        self.conf = ConfigParser.ConfigParser()
-        self.conf.read("example.conf")
         if self.style:
-            theme = "./themes/" + style + ".theme"
+            theme = os.path.join(pyroom_config.conf_dir, 'themes', style + ".theme")
         else:
-            theme = "./themes/" + self.conf.get("visual","theme") + ".theme"
+            theme = os.path.join(pyroom_config.conf_dir, 'themes', pyroom_config.config.get("visual","theme") + ".theme")
         self.config.read(theme)
 
     def quit(self):
@@ -120,8 +119,12 @@ class GUI():
                                    gtk.gdk.color_parse(self.config.get("theme","background")))
             self.textbox.modify_base(gtk.STATE_NORMAL,
                                      gtk.gdk.color_parse(self.config.get("theme","background")))
+            self.textbox.modify_base(gtk.STATE_SELECTED,
+                                     gtk.gdk.color_parse(self.config.get("theme","foreground")))
             self.textbox.modify_text(gtk.STATE_NORMAL,
                                      gtk.gdk.color_parse(self.config.get("theme","foreground")))
+            self.textbox.modify_text(gtk.STATE_SELECTED,
+                                     gtk.gdk.color_parse('#000000'))
             self.textbox.modify_fg(gtk.STATE_NORMAL,
                                    gtk.gdk.color_parse(self.config.get("theme","foreground")))
             self.status.active_color = self.config.get("theme","foreground")
@@ -157,8 +160,12 @@ class GUI():
                                    gtk.gdk.color_parse(self.style['background']))
             self.textbox.modify_base(gtk.STATE_NORMAL,
                                      gtk.gdk.color_parse(self.style['background']))
+            self.textbox.modify_base(gtk.STATE_NORMAL,
+                                     gtk.gdk.color_parse(self.style['foreground']))
             self.textbox.modify_text(gtk.STATE_NORMAL,
                                      gtk.gdk.color_parse(self.style['foreground']))
+            self.textbox.modify_text(gtk.STATE_SELECTED,
+                                     gtk.gdk.color_parse('#000000'))
             self.textbox.modify_fg(gtk.STATE_NORMAL,
                                    gtk.gdk.color_parse(self.style['foreground']))
             self.status.active_color = self.style['foreground']

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PyRoom\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2008-02-05 20:22+0100\n"
+"PO-Revision-Date: 2008-03-12 21:32+0100\n"
 "Last-Translator: Bruno Bord <bruno@jehaisleprintemps.ne>\n"
 "Language-Team: Bruno Bord <bruno@jehaisleprintemps.net>\n"
 "MIME-Version: 1.0\n"
@@ -11,11 +11,80 @@ msgstr ""
 "X-Poedit-Language: French\n"
 "X-Poedit-Country: FRANCE\n"
 
-#: writeroom.py:75
+#: autosave.py:14
+#: basic_edit.py:11
 msgid "* Unnamed *"
 msgstr "* Inconnu *"
 
-#: writeroom.py:78
+#: autosave.py:37
+#, python-format
+msgid "Could not autosave file %s"
+msgstr "Impossible d'enregistrer le fichier %s"
+
+#: autosave.py:63
+#, python-format
+msgid "AutoSaving Buffer %(buffer_id)d, to temp file %(buffer_tmp_filename)s"
+msgstr "Sauvegarde automatique du document %(buffer_id)d vers le fichier temporaire (%(buffer_tmp_filename)s)"
+
+#: basic_edit.py:13
+#: pyroom.py:56
+msgid "Usage: pyroom [-v] [--style={style name}] file1 file2"
+msgstr "Utilisation : pyroom [-v] [--style={nom style}] fichier1 fichier2"
+
+#: basic_edit.py:16
+msgid "Control-H: Show help in a new buffer"
+msgstr "Ctrl-H : Afficher l'aide dans un nouveau document"
+
+#: basic_edit.py:17
+msgid "Control-I: Show buffer information"
+msgstr "Ctrl-I : Montrer les informations du document"
+
+#: basic_edit.py:18
+msgid "Control-P: Shows Preferences dialog"
+msgstr "Ctrl-P : Montrer la fenêtre des préférences"
+
+#: basic_edit.py:19
+msgid "Control-N: Create a new buffer"
+msgstr "Ctrl-N : Créer un nouveau document"
+
+#: basic_edit.py:20
+msgid "Control-O: Open a file in a new buffer"
+msgstr "Ctrl-O : Ouvrir un nouveau fichier"
+
+#: basic_edit.py:21
+msgid "Control-Q: Quit"
+msgstr "Ctrl-Q : Quitter"
+
+#: basic_edit.py:22
+msgid "Control-S: Save current buffer"
+msgstr "Ctrl-S : Enregistrer le document courant"
+
+#: basic_edit.py:23
+msgid "Control-Shift-S: Save current buffer as"
+msgstr "Ctrl-Shift-S : Enregistrer le document sous"
+
+#: basic_edit.py:24
+msgid "Control-W: Close buffer and exit if it was the last buffer"
+msgstr "Ctrl-W : Fermer le document courant et quitter si c'est le dernier ouvert"
+
+#: basic_edit.py:25
+msgid "Control-Y: Redo last typing"
+msgstr "Ctrl-Y : Refaire la dernière frappe"
+
+#: basic_edit.py:26
+msgid "Control-Z: Undo last typing"
+msgstr "Ctrl-Z : Annuler la dernière frappe"
+
+#: basic_edit.py:27
+msgid "Control-Page Up: Switch to previous buffer"
+msgstr "Ctrl-Page Haut : Basculer vers le document précédent"
+
+#: basic_edit.py:28
+msgid "Control-Page Down: Switch to next buffer"
+msgstr "Ctrl-Page Bas : Basculer vers le document suivant"
+
+#: basic_edit.py:32
+#, python-format
 msgid ""
 "PyRoom - an adaptation of write room\n"
 "Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
@@ -29,142 +98,101 @@ msgid ""
 "Usage:\n"
 "------\n"
 "\n"
-"pyroom.py [-style] file1 file2 ...\n"
-"style can be either 'blue', 'green', 'darkgreen'\n"
+"%(USAGE)s\n"
 "\n"
 "\n"
 "Commands:\n"
 "---------\n"
-"Control-H: Show help in a new buffer\n"
-"Control-I: Show buffer information\n"
-"Control-L: Toggle line number\n"
-"Control-N: Create a new buffer\n"
-"Control-O: Open a file in a new buffer\n"
-"Control-Q: Quit\n"
-"Control-S: Save current buffer\n"
-"Control-Shift-S: Save current buffer as\n"
-"Control-W: Close buffer and exit if it was the last buffer\n"
-"Control-Y: Redo last typing\n"
-"Control-Z: Undo last typing\n"
-"Control-Left: Switch to previous buffer\n"
-"Control-Right: Switch to next buffer\n"
-"Control-Plus: Increases font size\n"
-"Control-Minus: Decreases font size\n"
+"%(KEY_BINDINGS)s\n"
 "\n"
-"Warnings:\n"
-"---------\n"
-"No autosave.\n"
-"No question whether to close a modified buffer or not\n"
 msgstr ""
-"PyRoom - une adapation de write room\n"
-"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
-"Copyright (c) 2008 Bruno Bord\n"
-"\n"
-"This program is free software: you can redistribute it and/or modify it under\n"
-"the terms of the GNU General Public License as published by the Free Software\n"
-"Foundation, either version 3 of the License, or (at your option) any later\n"
-"version.\n"
-"\n"
-"Utilisation :\n"
-"------\n"
-"\n"
-"pyroom.py [-style] file1 file2 ...\n"
-"le style peut être 'blue', 'green', 'darkgreen'\n"
-"\n"
-"\n"
-"Commandes :\n"
-"---------\n"
-"Control-H: Affiche l'aide dans un nouveau document\n"
-"Control-I: Montre les infos du document\n"
-"Control-L: Basculer l'affichage des numéros de ligne\n"
-"Control-N: Créer un nouveau document\n"
-"Control-O: Ouvrir un nouveau fichier\n"
-"Control-Q: Quitter\n"
-"Control-S: Enregistrer le document courant\n"
-"Control-Shift-S: Enregistrer sous...\n"
-"Control-W: Fermer le document en cours, et sortir si celui-ci était le dernier document\n"
-"Control-Y: Refaire la dernière frappe\n"
-"Control-Z: Annuler la dernière frappe\n"
-"Control-Gauche: Basculer vers le document précédent\n"
-"Control-Droit: Basculer vers le document suivant\n"
-"Control-Plus: Augmenter la taille de la police\n"
-"Control-Minus: Diminuer la taille de la police\n"
-"\n"
-"Alertes :\n"
-"---------\n"
-"Pas de sauvegarde automatique.\n"
-"Le programme ne pose pas de question quand on ferme un document modifié ou non.\n"
 
-#: writeroom.py:224
-msgid "Welcome to PyRoom 1.0, type Control-H for help"
-msgstr "Bienvenue dans la PyRoom 1.0, tapez Ctrl-H pour l'aide"
-
-#: writeroom.py:316
-#, python-format
-msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
-msgstr "Passage au document %(buffer_id)d (%(buffer_name)s)"
-
-#: writeroom.py:404
+#: basic_edit.py:145
 msgid " (modified)"
 msgstr "(modifié)"
 
-#: writeroom.py:407
+#: basic_edit.py:148
 #, python-format
 msgid "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), %(word_count)d word(s), %(lines)d line(s)"
 msgstr "Document %(buffer_id)d : %(buffer_name)s%(status)s, %(char_count)d octet(s), %(word_count)d mot(s), %(lines)d lignes(s)"
 
-#: writeroom.py:440
+#: basic_edit.py:163
 msgid "No more undo!"
 msgstr "Plus rien à annuler !"
 
-#: writeroom.py:449
+#: basic_edit.py:172
 msgid "No more redo!"
 msgstr "Plus rien à refaire !"
 
-#: writeroom.py:478
+#: basic_edit.py:202
+#: basic_edit.py:238
 #, python-format
 msgid "File %s open"
 msgstr "Fichier %s ouvert"
 
-#: writeroom.py:481
+#: basic_edit.py:205
+#: basic_edit.py:241
 #, python-format
-msgid ""
-"Unable to open %(filename)s\n"
-" %(traceback)s\n"
-msgstr ""
-"Impossible d'ouvrir le fichier %(filename)s\n"
-"%(traceback)s\n"
+msgid "Unable to open %(filename)s."
+msgstr "Impossible d'ouvrir le fichier %(filename)s."
 
-#: writeroom.py:486
-#, python-format
-msgid "Failed to open %s"
-msgstr "Échec dans l'ouverture de %s"
+#: basic_edit.py:207
+#: basic_edit.py:243
+msgid " The file does not exist."
+msgstr "Le fichier n'existe pas."
 
-#: writeroom.py:490
-#: writeroom.py:525
-msgid "Closed, no files selected"
-msgstr "Fermé, pas de fichier sélectionné"
+#: basic_edit.py:209
+#: basic_edit.py:245
+msgid " You do not have permission to open the file."
+msgstr "Vous n'avez pas la permission d'ouvrir le fichier."
 
-#: writeroom.py:505
-#, python-format
-msgid "File %s saved"
-msgstr "Fichier %s enregistré"
-
-#: writeroom.py:535
-msgid "Font size increased"
-msgstr "Taille de la police augmentée"
-
-#: writeroom.py:542
-msgid "Font size decreased"
-msgstr "Taille de la police diminuée"
-
-#: writeroom.py:573
+#: basic_edit.py:213
+#: basic_edit.py:249
 #, python-format
 msgid "Unable to open %s\n"
 msgstr "Impossible d'ouvrir %s\n"
 
-#: writeroom.py:575
+#: basic_edit.py:222
+#: basic_edit.py:306
+msgid "Closed, no files selected"
+msgstr "Fermé, pas de fichier sélectionné"
+
+#: basic_edit.py:271
 #, python-format
-msgid "Unable to open %(filename)s %(traceback)s"
-msgstr "Impossible d'ouvrir le fichier %(filename)s %(traceback)s"
+msgid "File %s saved"
+msgstr "Fichier %s enregistré"
+
+#: basic_edit.py:275
+#, python-format
+msgid "Unable to save %(filename)s."
+msgstr "Impossible d'ouvrir le fichier %(filename)s."
+
+#: basic_edit.py:277
+msgid " You do not have permission to write to the file."
+msgstr "Vous n'avez pas la permission d'enregistrer le fichier."
+
+#: basic_edit.py:281
+#, python-format
+msgid "Unable to save %s\n"
+msgstr "Impossible d'enregistrer %s\n"
+
+#: basic_edit.py:389
+#, python-format
+msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
+msgstr "Passage au document %(buffer_id)d (%(buffer_name)s)"
+
+#: preferences.py:183
+msgid "Could not save preferences file."
+msgstr "Impossible d'enregistrer le fichier des préférences."
+
+#: preferences.py:226
+#: preferences.py:241
+#, python-format
+msgid "Style Changed to %s"
+msgstr "Style changé en %s"
+
+#: pyroom.py:79
+#, python-format
+msgid "Welcome to Pyroom %s, type Control-H for help"
+msgstr "Bienvenue dans la PyRoom %s, tapez Ctrl-H pour l'aide"
 
