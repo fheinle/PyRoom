@@ -30,7 +30,7 @@ import gtk
 import gettext
 import locale
 locale.setlocale(locale.LC_ALL, '')
-import getopt
+from optparse import OptionParser
 import traceback
 gettext.install('pyroom', 'locale')
 from basic_edit import BasicEdit
@@ -46,23 +46,35 @@ if __name__ == '__main__':
     verbose = False
 
     files = []
-    style = pyroom_config.config.get("visual","theme")
-    autosave.autosave_time = pyroom_config.config.get("editor","autosavetime")
+    style = pyroom_config.config.get('visual', 'theme')
+    autosave.autosave_time = pyroom_config.config.get('editor', 'autosavetime')
+
     # Get commandline args
-    try:
-        args, files = getopt.getopt(sys.argv[1:],'vC', ['style=','autosave_time='])
-    except getopt.GetoptError:
-    # Print help information
-        print _("Usage: pyroom [-v] [--style={style name}] file1 file2")
-        sys.exit(2)
-    style_true = False
-    for arg, val in args:
-        if arg == '-v':
-            verbose = True
-        elif arg == '--style':
-            style = val
-        elif arg == '--autosave_time':
-            autosave.autosave_time=int(val) #set autosave timeout on user request
+    parser = OptionParser(usage = _('%prog [-v] [--style={style name}] [file1] [file2]...'),
+                        version = '%prog ' + __VERSION__,
+                        description = _('PyRoom lets you edit text files simply and efficiently in a full-screen window, with no distractions.'))
+    parser.set_defaults(verbose = False,
+                        style= pyroom_config.config.get('visual', 'theme'),
+                        autosave_time = pyroom_config.config.get('editor', 'autosavetime'))
+    parser.add_option('-a', '--autosave',
+                    type = 'int', action = 'store', dest = 'autosave_time',
+                    help = _('Specify the amount of time, in minutes, to automatically save your work.'))
+    parser.add_option('-v', '--verbose',
+                    action = 'store_true', dest = 'verbose',
+                    help = _('Turn on verbose mode.'))
+    parser.add_option('-s', '--style',
+                    action = 'store', dest = 'style',
+                    type = 'choice', choices = pyroom_config.read_themes_list(),
+                    help = _('Override the default style'))
+    parser.add_option('-r', '--recursive',
+                    action = 'store_true', dest = 'recursive',
+                    help = _('Search in subdirectories recursively [default: %default]'))
+    (options, args) = parser.parse_args()
+
+    verbose = options.verbose
+    style = options.style
+    autosave.autosave_time = options.autosave_time
+    files = args
 
     # Create relevant buffers for file and load them
     pyroom = BasicEdit(style=style, verbose=verbose, pyroom_config=pyroom_config)
