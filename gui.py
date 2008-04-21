@@ -160,7 +160,7 @@ class GUI():
                                    gtk.gdk.color_parse(self.style['background']))
             self.textbox.modify_base(gtk.STATE_NORMAL,
                                      gtk.gdk.color_parse(self.style['background']))
-            self.textbox.modify_base(gtk.STATE_NORMAL,
+            self.textbox.modify_base(gtk.STATE_SELECTED,
                                      gtk.gdk.color_parse(self.style['foreground']))
             self.textbox.modify_text(gtk.STATE_NORMAL,
                                      gtk.gdk.color_parse(self.style['foreground']))
