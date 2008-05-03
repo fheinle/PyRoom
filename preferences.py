@@ -84,6 +84,8 @@ class Preferences():
 
         self.customfile = ConfigParser.ConfigParser()
         self.customfile.read(os.path.join(self.pyroom_config.conf_dir, "themes/custom.theme"))
+        if not self.customfile.has_section('theme'):
+            self.customfile.add_section('theme')
 
         self.config = self.pyroom_config.config
 

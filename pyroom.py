@@ -49,6 +49,10 @@ if __name__ == '__main__':
     style = pyroom_config.config.get('visual', 'theme')
     autosave.autosave_time = pyroom_config.config.get('editor', 'autosavetime')
 
+    # Preparing the themes list for the optionparser
+    themes_list = pyroom_config.read_themes_list()
+    themes_list.append('custom')
+
     # Get commandline args
     parser = OptionParser(usage = _('%prog [-v] [--style={style name}] [file1] [file2]...'),
                         version = '%prog ' + __VERSION__,
@@ -64,7 +68,7 @@ if __name__ == '__main__':
                     help = _('Turn on verbose mode.'))
     parser.add_option('-s', '--style',
                     action = 'store', dest = 'style',
-                    type = 'choice', choices = pyroom_config.read_themes_list(),
+                    type = 'choice', choices = themes_list,
                     help = _('Override the default style'))
     parser.add_option('-r', '--recursive',
                     action = 'store_true', dest = 'recursive',
