@@ -71,9 +71,11 @@ class GUI():
 
         self.config = ConfigParser.ConfigParser()
         if self.style:
-            theme = os.path.join(pyroom_config.conf_dir, 'themes', style + ".theme")
+            theme = os.path.join(pyroom_config.conf_dir, 'themes',
+                                 style + ".theme")
         else:
-            theme = os.path.join(pyroom_config.conf_dir, 'themes', pyroom_config.config.get("visual", "theme") + ".theme")
+            theme = os.path.join(pyroom_config.conf_dir, 'themes',
+            pyroom_config.config.get("visual", "theme") + ".theme")
         self.config.read(theme)
 
     def quit(self):
@@ -116,27 +118,35 @@ class GUI():
     def apply_style(self, style=None, mode='normal'):
         if mode == 'normal':
             self.window.modify_bg(gtk.STATE_NORMAL,
-                                  gtk.gdk.color_parse(self.config.get("theme", "background")))
+                                  gtk.gdk.color_parse(self.config.get("theme",
+                                                      "background")))
             self.textbox.modify_bg(gtk.STATE_NORMAL,
-                                   gtk.gdk.color_parse(self.config.get("theme", "background")))
+                                   gtk.gdk.color_parse(self.config.get(
+                                               "theme", "background")))
             self.textbox.modify_base(gtk.STATE_NORMAL,
-                                     gtk.gdk.color_parse(self.config.get("theme", "background")))
+                                     gtk.gdk.color_parse(self.config.get(
+                                                 "theme", "background")))
             self.textbox.modify_base(gtk.STATE_SELECTED,
-                                     gtk.gdk.color_parse(self.config.get("theme", "foreground")))
+                                     gtk.gdk.color_parse(self.config.get(
+                                                 "theme", "foreground")))
             self.textbox.modify_text(gtk.STATE_NORMAL,
-                                     gtk.gdk.color_parse(self.config.get("theme", "foreground")))
+                                     gtk.gdk.color_parse(self.config.get(
+                                                 "theme", "foreground")))
             self.textbox.modify_text(gtk.STATE_SELECTED,
                                      gtk.gdk.color_parse('#000000'))
             self.textbox.modify_fg(gtk.STATE_NORMAL,
-                                   gtk.gdk.color_parse(self.config.get("theme", "foreground")))
+                                   gtk.gdk.color_parse(self.config.get(
+                                               "theme", "foreground")))
             self.status.active_color = self.config.get("theme", "foreground")
             self.status.inactive_color = self.config.get("theme", "background")
             self.error.active_color = self.config.get("theme", "foreground")
             self.error.inactive_color = self.config.get("theme", "background")
             self.boxout.modify_bg(gtk.STATE_NORMAL,
-                                  gtk.gdk.color_parse(self.config.get("theme", "border")))
+                                  gtk.gdk.color_parse(self.config.get(
+                                                  "theme", "border")))
             font_and_size = '%s %d' % (self.config.get("theme", "font"),
-                                       float(self.config.get("theme", "fontsize")))
+                                       float(self.config.get("theme",
+                                                        "fontsize")))
             self.textbox.modify_font(pango.FontDescription(font_and_size))
 
             gtk.rc_parse_string("""
@@ -151,25 +161,33 @@ class GUI():
             width = int(float(self.config.get("theme", "width")) * w)
             height = int(float(self.config.get("theme", "height")) * h)
             self.vbox.set_size_request(width, height)
-            self.fixed.move(self.vbox, int(((1 - float(self.config.get("theme", "width"))) * w)/ 2),
+            self.fixed.move(self.vbox, int(((1 - float(self.config.get(
+                                           "theme", "width"))) * w)/ 2),
                 int(((1-float(self.config.get("theme", "height"))) * h) / 2))
-            self.textbox.set_border_width(int(self.config.get("theme", "padding")))
+            self.textbox.set_border_width(int(self.config.get(
+                                         "theme", "padding")))
         elif mode == 'custom':
             self.style = style
             self.window.modify_bg(gtk.STATE_NORMAL,
-                                  gtk.gdk.color_parse(self.style['background']))
+                                  gtk.gdk.color_parse(self.style[
+                                                  'background']))
             self.textbox.modify_bg(gtk.STATE_NORMAL,
-                                   gtk.gdk.color_parse(self.style['background']))
+                                   gtk.gdk.color_parse(self.style[
+                                                   'background']))
             self.textbox.modify_base(gtk.STATE_NORMAL,
-                                     gtk.gdk.color_parse(self.style['background']))
+                                     gtk.gdk.color_parse(self.style[
+                                                     'background']))
             self.textbox.modify_base(gtk.STATE_SELECTED,
-                                     gtk.gdk.color_parse(self.style['foreground']))
+                                     gtk.gdk.color_parse(self.style[
+                                                     'foreground']))
             self.textbox.modify_text(gtk.STATE_NORMAL,
-                                     gtk.gdk.color_parse(self.style['foreground']))
+                                     gtk.gdk.color_parse(self.style[
+                                                     'foreground']))
             self.textbox.modify_text(gtk.STATE_SELECTED,
                                      gtk.gdk.color_parse('#000000'))
             self.textbox.modify_fg(gtk.STATE_NORMAL,
-                                   gtk.gdk.color_parse(self.style['foreground']))
+                                   gtk.gdk.color_parse(self.style[
+                                                   'foreground']))
             self.status.active_color = self.style['foreground']
             self.status.inactive_color = self.style['background']
             self.boxout.modify_bg(gtk.STATE_NORMAL,
@@ -190,6 +208,7 @@ class GUI():
             width = int(self.style['size'][0] * w)
             height = int(self.style['size'][1] * h)
             self.vbox.set_size_request(width, height)
-            self.fixed.move(self.vbox, int(((1 - self.style['size'][0]) * w)/ 2),
+            self.fixed.move(self.vbox, int(((1 - self.style['size'][0])
+                                                              * w)/ 2),
                 int(((1 - self.style['size'][1]) * h) / 2))
             self.textbox.set_border_width(self.style['padding'])

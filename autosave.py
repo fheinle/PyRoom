@@ -50,20 +50,25 @@ def autosave_quit(self):
 def autosave_file(self, buffer_id):
     """AutoSave the Buffer to temp folder"""
     buffer=self.buffers[buffer_id]
-    if not os.path.exists(temp_folder):  #chech if the path exists
+    if not os.path.exists(temp_folder):
         os.mkdir(temp_folder)
 
     try:
         buffer.tmp_filename
     except AttributeError:
         if buffer.filename==FILE_UNNAMED:
-            buffer.tmp_filename = tempfile.mkstemp(suffix="", prefix="noname_"+"tmp_", dir=temp_folder, text=True)[1]
+            buffer.tmp_filename = tempfile.mkstemp(suffix="",
+                prefix="noname_"+"tmp_", dir=temp_folder, text=True)[1]
         else:
             buff_path, buff_name=os.path.split(buffer.filename)
-            #print buff_path, buff_name #(debug)
-            buffer.tmp_filename=tempfile.mkstemp(suffix="", prefix=buff_name+"_tmp_", dir=temp_folder, text=True)[1]
-    save_file(buffer.tmp_filename, buffer.get_text(buffer.get_start_iter(), buffer.get_end_iter())) #really saves the fil
-    self.status.set_text(_('AutoSaving Buffer %(buffer_id)d, to temp file %(buffer_tmp_filename)s') % {'buffer_id': buffer_id, 'buffer_tmp_filename': buffer.tmp_filename}) #inform the user of the saving operation
+            buffer.tmp_filename=tempfile.mkstemp(suffix="",
+                prefix=buff_name+"_tmp_", dir=temp_folder, text=True)[1]
+    save_file(buffer.tmp_filename, buffer.get_text(buffer.get_start_iter(),
+        buffer.get_end_iter()))
+    # Inform the user of the saving operation
+    self.status.set_text(_('AutoSaving Buffer %(buffer_id)d, to temp file \
+%(buffer_tmp_filename)s') % {'buffer_id': buffer_id,
+'buffer_tmp_filename': buffer.tmp_filename})
 
 
 def timeout(self):
@@ -73,7 +78,8 @@ def timeout(self):
 
     if (int(autosave_time)!=0):
         elapsed_time=elapsed_time+1
-        #less exam  print "elapsed time = %d , autosave_time = %d" % (elapsed_time, int(autosave_time)*60)   #(debug)
+        # DEBUG: less exam  print "elapsed time = %d,
+        # autosave_time = %d" % (elapsed_time, int(autosave_time)*60)
         if (elapsed_time>=(int(autosave_time)*60)):
             for buffer in self.buffers:
                 #print "saving buffer" + str(buffer)
@@ -90,7 +96,8 @@ def kill_tempfile(killfile):
     try:
         os.remove(os.path.join(temp_folder, killfile))
     except:
-        print " ** is not possible to remove %s" % str(os.path.join(temp_folder, killfile))
+        print " ** is not possible to remove %s" % str(os.path.join(
+                                             temp_folder, killfile))
 
 
 def kill_all_tempfile():
@@ -106,6 +113,5 @@ def kill_all_tempfile():
             kill_tempfile(killfile)
     else:
         print "Nothing deleted..."
-    #sys.exit(0)
 
 #EOF
