@@ -1,0 +1,12 @@
+[theme]
+info = #AE8400
+foreground = #212121
+height = 1.0
+name = custom
+linenumbers = #5E4803
+padding = 8
+width = 0.6
+fontsize = 10
+background = #e2e2e2
+font = Bitstream Vera Sans 
+border = #6f6f6f

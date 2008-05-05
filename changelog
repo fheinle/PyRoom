@@ -1,6 +1,7 @@
 === 0.3 << Development Focus ===
   * Code is now compliant to the Python Style Guide (http://www.python.org/dev/peps/pep-0008/)
   * Optparse support
+  * Added grey theme
 
   Bugs Fixed:
   * bug #220056 https://code.launchpad.net/bugs/220056 - Doesn't save custom themes
