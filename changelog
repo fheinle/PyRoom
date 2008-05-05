@@ -1,0 +1,18 @@
+=== 0.3 << Development Focus ===
+  * Code is now compliant to the Python Style Guide (http://www.python.org/dev/peps/pep-0008/)
+  * Optparse support
+
+  Bugs Fixed:
+  * bug #220056 https://code.launchpad.net/bugs/220056 - Doesn't save custom themes
+
+=== 0.2 ===
+  * Lots of bugfixes
+  * Modularization of code
+  * A simple preferences windows with theme selection
+  * Some shortcuts have been changed
+
+=== 0.1 ===
+  * Initial forum version, only a simple gui for writing
+
+
+
