@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 # PyRoom - A clone of WriteRoom
 # Copyright (c) 2007 Nicolas P. Rougier & NoWhereMan
 # Copyright (c) 2008 The Pyroom Team - See AUTHORS file for more information
@@ -12,16 +12,17 @@
 #
 # This program is distributed in the hope that it will be useful, but WITHOUT
 # ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+# details.
 #
 # You should have received a copy of the GNU General Public License along with
 # this program.  If not, see <http://www.gnu.org/licenses/>.
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 #
 # Based on code posted on ubuntu forums by NoWhereMan (www.nowhereland.it)
 #  (Ubuntu thread was "WriteRoom/Darkroom/?")
 #
-# ------------------------------------------------------------------------------
+# -----------------------------------------------------------------------------
 
 import sys
 import os.path
@@ -54,15 +55,19 @@ if __name__ == '__main__':
     themes_list.append('custom')
 
     # Get commandline args
-    parser = OptionParser(usage = _('%prog [-v] [--style={style name}] [file1] [file2]...'),
+    parser = OptionParser(usage = _('%prog [-v] [--style={style name}] \
+[file1] [file2]...'),
                         version = '%prog ' + __VERSION__,
-                        description = _('PyRoom lets you edit text files simply and efficiently in a full-screen window, with no distractions.'))
+                        description = _('PyRoom lets you edit text files \
+simply and efficiently in a full-screen window, with no distractions.'))
     parser.set_defaults(verbose = False,
                         style= pyroom_config.config.get('visual', 'theme'),
-                        autosave_time = pyroom_config.config.get('editor', 'autosavetime'))
+                        autosave_time = pyroom_config.config.get('editor',
+                            'autosavetime'))
     parser.add_option('-a', '--autosave',
                     type = 'int', action = 'store', dest = 'autosave_time',
-                    help = _('Specify the amount of time, in minutes, to automatically save your work.'))
+                    help = _('Specify the amount of time, in minutes, to \
+                              automatically save your work.'))
     parser.add_option('-v', '--verbose',
                     action = 'store_true', dest = 'verbose',
                     help = _('Turn on verbose mode.'))
@@ -72,7 +77,8 @@ if __name__ == '__main__':
                     help = _('Override the default style'))
     parser.add_option('-r', '--recursive',
                     action = 'store_true', dest = 'recursive',
-                    help = _('Search in subdirectories recursively [default: %default]'))
+                    help = _('Search in subdirectories recursively [default: \
+                              %default]'))
     (options, args) = parser.parse_args()
 
     verbose = options.verbose
@@ -81,7 +87,8 @@ if __name__ == '__main__':
     files = args
 
     # Create relevant buffers for file and load them
-    pyroom = BasicEdit(style=style, verbose=verbose, pyroom_config=pyroom_config)
+    pyroom = BasicEdit(style=style, verbose=verbose,
+             pyroom_config=pyroom_config)
     try:
         buffnum = 0
         if len(files):
