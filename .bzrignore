@@ -7,3 +7,5 @@ preferences.pyc
 restore_session.pyc
 status_label.pyc
 styles.pyc
+pep8.py
+errors

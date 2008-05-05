@@ -4,6 +4,7 @@
 import gobject
 import gtk
 
+
 class FadeLabel(gtk.Label):
     """ GTK Label with timed fade out effect """
 

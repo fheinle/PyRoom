@@ -19,6 +19,7 @@ autosavetime = 2
 autosave = 0
 """
 
+
 class PyroomConfig():
     """Fetches (and/or) builds basic configuration files/dirs."""
 
@@ -55,7 +56,8 @@ class PyroomConfig():
                     os.path.join(self.conf_dir, "themes/"))
 
     def read_themes_list(self):
-        # Getting the theme files and cleaning up the list, i use custom first so that it always have the index 0 in the list
+        # Getting the theme files and cleaning up the list, i use custom first
+        # so that it always have the index 0 in the list
         themeslist = []
         rawthemeslist = os.listdir(os.path.join(self.conf_dir, "themes/"))
         for themefile in rawthemeslist:
@@ -63,11 +65,15 @@ class PyroomConfig():
                 themeslist.append(themefile[:-6])
         return themeslist
 
+
 class Preferences():
+
     def __init__(self, gui, style, verbose, pyroom_config):
         self.style = style
         self.pyroom_config = pyroom_config
-        self.wTree = gtk.glade.XML(os.path.join(pyroom_config.pyroom_absolute_path, "interface.glade"), "dialog-preferences")
+        self.wTree = gtk.glade.XML(os.path.join(
+            pyroom_config.pyroom_absolute_path, "interface.glade"),
+            "dialog-preferences")
         self.window = self.wTree.get_widget("dialog-preferences")
         self.fontpreference = self.wTree.get_widget("fontbutton")
         self.colorpreference = self.wTree.get_widget("colorbutton")
@@ -83,16 +89,17 @@ class Preferences():
         self.graphical = gui
 
         self.customfile = ConfigParser.ConfigParser()
-        self.customfile.read(os.path.join(self.pyroom_config.conf_dir, "themes/custom.theme"))
+        self.customfile.read(os.path.join(self.pyroom_config.conf_dir,
+            "themes/custom.theme"))
         if not self.customfile.has_section('theme'):
             self.customfile.add_section('theme')
 
         self.config = self.pyroom_config.config
 
-        self.activestyle = self.config.get("visual","theme")
-        self.linesstate = self.config.get("visual","linenumber")
-        self.autosavestate = self.config.get("editor","autosave") 
-        self.autosavetime = self.config.get("editor","autosavetime")
+        self.activestyle = self.config.get("visual", "theme")
+        self.linesstate = self.config.get("visual", "linenumber")
+        self.autosavestate = self.config.get("editor", "autosave")
+        self.autosavetime = self.config.get("editor", "autosavetime")
         if self.autosavestate == 1:
             autosave.autosave_time = self.autosavetime
         else:
@@ -105,10 +112,10 @@ class Preferences():
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
         self.toggleautosave(self.autosave)
-        
+
         self.window.set_transient_for(self.graphical.window)
 
-        self.stylesvalues = { 'custom' : 0 }
+        self.stylesvalues = {'custom': 0}
         self.startingvalue = 1
 
         for i in self.pyroom_config.themeslist:
@@ -121,9 +128,9 @@ class Preferences():
 
         # Connecting interface's signals
         dic = {
-                "on_MainWindow_destroy" : self.QuitEvent,
-                "on_button-ok_clicked" : self.set_preferences,
-                "on_button-close_clicked" : self.kill_preferences,
+                "on_MainWindow_destroy": self.QuitEvent,
+                "on_button-ok_clicked": self.set_preferences,
+                "on_button-close_clicked": self.kill_preferences,
                 }
         self.wTree.signal_autoconnect(dic)
         self.linenumbers.connect('toggled', self.togglelines)
@@ -142,9 +149,12 @@ class Preferences():
         self.fontname = self.fontpreference.get_font_name()
         self.fontsize = int(self.fontname[-2:])
         self.fontname = self.fontname[:-2]
-        self.colorname = self.format_rgb(gtk.gdk.Color.to_string(self.colorpreference.get_color()))
-        self.bgname = self.format_rgb(gtk.gdk.Color.to_string(self.bgpreference.get_color()))
-        self.bordername = self.format_rgb(gtk.gdk.Color.to_string(self.borderpreference.get_color()))
+        self.colorname = self.format_rgb(gtk.gdk.Color.to_string(
+                                self.colorpreference.get_color()))
+        self.bgname = self.format_rgb(gtk.gdk.Color.to_string(
+                               self.bgpreference.get_color()))
+        self.bordername = self.format_rgb(gtk.gdk.Color.to_string(
+                               self.borderpreference.get_color()))
         self.paddingname = self.paddingpreference.get_value_as_int()
         self.heightname = self.heightpreference.get_value()
         self.widthname = self.widthpreference.get_value()
@@ -161,25 +171,28 @@ class Preferences():
             self.autosavepref = 1
         else:
             self.autosavepref = 0
-        self.config.set("visual","linenumber",self.linenumberspref)
-        self.config.set("editor","autosave",self.autosavepref)
-        autosave.autosave_time=self.autosave_spinbutton.get_value_as_int() ## apply the autosave time settings
-        self.config.set("editor","autosavetime",autosave.autosave_time)
-        #print autosave.autosave_time,self.autosave_spinbutton.get_value_as_int() ## Debug
+        self.config.set("visual", "linenumber", self.linenumberspref)
+        self.config.set("editor", "autosave", self.autosavepref)
+        # Apply the autosave time settings
+        autosave.autosave_time=self.autosave_spinbutton.get_value_as_int()
+        self.config.set("editor", "autosavetime", autosave.autosave_time)
+
         if self.presetscombobox.get_active_text().lower() == 'custom':
-            c = open(os.path.join(self.pyroom_config.conf_dir, "themes/custom.theme"), "w")
-            self.customfile.set("theme","background",self.bgname)
-            self.customfile.set("theme","foreground",self.colorname)
-            self.customfile.set("theme","border",self.bordername)
-            self.customfile.set("theme","font",self.fontname)
-            self.customfile.set("theme","fontsize",self.fontsize)
-            self.customfile.set("theme","padding",self.paddingname)
-            self.customfile.set("theme","width",self.widthname)
-            self.customfile.set("theme","height",self.heightname)
+            c = open(os.path.join(self.pyroom_config.conf_dir,
+                "themes/custom.theme"), "w")
+            self.customfile.set("theme", "background", self.bgname)
+            self.customfile.set("theme", "foreground", self.colorname)
+            self.customfile.set("theme", "border", self.bordername)
+            self.customfile.set("theme", "font", self.fontname)
+            self.customfile.set("theme", "fontsize", self.fontsize)
+            self.customfile.set("theme", "padding", self.paddingname)
+            self.customfile.set("theme", "width", self.widthname)
+            self.customfile.set("theme", "height", self.heightname)
             self.customfile.write(c)
         self.dlg.hide()
         try:
-            f = open(os.path.join(self.pyroom_config.conf_dir, "pyroom.conf"), "w")
+            f = open(os.path.join(self.pyroom_config.conf_dir, "pyroom.conf"),
+                                                                         "w")
             self.config.write(f)
         except:
             e = PyroomError(_("Could not save preferences file."))
@@ -188,22 +201,27 @@ class Preferences():
                 print str(e)
                 print e.traceback
 
-
     def customchanged(self, widget):
         self.presetscombobox.set_active(0)
         self.presetchanged(widget)
 
     def presetchanged(self, widget, mode=None):
         if mode == 'initial':
-            self.graphical.apply_style(self.style,'normal')
-            self.fontname = self.graphical.config.get("theme","font") + ' ' + self.graphical.config.get("theme","fontsize")
+            self.graphical.apply_style(self.style, 'normal')
+            self.fontname = self.graphical.config.get("theme", "font") + ' ' + self.graphical.config.get("theme", "fontsize")
             self.fontpreference.set_font_name(self.fontname)
-            self.colorpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","foreground")))
-            self.bgpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","background")))
-            self.borderpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","border")))
-            self.paddingpreference.set_value(float(self.graphical.config.get("theme","padding")))
-            self.widthpreference.set_value(float(self.graphical.config.get("theme","width")))
-            self.heightpreference.set_value(float(self.graphical.config.get("theme","height")))
+            self.colorpreference.set_color(gtk.gdk.color_parse(
+             self.graphical.config.get("theme", "foreground")))
+            self.bgpreference.set_color(gtk.gdk.color_parse(
+             self.graphical.config.get("theme", "background")))
+            self.borderpreference.set_color(gtk.gdk.color_parse(
+                  self.graphical.config.get("theme", "border")))
+            self.paddingpreference.set_value(float(self.graphical.config.get(
+                                                        "theme", "padding")))
+            self.widthpreference.set_value(float(self.graphical.config.get(
+                                                        "theme", "width")))
+            self.heightpreference.set_value(float(self.graphical.config.get(
+                                                        "theme", "height")))
         else:
             active = self.presetscombobox.get_active_text().lower()
             activeid = self.presetscombobox.get_active()
@@ -222,36 +240,45 @@ class Preferences():
                         'padding': self.paddingname,
                         'size': [self.widthname, self.heightname],
                 }}
-                self.graphical.apply_style(customstyle['Custom'],'custom')
-                self.graphical.apply_style(customstyle['Custom'],'custom')
-                self.config.set("visual","theme",active)
-                self.graphical.status.set_text(_('Style Changed to %s' % (active)))
+                self.graphical.apply_style(customstyle['Custom'], 'custom')
+                self.graphical.apply_style(customstyle['Custom'], 'custom')
+                self.config.set("visual", "theme", active)
+                self.graphical.status.set_text(_('Style Changed to \
+%s' % (active)))
             else:
-                theme =  os.path.join(self.pyroom_config.conf_dir, "themes/", active + ".theme")
+                theme = os.path.join(self.pyroom_config.conf_dir, "themes/",
+                    active + ".theme")
                 self.graphical.config.read(theme)
                 self.graphical.apply_style()
                 self.graphical.apply_style()
-                self.fontname = self.graphical.config.get("theme","font") + ' ' + self.graphical.config.get("theme","fontsize")
+                self.fontname = self.graphical.config.get("theme", "font") + ' ' + self.graphical.config.get("theme", "fontsize")
                 self.fontpreference.set_font_name(self.fontname)
-                self.config.set("visual","theme",active)
-                self.colorpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","foreground")))
-                self.bgpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","background")))
-                self.borderpreference.set_color(gtk.gdk.color_parse(self.graphical.config.get("theme","border")))
-                self.paddingpreference.set_value(float(self.graphical.config.get("theme","padding")))
-                self.widthpreference.set_value(float(self.graphical.config.get("theme","width")))
-                self.heightpreference.set_value(float(self.graphical.config.get("theme","height")))
-                self.graphical.status.set_text(_('Style Changed to %s' % (active)))
+                self.config.set("visual", "theme", active)
+                self.colorpreference.set_color(gtk.gdk.color_parse(
+                 self.graphical.config.get("theme", "foreground")))
+                self.bgpreference.set_color(gtk.gdk.color_parse(
+                 self.graphical.config.get("theme", "background")))
+                self.borderpreference.set_color(gtk.gdk.color_parse(
+                      self.graphical.config.get("theme", "border")))
+                self.paddingpreference.set_value(float(
+                 self.graphical.config.get("theme", "padding")))
+                self.widthpreference.set_value(float(self.graphical.config.get(
+                                                            "theme", "width")))
+                self.heightpreference.set_value(float(
+                 self.graphical.config.get("theme", "height")))
+                self.graphical.status.set_text(_('Style Changed to \
+%s' % (active)))
                 self.presetscombobox.set_active(activeid)
 
     def show(self):
-		self.dlg = self.wTree.get_widget("dialog-preferences")
-		self.dlg.show()
+        self.dlg = self.wTree.get_widget("dialog-preferences")
+        self.dlg.show()
 
-    def format_rgb(self,color):
+    def format_rgb(self, color):
         color = color[0:3]+color[5:7]+color[11:13]
         color = color.upper()
         return color
-        
+
     def togglelines(self, widget):
         b = not self.graphical.textbox.get_show_line_numbers()
         self.graphical.textbox.set_show_line_numbers(b)
@@ -266,9 +293,9 @@ class Preferences():
             autosave.autosave_time = 0
 
     def QuitEvent(self, widget, data=None):
-    	print "Exiting..."
-    	gtk.main_quit()
-    	return False
+        print "Exiting..."
+        gtk.main_quit()
+        return False
 
     def kill_preferences(self, widget, data=None):
         self.dlg.hide()
