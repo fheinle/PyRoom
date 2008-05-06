@@ -75,10 +75,6 @@ simply and efficiently in a full-screen window, with no distractions.'))
                     action = 'store', dest = 'style',
                     type = 'choice', choices = themes_list,
                     help = _('Override the default style'))
-    parser.add_option('-r', '--recursive',
-                    action = 'store_true', dest = 'recursive',
-                    help = _('Search in subdirectories recursively [default: \
-                              %default]'))
     (options, args) = parser.parse_args()
 
     verbose = options.verbose
