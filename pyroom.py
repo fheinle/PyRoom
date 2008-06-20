@@ -1,45 +1,34 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# -----------------------------------------------------------------------------
-# PyRoom - A clone of WriteRoom
-# Copyright (c) 2007 Nicolas P. Rougier & NoWhereMan
-# Copyright (c) 2008 The Pyroom Team - See AUTHORS file for more information
-#
-# This program is free software: you can redistribute it and/or modify it under
-# the terms of the GNU General Public License as published by the Free Software
-# Foundation, either version 3 of the License, or (at your option) any later
-# version.
-#
-# This program is distributed in the hope that it will be useful, but WITHOUT
-# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
-# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
-# details.
-#
-# You should have received a copy of the GNU General Public License along with
-# this program.  If not, see <http://www.gnu.org/licenses/>.
-# -----------------------------------------------------------------------------
-#
-# Based on code posted on ubuntu forums by NoWhereMan (www.nowhereland.it)
-#  (Ubuntu thread was "WriteRoom/Darkroom/?")
-#
-# -----------------------------------------------------------------------------
 
-import sys
-import os.path
-import gobject
-import gtk
+"""
+    PyRoom - A clone of WriteRoom
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Based on code posted on ubuntu forums by NoWhereMan (www.nowhereland.it)
+    (Ubuntu thread was "WriteRoom/Darkroom/?")
+
+    :copyright: 2007 Nicolas P. Rougier & NoWhereMan Copyright
+    :copyright: 2008 The PyRoom Theme - See AUthors file for more information
+    :license: GNU General Public License, version 3 or later
+"""
+
+__VERSION__ = '0.2'
+
 import gettext
+gettext.install('pyroom', 'locale')
 import locale
 locale.setlocale(locale.LC_ALL, '')
 from optparse import OptionParser
 import traceback
-gettext.install('pyroom', 'locale')
-from basic_edit import BasicEdit
+
+import gtk
+
 import autosave
+from basic_edit import BasicEdit
 from pyroom_error import PyroomError
-#PYROOM_PATH = os.path.dirname(os.path.abspath(__file__))
 from preferences import PyroomConfig
-__VERSION__ = '0.2'
+
 pyroom_config = PyroomConfig()
 
 if __name__ == '__main__':
@@ -60,21 +49,21 @@ if __name__ == '__main__':
                         version = '%prog ' + __VERSION__,
                         description = _('PyRoom lets you edit text files \
 simply and efficiently in a full-screen window, with no distractions.'))
-    parser.set_defaults(verbose = False,
-                        style= pyroom_config.config.get('visual', 'theme'),
-                        autosave_time = pyroom_config.config.get('editor',
-                            'autosavetime'))
+    parser.set_defaults(verbose=False,
+                        style=pyroom_config.config.get('visual', 'theme'),
+                        autosave_time=pyroom_config.config.get('editor',
+                                                        'autosavetime'))
     parser.add_option('-a', '--autosave',
-                    type = 'int', action = 'store', dest = 'autosave_time',
-                    help = _('Specify the amount of time, in minutes, to \
+                    type='int', action='store', dest='autosave_time',
+                    help=_('Specify the amount of time, in minutes, to \
                               automatically save your work.'))
     parser.add_option('-v', '--verbose',
-                    action = 'store_true', dest = 'verbose',
-                    help = _('Turn on verbose mode.'))
+                    action='store_true', dest = 'verbose',
+                    help=_('Turn on verbose mode.'))
     parser.add_option('-s', '--style',
-                    action = 'store', dest = 'style',
-                    type = 'choice', choices = themes_list,
-                    help = _('Override the default style'))
+                    action='store', dest='style',
+                    type='choice', choices=themes_list,
+                    help=_('Override the default style'))
     (options, args) = parser.parse_args()
 
     verbose = options.verbose
@@ -105,6 +94,3 @@ simply and efficiently in a full-screen window, with no distractions.'))
             print e.traceback
     except:
         print traceback.format_exc()
-
-
-# EOF
