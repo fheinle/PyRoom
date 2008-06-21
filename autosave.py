@@ -26,11 +26,11 @@ timeout_id = 0
 FILE_UNNAMED = _('* Unnamed *')  ##repeted definition delete if possible
 
 
-def autosave_init(self, mill=1000):
+def autosave_init(edit_instance, mill=1000):
     """Init the internal autosave timer"""
     global elapsed_time
     global timeout_id
-    timeout_id=gobject.timeout_add(mill, timeout, self)
+    timeout_id=gobject.timeout_add(mill, timeout, edit_instance)
     elapsed_time=0  ## init the elapsed_time_var
 
 
@@ -42,14 +42,14 @@ def save_file(filename, text):
     except IOError:
         raise PyroomError(_("Could not autosave file %s") % filename)
 
-def autosave_quit(self):
+def autosave_quit(edit_instance):
     """dispose the internal timer"""
     gobject.source_remove(timeout_id)
 
 
-def autosave_file(self, buffer_id):
+def autosave_file(edit_instance, buffer_id):
     """AutoSave the Buffer to temp folder"""
-    buffer=self.buffers[buffer_id]
+    buffer=edit_instance.buffers[buffer_id]
     if not os.path.exists(temp_folder):
         os.mkdir(temp_folder)
 
@@ -66,12 +66,12 @@ def autosave_file(self, buffer_id):
     save_file(buffer.tmp_filename, buffer.get_text(buffer.get_start_iter(),
         buffer.get_end_iter()))
     # Inform the user of the saving operation
-    self.status.set_text(_('AutoSaving Buffer %(buffer_id)d, to temp file \
+    edit_instance.status.set_text(_('AutoSaving Buffer %(buffer_id)d, to temp file \
 %(buffer_tmp_filename)s') % {'buffer_id': buffer_id,
 'buffer_tmp_filename': buffer.tmp_filename})
 
 
-def timeout(self):
+def timeout(edit_instance):
     "the Timer Function"
     global elapsed_time
     global autosave_time
@@ -79,8 +79,8 @@ def timeout(self):
     if int(autosave_time) != 0:
         elapsed_time += 1
         if elapsed_time >= int(autosave_time) * 60:
-            for buffer in self.buffers:
-                autosave_file(self, self.buffers.index(buffer))
+            for buffer in edit_instance.buffers:
+                autosave_file(edit_instance, edit_instance.buffers.index(buffer))
             elapsed_time=0
         return True # continue repeat timeout event
     else:
