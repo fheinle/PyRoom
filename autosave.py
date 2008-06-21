@@ -13,28 +13,27 @@
 import gobject
 import os
 import tempfile
-import string
-import sys
 from pyroom_error import PyroomError
 
 
-elapsed_time = 0 # elapsed time in seconds
-autosave_time = 3 # the timeout time in minutes
-temp_folder = "/var/tmp/pyroom"
-timeout_id = 0
+ELAPSED_TIME = 0 # elapsed time in seconds
+AUTOSAVE_TIME = 3 # the timeout time in minutes
+TEMP_FOLDER = "/var/tmp/pyroom"
+TIMEOUT_ID = 0
 
 FILE_UNNAMED = _('* Unnamed *')  ##repeted definition delete if possible
 
 
 def autosave_init(edit_instance, mill=1000):
     """Init the internal autosave timer"""
-    global elapsed_time
-    global timeout_id
-    timeout_id=gobject.timeout_add(mill, timeout, edit_instance)
-    elapsed_time=0  ## init the elapsed_time_var
+    global ELAPSED_TIME
+    global TIMEOUT_ID
+    TIMEOUT_ID = gobject.timeout_add(mill, timeout, edit_instance)
+    ELAPSED_TIME = 0  ## init the ELAPSED_TIME_var
 
 
 def save_file(filename, text):
+    """save text fo filename"""
     try:
         out_file = open(filename, "w")
         out_file.write(text)
@@ -42,46 +41,47 @@ def save_file(filename, text):
     except IOError:
         raise PyroomError(_("Could not autosave file %s") % filename)
 
-def autosave_quit(edit_instance):
+def autosave_quit():
     """dispose the internal timer"""
-    gobject.source_remove(timeout_id)
+    gobject.source_remove(TIMEOUT_ID)
 
 
-def autosave_file(edit_instance, buffer_id):
+def autosave_file(edit_instance, buf_id):
     """AutoSave the Buffer to temp folder"""
-    buffer=edit_instance.buffers[buffer_id]
-    if not os.path.exists(temp_folder):
-        os.mkdir(temp_folder)
+    buf = edit_instance.buffers[buf_id]
+    if not os.path.exists(TEMP_FOLDER):
+        os.mkdir(TEMP_FOLDER)
 
     try:
-        buffer.tmp_filename
+        buf.tmp_filename
     except AttributeError:
-        if buffer.filename==FILE_UNNAMED:
-            buffer.tmp_filename = tempfile.mkstemp(suffix="",
-                prefix="noname_"+"tmp_", dir=temp_folder, text=True)[1]
+        if buf.filename == FILE_UNNAMED:
+            buf.tmp_filename = tempfile.mkstemp(suffix="",
+                prefix="noname_"+"tmp_", dir=TEMP_FOLDER, text=True)[1]
         else:
-            buff_path, buff_name=os.path.split(buffer.filename)
-            buffer.tmp_filename=tempfile.mkstemp(suffix="",
-                prefix=buff_name+"_tmp_", dir=temp_folder, text=True)[1]
-    save_file(buffer.tmp_filename, buffer.get_text(buffer.get_start_iter(),
-        buffer.get_end_iter()))
+            buf_name = os.path.split(buf.filename)[-1]
+            buf.tmp_filename = tempfile.mkstemp(suffix="",
+                prefix = buf_name + "_tmp_", dir=TEMP_FOLDER, text=True)[1]
+    save_file(buf.tmp_filename, buf.get_text(buf.get_start_iter(),
+        buf.get_end_iter()))
     # Inform the user of the saving operation
-    edit_instance.status.set_text(_('AutoSaving Buffer %(buffer_id)d, to temp file \
-%(buffer_tmp_filename)s') % {'buffer_id': buffer_id,
-'buffer_tmp_filename': buffer.tmp_filename})
+    edit_instance.status.set_text(_('AutoSaving Buffer %(buf_id)d, to temp\
+     file %(buf_tmp_filename)s') % {'buf_id': buf_id, 
+                   'buf_tmp_filename': buf.tmp_filename})
 
 
 def timeout(edit_instance):
     "the Timer Function"
-    global elapsed_time
-    global autosave_time
+    global ELAPSED_TIME
+    global AUTOSAVE_TIME
 
-    if int(autosave_time) != 0:
-        elapsed_time += 1
-        if elapsed_time >= int(autosave_time) * 60:
-            for buffer in edit_instance.buffers:
-                autosave_file(edit_instance, edit_instance.buffers.index(buffer))
-            elapsed_time=0
+    if int(AUTOSAVE_TIME) != 0:
+        ELAPSED_TIME += 1
+        if ELAPSED_TIME >= int(AUTOSAVE_TIME) * 60:
+            for buf in edit_instance.buffers:
+                autosave_file(edit_instance, 
+                    edit_instance.buffers.index(buf))
+            ELAPSED_TIME = 0
         return True # continue repeat timeout event
     else:
         return False #stop timeout event

@@ -458,6 +458,6 @@ continue editing your document.")
 
     def quit(self):
         #Add any functions that you want to take place here before pyRoom quits
-        autosave.autosave_quit(self)
+        autosave.autosave_quit()
         self.gui.quit()
 # EOF
