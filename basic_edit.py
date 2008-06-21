@@ -70,7 +70,7 @@ class BasicEdit():
                                                "linenumber")))
 
         # Autosave timer object
-        autosave.autosave_init(self, self.gui)
+        autosave.autosave_init(self)
 
         self.window.show_all()
         self.window.fullscreen()
