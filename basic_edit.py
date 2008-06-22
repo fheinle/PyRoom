@@ -444,10 +444,10 @@ continue editing your document.")
         try:
             for buffer in self.buffers:
                 if buffer.can_undo() or buffer.can_redo():
-                        if buffer.filename == FILE_UNNAMED:
-                            self.save_file_as()
-                        else:
-                            self.save_file()
+                    if buffer.filename == FILE_UNNAMED:
+                        self.save_file_as()
+                    else:
+                        self.save_file()
             self.quit()
         except:
             pass

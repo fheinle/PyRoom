@@ -59,7 +59,7 @@ def autosave_file(edit_instance, buf_id):
             buf.tmp_filename = tempfile.mkstemp(suffix="",
                 prefix="noname_"+"tmp_", dir=TEMP_FOLDER, text=True)[1]
         else:
-            buf_name = os.path.split(buf.filename)[-1]
+            buf_name = os.path.split(buf.filename)[1]
             buf.tmp_filename = tempfile.mkstemp(suffix="",
                 prefix = buf_name + "_tmp_", dir=TEMP_FOLDER, text=True)[1]
     save_file(buf.tmp_filename, buf.get_text(buf.get_start_iter(),
