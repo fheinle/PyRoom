@@ -9,7 +9,7 @@
     (Ubuntu thread was "WriteRoom/Darkroom/?")
 
     :copyright: 2007 Nicolas P. Rougier & NoWhereMan Copyright
-    :copyright: 2008 The PyRoom Theme - See AUthors file for more information
+    :copyright: 2008 The PyRoom Theme - See AUTHORS file for more information
     :license: GNU General Public License, version 3 or later
 """
 

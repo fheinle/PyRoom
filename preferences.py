@@ -1,3 +1,16 @@
+# -*- coding: utf-8 -*-
+
+"""
+    PyRoom - A clone of WriteRoom
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Preferences
+
+    :copyright: 2007 Nicolas P. Rougier & NoWhereMan Copyright
+    :copyright: 2008 The PyRoom Theme - See AUTHORS file for more information
+    :license: GNU General Public License, version 3 or later
+"""
+
 import gtk
 import gtk.glade
 import os

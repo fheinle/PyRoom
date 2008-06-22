@@ -1,5 +1,16 @@
-#!/usr/bin/env python
-#Includes the class for status label.
+# -*- coding: utf-8 -*-
+
+"""
+    PyRoom - A clone of WriteRoom
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Fading status label
+
+    :copyright: 2007 Nicolas P. Rougier & NoWhereMan Copyright
+    :copyright: 2008 The PyRoom Theme - See AUTHORS file for more information
+    :license: GNU General Public License, version 3 or later
+"""
+
 
 import gobject
 import gtk

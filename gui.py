@@ -1,6 +1,18 @@
+# -*- coding: utf-8 -*-
+
+"""
+    PyRoom - A clone of WriteRoom
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Basic global GUI
+
+    :copyright: 2007 Nicolas P. Rougier & NoWhereMan Copyright
+    :copyright: 2008 The PyRoom Theme - See AUTHORS file for more information
+    :license: GNU General Public License, version 3 or later
+"""
+
 from status_label import FadeLabel
 
-from pyroom_error import PyroomError
 import gtk
 import pango
 import gtksourceview
