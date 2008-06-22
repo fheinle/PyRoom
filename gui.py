@@ -22,6 +22,7 @@ import os
 
 
 class GUI():
+    """our basic global gui object"""
 
     def __init__(self, style, verbose, pyroom_config):
         self.verbose = verbose
@@ -128,27 +129,32 @@ class GUI():
             adj.value = 0
 
     def apply_style(self, style=None, mode='normal'):
+        """
+        apply the given style and rerender the textbox
+        @param style: style that was selected
+        @param mode: normal if style is builtin, otherwise custom
+        """
         if mode == 'normal':
             self.window.modify_bg(gtk.STATE_NORMAL,
-                                  gtk.gdk.color_parse(self.config.get("theme",
-                                                      "background")))
+                                  gtk.gdk.color_parse(self.config.get(
+                                               "theme", "background")))
             self.textbox.modify_bg(gtk.STATE_NORMAL,
                                    gtk.gdk.color_parse(self.config.get(
                                                "theme", "background")))
             self.textbox.modify_base(gtk.STATE_NORMAL,
-                                     gtk.gdk.color_parse(self.config.get(
-                                                 "theme", "background")))
+                                   gtk.gdk.color_parse(self.config.get(
+                                                "theme", "background")))
             self.textbox.modify_base(gtk.STATE_SELECTED,
-                                     gtk.gdk.color_parse(self.config.get(
-                                                 "theme", "foreground")))
+                                   gtk.gdk.color_parse(self.config.get(
+                                                "theme", "foreground")))
             self.textbox.modify_text(gtk.STATE_NORMAL,
-                                     gtk.gdk.color_parse(self.config.get(
-                                                 "theme", "foreground")))
+                                   gtk.gdk.color_parse(self.config.get(
+                                                "theme", "foreground")))
             self.textbox.modify_text(gtk.STATE_SELECTED,
-                                     gtk.gdk.color_parse('#000000'))
+                                   gtk.gdk.color_parse('#000000'))
             self.textbox.modify_fg(gtk.STATE_NORMAL,
                                    gtk.gdk.color_parse(self.config.get(
-                                               "theme", "foreground")))
+                                                "theme", "foreground")))
             self.status.active_color = self.config.get("theme", "foreground")
             self.status.inactive_color = self.config.get("theme", "background")
             self.error.active_color = self.config.get("theme", "foreground")
