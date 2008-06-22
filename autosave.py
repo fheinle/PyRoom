@@ -74,7 +74,6 @@ def autosave_file(edit_instance, buf_id):
 def timeout(edit_instance):
     "the Timer Function"
     global ELAPSED_TIME
-    global AUTOSAVE_TIME
 
     if int(AUTOSAVE_TIME) != 0:
         ELAPSED_TIME += 1
