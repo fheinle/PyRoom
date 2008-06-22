@@ -29,10 +29,14 @@ class FadeLabel(gtk.Label):
         self.active_color = active_color
         if not inactive_color:
             inactive_color = '#000000'
+        self.fade_level = 0
         self.inactive_color = inactive_color
         self.idle = 0
 
     def set_text(self, message, duration=None):
+        """change text that is displayed
+        @param message: message to display
+        @param duration: duration in miliseconds"""
         if not duration:
             duration = self.active_duration
         self.modify_fg(gtk.STATE_NORMAL,
@@ -43,12 +47,14 @@ class FadeLabel(gtk.Label):
         self.idle = gobject.timeout_add(duration, self.fade_start)
 
     def fade_start(self):
+        """start fading timer"""
         self.fade_level = 1.0
         if self.idle:
             gobject.source_remove(self.idle)
         self.idle = gobject.timeout_add(25, self.fade_out)
 
     def fade_out(self):
+        """now fade out"""
         color = gtk.gdk.color_parse(self.inactive_color)
         (red1, green1, blue1) = (color.red, color.green, color.blue)
         color = gtk.gdk.color_parse(self.active_color)
@@ -62,5 +68,3 @@ class FadeLabel(gtk.Label):
             return True
         self.idle = 0
         return False
-
-# EOF
