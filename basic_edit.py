@@ -387,11 +387,8 @@ continue editing your document.")
     def save_dialog(self, widget, data=None):
         """save when closing"""
         self.dialog.hide()
-        try:
-            self.save_file()
-            self.close_buffer()
-        except :
-            pass
+        self.save_file()
+        self.close_buffer()
 
     def close_buffer(self):
         """ Close current buffer """
@@ -455,16 +452,13 @@ continue editing your document.")
     def save_quit(self, widget, data=None):
         """save before quitting"""
         self.quitdialog.hide()
-        try:
-            for buf in self.buffers:
-                if buf.can_undo() or buffer.can_redo():
-                    if buf.filename == FILE_UNNAMED:
-                        self.save_file_as()
-                    else:
-                        self.save_file()
-            self.quit()
-        except:
-            pass
+        for buf in self.buffers:
+            if buf.can_undo() or buffer.can_redo():
+                if buf.filename == FILE_UNNAMED:
+                    self.save_file_as()
+                else:
+                    self.save_file()
+        self.quit()
 
     def quit_quit(self, widget, data=None):
         """really quit"""
