@@ -14,9 +14,11 @@
 import traceback
 
 
-class PyroomError (Exception):
+class PyroomError(Exception):
+    """our nice little exception"""
 
     def __init__(self, message):
+        Exception.__init__()
         self.value = 'ERROR: ' + message
         self.traceback = traceback.format_exc()
 
