@@ -1,5 +1,24 @@
 #!/usr/bin/env python
+# pyroom.py - executes pyroom
 # -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# PyRoom - A clone of WriteRoom
+# Copyright (c) 2007 Nicolas P. Rougier & NoWhereMan
+# Copyright (c) 2008 The Pyroom Team - See AUTHORS file for more information
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program.  If not, see <http://www.gnu.org/licenses/>.
+# -----------------------------------------------------------------------------
 
 """
     PyRoom - A clone of WriteRoom
@@ -50,20 +69,20 @@ if __name__ == '__main__':
                         description = _('PyRoom lets you edit text files \
 simply and efficiently in a full-screen window, with no distractions.'))
     parser.set_defaults(verbose=False,
-                        style=pyroom_config.config.get('visual', 'theme'),
-                        autosave_time=pyroom_config.config.get('editor',
+                        style = pyroom_config.config.get('visual', 'theme'),
+                        autosave_time = pyroom_config.config.get('editor',
                                                         'autosavetime'))
     parser.add_option('-a', '--autosave',
-                    type='int', action='store', dest='autosave_time',
-                    help=_('Specify the amount of time, in minutes, to \
+                    type = 'int', action = 'store', dest = 'autosave_time',
+                    help = _('Specify the amount of time, in minutes, to \
                               automatically save your work.'))
     parser.add_option('-v', '--verbose',
-                    action='store_true', dest = 'verbose',
-                    help=_('Turn on verbose mode.'))
+                    action = 'store_true', dest = 'verbose',
+                    help = _('Turn on verbose mode.'))
     parser.add_option('-s', '--style',
-                    action='store', dest='style',
-                    type='choice', choices=themes_list,
-                    help=_('Override the default style'))
+                    action = 'store', dest = 'style',
+                    type = 'choice', choices = themes_list,
+                    help = _('Override the default style'))
     (options, args) = parser.parse_args()
 
     verbose = options.verbose
