@@ -1,28 +1,46 @@
+# autosave.py - provides autosave functions
 # -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# PyRoom - A clone of WriteRoom
+# Copyright (c) 2007 Nicolas P. Rougier & NoWhereMan
+# Copyright (c) 2008 The Pyroom Team - See AUTHORS file for more information
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program.  If not, see <http://www.gnu.org/licenses/>.
+# -----------------------------------------------------------------------------
 
-"""
-    PyRoom - A clone of WriteRoom
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
-    automatic saving
 
-    :copyright: 2007 Nicolas P. Rougier & NoWhereMan Copyright
-    :copyright: 2008 The PyRoom Theme - See AUTHORS file for more information
-    :license: GNU General Public License, version 3 or later
+"""autosave.py - provides autosave functions
+
+allows a user to automatically save their files to /var/tmp/pyroom at a time
+period that is defined in the settings dialog (default is every 3 minutes)
+
 """
 
 import gobject
 import os
 import tempfile
+
 from pyroom_error import PyroomError
 
+#Elapsed time in seconds, autosave in minutes.
+ELAPSED_TIME = 0 
+AUTOSAVE_TIME = 3
 
-ELAPSED_TIME = 0 # elapsed time in seconds
-AUTOSAVE_TIME = 3 # the timeout time in minutes
 TEMP_FOLDER = "/var/tmp/pyroom"
 TIMEOUT_ID = 0
 
-FILE_UNNAMED = _('* Unnamed *')  ##repeted definition delete if possible
+FILE_UNNAMED = _('* Unnamed *')  
 
 
 def autosave_init(edit_instance, mill=1000):
