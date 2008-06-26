@@ -1,14 +1,30 @@
+# preferences.py - allows for custom set preferences
 # -*- coding: utf-8 -*-
+# -----------------------------------------------------------------------------
+# PyRoom - A clone of WriteRoom
+# Copyright (c) 2007 Nicolas P. Rougier & NoWhereMan
+# Copyright (c) 2008 The Pyroom Team - See AUTHORS file for more information
+#
+# This program is free software: you can redistribute it and/or modify it under
+# the terms of the GNU General Public License as published by the Free Software
+# Foundation, either version 3 of the License, or (at your option) any later
+# version.
+#
+# This program is distributed in the hope that it will be useful, but WITHOUT
+# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+# FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+# details.
+#
+# You should have received a copy of the GNU General Public License along with
+# this program.  If not, see <http://www.gnu.org/licenses/>.
+# -----------------------------------------------------------------------------
 
-"""
-    PyRoom - A clone of WriteRoom
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+"""preferences.py - allows for custom set preferences
 
-    Preferences
+Creates a preferences UI that allows the user to customise settings; allows for
+the choice of a theme from ~/.pyroom/themes as well as a custom theme created
+via the dialog
 
-    :copyright: 2007 Nicolas P. Rougier & NoWhereMan Copyright
-    :copyright: 2008 The PyRoom Theme - See AUTHORS file for more information
-    :license: GNU General Public License, version 3 or later
 """
 
 import gtk
