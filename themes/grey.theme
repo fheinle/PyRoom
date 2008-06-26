@@ -1,12 +1,12 @@
 [theme]
-info = #AE8400
-foreground = #212121
-height = 1.0
-name = custom
-linenumbers = #5E4803
-padding = 8
-width = 0.6
-fontsize = 10
+name = Grey
 background = #e2e2e2
-font = Bitstream Vera Sans 
+foreground = #212121
+linenumbers = #5E4803
 border = #6f6f6f
+info = #AE8400
+font = DejaVu Sans Mono
+fontsize = 9
+padding = 8
+width = 0.45 
+height = 0.75
