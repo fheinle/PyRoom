@@ -177,12 +177,12 @@ class Preferences():
         self.fontname = self.fontpreference.get_font_name()
         self.fontsize = int(self.fontname[-2:])
         self.fontname = self.fontname[:-2]
-        self.colorname = self.format_rgb(gtk.gdk.Color.to_string(
-                                self.colorpreference.get_color()))
-        self.bgname = self.format_rgb(gtk.gdk.Color.to_string(
-                               self.bgpreference.get_color()))
-        self.bordername = self.format_rgb(gtk.gdk.Color.to_string(
-                               self.borderpreference.get_color()))
+        self.colorname = gtk.gdk.Color.to_string(
+                                self.colorpreference.get_color())
+        self.bgname = gtk.gdk.Color.to_string(
+                               self.bgpreference.get_color())
+        self.bordername = gtk.gdk.Color.to_string(
+                               self.borderpreference.get_color())
         self.paddingname = self.paddingpreference.get_value_as_int()
         self.heightname = self.heightpreference.get_value()
         self.widthname = self.widthpreference.get_value()
@@ -307,12 +307,6 @@ class Preferences():
         """display the preferences dialog"""
         self.dlg = self.wTree.get_widget("dialog-preferences")
         self.dlg.show()
-
-    def format_rgb(self, color):
-        """rgb representation formatting"""
-        color = color[0:3]+color[5:7]+color[11:13]
-        color = color.upper()
-        return color
 
     def togglelines(self, widget):
         """show line numbers"""
