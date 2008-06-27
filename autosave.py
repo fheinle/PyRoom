@@ -48,7 +48,7 @@ def autosave_init(edit_instance, mill=1000):
     global ELAPSED_TIME
     global TIMEOUT_ID
     TIMEOUT_ID = gobject.timeout_add(mill, timeout, edit_instance)
-    ELAPSED_TIME = 0  ## init the ELAPSED_TIME_var
+    ELAPSED_TIME = 0
 
 
 def save_file(filename, text):
@@ -76,19 +76,16 @@ def autosave_file(edit_instance, buf_id):
     except AttributeError:
         if buf.filename == FILE_UNNAMED:
             buf.tmp_filename = tempfile.mkstemp(suffix="",
-                prefix="noname_"+"tmp_", dir=TEMP_FOLDER, text=True)[1]
+                prefix="noname_tmp_", dir=TEMP_FOLDER, text=True)[1]
         else:
             buf_name = os.path.split(buf.filename)[1]
             buf.tmp_filename = tempfile.mkstemp(suffix="",
                 prefix = buf_name + "_tmp_", dir=TEMP_FOLDER, text=True)[1]
     save_file(buf.tmp_filename, buf.get_text(buf.get_start_iter(),
         buf.get_end_iter()))
-    # Inform the user of the saving operation
     edit_instance.status.set_text(_('AutoSaving Buffer %(buf_id)d, to temp\
      file %(buf_tmp_filename)s') % {'buf_id': buf_id, 
                    'buf_tmp_filename': buf.tmp_filename})
-
-
 def timeout(edit_instance):
     "the Timer Function"
     global ELAPSED_TIME
@@ -103,6 +100,3 @@ def timeout(edit_instance):
         return True # continue repeat timeout event
     else:
         return False #stop timeout event
-
-
-
