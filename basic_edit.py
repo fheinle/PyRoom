@@ -188,7 +188,7 @@ class BasicEdit():
             'buffer_name': buf.filename,
             'status': status,
             'char_count': buf.get_char_count(),
-            'word_count': self.word_count(buffer),
+            'word_count': self.word_count(buf),
             'lines': buf.get_line_count(),
             }, 5000)
 
