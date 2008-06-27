@@ -344,8 +344,6 @@ the file.')
             self.status.set_text(_('Closed, no files selected'))
         chooser.destroy()
 
-    # BB
-
     def word_count(self, buf):
         """ Word count in a text buffer """
 
