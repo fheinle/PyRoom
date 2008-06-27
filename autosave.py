@@ -71,9 +71,7 @@ def autosave_file(edit_instance, buf_id):
     if not os.path.exists(TEMP_FOLDER):
         os.mkdir(TEMP_FOLDER)
 
-    try:
-        buf.tmp_filename
-    except AttributeError:
+    if not hasattr(buf, 'tmp_filename'):
         if buf.filename == FILE_UNNAMED:
             buf.tmp_filename = tempfile.mkstemp(suffix="",
                 prefix="noname_tmp_", dir=TEMP_FOLDER, text=True)[1]
@@ -86,6 +84,7 @@ def autosave_file(edit_instance, buf_id):
     edit_instance.status.set_text(_('AutoSaving Buffer %(buf_id)d, to temp\
      file %(buf_tmp_filename)s') % {'buf_id': buf_id, 
                    'buf_tmp_filename': buf.tmp_filename})
+
 def timeout(edit_instance):
     "the Timer Function"
     global ELAPSED_TIME
