@@ -466,7 +466,7 @@ continue editing your document.")
         """save before quitting"""
         self.quitdialog.hide()
         for buf in self.buffers:
-            if buf.can_undo() or buffer.can_redo():
+            if buf.can_undo() or buf.can_redo():
                 if buf.filename == FILE_UNNAMED:
                     self.save_file_as()
                 else:
