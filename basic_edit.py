@@ -82,6 +82,8 @@ class BasicEdit():
     """editing logic that gets passed around"""
 
     def __init__(self, style, verbose, pyroom_config):
+        self.current = 0
+        self.buffers = []
         self.style = style
         self.verbose = verbose
         self.config = pyroom_config.config
@@ -170,10 +172,6 @@ class BasicEdit():
                 bindings[event.keyval]()
                 return True
         return False
-
-    #FIXME: what is this doing over here?
-    current = 0
-    buffers = []
 
     def show_info(self):
         """ Display buffer information on status label for 5 seconds """
