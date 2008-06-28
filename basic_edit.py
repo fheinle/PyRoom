@@ -1,4 +1,3 @@
-# basic_edit.py - provides editor functionality
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # PyRoom - A clone of WriteRoom
@@ -19,11 +18,11 @@
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 # -----------------------------------------------------------------------------
 
-"""editor.py - provides the editing logic
+"""
+provide basic editor functionality
 
 contains basic functions needed for pyroom - any core functionality is included
 within this file
-    
 """
 
 import gtk

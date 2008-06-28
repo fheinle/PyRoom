@@ -1,4 +1,3 @@
-# preferences.py - allows for custom set preferences
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # PyRoom - A clone of WriteRoom
@@ -19,12 +18,12 @@
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 # -----------------------------------------------------------------------------
 
-"""preferences.py - allows for custom set preferences
+"""
+allows for custom set preferences
 
 Creates a preferences UI that allows the user to customise settings; allows for
 the choice of a theme from ~/.pyroom/themes as well as a custom theme created
 via the dialog
-
 """
 
 import gtk

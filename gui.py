@@ -1,4 +1,3 @@
-# gui.py - gui for pyrom
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # PyRoom - A clone of WriteRoom
@@ -19,10 +18,10 @@
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 # -----------------------------------------------------------------------------
 
-""" gui.py - basic global GUI
+"""
+basic global GUI
 
 Additionally allows user to apply custom settings
-
 """
 
 from status_label import FadeLabel

@@ -1,4 +1,3 @@
-# pyroom_error.py - catches errors
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # PyRoom - A clone of WriteRoom
@@ -20,10 +19,10 @@
 # -----------------------------------------------------------------------------
 
 
-"""pyroom_error.py - catches errors
+"""
+Errors raised within pyroom
 
-Catches errors and allows them to be displayed to the user via the status line
-
+TODO: make this somehow useful
 """
 
 import traceback

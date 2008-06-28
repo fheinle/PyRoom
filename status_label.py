@@ -1,4 +1,3 @@
-# status_label.py - status bar
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # PyRoom - A clone of WriteRoom
@@ -19,10 +18,10 @@
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 # -----------------------------------------------------------------------------
 
-"""status_label.py - status bar
+"""
+status bar
 
 provides a fading status bar that displays information to the user
-
 """
 
 

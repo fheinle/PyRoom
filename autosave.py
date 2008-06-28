@@ -1,4 +1,3 @@
-# autosave.py - provides autosave functions
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # PyRoom - A clone of WriteRoom
@@ -20,11 +19,11 @@
 # -----------------------------------------------------------------------------
 
 
-"""autosave.py - provides autosave functions
+"""
+provide autosave functions
 
 allows a user to automatically save their files to /var/tmp/pyroom at a time
 period that is defined in the settings dialog (default is every 3 minutes)
-
 """
 
 import gobject
