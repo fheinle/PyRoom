@@ -25,9 +25,21 @@ Errors raised within pyroom
 TODO: make this somehow useful
 """
 
-import traceback
-
+import gtk
 
 class PyroomError(Exception):
     """our nice little exception"""
     pass
+
+def handle_error(exception_type, exception_value, traceback):
+    """display errors to the end user using dialog boxes"""
+    dialog = gtk.MessageDialog(parent=None, flags=gtk.DIALOG_MODAL,
+                type=gtk.MESSAGE_WARNING, buttons=gtk.BUTTONS_NONE,
+                message_format=exception_value.message)
+    dialog.set_title('Fehler')
+    dialog.add_button(gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE)
+    dialog.set_position(gtk.WIN_POS_CENTER)
+    dialog.set_gravity(gtk.gdk.GRAVITY_CENTER)
+    dialog.show_all()
+    dialog.run()
+    dialog.destroy()

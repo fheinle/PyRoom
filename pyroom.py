@@ -38,18 +38,19 @@ gettext.install('pyroom', 'locale')
 import locale
 locale.setlocale(locale.LC_ALL, '')
 from optparse import OptionParser
+import sys
 
 import gtk
 
 import autosave
 from basic_edit import BasicEdit
-from pyroom_error import PyroomError
+from pyroom_error import handle_error
 from preferences import PyroomConfig
 
 pyroom_config = PyroomConfig()
 
 if __name__ == '__main__':
-
+    sys.excepthook = handle_error
     verbose = False
 
     files = []
@@ -91,15 +92,13 @@ simply and efficiently in a full-screen window, with no distractions.'))
     # Create relevant buffers for file and load them
     pyroom = BasicEdit(style=style, verbose=verbose,
              pyroom_config=pyroom_config)
-    try:
-        buffnum = 0
-        if len(files):
-            for filename in files:
-                pyroom.open_file_no_chooser(filename)
-                buffnum += 1
+    buffnum = 0
+    if len(files):
+        for filename in files:
+            pyroom.open_file_no_chooser(filename)
+            buffnum += 1
 
-        pyroom.set_buffer(buffnum)
-
-        pyroom.status.set_text(
-            _('Welcome to Pyroom %s, type Control-H for help' % __VERSION__))
-        gtk.main()
+    pyroom.set_buffer(buffnum)
+    pyroom.status.set_text(
+        _('Welcome to Pyroom %s, type Control-H for help' % __VERSION__))
+    gtk.main()
