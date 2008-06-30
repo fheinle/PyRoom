@@ -223,12 +223,8 @@ class Preferences():
                                                                          "w")
             self.config.write(config_file)
         except IOError:
-            e = PyroomError(_("Could not save preferences file."))
-            self.graphical.error.set_text(str(e))
-            if self.verbose:
-                print str(e)
-                print e.traceback
-
+            raise PyroomError(_("Could not save preferences file."))
+            
     def customchanged(self, widget):
         """triggered when custom themes are changed, reloads style"""
         self.presetscombobox.set_active(0)

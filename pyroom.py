@@ -38,7 +38,6 @@ gettext.install('pyroom', 'locale')
 import locale
 locale.setlocale(locale.LC_ALL, '')
 from optparse import OptionParser
-import traceback
 
 import gtk
 
@@ -104,11 +103,3 @@ simply and efficiently in a full-screen window, with no distractions.'))
         pyroom.status.set_text(
             _('Welcome to Pyroom %s, type Control-H for help' % __VERSION__))
         gtk.main()
-    except PyroomError, e:
-        # To change the format of the error text, edit pyroom_error
-        pyroom.gui.error.set_text(str(e))
-        if verbose:
-            print str(e)
-            print e.traceback
-    except:
-        print traceback.format_exc()

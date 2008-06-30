@@ -250,11 +250,6 @@ open the file.')
                 except:
                     raise PyroomError(_('Unable to open %s\n'
                                      % buf.filename))
-            except PyroomError, e:
-                self.gui.error.set_text(str(e))
-                if self.verbose:
-                    print str(e)
-                    print e.traceback
         else:
             self.status.set_text(_('Closed, no files selected'))
         chooser.destroy()
@@ -286,12 +281,6 @@ the file.')
             except:
                 raise PyroomError(_('Unable to open %s\n'
                                  % buf.filename))
-        except PyroomError, e:
-            self.gui.error.set_text(str(e))
-            if self.verbose:
-                print str(e)
-                print e.traceback
-
     def save_file(self):
         """ Save file """
         try:
@@ -318,11 +307,6 @@ the file.')
             except:
                 raise PyroomError(_('Unable to save %s\n'
                                 % buf.filename))
-        except PyroomError, e:
-            self.gui.error.set_text(str(e))
-            if self.verbose:
-                print str(e)
-                print e.traceback
 
     def save_file_as(self):
         """ Save file as """
