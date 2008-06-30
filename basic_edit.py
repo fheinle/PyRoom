@@ -225,40 +225,8 @@ class BasicEdit():
 
         res = chooser.run()
         if res == gtk.RESPONSE_OK:
-            try:
-                buf = self.new_buffer()
-                buf.filename = chooser.get_filename()
-                try:
-                    buffer_file = open(buf.filename, 'r')
-                    buf = self.buffers[self.current]
-                    buf.begin_not_undoable_action()
-                    utf8 = unicode(buffer_file.read(), 'utf-8')
-                    buf.set_text(utf8)
-                    buf.end_not_undoable_action()
-                    buffer_file.close()
-                    self.status.set_text(_('File %s open')
-                             % buf.filename)
-                except IOError, (errno, strerror):
-                    errortext = _('Unable to open %(filename)s.' % {
-                                    'filename': buf.filename})
-                    if errno == 2:
-                        errortext += _(' The file does not exist.')
-                    elif errno == 13:
-                        errortext += _(' You do not have permission to \
-open the file.')
-                    raise PyroomError(errortext)
-                except:
-                    raise PyroomError(_('Unable to open %s\n'
-                                     % buf.filename))
-        else:
-            self.status.set_text(_('Closed, no files selected'))
-        chooser.destroy()
-
-    def open_file_no_chooser(self, filename):
-        """ Open specified file """
-        try:
             buf = self.new_buffer()
-            buf.filename = filename
+            buf.filename = chooser.get_filename()
             try:
                 buffer_file = open(buf.filename, 'r')
                 buf = self.buffers[self.current]
@@ -271,42 +239,71 @@ open the file.')
                          % buf.filename)
             except IOError, (errno, strerror):
                 errortext = _('Unable to open %(filename)s.' % {
-                    'filename': buf.filename})
+                                'filename': buf.filename})
                 if errno == 2:
                     errortext += _(' The file does not exist.')
                 elif errno == 13:
-                    errortext += _(' You do not have permission to open \
-the file.')
+                    errortext += _(' You do not have permission to \
+open the file.')
                 raise PyroomError(errortext)
             except:
                 raise PyroomError(_('Unable to open %s\n'
                                  % buf.filename))
+        else:
+            self.status.set_text(_('Closed, no files selected'))
+        chooser.destroy()
+
+    def open_file_no_chooser(self, filename):
+        """ Open specified file """
+        buf = self.new_buffer()
+        buf.filename = filename
+        try:
+            buffer_file = open(buf.filename, 'r')
+            buf = self.buffers[self.current]
+            buf.begin_not_undoable_action()
+            utf8 = unicode(buffer_file.read(), 'utf-8')
+            buf.set_text(utf8)
+            buf.end_not_undoable_action()
+            buffer_file.close()
+            self.status.set_text(_('File %s open')
+                     % buf.filename)
+        except IOError, (errno, strerror):
+            errortext = _('Unable to open %(filename)s.' % {
+                'filename': buf.filename})
+            if errno == 2:
+                errortext += _(' The file does not exist.')
+            elif errno == 13:
+                errortext += _(' You do not have permission to open \
+the file.')
+            raise PyroomError(errortext)
+        except:
+            raise PyroomError(_('Unable to open %s\n'
+                             % buf.filename))
     def save_file(self):
         """ Save file """
         try:
-            try:
-                buf = self.buffers[self.current]
-                if buf.filename != FILE_UNNAMED:
-                    buffer_file = open(buf.filename, 'w')
-                    txt = buf.get_text(buf.get_start_iter(),
-                                         buf.get_end_iter())
-                    buffer_file.write(txt)
-                    buffer_file.close()
-                    buf.begin_not_undoable_action()
-                    buf.end_not_undoable_action()
-                    self.status.set_text(_('File %s saved') % buf.filename)
-                else:
-                    self.save_file_as()
-            except IOError, (errno, strerror):
-                errortext = _('Unable to save %(filename)s.' % {
-                    'filename': buf.filename})
-                if errno == 13:
-                    errortext += _(' You do not have permission to write to \
+            buf = self.buffers[self.current]
+            if buf.filename != FILE_UNNAMED:
+                buffer_file = open(buf.filename, 'w')
+                txt = buf.get_text(buf.get_start_iter(),
+                                     buf.get_end_iter())
+                buffer_file.write(txt)
+                buffer_file.close()
+                buf.begin_not_undoable_action()
+                buf.end_not_undoable_action()
+                self.status.set_text(_('File %s saved') % buf.filename)
+            else:
+                self.save_file_as()
+        except IOError, (errno, strerror):
+            errortext = _('Unable to save %(filename)s.' % {
+                'filename': buf.filename})
+            if errno == 13:
+                errortext += _(' You do not have permission to write to \
 the file.')
-                raise PyroomError(errortext)
-            except:
-                raise PyroomError(_('Unable to save %s\n'
-                                % buf.filename))
+            raise PyroomError(errortext)
+        except:
+            raise PyroomError(_('Unable to save %s\n'
+                            % buf.filename))
 
     def save_file_as(self):
         """ Save file as """
