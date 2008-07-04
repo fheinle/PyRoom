@@ -94,7 +94,7 @@ class PyroomConfig():
 
 class Preferences():
     """our main preferences object, to be passed around where needed"""
-    def __init__(self, gui, style, verbose, pyroom_config):
+    def __init__(self, gui, style, pyroom_config):
         self.style = style
         self.pyroom_config = pyroom_config
         self.wTree = gtk.glade.XML(os.path.join(
@@ -133,7 +133,6 @@ class Preferences():
         self.autosave_spinbutton.set_value(float(self.autosavetime))
         self.linesstate = int(self.linesstate)
         self.autosavestate = int(self.autosavestate)
-        self.verbose = verbose
 
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)

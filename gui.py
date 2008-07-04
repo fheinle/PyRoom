@@ -37,8 +37,7 @@ import os
 class GUI():
     """our basic global gui object"""
 
-    def __init__(self, style, verbose, pyroom_config):
-        self.verbose = verbose
+    def __init__(self, style, pyroom_config):
         self.status = FadeLabel()
         self.error = FadeLabel()
         self.style = style

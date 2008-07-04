@@ -80,15 +80,14 @@ Commands:
 class BasicEdit():
     """editing logic that gets passed around"""
 
-    def __init__(self, style, verbose, pyroom_config):
+    def __init__(self, style, pyroom_config):
         self.current = 0
         self.buffers = []
         self.style = style
-        self.verbose = verbose
         self.config = pyroom_config.config
-        self.gui = GUI(style, verbose, pyroom_config)
+        self.gui = GUI(style, pyroom_config)
         self.preferences = Preferences(gui=self.gui, style=style,
-            verbose=verbose, pyroom_config=pyroom_config)
+            pyroom_config=pyroom_config)
         self.status = self.gui.status
         self.window = self.gui.window
         self.textbox = self.gui.textbox
