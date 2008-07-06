@@ -24,8 +24,6 @@ basic global GUI
 Additionally allows user to apply custom settings
 """
 
-from status_label import FadeLabel
-
 import gtk
 import pango
 import gtksourceview
@@ -33,6 +31,7 @@ import gtk.glade
 import ConfigParser
 import os
 
+from status_label import FadeLabel
 
 class GUI():
     """our basic global gui object"""

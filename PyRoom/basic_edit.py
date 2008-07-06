@@ -28,12 +28,12 @@ within this file
 import gtk
 import gtk.glade
 import gtksourceview
+import os
 
 from pyroom_error import PyroomError
 from gui import GUI
 from preferences import Preferences
 import autosave
-import os
 
 FILE_UNNAMED = _('* Unnamed *')
 

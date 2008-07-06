@@ -29,11 +29,11 @@ via the dialog
 import gtk
 import gtk.glade
 import os
-from pyroom_error import PyroomError
-import autosave
 import ConfigParser
 import shutil
 
+from pyroom_error import PyroomError
+import autosave
 
 DEFAULT_CONF = """
 [visual]

@@ -49,7 +49,7 @@ from preferences import PyroomConfig
 
 pyroom_config = PyroomConfig()
 
-if __name__ == '__main__':
+def main():
     sys.excepthook = handle_error
 
     files = []
@@ -97,3 +97,6 @@ simply and efficiently in a full-screen window, with no distractions.'))
     pyroom.status.set_text(
         _('Welcome to Pyroom %s, type Control-H for help' % __VERSION__))
     gtk.main()
+
+if __name__ == '__main__':
+        main()
