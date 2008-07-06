@@ -31,8 +31,6 @@ Based on code posted on ubuntu forums by NoWhereMan (www.nowhereland.it)
 :license: GNU General Public License, version 3 or later
 """
 
-__VERSION__ = '0.2'
-
 import gettext
 gettext.install('pyroom', 'locale')
 import locale
