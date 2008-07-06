@@ -40,10 +40,13 @@ import sys
 
 import gtk
 
+import PyRoom
 import autosave
 from basic_edit import BasicEdit
 from pyroom_error import handle_error
 from preferences import PyroomConfig
+
+__VERSION__ = PyRoom.__VERSION__
 
 pyroom_config = PyroomConfig()
 
