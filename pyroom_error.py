@@ -36,9 +36,8 @@ def handle_error(exception_type, exception_value, exception_traceback):
     if exception_type == PyroomError:
         message = exception_value.message
     else: # uncaught exception in code
-        message = _("""There has been an uncaught exception in pyroom.
-This is most likely a programming error. Please submit a bug report
-to launchpad""")
+        message = _("""There has been an uncaught exception in pyroom.\n
+This is most likely a programming error. Please submit a bug report to launchpad""")
 
     error_dialog = gtk.MessageDialog(parent=None, flags=gtk.DIALOG_MODAL,
                 type=gtk.MESSAGE_ERROR, buttons=gtk.BUTTONS_NONE,
@@ -49,36 +48,45 @@ to launchpad""")
     error_dialog.set_position(gtk.WIN_POS_CENTER)
     error_dialog.set_gravity(gtk.gdk.GRAVITY_CENTER)
     error_dialog.show_all()
-    resp = error_dialog.run()
-    if resp == 2:
-        details_dialog = gtk.Dialog(_('Bug details'), error_dialog, 
-            gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
-		    (gtk.STOCK_CLOSE, gtk.RESPONSE_CLOSE)
+
+    details_textview = gtk.TextView()
+    details_textview.show()
+    details_textview.set_editable(False)
+    details_textview.modify_font(pango.FontDescription('Monospace'))
+
+    scrolled_window = gtk.ScrolledWindow()
+    scrolled_window.show()
+    scrolled_window.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
+    scrolled_window.add(details_textview)
+
+    frame = gtk.Frame()
+    frame.set_shadow_type(gtk.SHADOW_IN)
+    frame.add(scrolled_window)
+    frame.set_border_width(6)
+    error_dialog.vbox.add(frame)
+
+    details_buffer = details_textview.get_buffer()
+    printable_traceback = "\n".join(
+        traceback.format_exception(
+            exception_type,
+            exception_value,
+            exception_traceback,
         )
-        textview = gtk.TextView()
-        textview.show()
-        textview.set_editable (False)
-        textview.modify_font(pango.FontDescription ("Monospace"))
-        scrolled_window = gtk.ScrolledWindow()
-        scrolled_window.show()
-        scrolled_window.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_AUTOMATIC)
-        scrolled_window.add(textview)
-        details_dialog.vbox.add(scrolled_window)
-        textbuffer = textview.get_buffer()
-        printable_traceback = "\n".join(
-            traceback.format_exception(
-                exception_type, 
-                exception_value,
-                exception_traceback
-            )
-        )
-        textbuffer.set_text(printable_traceback)
-        monitor = gtk.gdk.screen_get_default().\
-                  get_monitor_at_window(error_dialog.window)
-        area = gtk.gdk.screen_get_default().get_monitor_geometry(monitor)
-        details_width = area.width // 1.6
-        details_height = area.height // 1.6
-        details_dialog.set_default_size(int(details_width), int(details_height))
-        details_dialog.run()
-        details_dialog.destroy()
+    )
+    details_buffer.set_text(printable_traceback)
+    details_textview.set_size_request(
+        gtk.gdk.screen_width()/2,
+        gtk.gdk.screen_height()/3
+    )
+
+    error_dialog.details = frame
+
+    while True:
+        resp = error_dialog.run()
+        if resp == 2:
+            error_dialog.details.show()
+            error_dialog.action_area.get_children()\
+        [0].set_sensitive(0)
+        else:
+            break
     error_dialog.destroy()
