@@ -94,7 +94,7 @@ class PyroomConfig():
 
 class Preferences():
     """our main preferences object, to be passed around where needed"""
-    def __init__(self, gui, style, verbose, pyroom_config):
+    def __init__(self, gui, style, pyroom_config):
         self.style = style
         self.pyroom_config = pyroom_config
         self.wTree = gtk.glade.XML(os.path.join(
@@ -133,7 +133,6 @@ class Preferences():
         self.autosave_spinbutton.set_value(float(self.autosavetime))
         self.linesstate = int(self.linesstate)
         self.autosavestate = int(self.autosavestate)
-        self.verbose = verbose
 
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
@@ -223,12 +222,8 @@ class Preferences():
                                                                          "w")
             self.config.write(config_file)
         except IOError:
-            e = PyroomError(_("Could not save preferences file."))
-            self.graphical.error.set_text(str(e))
-            if self.verbose:
-                print str(e)
-                print e.traceback
-
+            raise PyroomError(_("Could not save preferences file."))
+            
     def customchanged(self, widget):
         """triggered when custom themes are changed, reloads style"""
         self.presetscombobox.set_active(0)
