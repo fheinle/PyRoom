@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# pyroom.py - executes pyroom
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # PyRoom - A clone of WriteRoom
@@ -21,15 +20,15 @@
 # -----------------------------------------------------------------------------
 
 """
-    PyRoom - A clone of WriteRoom
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+PyRoom - A clone of WriteRoom
+=============================
 
-    Based on code posted on ubuntu forums by NoWhereMan (www.nowhereland.it)
-    (Ubuntu thread was "WriteRoom/Darkroom/?")
+Based on code posted on ubuntu forums by NoWhereMan (www.nowhereland.it)
+(Ubuntu thread was "WriteRoom/Darkroom/?")
 
-    :copyright: 2007 Nicolas P. Rougier & NoWhereMan Copyright
-    :copyright: 2008 The PyRoom Theme - See AUTHORS file for more information
-    :license: GNU General Public License, version 3 or later
+:copyright: 2007 Nicolas P. Rougier & NoWhereMan Copyright
+:copyright: 2008 The PyRoom Theme - See AUTHORS file for more information
+:license: GNU General Public License, version 3 or later
 """
 
 __VERSION__ = '0.2'

@@ -1,4 +1,3 @@
-# basic_edit.py - provides editor functionality
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # PyRoom - A clone of WriteRoom
@@ -19,11 +18,11 @@
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 # -----------------------------------------------------------------------------
 
-"""editor.py - provides the editing logic
+"""
+provide basic editor functionality
 
 contains basic functions needed for pyroom - any core functionality is included
 within this file
-    
 """
 
 import gtk
@@ -82,6 +81,8 @@ class BasicEdit():
     """editing logic that gets passed around"""
 
     def __init__(self, style, verbose, pyroom_config):
+        self.current = 0
+        self.buffers = []
         self.style = style
         self.verbose = verbose
         self.config = pyroom_config.config
@@ -171,10 +172,6 @@ class BasicEdit():
                 return True
         return False
 
-    #FIXME: what is this doing over here?
-    current = 0
-    buffers = []
-
     def show_info(self):
         """ Display buffer information on status label for 5 seconds """
 
@@ -190,7 +187,7 @@ class BasicEdit():
             'buffer_name': buf.filename,
             'status': status,
             'char_count': buf.get_char_count(),
-            'word_count': self.word_count(buffer),
+            'word_count': self.word_count(buf),
             'lines': buf.get_line_count(),
             }, 5000)
 
@@ -346,8 +343,6 @@ the file.')
             self.status.set_text(_('Closed, no files selected'))
         chooser.destroy()
 
-    # BB
-
     def word_count(self, buf):
         """ Word count in a text buffer """
 
@@ -468,7 +463,7 @@ continue editing your document.")
         """save before quitting"""
         self.quitdialog.hide()
         for buf in self.buffers:
-            if buf.can_undo() or buffer.can_redo():
+            if buf.can_undo() or buf.can_redo():
                 if buf.filename == FILE_UNNAMED:
                     self.save_file_as()
                 else:

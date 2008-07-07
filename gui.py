@@ -1,4 +1,3 @@
-# gui.py - gui for pyrom
 # -*- coding: utf-8 -*-
 # -----------------------------------------------------------------------------
 # PyRoom - A clone of WriteRoom
@@ -19,10 +18,10 @@
 # this program.  If not, see <http://www.gnu.org/licenses/>.
 # -----------------------------------------------------------------------------
 
-""" gui.py - basic global GUI
+"""
+basic global GUI
 
 Additionally allows user to apply custom settings
-
 """
 
 from status_label import FadeLabel
@@ -146,101 +145,63 @@ class GUI():
         """
         apply the given style and rerender the textbox
         @param style: style that was selected
-        @param mode: normal if style is builtin, otherwise custom
+        @param mode: normal if style is builtin or at first call on startup,
+                     otherwise custom
         """
         if mode == 'normal':
-            self.window.modify_bg(gtk.STATE_NORMAL,
-                                  gtk.gdk.color_parse(self.config.get(
-                                               "theme", "background")))
-            self.textbox.modify_bg(gtk.STATE_NORMAL,
-                                   gtk.gdk.color_parse(self.config.get(
-                                               "theme", "background")))
-            self.textbox.modify_base(gtk.STATE_NORMAL,
-                                   gtk.gdk.color_parse(self.config.get(
-                                                "theme", "background")))
-            self.textbox.modify_base(gtk.STATE_SELECTED,
-                                   gtk.gdk.color_parse(self.config.get(
-                                                "theme", "foreground")))
-            self.textbox.modify_text(gtk.STATE_NORMAL,
-                                   gtk.gdk.color_parse(self.config.get(
-                                                "theme", "foreground")))
-            self.textbox.modify_text(gtk.STATE_SELECTED,
-                                   gtk.gdk.color_parse('#000000'))
-            self.textbox.modify_fg(gtk.STATE_NORMAL,
-                                   gtk.gdk.color_parse(self.config.get(
-                                                "theme", "foreground")))
-            self.status.active_color = self.config.get("theme", "foreground")
-            self.status.inactive_color = self.config.get("theme", "background")
-            self.error.active_color = self.config.get("theme", "foreground")
-            self.error.inactive_color = self.config.get("theme", "background")
-            self.boxout.modify_bg(gtk.STATE_NORMAL,
-                                  gtk.gdk.color_parse(self.config.get(
-                                                  "theme", "border")))
-            font_and_size = '%s %d' % (self.config.get("theme", "font"),
-                                       float(self.config.get("theme",
-                                                        "fontsize")))
-            self.textbox.modify_font(pango.FontDescription(font_and_size))
-
-            gtk.rc_parse_string("""
-            style "pyroom-colored-cursor" {
-            GtkTextView::cursor-color = '"""
-                                 + self.config.get("theme", "foreground")
-                                 + """'
-            }
-            class "GtkWidget" style "pyroom-colored-cursor"
-            """)
-            (w, h) = (gtk.gdk.screen_width(), gtk.gdk.screen_height())
-            width = int(float(self.config.get("theme", "width")) * w)
-            height = int(float(self.config.get("theme", "height")) * h)
-            self.vbox.set_size_request(width, height)
-            self.fixed.move(self.vbox, int(((1 - float(self.config.get(
-                                           "theme", "width"))) * w)/ 2),
-                int(((1-float(self.config.get("theme", "height"))) * h) / 2))
-            self.textbox.set_border_width(int(self.config.get(
-                                         "theme", "padding")))
+            get_color = lambda color: gtk.gdk.color_parse(
+                                        self.config.get('theme', color)
+                                        )
         elif mode == 'custom':
             self.style = style
-            self.window.modify_bg(gtk.STATE_NORMAL,
-                                  gtk.gdk.color_parse(self.style[
-                                                  'background']))
-            self.textbox.modify_bg(gtk.STATE_NORMAL,
-                                   gtk.gdk.color_parse(self.style[
-                                                   'background']))
-            self.textbox.modify_base(gtk.STATE_NORMAL,
-                                     gtk.gdk.color_parse(self.style[
-                                                     'background']))
-            self.textbox.modify_base(gtk.STATE_SELECTED,
-                                     gtk.gdk.color_parse(self.style[
-                                                     'foreground']))
-            self.textbox.modify_text(gtk.STATE_NORMAL,
-                                     gtk.gdk.color_parse(self.style[
-                                                     'foreground']))
-            self.textbox.modify_text(gtk.STATE_SELECTED,
-                                     gtk.gdk.color_parse('#000000'))
-            self.textbox.modify_fg(gtk.STATE_NORMAL,
-                                   gtk.gdk.color_parse(self.style[
-                                                   'foreground']))
-            self.status.active_color = self.style['foreground']
-            self.status.inactive_color = self.style['background']
-            self.boxout.modify_bg(gtk.STATE_NORMAL,
-                                  gtk.gdk.color_parse(self.style['border']))
-            font_and_size = '%s %d' % (self.style['font'],
-                                       float(self.style['fontsize']))
-            self.textbox.modify_font(pango.FontDescription(font_and_size))
+            get_color = lambda color: gtk.gdk.color_parse(self.style[color])
 
-            gtk.rc_parse_string("""
-            style "pyroom-colored-cursor" {
-            GtkTextView::cursor-color = '"""
-                                 + self.style['foreground']
-                                 + """'
-            }
-            class "GtkWidget" style "pyroom-colored-cursor"
-            """)
-            (w, h) = (gtk.gdk.screen_width(), gtk.gdk.screen_height())
-            width = int(self.style['size'][0] * w)
-            height = int(self.style['size'][1] * h)
-            self.vbox.set_size_request(width, height)
-            self.fixed.move(self.vbox, int(((1 - self.style['size'][0])
-                                                              * w)/ 2),
-                int(((1 - self.style['size'][1]) * h) / 2))
-            self.textbox.set_border_width(self.style['padding'])
+        self.window.modify_bg(gtk.STATE_NORMAL, get_color('background'))
+        self.textbox.modify_bg(gtk.STATE_NORMAL, get_color('background'))
+        self.textbox.modify_base(gtk.STATE_NORMAL, get_color('background'))
+        self.textbox.modify_base(gtk.STATE_SELECTED, get_color('foreground'))
+        self.textbox.modify_text(gtk.STATE_NORMAL, get_color('foreground'))
+        self.textbox.modify_text(gtk.STATE_SELECTED, gtk.gdk.color_parse('#000000'))
+        self.textbox.modify_fg(gtk.STATE_NORMAL, get_color('foreground'))
+        self.status.active_color = self.config.get('theme', 'foreground')
+        self.status.inactive_color = self.config.get('theme', 'background')
+        self.error.active_color = self.config.get('theme', 'foreground')
+        self.error.inactive_color = self.config.get('theme', 'background')
+        self.boxout.modify_bg(gtk.STATE_NORMAL, 
+                              get_color('border'),
+                             )
+        font_and_size = "%s %d" % (self.config.get('theme', 'font'),
+                                   float(self.config.get('theme', 'fontsize')))
+        self.textbox.modify_font(pango.FontDescription(font_and_size))
+        
+        gtkrc_string = """\
+        style "pyroom-colored-cursor" { 
+        GtkTextView::cursor-color = '%s'
+        }
+        class "GtkWidget" style "pyroom-colored-cursor"
+        """ % self.config.get('theme', 'foreground')
+        gtk.rc_parse_string(gtkrc_string)
+
+        (screen_width, screen_height) = (
+                                         gtk.gdk.screen_width(),
+                                         gtk.gdk.screen_height(),
+                                        )
+
+        if mode == "normal":
+            width_percentage = float(self.config.get('theme', 'width'))
+            height_percentage = float(self.config.get('theme', 'height'))
+            padding = int(float(self.config.get('theme', 'padding')))
+        elif mode == "custom":
+            width_percentage = self.style['size'][0]
+            height_percentage = self.style['size'][1]
+            padding = int(float(self.style['padding']))
+
+
+        self.vbox.set_size_request(int(width_percentage * screen_width),
+                                   int(height_percentage * screen_height))
+        self.fixed.move(self.vbox, 
+            int(((1 - width_percentage) * screen_width) / 2),
+            int(((1 - height_percentage) * screen_height) / 2),
+        )
+        
+        self.textbox.set_border_width(padding) 
