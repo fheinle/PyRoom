@@ -6,9 +6,22 @@ ez_setup.use_setuptools()
 from setuptools import setup, find_packages
 
 import PyRoom
+import os
 
 author = 'The Pyroom Team'
-url = 'http://www.pygments.org'
+url = 'http://www.pyroom.org'
+
+def gather_files(files_dir):
+    """gather filenames for easy integration of locales"""
+    files = []
+    for directory in os.walk(files_dir):
+        for filename in directory[2]:
+            included_file = os.path.join(
+                directory[0],
+                filename
+            ).lstrip(files_dir + '/')
+            files.append(included_file)
+    return files
 
 setup(
     name = 'PyRoom',
@@ -30,4 +43,8 @@ setup(
         'Programming Language :: Python',
         'Operating System :: OS Independent',
     ],
+    package_data = {
+        'themes':['themes/*.theme'],
+        'locale':gather_files('locale'),
+    }
 )
