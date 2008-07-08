@@ -32,6 +32,8 @@ import os
 import ConfigParser
 import shutil
 
+from pkg_resources import Requirement, resource_filename
+
 from pyroom_error import PyroomError
 import autosave
 
@@ -75,9 +77,12 @@ class PyroomConfig():
             config_file.write(DEFAULT_CONF)
             config_file.close()
         # Copy themes
-        theme_source_dir = os.path.join(self.pyroom_absolute_path, 'themes/')
+        theme_source_dir = resource_filename(
+            Requirement.parse('PyRoom'),
+            'themes'
+        )
         for theme_file in os.listdir(theme_source_dir):
-            if theme_file != 'custom.theme':
+            if theme_file not in ['custom.theme', '__init__.py']:
                 shutil.copy(
                     os.path.join(theme_source_dir, theme_file),
                     os.path.join(self.conf_dir, "themes/"))
