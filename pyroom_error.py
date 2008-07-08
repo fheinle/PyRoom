@@ -37,7 +37,7 @@ def handle_error(exception_type, exception_value, exception_traceback):
         message = exception_value.message
     else: # uncaught exception in code
         message = _("""There has been an uncaught exception in pyroom.\n
-This is most likely a programming error.\
+This is most likely a programming error. \
 Please submit a bug report to launchpad""")
 
     error_dialog = gtk.MessageDialog(parent=None, flags=gtk.DIALOG_MODAL,
