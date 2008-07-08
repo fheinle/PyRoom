@@ -32,13 +32,21 @@ Based on code posted on ubuntu forums by NoWhereMan (www.nowhereland.it)
 """
 
 import gettext
-gettext.install('pyroom', 'locale')
 import locale
 locale.setlocale(locale.LC_ALL, '')
 from optparse import OptionParser
 import sys
 
 import gtk
+from pkg_resources import Requirement, resource_filename
+
+
+gettext.install('pyroom', 
+                resource_filename(
+                    Requirement.parse('PyRoom'),
+                    'locales'
+                )
+)
 
 import PyRoom
 import autosave
