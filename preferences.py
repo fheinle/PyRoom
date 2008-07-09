@@ -101,6 +101,8 @@ class Preferences():
         self.wTree = gtk.glade.XML(os.path.join(
             pyroom_config.pyroom_absolute_path, "interface.glade"),
             "dialog-preferences")
+
+        # Defining widgets needed
         self.window = self.wTree.get_widget("dialog-preferences")
         self.fontpreference = self.wTree.get_widget("fontbutton")
         self.colorpreference = self.wTree.get_widget("colorbutton")
@@ -114,16 +116,18 @@ class Preferences():
         self.autosave = self.wTree.get_widget("autosavetext")
         self.autosave_spinbutton = self.wTree.get_widget("autosavetime")
         self.linespacing_spinbutton = self.wTree.get_widget("linespacing")
+
         self.graphical = gui
 
+        # Setting up config parser
         self.customfile = ConfigParser.ConfigParser()
         self.customfile.read(os.path.join(self.pyroom_config.conf_dir,
             "themes/custom.theme"))
         if not self.customfile.has_section('theme'):
             self.customfile.add_section('theme')
-
         self.config = self.pyroom_config.config
 
+        # Getting preferences from conf file
         self.activestyle = self.config.get("visual", "theme")
         self.linesstate = self.config.get("visual", "linenumber")
         self.autosavestate = self.config.get("editor", "autosave")
@@ -133,20 +137,23 @@ class Preferences():
             autosave.autosave_time = self.autosavetime
         else:
             autosave.autosave_time = 0
-        self.autosave_spinbutton.set_value(float(self.autosavetime))
         self.linesstate = int(self.linesstate)
         self.autosavestate = int(self.autosavestate)
-        self.linespacing_spinbutton.set_value(float(self.linespacing))
 
+        # Set up pyroom from conf file
+        self.linespacing_spinbutton.set_value(float(self.linespacing))
+        self.autosave_spinbutton.set_value(float(self.autosavetime))
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
         self.toggleautosave(self.autosave)
 
+        
         self.window.set_transient_for(self.graphical.window)
 
         self.stylesvalues = {'custom': 0}
         self.startingvalue = 1
 
+        # Add themes to combobox
         for i in self.pyroom_config.themeslist:
             self.stylesvalues['%s' % (i)] = self.startingvalue
             self.startingvalue = self.startingvalue + 1
