@@ -179,12 +179,16 @@ class GUI():
             width_percentage = float(self.config.get('theme', 'width'))
             height_percentage = float(self.config.get('theme', 'height'))
             padding = int(float(self.config.get('theme', 'padding')))
+            font_and_size = "%s %d" % (self.config.get('theme', 'font'),
+                           float(self.config.get('theme', 'fontsize')))
         elif mode == "custom":
             width_percentage = self.style['size'][0]
             height_percentage = self.style['size'][1]
             padding = int(float(self.style['padding']))
+            font_and_size = "%s %d" % (self.style['font'],
+                           float(self.style['fontsize']))
 
-
+        self.textbox.modify_font(pango.FontDescription(font_and_size))
         self.vbox.set_size_request(int(width_percentage * screen_width),
                                    int(height_percentage * screen_height))
         self.fixed.move(self.vbox, 
