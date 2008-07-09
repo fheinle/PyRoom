@@ -39,6 +39,7 @@ DEFAULT_CONF = """
 [visual]
 theme = green
 linenumber = 0
+linespacing = 2
 
 [editor]
 session = True
@@ -112,6 +113,7 @@ class Preferences():
         self.linenumbers = self.wTree.get_widget("linescheck")
         self.autosave = self.wTree.get_widget("autosavetext")
         self.autosave_spinbutton = self.wTree.get_widget("autosavetime")
+        self.linespacing_spinbutton = self.wTree.get_widget("linespacing")
         self.graphical = gui
 
         self.customfile = ConfigParser.ConfigParser()
@@ -126,6 +128,7 @@ class Preferences():
         self.linesstate = self.config.get("visual", "linenumber")
         self.autosavestate = self.config.get("editor", "autosave")
         self.autosavetime = self.config.get("editor", "autosavetime")
+        self.linespacing = self.config.get("visual", "linespacing")
         if self.autosavestate == 1:
             autosave.autosave_time = self.autosavetime
         else:
@@ -133,6 +136,7 @@ class Preferences():
         self.autosave_spinbutton.set_value(float(self.autosavetime))
         self.linesstate = int(self.linesstate)
         self.autosavestate = int(self.autosavestate)
+        self.linespacing_spinbutton.set_value(float(self.linespacing))
 
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
@@ -161,6 +165,7 @@ class Preferences():
         self.linenumbers.connect('toggled', self.togglelines)
         self.autosave.connect('toggled', self.toggleautosave)
         self.autosave_spinbutton.connect('value-changed', self.toggleautosave)
+        self.linespacing_spinbutton.connect('value-changed', self.changelinespacing)
         self.presetscombobox.connect('changed', self.presetchanged)
         self.fontpreference.connect('font-set', self.customchanged)
         self.colorpreference.connect('color-set', self.customchanged)
@@ -200,6 +205,7 @@ class Preferences():
             self.autosavepref = 0
         self.config.set("visual", "linenumber", self.linenumberspref)
         self.config.set("editor", "autosave", self.autosavepref)
+        self.config.set("visual", "linespacing", int(self.linespacing))
 
         autosave.autosave_time = self.autosave_spinbutton.get_value_as_int()
         self.config.set("editor", "autosavetime", autosave.autosave_time)
@@ -306,6 +312,14 @@ class Preferences():
         """show line numbers"""
         opposite_state = not self.graphical.textbox.get_show_line_numbers()
         self.graphical.textbox.set_show_line_numbers(opposite_state)
+
+    def changelinespacing(self, widget):
+        """Change line spacing"""
+        self.linespacing = self.linespacing_spinbutton.get_value()
+        self.graphical.textbox.set_pixels_below_lines(int(self.linespacing))
+        self.graphical.textbox.set_pixels_above_lines(int(self.linespacing))
+        self.graphical.textbox.set_pixels_inside_wrap(int(self.linespacing))
+        
 
     def toggleautosave(self, widget):
         """enable or disable autosave"""
