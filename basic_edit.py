@@ -202,7 +202,7 @@ class BasicEdit():
         if buf.can_undo():
             buf.undo()
         else:
-            self.status.set_text(_('No more undo!'))
+            self.status.set_text(_('Nothing more to undo!'))
 
     def redo(self):
         """ Redo last typing """
@@ -211,7 +211,7 @@ class BasicEdit():
         if buf.can_redo():
             buf.redo()
         else:
-            self.status.set_text(_('No more redo!'))
+            self.status.set_text(_('Nothing more to redo!'))
 
     def toggle_lines(self):
         """ Toggle lines number """
