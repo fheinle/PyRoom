@@ -95,9 +95,14 @@ class BasicEdit():
         self.new_buffer()
 
         self.textbox.connect('key-press-event', self.key_press_event)
+
+        # Set line numbers visible, set linespacing
         self.textbox.set_show_line_numbers(int(self.config.get("visual",
                                                "linenumber")))
-
+        self.textbox.set_pixels_below_lines(int(self.config.get("visual", "linespacing")))
+        self.textbox.set_pixels_above_lines(int(self.config.get("visual", "linespacing")))
+        self.textbox.set_pixels_inside_wrap(int(self.config.get("visual", "linespacing")))
+                
         # Autosave timer object
         autosave.autosave_init(self)
 
