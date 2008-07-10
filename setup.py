@@ -23,6 +23,14 @@ def gather_files(files_dir):
             files.append(included_file)
     return files
 
+install_requires = []
+
+print "Checking for PyGTK"
+try: # quite hackish workaround for distros with pygtk packages
+    import gtk
+except ImportError:
+    print "PyGTK not found, will try to install"
+    install_requires.append('PyGTK')
 setup(
     name = 'PyRoom',
     version = PyRoom.__VERSION__,
@@ -46,5 +54,6 @@ setup(
     package_data = {
         'themes':['themes/*.theme'],
         'locale':gather_files('locale'),
-    }
+    },
+    install_requires = install_requires,
 )
