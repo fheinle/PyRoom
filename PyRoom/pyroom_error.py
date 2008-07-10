@@ -26,6 +26,7 @@ Errors raised within pyroom
 
 import gtk, pango
 import traceback
+from exceptions import KeyboardInterrupt
 
 class PyroomError(Exception):
     """our nice little exception"""
@@ -35,17 +36,20 @@ def handle_error(exception_type, exception_value, exception_traceback):
     """display errors to the end user using dialog boxes"""
     if exception_type == PyroomError:
         message = exception_value.message
+    elif exception_type == KeyboardInterrupt: # ctrl+c
+        return
     else: # uncaught exception in code
         message = _("""There has been an uncaught exception in pyroom.\n
-This is most likely a programming error.\
+This is most likely a programming error. \
 Please submit a bug report to launchpad""")
 
     error_dialog = gtk.MessageDialog(parent=None, flags=gtk.DIALOG_MODAL,
                 type=gtk.MESSAGE_ERROR, buttons=gtk.BUTTONS_NONE,
                 message_format=message)
-    error_dialog.set_title('Fehler')
+    error_dialog.set_title(_('Error'))
     error_dialog.add_button(gtk.STOCK_OK, gtk.RESPONSE_OK)
-    error_dialog.add_button (_("Details..."), 2)
+    if not exception_type == PyroomError:
+        error_dialog.add_button (_("Details..."), 2)
     error_dialog.set_position(gtk.WIN_POS_CENTER)
     error_dialog.set_gravity(gtk.gdk.GRAVITY_CENTER)
     error_dialog.show_all()

@@ -1,11 +1,7 @@
-TODO
-session
 basic_edit.pyc
-check_unsaved.pyc
 gui.pyc
 preferences.pyc
-restore_session.pyc
 status_label.pyc
 styles.pyc
-pep8.py
-errors
+pyroom_error.pyc
+autosave.pyc

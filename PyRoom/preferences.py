@@ -41,6 +41,7 @@ DEFAULT_CONF = """
 [visual]
 theme = green
 linenumber = 0
+linespacing = 2
 
 [editor]
 session = True
@@ -105,6 +106,8 @@ class Preferences():
         self.wTree = gtk.glade.XML(os.path.join(
             pyroom_config.pyroom_absolute_path, "interface.glade"),
             "dialog-preferences")
+
+        # Defining widgets needed
         self.window = self.wTree.get_widget("dialog-preferences")
         self.fontpreference = self.wTree.get_widget("fontbutton")
         self.colorpreference = self.wTree.get_widget("colorbutton")
@@ -117,37 +120,45 @@ class Preferences():
         self.linenumbers = self.wTree.get_widget("linescheck")
         self.autosave = self.wTree.get_widget("autosavetext")
         self.autosave_spinbutton = self.wTree.get_widget("autosavetime")
+        self.linespacing_spinbutton = self.wTree.get_widget("linespacing")
+
         self.graphical = gui
 
+        # Setting up config parser
         self.customfile = ConfigParser.ConfigParser()
         self.customfile.read(os.path.join(self.pyroom_config.conf_dir,
             "themes/custom.theme"))
         if not self.customfile.has_section('theme'):
             self.customfile.add_section('theme')
-
         self.config = self.pyroom_config.config
 
+        # Getting preferences from conf file
         self.activestyle = self.config.get("visual", "theme")
         self.linesstate = self.config.get("visual", "linenumber")
         self.autosavestate = self.config.get("editor", "autosave")
         self.autosavetime = self.config.get("editor", "autosavetime")
+        self.linespacing = self.config.get("visual", "linespacing")
         if self.autosavestate == 1:
             autosave.autosave_time = self.autosavetime
         else:
             autosave.autosave_time = 0
-        self.autosave_spinbutton.set_value(float(self.autosavetime))
         self.linesstate = int(self.linesstate)
         self.autosavestate = int(self.autosavestate)
 
+        # Set up pyroom from conf file
+        self.linespacing_spinbutton.set_value(float(self.linespacing))
+        self.autosave_spinbutton.set_value(float(self.autosavetime))
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
         self.toggleautosave(self.autosave)
 
+        
         self.window.set_transient_for(self.graphical.window)
 
         self.stylesvalues = {'custom': 0}
         self.startingvalue = 1
 
+        # Add themes to combobox
         for i in self.pyroom_config.themeslist:
             self.stylesvalues['%s' % (i)] = self.startingvalue
             self.startingvalue = self.startingvalue + 1
@@ -166,6 +177,7 @@ class Preferences():
         self.linenumbers.connect('toggled', self.togglelines)
         self.autosave.connect('toggled', self.toggleautosave)
         self.autosave_spinbutton.connect('value-changed', self.toggleautosave)
+        self.linespacing_spinbutton.connect('value-changed', self.changelinespacing)
         self.presetscombobox.connect('changed', self.presetchanged)
         self.fontpreference.connect('font-set', self.customchanged)
         self.colorpreference.connect('color-set', self.customchanged)
@@ -205,6 +217,7 @@ class Preferences():
             self.autosavepref = 0
         self.config.set("visual", "linenumber", self.linenumberspref)
         self.config.set("editor", "autosave", self.autosavepref)
+        self.config.set("visual", "linespacing", int(self.linespacing))
 
         autosave.autosave_time = self.autosave_spinbutton.get_value_as_int()
         self.config.set("editor", "autosavetime", autosave.autosave_time)
@@ -311,6 +324,14 @@ class Preferences():
         """show line numbers"""
         opposite_state = not self.graphical.textbox.get_show_line_numbers()
         self.graphical.textbox.set_show_line_numbers(opposite_state)
+
+    def changelinespacing(self, widget):
+        """Change line spacing"""
+        self.linespacing = self.linespacing_spinbutton.get_value()
+        self.graphical.textbox.set_pixels_below_lines(int(self.linespacing))
+        self.graphical.textbox.set_pixels_above_lines(int(self.linespacing))
+        self.graphical.textbox.set_pixels_inside_wrap(int(self.linespacing))
+        
 
     def toggleautosave(self, widget):
         """enable or disable autosave"""
