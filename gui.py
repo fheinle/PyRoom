@@ -204,7 +204,7 @@ class GUI():
         self.textbox.modify_base(gtk.STATE_NORMAL, get_color('background'))
         self.textbox.modify_base(gtk.STATE_SELECTED, get_color('foreground'))
         self.textbox.modify_text(gtk.STATE_NORMAL, get_color('foreground'))
-        self.textbox.modify_text(gtk.STATE_SELECTED, gtk.gdk.color_parse('#000000'))
+        self.textbox.modify_text(gtk.STATE_SELECTED, get_color('background'))
         self.textbox.modify_fg(gtk.STATE_NORMAL, get_color('foreground'))
         self.status.active_color = self.config.get('theme', 'foreground')
         self.status.inactive_color = self.config.get('theme', 'background')
