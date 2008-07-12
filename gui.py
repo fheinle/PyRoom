@@ -88,9 +88,10 @@ class FadeLabel(gtk.Label):
 class GUI():
     """our basic global gui object"""
 
-    def __init__(self, style, pyroom_config):
+    def __init__(self, style, pyroom_config, edit_instance):
         self.status = FadeLabel()
         self.style = style
+        self.edit_instance = edit_instance
 
         # Main window
 
@@ -151,7 +152,8 @@ class GUI():
 
     def delete_event(self, widget, event, data=None):
         """ Quit """
-        return False
+        self.edit_instance.dialog_quit()
+        return True
 
     def destroy(self, widget, data=None):
         """ Quit """
