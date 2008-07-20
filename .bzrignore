@@ -1,7 +1,1 @@
-basic_edit.pyc
-gui.pyc
-preferences.pyc
-status_label.pyc
-styles.pyc
-pyroom_error.pyc
-autosave.pyc
+*.pyc

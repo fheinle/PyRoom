@@ -85,7 +85,7 @@ class BasicEdit():
         self.buffers = []
         self.style = style
         self.config = pyroom_config.config
-        self.gui = GUI(style, pyroom_config)
+        self.gui = GUI(style, pyroom_config, self)
         self.preferences = Preferences(gui=self.gui, style=style,
             pyroom_config=pyroom_config)
         self.status = self.gui.status

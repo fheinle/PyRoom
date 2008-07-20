@@ -25,20 +25,73 @@ Additionally allows user to apply custom settings
 """
 
 import gtk
+import gobject
 import pango
 import gtksourceview
 import gtk.glade
 import ConfigParser
 import os
 
-from status_label import FadeLabel
+class FadeLabel(gtk.Label):
+    """ GTK Label with timed fade out effect """
+
+    active_duration = 3000  # Fade start after this time
+    fade_duration = 1500.0  # Fade duration
+
+    def __init__(self, message='', active_color=None, inactive_color=None):
+        gtk.Label.__init__(self, message)
+        if not active_color:
+            active_color = '#ffffff'
+        self.active_color = active_color
+        if not inactive_color:
+            inactive_color = '#000000'
+        self.fade_level = 0
+        self.inactive_color = inactive_color
+        self.idle = 0
+
+    def set_text(self, message, duration=None):
+        """change text that is displayed
+        @param message: message to display
+        @param duration: duration in miliseconds"""
+        if not duration:
+            duration = self.active_duration
+        self.modify_fg(gtk.STATE_NORMAL,
+                       gtk.gdk.color_parse(self.active_color))
+        gtk.Label.set_text(self, message)
+        if self.idle:
+            gobject.source_remove(self.idle)
+        self.idle = gobject.timeout_add(duration, self.fade_start)
+
+    def fade_start(self):
+        """start fading timer"""
+        self.fade_level = 1.0
+        if self.idle:
+            gobject.source_remove(self.idle)
+        self.idle = gobject.timeout_add(25, self.fade_out)
+
+    def fade_out(self):
+        """now fade out"""
+        color = gtk.gdk.color_parse(self.inactive_color)
+        (red1, green1, blue1) = (color.red, color.green, color.blue)
+        color = gtk.gdk.color_parse(self.active_color)
+        (red2, green2, blue2) = (color.red, color.green, color.blue)
+        red = red1 + int(self.fade_level * abs(red1 - red2))
+        green = green1 + int(self.fade_level * abs(green1 - green2))
+        blue = blue1 + int(self.fade_level * abs(blue1 - blue2))
+        self.modify_fg(gtk.STATE_NORMAL, gtk.gdk.Color(red, green, blue))
+        self.fade_level -= 1.0 / (self.fade_duration / 25)
+        if self.fade_level > 0:
+            return True
+        self.idle = 0
+        return False
 
 class GUI():
     """our basic global gui object"""
 
-    def __init__(self, style, pyroom_config):
+    def __init__(self, style, pyroom_config, edit_instance):
         self.status = FadeLabel()
         self.style = style
+        self.edit_instance = edit_instance
 
         # Main window
 
@@ -99,7 +152,8 @@ class GUI():
 
     def delete_event(self, widget, event, data=None):
         """ Quit """
-        return False
+        self.edit_instance.dialog_quit()
+        return True
 
     def destroy(self, widget, data=None):
         """ Quit """
@@ -150,7 +204,7 @@ class GUI():
         self.textbox.modify_base(gtk.STATE_NORMAL, get_color('background'))
         self.textbox.modify_base(gtk.STATE_SELECTED, get_color('foreground'))
         self.textbox.modify_text(gtk.STATE_NORMAL, get_color('foreground'))
-        self.textbox.modify_text(gtk.STATE_SELECTED, gtk.gdk.color_parse('#000000'))
+        self.textbox.modify_text(gtk.STATE_SELECTED, get_color('background'))
         self.textbox.modify_fg(gtk.STATE_NORMAL, get_color('foreground'))
         self.status.active_color = self.config.get('theme', 'foreground')
         self.status.inactive_color = self.config.get('theme', 'background')
