@@ -47,7 +47,7 @@ _('Control-N: Create a new buffer'),
 _('Control-O: Open a file in a new buffer'),
 _('Control-Q: Quit'),
 _('Control-S: Save current buffer'),
-_('Control-A: Save current buffer as'),
+_('Control-Shift-S: Save current buffer as'),
 _('Control-W: Close buffer and exit if it was the last buffer'),
 _('Control-Y: Redo last typing'),
 _('Control-Z: Undo last typing'),
@@ -92,7 +92,6 @@ def define_keybindings(edit_instance):
         gtk.keysyms.W: edit_instance.close_dialog,
         gtk.keysyms.Y: edit_instance.redo,
         gtk.keysyms.Z: edit_instance.undo,
-        gtk.keysyms.A: edit_instance.save_file_as,
     }
     translated_bindings = {}
     for key, value in basic_bindings.items():
@@ -163,7 +162,11 @@ class BasicEdit():
         """ key press event dispatcher """
         if event.state & gtk.gdk.CONTROL_MASK:
             if event.hardware_keycode in self.keybindings:
-                self.keybindings[event.hardware_keycode]()
+                if self.keybindings[event.hardware_keycode] == self.save_file\
+                    and event.state & gtk.gdk.SHIFT_MASK:
+                    self.save_file_as()
+                else:
+                    self.keybindings[event.hardware_keycode]()
                 return True
         return False
 
