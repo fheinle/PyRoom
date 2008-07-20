@@ -52,8 +52,9 @@ setup(
         'Operating System :: OS Independent',
     ],
     package_data = {
-        'themes':['themes/*.theme'],
-        'locale':gather_files('locale'),
+        'PyRoom':['interface.glade'],
+        'themes':['*.theme'],
+        'locales':gather_files('locales'),
     },
     install_requires = install_requires,
 )
