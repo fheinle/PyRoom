@@ -57,11 +57,6 @@ HELP = \
 Copyright (c) 2007 Nicolas Rougier, NoWhereMan
 Copyright (c) 2008 Bruno Bord
 
-This program is free software: you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free Software
-Foundation, either version 3 of the License, or (at your option) any later
-version.
-
 Commands:
 ---------
 %s
