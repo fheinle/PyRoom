@@ -37,8 +37,6 @@ import os
 
 FILE_UNNAMED = _('* Unnamed *')
 
-USAGE = _('Usage: pyroom [-v] [--style={style name}] file1 file2')
-
 KEY_BINDINGS = '\n'.join([
 _('Control-H: Show help in a new buffer'),
 _('Control-I: Show buffer information'),
@@ -64,17 +62,11 @@ the terms of the GNU General Public License as published by the Free Software
 Foundation, either version 3 of the License, or (at your option) any later
 version.
 
-Usage:
-------
-
-%(USAGE)s
-
-
 Commands:
 ---------
-%(KEY_BINDINGS)s
+%s
 
-""" % {'USAGE': USAGE, 'KEY_BINDINGS': KEY_BINDINGS})
+""" % KEY_BINDINGS)
 
 def define_keybindings(edit_instance):
     """define keybindings, respectively to keyboard layout"""
