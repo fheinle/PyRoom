@@ -53,7 +53,7 @@ _('Control-Page Up: Switch to previous buffer'),
 _('Control-Page Down: Switch to next buffer'), ])
 
 HELP = \
-    _("""PyRoom - an adaptation of write room
+    _("""PyRoom - distraction free writing
 Copyright (c) 2007 Nicolas Rougier, NoWhereMan
 Copyright (c) 2008 Bruno Bord and the PyRoom team
 
