@@ -57,6 +57,17 @@ HELP = \
 Copyright (c) 2007 Nicolas Rougier, NoWhereMan
 Copyright (c) 2008 Bruno Bord and the PyRoom team
 
+Welcome to PyRoom and distraction-free writing.
+
+To hide this help window, press Control-W.
+
+PyRoom stays out of your way with formatting options and buttons, 
+it is largely keyboard controlled, via shortcuts. You can find a list
+of available keyboard shortcuts later.
+
+If enabled in preferences, pyroom will save your files automatically every
+few minutes or when you press the keyboard shortcut.
+
 Commands:
 ---------
 %s
