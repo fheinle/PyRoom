@@ -76,6 +76,28 @@ Commands:
 
 """ % {'USAGE': USAGE, 'KEY_BINDINGS': KEY_BINDINGS})
 
+def define_keybindings(edit_instance):
+    """define keybindings, respectively to keyboard layout"""
+    keymap = gtk.gdk.keymap_get_default()
+    basic_bindings = {
+        gtk.keysyms.Page_Up: edit_instance.prev_buffer,
+        gtk.keysyms.Page_Down: edit_instance.next_buffer,
+        gtk.keysyms.H: edit_instance.show_help,
+        gtk.keysyms.I: edit_instance.show_info,
+        gtk.keysyms.N: edit_instance.new_buffer,
+        gtk.keysyms.O: edit_instance.open_file,
+        gtk.keysyms.P: edit_instance.preferences.show,
+        gtk.keysyms.Q: edit_instance.dialog_quit,
+        gtk.keysyms.S: edit_instance.save_file,
+        gtk.keysyms.W: edit_instance.close_dialog,
+        gtk.keysyms.Y: edit_instance.redo,
+        gtk.keysyms.Z: edit_instance.undo,
+    }
+    translated_bindings = {}
+    for key, value in basic_bindings.items():
+        hardware_keycode = keymap.get_entries_for_keyval(key)[0][0]
+        translated_bindings[hardware_keycode] = value
+    return translated_bindings
 
 class BasicEdit():
     """editing logic that gets passed around"""
@@ -134,45 +156,17 @@ class BasicEdit():
                 "on_button-save2_clicked": self.save_quit,
                 }
         self.aTree.signal_autoconnect(dic)
+        self.keybindings = define_keybindings(self)
 
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
-
-        bindings = {
-            gtk.keysyms.Page_Up: self.prev_buffer,
-            gtk.keysyms.Page_Down: self.next_buffer,
-            gtk.keysyms.h: self.show_help,
-            gtk.keysyms.H: self.show_help,
-            gtk.keysyms.i: self.show_info,
-            gtk.keysyms.I: self.show_info,
-            gtk.keysyms.n: self.new_buffer,
-            gtk.keysyms.N: self.new_buffer,
-            gtk.keysyms.o: self.open_file,
-            gtk.keysyms.O: self.open_file,
-            gtk.keysyms.p: self.preferences.show,
-            gtk.keysyms.P: self.preferences.show,
-            gtk.keysyms.q: self.dialog_quit,
-            gtk.keysyms.Q: self.dialog_quit,
-            gtk.keysyms.s: self.save_file,
-            gtk.keysyms.S: self.save_file,
-            gtk.keysyms.w: self.close_dialog,
-            gtk.keysyms.W: self.close_dialog,
-            gtk.keysyms.y: self.redo,
-            gtk.keysyms.Y: self.redo,
-            gtk.keysyms.z: self.undo,
-            gtk.keysyms.Z: self.undo}
         if event.state & gtk.gdk.CONTROL_MASK:
-
-            # Special case for Control-Shift-s
-
-            if event.state & gtk.gdk.SHIFT_MASK:
-                print event.keyval
-            if event.state & gtk.gdk.SHIFT_MASK and event.keyval\
-                 == gtk.keysyms.S:
-                self.save_file_as()
-                return True
-            if bindings.has_key(event.keyval):
-                bindings[event.keyval]()
+            if event.hardware_keycode in self.keybindings:
+                if self.keybindings[event.hardware_keycode] == self.save_file\
+                    and event.state & gtk.gdk.SHIFT_MASK:
+                    self.save_file_as()
+                else:
+                    self.keybindings[event.hardware_keycode]()
                 return True
         return False
 
