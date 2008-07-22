@@ -37,8 +37,6 @@ import os
 
 FILE_UNNAMED = _('* Unnamed *')
 
-USAGE = _('Usage: pyroom [-v] [--style={style name}] file1 file2')
-
 KEY_BINDINGS = '\n'.join([
 _('Control-H: Show help in a new buffer'),
 _('Control-I: Show buffer information'),
@@ -55,26 +53,26 @@ _('Control-Page Up: Switch to previous buffer'),
 _('Control-Page Down: Switch to next buffer'), ])
 
 HELP = \
-    _("""PyRoom - an adaptation of write room
+    _("""PyRoom - distraction free writing
 Copyright (c) 2007 Nicolas Rougier, NoWhereMan
-Copyright (c) 2008 Bruno Bord
+Copyright (c) 2008 Bruno Bord and the PyRoom team
 
-This program is free software: you can redistribute it and/or modify it under
-the terms of the GNU General Public License as published by the Free Software
-Foundation, either version 3 of the License, or (at your option) any later
-version.
+Welcome to PyRoom and distraction-free writing.
 
-Usage:
-------
+To hide this help window, press Control-W.
 
-%(USAGE)s
+PyRoom stays out of your way with formatting options and buttons, 
+it is largely keyboard controlled, via shortcuts. You can find a list
+of available keyboard shortcuts later.
 
+If enabled in preferences, pyroom will save your files automatically every
+few minutes or when you press the keyboard shortcut.
 
 Commands:
 ---------
-%(KEY_BINDINGS)s
+%s
 
-""" % {'USAGE': USAGE, 'KEY_BINDINGS': KEY_BINDINGS})
+""" % KEY_BINDINGS)
 
 def define_keybindings(edit_instance):
     """define keybindings, respectively to keyboard layout"""
