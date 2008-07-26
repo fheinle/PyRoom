@@ -167,6 +167,7 @@ class Preferences():
                 "on_MainWindow_destroy": self.QuitEvent,
                 "on_button-ok_clicked": self.set_preferences,
                 "on_button-close_clicked": self.kill_preferences,
+                "on_close": self.kill_preferences
                 }
         self.wTree.signal_autoconnect(dic)
         self.linenumbers.connect('toggled', self.togglelines)
@@ -345,3 +346,6 @@ class Preferences():
     def kill_preferences(self, widget, data=None):
         """hide the preferences window"""
         self.dlg.hide()
+        return True
+
+        
