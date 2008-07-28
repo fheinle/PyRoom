@@ -1,0 +1,12 @@
+[theme]
+name = website
+foreground = #e8e8eaeaebeb
+height = 0.75
+padding = 8
+width = 0.45
+fontsize = 11
+background = #19192d2d4040
+font = Serif 
+border = #e8e8eaeaebeb
+info = #e8e8eaeaebeb
+linenumbers = #e8e8eaeaebeb
