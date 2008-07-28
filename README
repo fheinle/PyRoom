@@ -8,33 +8,45 @@ PyRoom depends on Python, PyGTK and gtksourceview. Please refer to your system d
 
 ===== Installing and Running =====
 
-PyRoom is not currently packaged, so if you want to get the latest chunk of code, you'll have to type the following commands in a console:
+PyRoom is available as a seutptools enabled package. Installation procedures for those are easy:
 
-  $ bzr branch http://bazaar.launchpad.net/~brunobord/pyroom/trunk pyroom
-  $ cd pyroom
-  $ python pyroom.py
+Either unpack the tarball 
+    
+    $ tar xvfz pyroom.tar.gz
+
+or check out our bazaar branch for a development version (we try to keep those 
+unbroken and ready for production use)
+    
+    $ bzr branch lp:pyroom
+
+From there, you can either run pyroom from commandline
+
+    $ cd pyroom/
+    $ ./pyroom
+
+Or install it system wide
+
+    $ cd pyroom
+    $ python setup.py install # as root
+    $ pyroom
 
 ==== Usage ====
 
 === Running PyRoom ===
 
-To run PyRoom, type:
-
-  $ python pyroom.py
-
 To run pyroom and instruct it to load some existing files, type:
 
-  $ python pyroom.py /path/to/file1 /other/path/to/file2
+  $ pyroom /path/to/file1 /other/path/to/file2
 
 ===Graphical Styles===
 
 The default style is "green", which is a green text color in a black background. You can change the chosen style by typing:
 
-  $ python pyroom.py [--style={style name}]
+  $ pyroom [--style={style name}]
 
 For instance:
 
-  $ python pyroom.py --style=blue
+  $ pyroom --style=blue
 
 At the time of writing, the available styles are:
   * blue
@@ -45,7 +57,7 @@ At the time of writing, the available styles are:
 
 For example, to load PyRoom and instruct it to use the "darkgreen" style and to load the files "article.txt" and "blogpost.txt", type the following:
 
-  $ python pyroom.py --style=darkgreen article.txt blog.txt
+  $ pyroom --style=darkgreen article.txt blog.txt
 
 ==== Key Bindings ====
 

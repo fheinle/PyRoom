@@ -31,25 +31,41 @@ Based on code posted on ubuntu forums by NoWhereMan (www.nowhereland.it)
 :license: GNU General Public License, version 3 or later
 """
 
-__VERSION__ = '0.2'
-
 import gettext
-gettext.install('pyroom', 'locale')
 import locale
 locale.setlocale(locale.LC_ALL, '')
 from optparse import OptionParser
 import sys
+import os
 
 import gtk
+from pkg_resources import Requirement, resource_filename, DistributionNotFound
 
+try:
+    gettext.install('pyroom', 
+                    resource_filename(
+                        Requirement.parse('PyRoom'),
+                        'locales'
+                    )
+    )
+except DistributionNotFound: # for when pyroom isn't installed
+    locales_path = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        'locales'
+    )
+    gettext.install(locales_path)
+
+import PyRoom
 import autosave
 from basic_edit import BasicEdit
 from pyroom_error import handle_error
 from preferences import PyroomConfig
 
+__VERSION__ = PyRoom.__VERSION__
+
 pyroom_config = PyroomConfig()
 
-if __name__ == '__main__':
+def main():
     sys.excepthook = handle_error
 
     files = []
@@ -97,3 +113,6 @@ simply and efficiently in a full-screen window, with no distractions.'))
     pyroom.status.set_text(
         _('Welcome to Pyroom %s, type Control-H for help' % __VERSION__))
     gtk.main()
+
+if __name__ == '__main__':
+        main()

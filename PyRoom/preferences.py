@@ -29,11 +29,11 @@ via the dialog
 import gtk
 import gtk.glade
 import os
-from pyroom_error import PyroomError
-import autosave
 import ConfigParser
 import shutil
 
+from pyroom_error import PyroomError
+import autosave
 
 DEFAULT_CONF = """
 [visual]
@@ -74,7 +74,7 @@ class PyroomConfig():
             config_file.write(DEFAULT_CONF)
             config_file.close()
             # Copy themes
-            theme_src = os.path.join(self.pyroom_absolute_path, 'themes/')
+            theme_src = os.path.join(self.pyroom_absolute_path, '../themes/')
             for theme_file in os.listdir(theme_src):
                 if theme_file != 'custom.theme':
                     shutil.copy(
