@@ -71,22 +71,17 @@ class PyroomConfig():
         """
         if not os.path.isdir(self.conf_dir):
             os.mkdir(self.conf_dir)
-        if not os.path.isdir(os.path.join(self.conf_dir, 'themes')):
             os.mkdir(os.path.join(self.conf_dir, 'themes'))
-        if not os.path.isfile(self.conf_file):
             config_file = open(self.conf_file, "w")
             config_file.write(DEFAULT_CONF)
             config_file.close()
-        # Copy themes
-        theme_source_dir = resource_filename(
-            Requirement.parse('PyRoom'),
-            'themes'
-        )
-        for theme_file in os.listdir(theme_source_dir):
-            if theme_file not in ['custom.theme', '__init__.py']:
-                shutil.copy(
-                    os.path.join(theme_source_dir, theme_file),
-                    os.path.join(self.conf_dir, "themes/"))
+            # Copy themes
+            theme_src = os.path.join(self.pyroom_absolute_path, '../themes/')
+            for theme_file in os.listdir(theme_src):
+                if theme_file != 'custom.theme':
+                    shutil.copy(
+                        os.path.join(theme_src, theme_file),
+                        os.path.join(self.conf_dir, "themes/"))
 
     def read_themes_list(self):
         """get all the theme files sans file suffix and the custom theme"""
@@ -172,6 +167,7 @@ class Preferences():
                 "on_MainWindow_destroy": self.QuitEvent,
                 "on_button-ok_clicked": self.set_preferences,
                 "on_button-close_clicked": self.kill_preferences,
+                "on_close": self.kill_preferences
                 }
         self.wTree.signal_autoconnect(dic)
         self.linenumbers.connect('toggled', self.togglelines)
@@ -350,3 +346,6 @@ class Preferences():
     def kill_preferences(self, widget, data=None):
         """hide the preferences window"""
         self.dlg.hide()
+        return True
+
+        
