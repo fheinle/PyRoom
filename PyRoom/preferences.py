@@ -32,8 +32,6 @@ import os
 import ConfigParser
 import shutil
 
-from pkg_resources import Requirement, resource_filename
-
 from pyroom_error import PyroomError
 import autosave
 
