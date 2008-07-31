@@ -29,25 +29,54 @@ via the dialog
 import gtk
 import gtk.glade
 import os
-import ConfigParser
+from ConfigParser import SafeConfigParser, NoOptionError
 import shutil
 
 from pyroom_error import PyroomError
 import autosave
 
-DEFAULT_CONF = """
-[visual]
-theme = green
-linenumber = 0
-linespacing = 2
+DEFAULT_CONF = {
+    'visual':{
+        'theme':'green',
+        'linenumber':'0',
+        'linespacing':'2',
+    },
+    'editor':{
+        'session':'True',
+        'autosavetime':'2',
+        'autosave':'0',
+    },
+}
 
-[editor]
-session = True
-autosavetime = 2
-autosave = 0
-"""
+class FailsafeConfigParser(SafeConfigParser):
+    """
+    Config parser that returns default values 
 
+    Two reasons for implementation: we don't want pyroom to break while
+    running on legacy configuration files. Second reason: standard 
+    'defaults' behaviour of ConfigParser is stupid, doesn't allow for 
+    sections and works with a lot of magic. 
 
+    XXX: we really really should come up with a preferences system that is
+    sane on a more global level
+    """
+    def get(self, section, option):
+        """
+        return default values instead of breaking
+
+        this is a drop-in replacement for standard get from ConfigParser
+        """
+        try:
+            return SafeConfigParser.get(self, section, option)
+        except NoOptionError:
+            try:
+                default_value = DEFAULT_CONF[section][option]
+            except KeyError:
+                raise NoOptionError(option, section)
+            else:
+                return default_value
+
+            
 class PyroomConfig():
     """Fetches (and/or) builds basic configuration files/dirs."""
 
@@ -56,9 +85,9 @@ class PyroomConfig():
         home = os.getenv("HOME")
         self.conf_dir = os.path.join(home, '.pyroom')
         self.conf_file = os.path.join(self.conf_dir, 'pyroom.conf')
+        self.config = FailsafeConfigParser()
         self.build_default_conf()
-        self.config = ConfigParser.ConfigParser()
-        self.config.read(self.conf_file)
+        self.config.readfp(open(self.conf_file, 'r'))
         self.themeslist = self.read_themes_list()
 
     def build_default_conf(self):
@@ -70,8 +99,12 @@ class PyroomConfig():
         if not os.path.isdir(self.conf_dir):
             os.mkdir(self.conf_dir)
             os.mkdir(os.path.join(self.conf_dir, 'themes'))
+            for section, settings in DEFAULT_CONF.items():
+                self.config.add_section(section)
+                for key, value in settings.items():
+                    self.config.set(section, key, str(value))
             config_file = open(self.conf_file, "w")
-            config_file.write(DEFAULT_CONF)
+            self.config.write(config_file)
             config_file.close()
             # Copy themes
             theme_src = os.path.join(self.pyroom_absolute_path, '../themes/')
@@ -118,7 +151,7 @@ class Preferences():
         self.graphical = gui
 
         # Setting up config parser
-        self.customfile = ConfigParser.ConfigParser()
+        self.customfile = FailsafeConfigParser()
         self.customfile.read(os.path.join(self.pyroom_config.conf_dir,
             "themes/custom.theme"))
         if not self.customfile.has_section('theme'):
@@ -209,12 +242,12 @@ class Preferences():
             self.autosavepref = 1
         else:
             self.autosavepref = 0
-        self.config.set("visual", "linenumber", self.linenumberspref)
-        self.config.set("editor", "autosave", self.autosavepref)
-        self.config.set("visual", "linespacing", int(self.linespacing))
+        self.config.set("visual", "linenumber", str(self.linenumberspref))
+        self.config.set("editor", "autosave", str(self.autosavepref))
+        self.config.set("visual", "linespacing", str(self.linespacing))
 
         autosave.autosave_time = self.autosave_spinbutton.get_value_as_int()
-        self.config.set("editor", "autosavetime", autosave.autosave_time)
+        self.config.set("editor", "autosavetime", str(autosave.autosave_time))
 
         if self.presetscombobox.get_active_text().lower() == 'custom':
             custom_theme = open(os.path.join(self.pyroom_config.conf_dir,
@@ -280,7 +313,7 @@ class Preferences():
                 }}
                 self.graphical.apply_style(customstyle['Custom'], 'custom')
                 self.graphical.apply_style(customstyle['Custom'], 'custom')
-                self.config.set("visual", "theme", active)
+                self.config.set("visual", "theme", str(active))
                 self.graphical.status.set_text(_('Style Changed to \
                                                 %s' % (active)))
             else:
@@ -292,7 +325,7 @@ class Preferences():
                 self.fontname = "%s %s" % (self.graphical.config.get("theme", "font"),
                                     self.graphical.config.get("theme", "fontsize"))
                 self.fontpreference.set_font_name(self.fontname)
-                self.config.set("visual", "theme", active)
+                self.config.set("visual", "theme", str(active))
                 self.colorpreference.set_color(gtk.gdk.color_parse(
                  self.graphical.config.get("theme", "foreground")))
                 self.bgpreference.set_color(gtk.gdk.color_parse(
