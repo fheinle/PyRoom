@@ -12,7 +12,9 @@ author = 'The Pyroom Team'
 url = 'http://www.pyroom.org'
 
 def gather_files(files_dir):
-    """gather filenames for easy integration of locales"""
+    """gather filenames for easy integration of locales
+    
+    not needed atm, as we don't ship locales"""
     files = []
     for directory in os.walk(files_dir):
         for filename in directory[2]:
@@ -54,7 +56,6 @@ setup(
     package_data = {
         'PyRoom':['interface.glade'],
         'themes':['*.theme'],
-        'locales':gather_files('locales'),
     },
     install_requires = install_requires,
 )
