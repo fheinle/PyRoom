@@ -172,7 +172,7 @@ class Preferences():
         self.autosavestate = int(self.autosavestate)
 
         # Set up pyroom from conf file
-        self.linespacing_spinbutton.set_value(float(self.linespacing))
+        self.linespacing_spinbutton.set_value(int(self.linespacing))
         self.autosave_spinbutton.set_value(float(self.autosavetime))
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
@@ -244,7 +244,7 @@ class Preferences():
             self.autosavepref = 0
         self.config.set("visual", "linenumber", str(self.linenumberspref))
         self.config.set("editor", "autosave", str(self.autosavepref))
-        self.config.set("visual", "linespacing", str(self.linespacing))
+        self.config.set("visual", "linespacing", str(int(self.linespacing)))
 
         autosave.autosave_time = self.autosave_spinbutton.get_value_as_int()
         self.config.set("editor", "autosavetime", str(autosave.autosave_time))
