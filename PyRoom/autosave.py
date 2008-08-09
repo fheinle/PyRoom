@@ -36,7 +36,7 @@ from pyroom_error import PyroomError
 ELAPSED_TIME = 0 
 AUTOSAVE_TIME = 3
 
-TEMP_FOLDER = "/var/tmp/pyroom"
+TEMP_FOLDER = tempfile.gettempdir()
 TIMEOUT_ID = 0
 
 FILE_UNNAMED = _('* Unnamed *')  
