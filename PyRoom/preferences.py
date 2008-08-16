@@ -107,7 +107,13 @@ class PyroomConfig():
             self.config.write(config_file)
             config_file.close()
             # Copy themes
-            theme_src = os.path.join(self.pyroom_absolute_path, '../themes/')
+            if not os.path.isdir('/usr/share/pyroom/themes'):
+                theme_src = os.path.join(
+                    self.pyroom_absolute_path,
+                    '../themes/'
+                )
+            else:
+                theme_src = '/usr/share/pyroom/themes'
             for theme_file in os.listdir(theme_src):
                 if theme_file != 'custom.theme':
                     shutil.copy(
