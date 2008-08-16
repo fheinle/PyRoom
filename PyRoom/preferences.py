@@ -110,7 +110,8 @@ class PyroomConfig():
             if not os.path.isdir('/usr/share/pyroom/themes'):
                 theme_src = os.path.join(
                     self.pyroom_absolute_path,
-                    '../themes/'
+                    '..',
+                    'themes'
                 )
             else:
                 theme_src = '/usr/share/pyroom/themes'
@@ -118,12 +119,12 @@ class PyroomConfig():
                 if theme_file != 'custom.theme':
                     shutil.copy(
                         os.path.join(theme_src, theme_file),
-                        os.path.join(self.conf_dir, "themes/"))
+                        os.path.join(self.conf_dir, "themes"))
 
     def read_themes_list(self):
         """get all the theme files sans file suffix and the custom theme"""
         themeslist = []
-        rawthemeslist = os.listdir(os.path.join(self.conf_dir, "themes/"))
+        rawthemeslist = os.listdir(os.path.join(self.conf_dir, "themes"))
         for themefile in rawthemeslist:
             if themefile.endswith('theme') and themefile != 'custom.theme':
                 themeslist.append(themefile[:-6])
@@ -158,8 +159,10 @@ class Preferences():
 
         # Setting up config parser
         self.customfile = FailsafeConfigParser()
-        self.customfile.read(os.path.join(self.pyroom_config.conf_dir,
-            "themes/custom.theme"))
+        self.customfile.read(os.path.join(
+            self.pyroom_config.conf_dir,
+            'themes', 'custom.theme')
+        )
         if not self.customfile.has_section('theme'):
             self.customfile.add_section('theme')
         self.config = self.pyroom_config.config
@@ -256,8 +259,10 @@ class Preferences():
         self.config.set("editor", "autosavetime", str(autosave.autosave_time))
 
         if self.presetscombobox.get_active_text().lower() == 'custom':
-            custom_theme = open(os.path.join(self.pyroom_config.conf_dir,
-                "themes/custom.theme"), "w")
+            custom_theme = open(os.path.join(
+                self.pyroom_config.conf_dir, 'themes', 'custom.theme'),
+                "w"
+            )
             self.customfile.set("theme", "background", self.bgname)
             self.customfile.set("theme", "foreground", self.colorname)
             self.customfile.set("theme", "border", self.bordername)
@@ -323,7 +328,7 @@ class Preferences():
                 self.graphical.status.set_text(_('Style Changed to \
                                                 %s' % (active)))
             else:
-                theme = os.path.join(self.pyroom_config.conf_dir, "themes/",
+                theme = os.path.join(self.pyroom_config.conf_dir, "themes",
                     active + ".theme")
                 self.graphical.config.read(theme)
                 self.graphical.apply_style()
