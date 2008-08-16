@@ -18,8 +18,8 @@ setup(
   package_data = {'PyRoom':['interface.glade']},
   data_files = [
     ('/usr/share/pyroom/themes', glob.glob('themes/*.theme')),
-    ('/usr/share/pyroom', 'pyroom.png'),
-    ('/usr/share/applications', 'pyroom.desktop'),
+    ('/usr/share/pyroom', ['pyroom.png']),
+    ('/usr/share/applications', ['pyroom.desktop']),
   ],
   scripts=['pyroom',],
 )
