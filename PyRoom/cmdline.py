@@ -39,21 +39,12 @@ import sys
 import os
 
 import gtk
-from pkg_resources import Requirement, resource_filename, DistributionNotFound
 
-try:
-    gettext.install('pyroom', 
-                    resource_filename(
-                        Requirement.parse('PyRoom'),
-                        'locales'
-                    )
-    )
-except DistributionNotFound: # for when pyroom isn't installed
-    locales_path = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        'locales'
-    )
-    gettext.install(locales_path)
+locales_path = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)),
+    'locales'
+)
+gettext.install(locales_path)
 
 import PyRoom
 import autosave
