@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Name=PyRoom
+Icon=/usr/share/pyroom/pyroom.png
+Comment=Distraction free full-screen text editor
+Exec=/usr/bin/pyroom
+Terminal=false
+Type=Application
+Categories=GNOME;GTK;Office;
+StartupNotify=false
+Name[en_US]=PyRoom
