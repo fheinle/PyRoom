@@ -22,7 +22,7 @@
 allows for custom set preferences
 
 Creates a preferences UI that allows the user to customise settings; allows for
-the choice of a theme from ~/.pyroom/themes as well as a custom theme created
+the choice of a theme from $XDG_DATA_HOME/pyroom/themes as well as a custom theme created
 via the dialog
 """
 
@@ -83,9 +83,19 @@ class PyroomConfig():
 
     def __init__(self):
         self.pyroom_absolute_path = os.path.dirname(os.path.abspath(__file__))
+        #conf_dir and data_dir are directory defined by the XDG standard
         self.conf_dir = os.path.join(xdg_config_home, 'pyroom')
         self.data_dir = os.path.join(xdg_data_home, 'pyroom')
         self.themes_dir  = os.path.join(self.data_dir, 'themes')
+        self.global_themes_dir = '/usr/share/pyroom/themes'
+        #if we are not using a global installation,
+        #take the themes directly from sources
+        if not os.path.exists(self.global_themes_dir) :
+	    	self.global_themes_dir = os.path.join(
+	    	    self.pyroom_absolute_path,
+	    		'..',
+	        	'themes'
+	        	)
         self.conf_file = os.path.join(self.conf_dir, 'pyroom.conf')
         self.config = FailsafeConfigParser()
         self.build_default_conf()
@@ -110,29 +120,20 @@ class PyroomConfig():
         if not os.path.isdir(self.themes_dir):
             os.makedirs(os.path.join(self.themes_dir))
 
-            # Copy themes
-            if not os.path.isdir('/usr/share/pyroom/themes'):
-                theme_src = os.path.join(
-                    self.pyroom_absolute_path,
-                    '..',
-                    'themes'
-                )
-            else:
-                theme_src = '/usr/share/pyroom/themes'
-            for theme_file in os.listdir(theme_src):
-                if theme_file != 'custom.theme':
-                    shutil.copy(
-                        os.path.join(theme_src, theme_file),
-                        os.path.join(self.themes_dir)
-                    )
-
     def read_themes_list(self):
         """get all the theme files sans file suffix and the custom theme"""
         themeslist = []
         rawthemeslist = os.listdir(self.themes_dir)
+        globalthemeslist = os.listdir(self.global_themes_dir)
         for themefile in rawthemeslist:
             if themefile.endswith('theme') and themefile != 'custom.theme':
                 themeslist.append(themefile[:-6])
+        for themefile in globalthemeslist:
+            if themefile.endswith('theme') and themefile != 'custom.theme':
+            	#TODO : do not add in the themelist a theme already existing in
+            	# the personnal directory
+            	if not (themefile[:-6] in themeslist) :
+                	themeslist.append(themefile[:-6])
         return themeslist
 
 
@@ -165,8 +166,7 @@ class Preferences():
         # Setting up config parser
         self.customfile = FailsafeConfigParser()
         self.customfile.read(os.path.join(
-            self.pyroom_config.conf_dir,
-            'themes', 'custom.theme')
+            self.pyroom_config.themes_dir,'custom.theme')
         )
         if not self.customfile.has_section('theme'):
             self.customfile.add_section('theme')
@@ -335,6 +335,11 @@ class Preferences():
             else:
                 theme = os.path.join(self.pyroom_config.themes_dir,
                     active + ".theme")
+                #if theme doesn't exist in personnal config
+                # we take it in the global theme directory
+                if not os.path.exists(theme) :
+                	theme = os.path.join(self.pyroom_config.global_themes_dir,
+                		active + ".theme")          
                 self.graphical.config.read(theme)
                 self.graphical.apply_style()
                 self.graphical.apply_style()
