@@ -90,7 +90,7 @@ class PyroomConfig():
         self.global_themes_dir = '/usr/share/pyroom/themes'
         #if we are not using a global installation,
         #take the themes directly from sources
-        if not os.path.exists(self.global_themes_dir) :
+        if not os.path.isdir(self.global_themes_dir) :
 	    	self.global_themes_dir = os.path.join(
 	    	    self.pyroom_absolute_path,
 	    		'..',
@@ -337,7 +337,7 @@ class Preferences():
                     active + ".theme")
                 #if theme doesn't exist in personnal config
                 # we take it in the global theme directory
-                if not os.path.exists(theme) :
+                if not os.path.isfile(theme) :
                 	theme = os.path.join(self.pyroom_config.global_themes_dir,
                 		active + ".theme")          
                 self.graphical.config.read(theme)

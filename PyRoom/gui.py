@@ -141,13 +141,13 @@ class GUI():
         if self.style:
             theme = os.path.join(pyroom_config.themes_dir,
                                  style + ".theme")
-            if not os.path.exists(theme) :
+            if not os.path.isfile(theme) :
             	theme = os.path.join(pyroom_config.global_themes_dir,
             	style + ".theme")
         else:
             theme = os.path.join(pyroom_config.themes_dir,
             pyroom_config.config.get("visual", "theme") + ".theme")
-            if not os.path.exists(theme) :
+            if not os.path.isfile(theme) :
             	theme = os.path.join(pyroom_config.global_themes_dir,
             	pyroom_config.config.get("visual", "theme") + ".theme")
         self.config.read(theme)

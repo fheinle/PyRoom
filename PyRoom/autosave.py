@@ -67,7 +67,7 @@ def autosave_quit():
 def autosave_file(edit_instance, buf_id):
     """AutoSave the Buffer to temp folder"""
     buf = edit_instance.buffers[buf_id]
-    if not os.path.exists(TEMP_FOLDER):
+    if not os.path.isdir(TEMP_FOLDER):
         os.mkdir(TEMP_FOLDER)
 
     if not hasattr(buf, 'tmp_filename'):
