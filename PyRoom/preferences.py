@@ -98,7 +98,7 @@ class PyroomConfig():
         * builds the default conf file
         """
         if not os.path.isdir(self.conf_dir):
-            os.mkdir(self.conf_dir)
+            os.makedirs(self.conf_dir)
             for section, settings in DEFAULT_CONF.items():
                 self.config.add_section(section)
                 for key, value in settings.items():
