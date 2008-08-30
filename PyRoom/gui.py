@@ -139,10 +139,10 @@ class GUI():
 
         self.config = ConfigParser.ConfigParser()
         if self.style:
-            theme = os.path.join(pyroom_config.data_dir, 'themes',
+            theme = os.path.join(pyroom_config.themes_dir,
                                  style + ".theme")
         else:
-            theme = os.path.join(pyroom_config.data_dir, 'themes',
+            theme = os.path.join(pyroom_config.themes_dir,
             pyroom_config.config.get("visual", "theme") + ".theme")
         self.config.read(theme)
 
