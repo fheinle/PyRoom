@@ -425,7 +425,9 @@ continue editing your document.")
         count = 0
         ret = False
         for buf in self.buffers:
-            if buf.can_undo() or buf.can_redo():
+            if (buf.can_undo() or buf.can_redo()) and \
+            not buf.get_text(buf.get_start_iter(),
+                                 buf.get_end_iter()) == '':
                 count = count + 1
         if count > 0:
             self.quitdialog.show()
