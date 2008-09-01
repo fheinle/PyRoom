@@ -85,7 +85,7 @@ class FadeLabel(gtk.Label):
         self.idle = 0
         return False
 
-class GUI():
+class GUI(object):
     """our basic global gui object"""
 
     def __init__(self, style, pyroom_config, edit_instance):

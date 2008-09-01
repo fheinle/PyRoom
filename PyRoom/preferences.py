@@ -78,7 +78,7 @@ class FailsafeConfigParser(SafeConfigParser):
                 return default_value
 
             
-class PyroomConfig():
+class PyroomConfig(object):
     """Fetches (and/or) builds basic configuration files/dirs."""
 
     def __init__(self):
@@ -137,7 +137,7 @@ class PyroomConfig():
         return themeslist
 
 
-class Preferences():
+class Preferences(object):
     """our main preferences object, to be passed around where needed"""
     def __init__(self, gui, style, pyroom_config):
         self.style = style

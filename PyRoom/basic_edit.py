@@ -97,7 +97,7 @@ def define_keybindings(edit_instance):
         translated_bindings[hardware_keycode] = value
     return translated_bindings
 
-class BasicEdit():
+class BasicEdit(object):
     """editing logic that gets passed around"""
 
     def __init__(self, style, pyroom_config):
