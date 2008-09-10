@@ -129,6 +129,24 @@ class BasicEdit(object):
         self.window.show_all()
         self.window.fullscreen()
 
+        # Handle multiple monitors
+        screen = gtk.gdk.screen_get_default()
+        rootwin = screen.get_root_window()
+        x, y, mods = rootwin.get_pointer()
+        monitor_number = screen.get_monitor_at_point(x,y)
+        geometry = screen.get_monitor_geometry( monitor_number )
+        self.window.move(geometry.x, geometry.y)
+        self.window.set_geometry_hints( None, min_width=geometry.width, min_height=geometry.height, max_width=geometry.width, max_height=geometry.height)
+
+        # Handle multiple monitors
+        screen = gtk.gdk.screen_get_default()
+        rootwin = screen.get_root_window()
+        x, y, mods = rootwin.get_pointer()
+        monitor_number = screen.get_monitor_at_point(x,y)
+        geometry = screen.get_monitor_geometry( monitor_number )
+        self.window.move(geometry.x, geometry.y)
+        self.window.set_geometry_hints( None, min_width=geometry.width, min_height=geometry.height, max_width=geometry.width, max_height=geometry.height)
+
         # Defines the glade file functions for use on closing a buffer
         self.wTree = gtk.glade.XML(os.path.join(
             pyroom_config.pyroom_absolute_path, "interface.glade"),
