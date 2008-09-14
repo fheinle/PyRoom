@@ -229,12 +229,14 @@ class GUI(object):
         """ % self.config.get('theme', 'foreground')
         gtk.rc_parse_string(gtkrc_string)
 
+        # for multiple monitors
         screen = gtk.gdk.screen_get_default() 
-        rootwin = screen.get_root_window() 
-        x,y,mods = rootwin.get_pointer()
-        monitor_number = screen.get_monitor_at_point(x,y) 
-        geometry = screen.get_monitor_geometry(monitor_number) 
-        (screen_width, screen_height) = (geometry.width, geometry.height)
+        root_window = screen.get_root_window() 
+        mouse_x, mouse_y, mouse_mods = root_window.get_pointer()
+        current_monitor_number = screen.get_monitor_at_point(mouse_x,mouse_y)
+        monitor_geometry = screen.get_monitor_geometry(current_monitor_number)
+        (screen_width, screen_height) = (monitor_geometry.width,
+                                         monitor_geometry.height)
 
         if mode == "normal":
             width_percentage = float(self.config.get('theme', 'width'))

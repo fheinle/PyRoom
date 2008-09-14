@@ -131,21 +131,15 @@ class BasicEdit(object):
 
         # Handle multiple monitors
         screen = gtk.gdk.screen_get_default()
-        rootwin = screen.get_root_window()
-        x, y, mods = rootwin.get_pointer()
-        monitor_number = screen.get_monitor_at_point(x,y)
-        geometry = screen.get_monitor_geometry( monitor_number )
-        self.window.move(geometry.x, geometry.y)
-        self.window.set_geometry_hints( None, min_width=geometry.width, min_height=geometry.height, max_width=geometry.width, max_height=geometry.height)
-
-        # Handle multiple monitors
-        screen = gtk.gdk.screen_get_default()
-        rootwin = screen.get_root_window()
-        x, y, mods = rootwin.get_pointer()
-        monitor_number = screen.get_monitor_at_point(x,y)
-        geometry = screen.get_monitor_geometry( monitor_number )
-        self.window.move(geometry.x, geometry.y)
-        self.window.set_geometry_hints( None, min_width=geometry.width, min_height=geometry.height, max_width=geometry.width, max_height=geometry.height)
+        root_window = screen.get_root_window()
+        mouse_x, mouse_y, mouse_mods = root_window.get_pointer()
+        current_monitor_number = screen.get_monitor_at_point(mouse_x, mouse_y)
+        monitor_geometry = screen.get_monitor_geometry(current_monitor_number)
+        self.window.move(monitor_geometry.x, monitor_geometry.y)
+        self.window.set_geometry_hints(None, min_width=monitor_geometry.width,
+          min_height=monitor_geometry.height, max_width=monitor_geometry.width,
+          max_height=monitor_geometry.height
+        )
 
         # Defines the glade file functions for use on closing a buffer
         self.wTree = gtk.glade.XML(os.path.join(
