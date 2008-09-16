@@ -410,6 +410,10 @@ continue editing your document.")
         else:
             self.current = 0
         self.set_buffer(self.current)
+        self.gui.textbox.scroll_to_mark(
+            self.buffers[self.current].get_insert(),
+            0.0,
+        )
 
     def prev_buffer(self):
         """ Switch to prev buffer """
@@ -419,7 +423,10 @@ continue editing your document.")
         else:
             self.current = len(self.buffers) - 1
         self.set_buffer(self.current)
-
+        self.gui.textbox.scroll_to_mark(
+            self.buffers[self.current].get_insert(),
+            0.0,
+        )
     def dialog_quit(self):
         """the quit dialog"""
         count = 0
