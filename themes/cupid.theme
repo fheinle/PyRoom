@@ -1,6 +1,7 @@
 [theme]
 name = cupid
 background = #12000B
+textboxbg = #12000B
 foreground = #D68C8B
 linenumbers = #733B44
 border = #733B44

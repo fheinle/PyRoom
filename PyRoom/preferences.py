@@ -150,6 +150,7 @@ class Preferences(object):
         self.window = self.wTree.get_widget("dialog-preferences")
         self.fontpreference = self.wTree.get_widget("fontbutton")
         self.colorpreference = self.wTree.get_widget("colorbutton")
+        self.textboxbgpreference = self.wTree.get_widget("textboxbgbutton")
         self.bgpreference = self.wTree.get_widget("bgbutton")
         self.borderpreference = self.wTree.get_widget("borderbutton")
         self.paddingpreference = self.wTree.get_widget("paddingtext")
@@ -224,6 +225,7 @@ class Preferences(object):
         self.presetscombobox.connect('changed', self.presetchanged)
         self.fontpreference.connect('font-set', self.customchanged)
         self.colorpreference.connect('color-set', self.customchanged)
+        self.textboxbgpreference.connect('color-set', self.customchanged)
         self.bgpreference.connect('color-set', self.customchanged)
         self.borderpreference.connect('color-set', self.customchanged)
         self.paddingpreference.connect('value-changed', self.customchanged)
@@ -237,6 +239,8 @@ class Preferences(object):
         self.fontname = self.fontname[:-2]
         self.colorname = gtk.gdk.Color.to_string(
                                 self.colorpreference.get_color())
+        self.textboxbgname = gtk.gdk.Color.to_string(
+                                self.textboxbgpreference.get_color())
         self.bgname = gtk.gdk.Color.to_string(
                                self.bgpreference.get_color())
         self.bordername = gtk.gdk.Color.to_string(
@@ -272,6 +276,7 @@ class Preferences(object):
             )
             self.customfile.set("theme", "background", self.bgname)
             self.customfile.set("theme", "foreground", self.colorname)
+            self.customfile.set("theme", "textboxbg", self.textboxbgname)
             self.customfile.set("theme", "border", self.bordername)
             self.customfile.set("theme", "font", self.fontname)
             self.customfile.set("theme", "fontsize", str(self.fontsize))
@@ -301,6 +306,8 @@ class Preferences(object):
             self.fontpreference.set_font_name(self.fontname)
             self.colorpreference.set_color(gtk.gdk.color_parse(
              self.graphical.config.get("theme", "foreground")))
+            self.textboxbgpreference.set_color(gtk.gdk.color_parse(
+             self.graphical.config.get("theme", "textboxbg")))
             self.bgpreference.set_color(gtk.gdk.color_parse(
              self.graphical.config.get("theme", "background")))
             self.borderpreference.set_color(gtk.gdk.color_parse(
@@ -320,6 +327,7 @@ class Preferences(object):
                     'Custom': {
                         'name': 'custom',
                         'background': self.bgname,
+                        'textboxbg': self.textboxbgname,
                         'foreground': self.colorname,
                         'lines': self.colorname,
                         'border': self.bordername,
@@ -353,6 +361,8 @@ class Preferences(object):
                  self.graphical.config.get("theme", "foreground")))
                 self.bgpreference.set_color(gtk.gdk.color_parse(
                  self.graphical.config.get("theme", "background")))
+                self.textboxbgpreference.set_color(gtk.gdk.color_parse(
+                 self.graphical.config.get("theme", "textboxbg")))
                 self.borderpreference.set_color(gtk.gdk.color_parse(
                       self.graphical.config.get("theme", "border")))
                 self.paddingpreference.set_value(float(
@@ -401,5 +411,3 @@ class Preferences(object):
         """hide the preferences window"""
         self.dlg.hide()
         return True
-
-        

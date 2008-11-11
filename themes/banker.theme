@@ -1,6 +1,7 @@
 [theme]
 name = banker
 background = #111D00
+textboxbg = #111D00
 foreground = #DED291
 linenumbers = #7D9635
 border = #7D9635

@@ -1,6 +1,7 @@
 [theme]
 name = darkgreen
 background = #000000
+textboxbg = #000000
 foreground = #007700
 linenumbers= #001100
 border = #001100
