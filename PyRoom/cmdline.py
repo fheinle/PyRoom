@@ -106,4 +106,4 @@ simply and efficiently in a full-screen window, with no distractions.'))
     gtk.main()
 
 if __name__ == '__main__':
-        main()
+    main()

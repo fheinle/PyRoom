@@ -143,8 +143,8 @@ class GUI(object):
             theme = os.path.join(pyroom_config.themes_dir,
                                  style + ".theme")
             if not os.path.isfile(theme) :
-            	theme = os.path.join(pyroom_config.global_themes_dir,
-            	style + ".theme")
+                theme = os.path.join(pyroom_config.global_themes_dir,
+                style + ".theme")
         else:
             theme = os.path.join(pyroom_config.themes_dir,
             pyroom_config.config.get("visual", "theme") + ".theme")
@@ -240,7 +240,7 @@ class GUI(object):
         screen = gtk.gdk.screen_get_default() 
         root_window = screen.get_root_window() 
         mouse_x, mouse_y, mouse_mods = root_window.get_pointer()
-        current_monitor_number = screen.get_monitor_at_point(mouse_x,mouse_y)
+        current_monitor_number = screen.get_monitor_at_point(mouse_x, mouse_y)
         monitor_geometry = screen.get_monitor_geometry(current_monitor_number)
         (screen_width, screen_height) = (monitor_geometry.width,
                                          monitor_geometry.height)

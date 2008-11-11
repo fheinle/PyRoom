@@ -22,15 +22,14 @@
 allows for custom set preferences
 
 Creates a preferences UI that allows the user to customise settings; allows for
-the choice of a theme from $XDG_DATA_HOME/pyroom/themes as well as a custom theme created
-via the dialog
+the choice of a theme from $XDG_DATA_HOME/pyroom/themes as well as a custom
+theme created via the dialog
 """
 
 import gtk
 import gtk.glade
 import os
 from ConfigParser import SafeConfigParser, NoOptionError
-import shutil
 from xdg.BaseDirectory import xdg_config_home, xdg_data_home
 
 from pyroom_error import PyroomError
@@ -92,11 +91,11 @@ class PyroomConfig(object):
         #if we are not using a global installation,
         #take the themes directly from sources
         if not os.path.isdir(self.global_themes_dir) :
-	    	self.global_themes_dir = os.path.join(
-	    	    self.pyroom_absolute_path,
-	    		'..',
-	        	'themes'
-	        	)
+            self.global_themes_dir = os.path.join(
+                self.pyroom_absolute_path,
+                '..',
+                'themes'
+            )
         self.conf_file = os.path.join(self.conf_dir, 'pyroom.conf')
         self.config = FailsafeConfigParser()
         self.build_default_conf()
@@ -137,8 +136,8 @@ class PyroomConfig(object):
             if themefile.endswith('theme') and themefile != 'custom.theme':
             	#TODO : do not add in the themelist a theme already existing in
             	# the personnal directory
-            	if not (themefile[:-6] in themeslist) :
-                	themeslist.append(themefile[:-6])
+                if not themefile[:-6] in themeslist:
+                    themeslist.append(themefile[:-6])
         return themeslist
 
 
@@ -184,7 +183,9 @@ class Preferences(object):
         # Getting preferences from conf file
         self.activestyle = self.config.get("visual", "theme")
         self.linesstate = self.config.get("visual", "linenumber")
-        self.pyroom_config.showborderstate = self.config.get("visual", "showborder")
+        self.pyroom_config.showborderstate = self.config.get(
+            "visual", "showborder"
+        )
         self.autosavestate = self.config.get("editor", "autosave")
         self.autosavetime = self.config.get("editor", "autosavetime")
         self.linespacing = self.config.get("visual", "linespacing")
@@ -193,7 +194,9 @@ class Preferences(object):
         else:
             autosave.autosave_time = 0
         self.linesstate = int(self.linesstate)
-        self.pyroom_config.showborderstate = int(self.pyroom_config.showborderstate)
+        self.pyroom_config.showborderstate = int(
+            self.pyroom_config.showborderstate
+        )
         self.autosavestate = int(self.autosavestate)
 
         # Set up pyroom from conf file
@@ -231,7 +234,9 @@ class Preferences(object):
         self.showborderbutton.connect('toggled', self.toggleborder)
         self.autosave.connect('toggled', self.toggleautosave)
         self.autosave_spinbutton.connect('value-changed', self.toggleautosave)
-        self.linespacing_spinbutton.connect('value-changed', self.changelinespacing)
+        self.linespacing_spinbutton.connect(
+            'value-changed', self.changelinespacing
+        )
         self.presetscombobox.connect('changed', self.presetchanged)
         self.fontpreference.connect('font-set', self.customchanged)
         self.colorpreference.connect('color-set', self.customchanged)
@@ -272,7 +277,8 @@ class Preferences(object):
             self.autosavepref = 1
         else:
             self.autosavepref = 0
-        self.config.set("visual", "showborder", str(self.pyroom_config.showborderstate))
+        self.config.set("visual", "showborder", 
+                        str(self.pyroom_config.showborderstate))
         self.config.set("visual", "linenumber", str(self.linenumberspref))
         self.config.set("editor", "autosave", str(self.autosavepref))
         self.config.set("visual", "linespacing", str(int(self.linespacing)))
@@ -312,8 +318,10 @@ class Preferences(object):
         """some presets have changed, apply those"""
         if mode == 'initial':
             self.graphical.apply_style(self.style, 'normal')
-            self.fontname = "%s %s" % (self.graphical.config.get("theme", "font"),
-                            self.graphical.config.get("theme", "fontsize"))
+            self.fontname = "%s %s" % (
+                self.graphical.config.get("theme", "font"),
+                self.graphical.config.get("theme", "fontsize")
+            )
             self.fontpreference.set_font_name(self.fontname)
             self.colorpreference.set_color(gtk.gdk.color_parse(
              self.graphical.config.get("theme", "foreground")))
@@ -364,8 +372,9 @@ class Preferences(object):
                 self.graphical.config.read(theme)
                 self.graphical.apply_style()
                 self.graphical.apply_style()
-                self.fontname = "%s %s" % (self.graphical.config.get("theme", "font"),
-                                    self.graphical.config.get("theme", "fontsize"))
+                self.fontname = "%s %s" % (
+                    self.graphical.config.get("theme", "font"),
+                    self.graphical.config.get("theme", "fontsize"))
                 self.fontpreference.set_font_name(self.fontname)
                 self.config.set("visual", "theme", str(active))
                 self.colorpreference.set_color(gtk.gdk.color_parse(
