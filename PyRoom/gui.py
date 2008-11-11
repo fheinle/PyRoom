@@ -220,7 +220,10 @@ class GUI(object):
                              )
         if not int(self.pyroom_config.showborderstate):
             self.boxin.set_border_width(0)
-            self.boxout.set_border_width(0)            
+            self.boxout.set_border_width(0)
+        else:
+            self.boxin.set_border_width(1)
+            self.boxout.set_border_width(1)
         font_and_size = "%s %d" % (self.config.get('theme', 'font'),
                                    float(self.config.get('theme', 'fontsize')))
         self.textbox.modify_font(pango.FontDescription(font_and_size))
