@@ -92,6 +92,7 @@ class GUI(object):
         self.status = FadeLabel()
         self.style = style
         self.edit_instance = edit_instance
+        self.pyroom_config = pyroom_config
 
         # Main window
 
@@ -217,6 +218,9 @@ class GUI(object):
         self.boxout.modify_bg(gtk.STATE_NORMAL, 
                               get_color('border'),
                              )
+        if not int(self.pyroom_config.showborderstate):
+            self.boxin.set_border_width(0)
+            self.boxout.set_border_width(0)            
         font_and_size = "%s %d" % (self.config.get('theme', 'font'),
                                    float(self.config.get('theme', 'fontsize')))
         self.textbox.modify_font(pango.FontDescription(font_and_size))
