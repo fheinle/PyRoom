@@ -102,7 +102,10 @@ class PyroomConfig(object):
         self.build_default_conf()
         self.config.readfp(open(self.conf_file, 'r'))
         self.themeslist = self.read_themes_list()
-        self.showborderstate = self.config.get('visual', 'showborder')
+        self.showborderstate = self.config.get(
+                                                            'visual',
+                                                            'showborder'
+                                                            )
 
     def build_default_conf(self):
         """builds necessary default conf.
@@ -157,9 +160,9 @@ class Preferences(object):
         self.borderpreference = self.wTree.get_widget("borderbutton")
         self.paddingpreference = self.wTree.get_widget("paddingtext")
         self.heightpreference = self.wTree.get_widget("heighttext")
-        self.heightpreference.set_range(0.05, 0.95)
+        self.heightpreference.set_range(5, 95)
         self.widthpreference = self.wTree.get_widget("widthtext")
-        self.widthpreference.set_range(0.05, 0.95)
+        self.widthpreference.set_range(5, 95)
         self.presetscombobox = self.wTree.get_widget("presetscombobox")
         self.linenumbers = self.wTree.get_widget("linescheck")
         self.showborderbutton = self.wTree.get_widget("showborder")
@@ -181,7 +184,7 @@ class Preferences(object):
         # Getting preferences from conf file
         self.activestyle = self.config.get("visual", "theme")
         self.linesstate = self.config.get("visual", "linenumber")
-        self.showborderstate = self.config.get("visual", "showborder")
+        self.pyroom_config.showborderstate = self.config.get("visual", "showborder")
         self.autosavestate = self.config.get("editor", "autosave")
         self.autosavetime = self.config.get("editor", "autosavetime")
         self.linespacing = self.config.get("visual", "linespacing")
@@ -190,7 +193,7 @@ class Preferences(object):
         else:
             autosave.autosave_time = 0
         self.linesstate = int(self.linesstate)
-        self.showborderstate = int(self.showborderstate)
+        self.pyroom_config.showborderstate = int(self.pyroom_config.showborderstate)
         self.autosavestate = int(self.autosavestate)
 
         # Set up pyroom from conf file
@@ -198,7 +201,7 @@ class Preferences(object):
         self.autosave_spinbutton.set_value(float(self.autosavetime))
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
-        self.showborderbutton.set_active(self.showborderstate)
+        self.showborderbutton.set_active(self.pyroom_config.showborderstate)
         self.toggleautosave(self.autosave)
 
         
@@ -253,8 +256,8 @@ class Preferences(object):
         self.bordername = gtk.gdk.Color.to_string(
                                self.borderpreference.get_color())
         self.paddingname = self.paddingpreference.get_value_as_int()
-        self.heightname = self.heightpreference.get_value()
-        self.widthname = self.widthpreference.get_value()
+        self.heightname = self.heightpreference.get_value() / 100.0
+        self.widthname = self.widthpreference.get_value() / 100.0
 
     def set_preferences(self, widget, data=None):
         """save preferences"""
@@ -269,7 +272,7 @@ class Preferences(object):
             self.autosavepref = 1
         else:
             self.autosavepref = 0
-        self.config.set("visual", "showborder", str(self.showborderstate))
+        self.config.set("visual", "showborder", str(self.pyroom_config.showborderstate))
         self.config.set("visual", "linenumber", str(self.linenumberspref))
         self.config.set("editor", "autosave", str(self.autosavepref))
         self.config.set("visual", "linespacing", str(int(self.linespacing)))
@@ -323,9 +326,9 @@ class Preferences(object):
             self.paddingpreference.set_value(float(self.graphical.config.get(
                                                         "theme", "padding")))
             self.widthpreference.set_value(float(self.graphical.config.get(
-                                                        "theme", "width")))
+                                                       "theme", "width")) * 100)
             self.heightpreference.set_value(float(self.graphical.config.get(
-                                                        "theme", "height")))
+                                                       "theme", "height")) *100)
         else:
             active = self.presetscombobox.get_active_text().lower()
             activeid = self.presetscombobox.get_active()
@@ -390,12 +393,16 @@ class Preferences(object):
 
     def toggleborder(self, widget):
         """toggle border display"""
-        if self.showborderstate:
-            self.showborderstate = 0
+        if self.pyroom_config.showborderstate:
+            self.pyroom_config.showborderstate = 0
         else:
-            self.showborderstate = 1
-        self.graphical.boxout.set_border_width(self.showborderstate)
-        self.graphical.boxin.set_border_width(self.showborderstate)
+            self.pyroom_config.showborderstate = 1
+        self.graphical.boxout.set_border_width(
+            self.pyroom_config.showborderstate
+        )
+        self.graphical.boxin.set_border_width(
+            self.pyroom_config.showborderstate
+        )
 
     def togglelines(self, widget):
         """show line numbers"""
