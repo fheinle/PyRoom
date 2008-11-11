@@ -44,7 +44,6 @@ locales_path = os.path.join(
     os.path.dirname(os.path.abspath(__file__)),
     'locales'
 )
-print locales_path
 gettext.install(locales_path)
 
 import PyRoom
