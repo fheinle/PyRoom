@@ -102,6 +102,7 @@ class PyroomConfig(object):
         self.build_default_conf()
         self.config.readfp(open(self.conf_file, 'r'))
         self.themeslist = self.read_themes_list()
+        self.showborderstate = self.config.get('visual', 'showborder')
 
     def build_default_conf(self):
         """builds necessary default conf.
@@ -268,6 +269,7 @@ class Preferences(object):
             self.autosavepref = 1
         else:
             self.autosavepref = 0
+        self.config.set("visual", "showborder", str(self.showborderstate))
         self.config.set("visual", "linenumber", str(self.linenumberspref))
         self.config.set("editor", "autosave", str(self.autosavepref))
         self.config.set("visual", "linespacing", str(int(self.linespacing)))
