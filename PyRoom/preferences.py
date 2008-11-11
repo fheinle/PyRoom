@@ -40,6 +40,7 @@ DEFAULT_CONF = {
     'visual':{
         'theme':'green',
         'linenumber':'0',
+        'showborder':'1',
         'linespacing':'2',
     },
     'editor':{
@@ -160,6 +161,7 @@ class Preferences(object):
         self.widthpreference.set_range(0.05, 0.95)
         self.presetscombobox = self.wTree.get_widget("presetscombobox")
         self.linenumbers = self.wTree.get_widget("linescheck")
+        self.showborderbutton = self.wTree.get_widget("showborder")
         self.autosave = self.wTree.get_widget("autosavetext")
         self.autosave_spinbutton = self.wTree.get_widget("autosavetime")
         self.linespacing_spinbutton = self.wTree.get_widget("linespacing")
@@ -178,6 +180,7 @@ class Preferences(object):
         # Getting preferences from conf file
         self.activestyle = self.config.get("visual", "theme")
         self.linesstate = self.config.get("visual", "linenumber")
+        self.showborderstate = self.config.get("visual", "showborder")
         self.autosavestate = self.config.get("editor", "autosave")
         self.autosavetime = self.config.get("editor", "autosavetime")
         self.linespacing = self.config.get("visual", "linespacing")
@@ -186,6 +189,7 @@ class Preferences(object):
         else:
             autosave.autosave_time = 0
         self.linesstate = int(self.linesstate)
+        self.showborderstate = int(self.showborderstate)
         self.autosavestate = int(self.autosavestate)
 
         # Set up pyroom from conf file
@@ -193,6 +197,7 @@ class Preferences(object):
         self.autosave_spinbutton.set_value(float(self.autosavetime))
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
+        self.showborderbutton.set_active(self.showborderstate)
         self.toggleautosave(self.autosave)
 
         
@@ -219,6 +224,7 @@ class Preferences(object):
                 }
         self.wTree.signal_autoconnect(dic)
         self.linenumbers.connect('toggled', self.togglelines)
+        self.showborderbutton.connect('toggled', self.toggleborder)
         self.autosave.connect('toggled', self.toggleautosave)
         self.autosave_spinbutton.connect('value-changed', self.toggleautosave)
         self.linespacing_spinbutton.connect('value-changed', self.changelinespacing)
@@ -379,6 +385,15 @@ class Preferences(object):
         """display the preferences dialog"""
         self.dlg = self.wTree.get_widget("dialog-preferences")
         self.dlg.show()
+
+    def toggleborder(self, widget):
+        """toggle border display"""
+        if self.showborderstate:
+            self.showborderstate = 0
+        else:
+            self.showborderstate = 1
+        self.graphical.boxout.set_border_width(self.showborderstate)
+        self.graphical.boxin.set_border_width(self.showborderstate)
 
     def togglelines(self, widget):
         """show line numbers"""
