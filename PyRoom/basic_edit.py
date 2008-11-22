@@ -27,7 +27,7 @@ within this file
 
 import gtk
 import gtk.glade
-import gtksourceview
+import gtksourceview2
 import os
 
 from pyroom_error import PyroomError
@@ -363,9 +363,7 @@ continue editing your document.")
     def new_buffer(self):
         """ Create a new buffer """
 
-        buf = gtksourceview.SourceBuffer()
-        buf.set_check_brackets(False)
-        buf.set_highlight(False)
+        buf = gtksourceview2.Buffer()
         buf.filename = FILE_UNNAMED
         self.buffers.insert(self.current + 1, buf)
         buf.place_cursor(buf.get_end_iter())
