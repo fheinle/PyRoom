@@ -173,6 +173,7 @@ class BasicEdit(object):
                 }
         self.aTree.signal_autoconnect(dic)
         self.keybindings = define_keybindings(self)
+        self.gui.apply_style()
 
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
