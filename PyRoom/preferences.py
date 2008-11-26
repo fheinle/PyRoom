@@ -83,13 +83,12 @@ class PyroomConfig(object):
 
     def __init__(self):
         self.pyroom_absolute_path = os.path.dirname(os.path.abspath(__file__))
-        #conf_dir and data_dir are directory defined by the XDG standard
         self.conf_dir = os.path.join(xdg_config_home, 'pyroom')
         self.data_dir = os.path.join(xdg_data_home, 'pyroom')
         self.themes_dir  = os.path.join(self.data_dir, 'themes')
         self.global_themes_dir = '/usr/share/pyroom/themes'
-        #if we are not using a global installation,
-        #take the themes directly from sources
+        # if we are not using a global installation,
+        # take the themes directly from sources
         if not os.path.isdir(self.global_themes_dir) :
             self.global_themes_dir = os.path.join(
                 self.pyroom_absolute_path,
@@ -101,10 +100,7 @@ class PyroomConfig(object):
         self.build_default_conf()
         self.config.readfp(open(self.conf_file, 'r'))
         self.themeslist = self.read_themes_list()
-        self.showborderstate = self.config.get(
-                                                            'visual',
-                                                            'showborder'
-                                                            )
+        self.showborderstate = self.config.get('visual', 'showborder')
 
     def build_default_conf(self):
         """builds necessary default conf.
@@ -134,8 +130,8 @@ class PyroomConfig(object):
                 themeslist.append(themefile[:-6])
         for themefile in globalthemeslist:
             if themefile.endswith('theme') and themefile != 'custom.theme':
-            	#TODO : do not add in the themelist a theme already existing in
-            	# the personnal directory
+            	# TODO : do not add in the themelist a theme already existing in
+            	# the personal directory
                 if not themefile[:-6] in themeslist:
                     themeslist.append(themefile[:-6])
         return themeslist
@@ -317,7 +313,6 @@ class Preferences(object):
     def presetchanged(self, widget, mode=None):
         """some presets have changed, apply those"""
         if mode == 'initial':
-            self.graphical.apply_style(self.style, 'normal')
             self.fontname = "%s %s" % (
                 self.graphical.config.get("theme", "font"),
                 self.graphical.config.get("theme", "fontsize")
@@ -337,6 +332,7 @@ class Preferences(object):
                                                        "theme", "width")) * 100)
             self.heightpreference.set_value(float(self.graphical.config.get(
                                                        "theme", "height")) *100)
+            self.graphical.apply_style(self.style, 'normal')
         else:
             active = self.presetscombobox.get_active_text().lower()
             activeid = self.presetscombobox.get_active()
@@ -357,7 +353,6 @@ class Preferences(object):
                         'size': [self.widthname, self.heightname],
                 }}
                 self.graphical.apply_style(customstyle['Custom'], 'custom')
-                self.graphical.apply_style(customstyle['Custom'], 'custom')
                 self.config.set("visual", "theme", str(active))
                 self.graphical.status.set_text(_('Style Changed to \
                                                 %s' % (active)))
@@ -370,7 +365,6 @@ class Preferences(object):
                 	theme = os.path.join(self.pyroom_config.global_themes_dir,
                 		active + ".theme")          
                 self.graphical.config.read(theme)
-                self.graphical.apply_style()
                 self.graphical.apply_style()
                 self.fontname = "%s %s" % (
                     self.graphical.config.get("theme", "font"),
