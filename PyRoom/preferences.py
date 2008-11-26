@@ -382,9 +382,9 @@ class Preferences(object):
                 self.paddingpreference.set_value(float(
                  self.graphical.config.get("theme", "padding")))
                 self.widthpreference.set_value(float(self.graphical.config.get(
-                                                            "theme", "width")))
+                                                     "theme", "width")) * 100)
                 self.heightpreference.set_value(float(
-                 self.graphical.config.get("theme", "height")))
+                 self.graphical.config.get("theme", "height")) * 100)
                 self.graphical.status.set_text(_('Style Changed to \
 %s' % (active)))
                 self.presetscombobox.set_active(activeid)
