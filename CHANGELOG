@@ -1,0 +1,29 @@
+pyroom 0.3.2 (2008-12-03)
+=========================
+    
+User visible changes
+--------------------
+
+* added multi-monitor support (LP:#189037)
+* textbox background can be configured independantly from app background
+  (LP:#285116)
+* textbox border can be switched on/off (LP:#193855)
+
+Noteable background changes
+---------------------------
+
+* pyroom adheres to XDG directory specifications for config etc
+  (LP:#262697)
+* standard themes reside in a global dir now, not in homedirs (LP:#246133)
+* switched from gtksourceview 1 to 2, removing a lot of gnome 
+  dependencies (LP:#300684)
+
+Bugfixes
+--------
+
+* don't ask to save empty files (LP:#262798)
+* textbox size configurable in percentages, not fractures (LP:#296935)
+* can't select textbox sizes >100% any more (LP:#263046)
+* switching buffer scrolls to cursor position (LP:#270350)
+* cursor placed at file bottom on opened files (LP:#188908)
+* allow using pyroom for opening files from GUIS (LP:#282009)
