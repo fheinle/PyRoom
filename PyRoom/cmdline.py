@@ -60,21 +60,15 @@ def main():
     sys.excepthook = handle_error
 
     files = []
-    style = pyroom_config.config.get('visual', 'theme')
     autosave.autosave_time = pyroom_config.config.get('editor', 'autosavetime')
 
-    # Preparing the themes list for the optionparser
-    themes_list = pyroom_config.read_themes_list()
-    themes_list.append('custom')
-
     # Get commandline args
-    parser = OptionParser(usage = _('%prog [-v] [--style={style name}] \
+    parser = OptionParser(usage = _('%prog [-v] \
 [file1] [file2]...'),
                         version = '%prog ' + __VERSION__,
                         description = _('PyRoom lets you edit text files \
 simply and efficiently in a full-screen window, with no distractions.'))
     parser.set_defaults(
-                        style = pyroom_config.config.get('visual', 'theme'),
                         autosave_time = pyroom_config.config.get('editor',
                                                         'autosavetime')
                        )
@@ -82,18 +76,13 @@ simply and efficiently in a full-screen window, with no distractions.'))
                     type = 'int', action = 'store', dest = 'autosave_time',
                     help = _('Specify the amount of time, in minutes, to \
                               automatically save your work.'))
-    parser.add_option('-s', '--style',
-                    action = 'store', dest = 'style',
-                    type = 'choice', choices = themes_list,
-                    help = _('Override the default style'))
     (options, args) = parser.parse_args()
 
-    style = options.style
     autosave.autosave_time = options.autosave_time
     files = args
 
     # Create relevant buffers for file and load them
-    pyroom = BasicEdit(style=style, pyroom_config=pyroom_config)
+    pyroom = BasicEdit(pyroom_config=pyroom_config)
     buffnum = 0
     if len(files):
         for filename in files:

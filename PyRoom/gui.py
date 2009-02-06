@@ -132,9 +132,8 @@ class FadeLabel(gtk.Label):
 class GUI(object):
     """our basic global gui object"""
 
-    def __init__(self, style, pyroom_config, edit_instance):
+    def __init__(self, pyroom_config, edit_instance):
         self.status = FadeLabel()
-        self.style = style
         self.edit_instance = edit_instance
         self.pyroom_config = pyroom_config
 
@@ -183,20 +182,7 @@ class GUI(object):
 
 
         self.config = ConfigParser.ConfigParser()
-        if self.style:
-            theme = os.path.join(pyroom_config.themes_dir,
-                                 style + ".theme")
-            if not os.path.isfile(theme) :
-                theme = os.path.join(pyroom_config.global_themes_dir,
-                style + ".theme")
-        else:
-            theme = os.path.join(pyroom_config.themes_dir,
-            pyroom_config.config.get("visual", "theme") + ".theme")
-            if not os.path.isfile(theme) :
-            	theme = os.path.join(pyroom_config.global_themes_dir,
-            	pyroom_config.config.get("visual", "theme") + ".theme")
-        self.config.read(theme)
-
+        
     def quit(self):
         """ quit pyroom """
         gtk.main_quit()
