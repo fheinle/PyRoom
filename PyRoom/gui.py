@@ -31,6 +31,50 @@ import gtksourceview2
 import gtk.glade
 import ConfigParser
 import os
+from xdg.BaseDirectory import xdg_data_home
+
+from pyroom_error import PyroomError
+
+class Theme(dict):
+    """basically a dict with some utility methods"""
+    def __init__(self, theme_name):
+        theme_filename = self._lookup_theme(theme_name)
+        if not theme_filename:
+            raise PyroomError(_('theme not found: %s') % theme_name)
+        theme_file = ConfigParser.SafeConfigParser()
+        theme_file.read(theme_filename)
+        self.update(theme_file.items('theme'))
+
+    def _lookup_theme(self, theme_name):
+        """lookup theme_filename for given theme_name
+
+        order of preference is homedir, global dir, source dir (if available)"""
+        local_directory = os.path.join(xdg_data_home, 'pyroom', 'themes')
+        global_directory = '/usr/share/pyroom/themes' # FIXME: platform
+        # in case PyRoom is run without installation
+        fallback_directory = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            '..',
+            'themes'
+        )
+        for dirname in (local_directory, global_directory, fallback_directory):
+            filename = os.path.join(dirname, theme_name + '.theme')
+            if os.path.isfile(filename):
+                return filename
+
+    def save(self, filename):
+        """save a theme"""
+        absolute_filename = os.path.join(
+            xdg_data_home,
+            'pyroom',
+            'themes',
+            filename + '.theme'
+        )
+        theme_file = ConfigParser.SafeConfigParser()
+        theme_file.add_section('theme')
+        for key, value in self.iteritems():
+            theme_file.set('theme', key, value)
+        theme_file.write(open(absolute_filename, 'w'))
 
 class FadeLabel(gtk.Label):
     """ GTK Label with timed fade out effect """
