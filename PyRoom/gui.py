@@ -135,7 +135,11 @@ class GUI(object):
     def __init__(self, pyroom_config, edit_instance):
         self.status = FadeLabel()
         self.edit_instance = edit_instance
-        self.pyroom_config = pyroom_config
+        self.config = pyroom_config.config # FIXME: use pyroom_config itself
+
+        # Theme
+        theme_name = self.config.get('visual', 'theme')
+        self.theme = Theme(theme_name)
 
         # Main window
 
@@ -180,9 +184,73 @@ class GUI(object):
         self.status.set_alignment(0.0, 0.5)
         self.status.set_justify(gtk.JUSTIFY_LEFT)
 
+    def apply_theme(self):
+        """immediately apply the theme given in configuration
 
-        self.config = ConfigParser.ConfigParser()
+        this has changed from previous versions! Takes no arguments!
+        Only uses configuration!"""
+
+        parse_color = lambda x: gtk.gdk.color_parse(self.theme[x])
+
+        # Colors
+        self.window.modify_bg(gtk.STATE_NORMAL, parse_color('background'))
+        self.textbox.modify_bg(gtk.STATE_NORMAL, parse_color('textboxbg'))
+        self.textbox.modify_base(gtk.STATE_NORMALE, parse_color('textboxbg'))
+        self.textbox.modify_base(gtk.STATE_SELECTED, parse_color('foreground'))
+        self.textbox.modify_text(gtk.STATE_NORMAL, parse_color('foreground'))
+        self.textbox.modify_text(gtk.STATE_SELECTED, parse_color('textboxbg'))
+        self.textbox.modify_fg(gtk.STATE_NORMAL, parse_color('foreground'))
+        self.boxout.modify_bg(gtk.STATE_NORMAL, parse_color('border'))
+        self.status.active_color = self.theme['foreground']
+        self.status.inactive_color = self.theme['background']
+
+        # text cursor
+        gtkrc_string = """\
+        style "pyroom-colored-cursor" { 
+        GtkTextView::cursor-color = '%s'
+        }
+        class "GtkWidget" style "pyroom-colored-cursor"
+        """ % self.theme['foreground']
+        gtk.rc_parse_string(gtkrc_string)
+
+        # Border
+        if not int(self.config.get('visual', 'showborder')):
+            self.boxin.set_border_width(0)
+            self.boxout.set_border_width(0)
+        else:
+            self.boxin.set_border_width(1)
+            self.boxout.set_border_width(1)
+
+        # Font
+        font_and_size = "%s %d" % (self.theme['font']),
+                                   float(self.theme['fontsize'])
+                                  )
+        self.textbox.modify_font(pango.FontDescription(font_and_size))
+
+        # Screen geometry
+        screen = gtk.gdk.screen_get_default() 
+        root_window = screen.get_root_window() 
+        mouse_x, mouse_y, mouse_mods = root_window.get_pointer()
+        current_monitor_number = screen.get_monitor_at_point(mouse_x, mouse_y)
+        monitor_geometry = screen.get_monitor_geometry(current_monitor_number)
+        (screen_width, screen_height) = (monitor_geometry.width,
+                                         monitor_geometry.height)
+
+        width_percentage = float(self.theme['width'])
+        height_percentage = float(self.theme['height'])
+        padding = int(self.theme['padding'])
         
+        # Sizing
+        self.vbox.set_size_request(
+            int(width_percentage * screen_width),
+            int(height_percentage * screen_height)
+        )
+        self.fixed.move(self.vbox,
+                        int(((1 - width_percentage) * screen_width) / 2),
+                        int(((1 - height_percentage) * screen_height) / 2)
+                       )
+        self.textbox.set_border_width(padding
+
     def quit(self):
         """ quit pyroom """
         gtk.main_quit()
