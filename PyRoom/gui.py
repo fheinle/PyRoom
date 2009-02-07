@@ -195,7 +195,7 @@ class GUI(object):
         # Colors
         self.window.modify_bg(gtk.STATE_NORMAL, parse_color('background'))
         self.textbox.modify_bg(gtk.STATE_NORMAL, parse_color('textboxbg'))
-        self.textbox.modify_base(gtk.STATE_NORMALE, parse_color('textboxbg'))
+        self.textbox.modify_base(gtk.STATE_NORMAL, parse_color('textboxbg'))
         self.textbox.modify_base(gtk.STATE_SELECTED, parse_color('foreground'))
         self.textbox.modify_text(gtk.STATE_NORMAL, parse_color('foreground'))
         self.textbox.modify_text(gtk.STATE_SELECTED, parse_color('textboxbg'))
@@ -213,6 +213,9 @@ class GUI(object):
         """ % self.theme['foreground']
         gtk.rc_parse_string(gtkrc_string)
 
+        padding = int(self.theme['padding'])
+        self.textbox.set_border_width(padding)
+
         # Border
         if not int(self.config.get('visual', 'showborder')):
             self.boxin.set_border_width(0)
@@ -222,7 +225,7 @@ class GUI(object):
             self.boxout.set_border_width(1)
 
         # Font
-        font_and_size = "%s %d" % (self.theme['font']),
+        font_and_size = "%s %d" % (self.theme['font'],
                                    float(self.theme['fontsize'])
                                   )
         self.textbox.modify_font(pango.FontDescription(font_and_size))
@@ -238,7 +241,6 @@ class GUI(object):
 
         width_percentage = float(self.theme['width'])
         height_percentage = float(self.theme['height'])
-        padding = int(self.theme['padding'])
         
         # Sizing
         self.vbox.set_size_request(
@@ -249,7 +251,6 @@ class GUI(object):
                         int(((1 - width_percentage) * screen_width) / 2),
                         int(((1 - height_percentage) * screen_height) / 2)
                        )
-        self.textbox.set_border_width(padding
 
     def quit(self):
         """ quit pyroom """
