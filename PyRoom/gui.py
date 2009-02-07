@@ -133,14 +133,14 @@ class GUI(object):
     """our basic global gui object"""
 
     def __init__(self, pyroom_config, edit_instance):
-        self.status = FadeLabel()
-        self.edit_instance = edit_instance
         self.config = pyroom_config.config # FIXME: use pyroom_config itself
-
         # Theme
         theme_name = self.config.get('visual', 'theme')
         self.theme = Theme(theme_name)
 
+        self.status = FadeLabel()
+        self.edit_instance = edit_instance
+        
         # Main window
 
         self.window = gtk.Window(gtk.WINDOW_TOPLEVEL)
@@ -151,7 +151,6 @@ class GUI(object):
 
         self.textbox = gtksourceview2.View()
         self.textbox.connect('scroll-event', self.scroll_event)
-
         self.textbox.set_wrap_mode(gtk.WRAP_WORD)
 
         self.fixed = gtk.Fixed()
@@ -163,7 +162,7 @@ class GUI(object):
         self.boxout.set_border_width(1)
         self.boxin = gtk.EventBox()
         self.boxin.set_border_width(1)
-        self.vbox.pack_start(self.boxout, True, True, 6)
+        self.vbox.pack_start(self.boxout, True, True, 1)
         self.boxout.add(self.boxin)
 
         self.scrolled = gtk.ScrolledWindow()
@@ -183,27 +182,15 @@ class GUI(object):
         self.vbox.pack_end(self.hbox, False, False, 0)
         self.status.set_alignment(0.0, 0.5)
         self.status.set_justify(gtk.JUSTIFY_LEFT)
+        
+        self.apply_theme()
 
     def apply_theme(self):
         """immediately apply the theme given in configuration
 
         this has changed from previous versions! Takes no arguments!
         Only uses configuration!"""
-
-        parse_color = lambda x: gtk.gdk.color_parse(self.theme[x])
-
-        # Colors
-        self.window.modify_bg(gtk.STATE_NORMAL, parse_color('background'))
-        self.textbox.modify_bg(gtk.STATE_NORMAL, parse_color('textboxbg'))
-        self.textbox.modify_base(gtk.STATE_NORMAL, parse_color('textboxbg'))
-        self.textbox.modify_base(gtk.STATE_SELECTED, parse_color('foreground'))
-        self.textbox.modify_text(gtk.STATE_NORMAL, parse_color('foreground'))
-        self.textbox.modify_text(gtk.STATE_SELECTED, parse_color('textboxbg'))
-        self.textbox.modify_fg(gtk.STATE_NORMAL, parse_color('foreground'))
-        self.boxout.modify_bg(gtk.STATE_NORMAL, parse_color('border'))
-        self.status.active_color = self.theme['foreground']
-        self.status.inactive_color = self.theme['background']
-
+        
         # text cursor
         gtkrc_string = """\
         style "pyroom-colored-cursor" { 
@@ -251,6 +238,19 @@ class GUI(object):
                         int(((1 - width_percentage) * screen_width) / 2),
                         int(((1 - height_percentage) * screen_height) / 2)
                        )
+
+        parse_color = lambda x: gtk.gdk.color_parse(self.theme[x])
+        # Colors
+        self.window.modify_bg(gtk.STATE_NORMAL, parse_color('background'))
+        self.boxout.modify_bg(gtk.STATE_NORMAL, parse_color('border'))
+        self.status.active_color = self.theme['foreground']
+        self.status.inactive_color = self.theme['background']
+        self.textbox.modify_bg(gtk.STATE_NORMAL, parse_color('textboxbg'))
+        self.textbox.modify_base(gtk.STATE_NORMAL, parse_color('textboxbg'))
+        self.textbox.modify_base(gtk.STATE_SELECTED, parse_color('foreground'))
+        self.textbox.modify_text(gtk.STATE_NORMAL, parse_color('foreground'))
+        self.textbox.modify_text(gtk.STATE_SELECTED, parse_color('textboxbg'))
+        self.textbox.modify_fg(gtk.STATE_NORMAL, parse_color('foreground'))
 
     def quit(self):
         """ quit pyroom """
