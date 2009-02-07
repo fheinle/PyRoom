@@ -209,6 +209,8 @@ class Preferences(object):
         self.stylesvalues = {'custom': 0}
         self.startingvalue = 1
 
+
+        self.graphical.theme = Theme(self.config.get('visual', 'theme'))
         # Add themes to combobox
         for i in self.pyroom_config.themeslist:
             self.stylesvalues['%s' % (i)] = self.startingvalue
@@ -216,7 +218,7 @@ class Preferences(object):
             i = i.capitalize()
             self.presetscombobox.append_text(i)
         self.presetscombobox.set_active(self.stylesvalues[self.activestyle])
-        self.presetchanged(self.presetscombobox, 'initial')
+        self.fill_pref_dialog()
 
         # Connecting interface's signals
         dic = {
@@ -310,10 +312,58 @@ class Preferences(object):
         self.presetscombobox.set_active(0)
         self.presetchanged(widget)
 
+    def fill_pref_dialog(self):
+        self.fontname = "%s %s" % (
+            self.graphical.theme["font"],
+            self.graphical.theme["fontsize"]
+        )
+        parse_color = lambda x: gtk.gdk.color_parse(
+            self.graphical.theme[x]
+        )
+        self.fontpreference.set_font_name(self.fontname)
+        self.colorpreference.set_color(parse_color('foreground'))
+        self.textboxbgpreference.set_color(parse_color('textboxbg'))
+        self.bgpreference.set_color(parse_color('background'))
+        self.borderpreference.set_color(parse_color('border'))
+        self.paddingpreference.set_value(float(
+            self.graphical.theme['padding'])
+        )
+        self.widthpreference.set_value(
+            float(self.graphical.theme['width']) * 100
+        )
+        self.heightpreference.set_value(
+            float(self.graphical.theme['height']) * 100
+        )
+
     def presetchanged(self, widget, mode=None):
         """some presets have changed, apply those"""
-        if mode == 'initial':
-            self.graphical.theme = Theme(self.config.get('visual', 'theme'))
+        active_theme = self.presetscombobox.get_active_text().lower()
+        active_theme_id = self.presetscombobox.get_active()
+        if active_theme_id == 0:
+            self.getcustomdata()
+            custom_theme = Theme('custom')
+            custom_theme.update({
+                    'name': 'custom',
+                    'background': self.bgname,
+                    'textboxbg': self.textboxbgname,
+                    'foreground': self.colorname,
+                    'lines': self.colorname,
+                    'border': self.bordername,
+                    'info': self.colorname,
+                    'font': self.fontname,
+                    'fontsize': self.fontsize,
+                    'padding': self.paddingname,
+                    'height': self.heightname,
+                    'width': self.widthname,
+            })
+
+            self.config.set("visual", "theme", str(active))
+            self.graphical.theme = custom_theme
+            self.graphical.status.set_text(_('Style Changed to \
+                                            %s' % (active_theme)))
+        else:
+            new_theme = Theme(active_theme)
+            self.graphical.theme = new_theme
             self.fontname = "%s %s" % (
                 self.graphical.theme["font"],
                 self.graphical.theme["fontsize"]
@@ -336,61 +386,10 @@ class Preferences(object):
                 float(self.graphical.theme['height']) * 100
             )
             self.graphical.apply_theme()
-        else:
-            active = self.presetscombobox.get_active_text().lower()
-            activeid = self.presetscombobox.get_active()
-            if activeid == 0:
-                self.getcustomdata()
-                custom_theme = Theme('custom')
-                custom_theme.update({
-                        'name': 'custom',
-                        'background': self.bgname,
-                        'textboxbg': self.textboxbgname,
-                        'foreground': self.colorname,
-                        'lines': self.colorname,
-                        'border': self.bordername,
-                        'info': self.colorname,
-                        'font': self.fontname,
-                        'fontsize': self.fontsize,
-                        'padding': self.paddingname,
-                        'height': self.heightname,
-                        'width': self.widthname,
-                })
-                
-                self.config.set("visual", "theme", str(active))
-                self.graphical.theme = custom_theme
-                self.graphical.apply_theme()
-                self.graphical.status.set_text(_('Style Changed to \
-                                                %s' % (active)))
-            else:
-                new_theme = Theme(active)
-                self.graphical.theme = new_theme
-                self.fontname = "%s %s" % (
-                    self.graphical.theme["font"],
-                    self.graphical.theme["fontsize"]
-                )
-                parse_color = lambda x: gtk.gdk.color_parse(
-                    self.graphical.theme[x]
-                )
-                self.fontpreference.set_font_name(self.fontname)
-                self.colorpreference.set_color(parse_color('foreground'))
-                self.textboxbgpreference.set_color(parse_color('textboxbg'))
-                self.bgpreference.set_color(parse_color('background'))
-                self.borderpreference.set_color(parse_color('border'))
-                self.paddingpreference.set_value(float(
-                    self.graphical.theme['padding'])
-                )
-                self.widthpreference.set_value(
-                    float(self.graphical.theme['width']) * 100
-                )
-                self.heightpreference.set_value(
-                    float(self.graphical.theme['height']) * 100
-                )
-                self.graphical.apply_theme()
-                self.config.set("visual", "theme", str(active))
-                self.graphical.status.set_text(_('Style Changed to \
-%s' % (active)))
-                self.presetscombobox.set_active(activeid)
+            self.config.set("visual", "theme", str(active_theme))
+            self.graphical.status.set_text(_('Style Changed to \
+%s' % (active_theme)))
+            self.presetscombobox.set_active(active_theme_id)
 
     def show(self):
         """display the preferences dialog"""
