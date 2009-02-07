@@ -100,14 +100,15 @@ def define_keybindings(edit_instance):
 class BasicEdit(object):
     """editing logic that gets passed around"""
 
-    def __init__(self, style, pyroom_config):
+    def __init__(self, pyroom_config):
         self.current = 0
         self.buffers = []
-        self.style = style
         self.config = pyroom_config.config
-        self.gui = GUI(style, pyroom_config, self)
-        self.preferences = Preferences(gui=self.gui, style=style,
-            pyroom_config=pyroom_config)
+        self.gui = GUI(pyroom_config, self)
+        self.preferences = Preferences(
+            gui=self.gui,
+            pyroom_config=pyroom_config
+        )
         self.status = self.gui.status
         self.window = self.gui.window
         self.textbox = self.gui.textbox
@@ -173,7 +174,6 @@ class BasicEdit(object):
                 }
         self.aTree.signal_autoconnect(dic)
         self.keybindings = define_keybindings(self)
-        self.gui.apply_style()
 
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
