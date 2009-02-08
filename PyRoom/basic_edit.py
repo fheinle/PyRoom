@@ -174,6 +174,9 @@ class BasicEdit(object):
                 }
         self.aTree.signal_autoconnect(dic)
         self.keybindings = define_keybindings(self)
+        # this sucks, shouldn't have to call this here, textbox should
+        # have its background and padding color from GUI().__init__() already
+        self.gui.apply_theme()
 
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
