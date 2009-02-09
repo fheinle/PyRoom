@@ -1,3 +1,16 @@
+pyroom trunk ()
+===============
+
+User visible changes
+--------------------
+
+* create nonexistant files if necessary (LP:#307257)
+
+Noteable background changes
+---------------------------
+
+* new method of theme lookup and application (LP:#326108)
+
 pyroom 0.3.2 (2008-12-03)
 =========================
     
