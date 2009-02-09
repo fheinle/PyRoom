@@ -203,14 +203,6 @@ class GUI(object):
         padding = int(self.theme['padding'])
         self.textbox.set_border_width(padding)
 
-        # Border
-        if not int(self.config.get('visual', 'showborder')):
-            self.boxin.set_border_width(0)
-            self.boxout.set_border_width(0)
-        else:
-            self.boxin.set_border_width(1)
-            self.boxout.set_border_width(1)
-
         # Font
         font_and_size = "%s %d" % (self.theme['font'],
                                    float(self.theme['fontsize'])
@@ -251,6 +243,14 @@ class GUI(object):
         self.textbox.modify_text(gtk.STATE_NORMAL, parse_color('foreground'))
         self.textbox.modify_text(gtk.STATE_SELECTED, parse_color('textboxbg'))
         self.textbox.modify_fg(gtk.STATE_NORMAL, parse_color('foreground'))
+
+        # Border
+        if not int(self.config.get('visual', 'showborder')):
+            self.boxin.set_border_width(0)
+            self.boxout.set_border_width(0)
+        else:
+            self.boxin.set_border_width(1)
+            self.boxout.set_border_width(1)
 
     def quit(self):
         """ quit pyroom """

@@ -275,8 +275,6 @@ class Preferences(object):
             self.autosavepref = 1
         else:
             self.autosavepref = 0
-        self.config.set("visual", "showborder", 
-                        str(self.pyroom_config.showborderstate))
         self.config.set("visual", "linenumber", str(self.linenumberspref))
         self.config.set("editor", "autosave", str(self.autosavepref))
         self.config.set("visual", "linespacing", str(int(self.linespacing)))
@@ -357,7 +355,7 @@ class Preferences(object):
                     'width': self.widthname,
             })
 
-            self.config.set("visual", "theme", str(active))
+            self.config.set("visual", "theme", str(active_theme))
             self.graphical.theme = custom_theme
             self.graphical.status.set_text(_('Style Changed to \
                                             %s' % (active_theme)))
@@ -385,12 +383,11 @@ class Preferences(object):
             self.heightpreference.set_value(
                 float(self.graphical.theme['height']) * 100
             )
-            self.graphical.apply_theme()
             self.config.set("visual", "theme", str(active_theme))
             self.graphical.status.set_text(_('Style Changed to \
 %s' % (active_theme)))
             self.presetscombobox.set_active(active_theme_id)
-
+        self.graphical.apply_theme()
     def show(self):
         """display the preferences dialog"""
         self.dlg = self.wTree.get_widget("dialog-preferences")
@@ -398,10 +395,13 @@ class Preferences(object):
 
     def toggleborder(self, widget):
         """toggle border display"""
+        #FIXME just workaround, we should drop pyroom_config entirely
         if self.pyroom_config.showborderstate:
             self.pyroom_config.showborderstate = 0
+            self.config.set('visual', 'showborder', '0')
         else:
             self.pyroom_config.showborderstate = 1
+            self.config.set('visual', 'showborder', '1')
         self.graphical.boxout.set_border_width(
             self.pyroom_config.showborderstate
         )
