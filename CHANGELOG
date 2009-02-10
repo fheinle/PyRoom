@@ -11,6 +11,10 @@ Noteable background changes
 
 * new method of theme lookup and application (LP:#326108)
 
+Bugfixes
+--------
+* disable background pixmaps that some gtk themes use (LP:#309773)
+
 pyroom 0.3.2 (2008-12-03)
 =========================
     

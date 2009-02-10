@@ -195,6 +195,7 @@ class GUI(object):
         gtkrc_string = """\
         style "pyroom-colored-cursor" { 
         GtkTextView::cursor-color = '%s'
+        bg_pixmap[NORMAL] = "<none>"
         }
         class "GtkWidget" style "pyroom-colored-cursor"
         """ % self.theme['foreground']
