@@ -29,6 +29,7 @@ import gtk
 import gtk.glade
 import gtksourceview2
 import os
+import urllib
 
 from pyroom_error import PyroomError
 from gui import GUI
@@ -306,14 +307,14 @@ the file.')
                 txt = buf.get_text(buf.get_start_iter(),
                                      buf.get_end_iter())
                 buffer_file.write(txt)
-                self.recent_manager.add_full(buf.filename,
+                self.recent_manager.add_full(
+                    "file://" + urllib.quote(buf.filename),
                     {
                         'mime_type':'text/plain',
                         'app_name':'pyroom',
                         'app_exec':'%F',
                         'is_private':False,
                         'display_name':os.path.basename(buf.filename),
-                        'description':'A text file',
                     }
                 )
                 buffer_file.close()
