@@ -29,6 +29,7 @@ import gtk
 import gtk.glade
 import gtksourceview2
 import os
+import urllib
 
 from pyroom_error import PyroomError
 from gui import GUI
@@ -109,6 +110,7 @@ class BasicEdit(object):
             gui=self.gui,
             pyroom_config=pyroom_config
         )
+        self.recent_manager = gtk.recent_manager_get_default()
         self.status = self.gui.status
         self.window = self.gui.window
         self.textbox = self.gui.textbox
@@ -292,7 +294,6 @@ the file.')
             if not errno == 2:
                 raise PyroomError(errortext)
         except:
-            raise
             raise PyroomError(_('Unable to open %s\n' % buf.filename))
         else:
             self.status.set_text(_('File %s open') % buf.filename)
@@ -306,6 +307,16 @@ the file.')
                 txt = buf.get_text(buf.get_start_iter(),
                                      buf.get_end_iter())
                 buffer_file.write(txt)
+                self.recent_manager.add_full(
+                    "file://" + urllib.quote(buf.filename),
+                    {
+                        'mime_type':'text/plain',
+                        'app_name':'pyroom',
+                        'app_exec':'%F',
+                        'is_private':False,
+                        'display_name':os.path.basename(buf.filename),
+                    }
+                )
                 buffer_file.close()
                 buf.begin_not_undoable_action()
                 buf.end_not_undoable_action()
