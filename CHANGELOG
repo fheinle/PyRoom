@@ -5,6 +5,7 @@ User visible changes
 --------------------
 
 * create nonexistant files if necessary (LP:#307257)
+* recently used files are now remembered (LP:#315873)
 
 Noteable background changes
 ---------------------------
