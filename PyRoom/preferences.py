@@ -357,8 +357,6 @@ class Preferences(object):
 
             self.config.set("visual", "theme", str(active_theme))
             self.graphical.theme = custom_theme
-            self.graphical.status.set_text(_('Style Changed to \
-                                            %s' % (active_theme)))
         else:
             new_theme = Theme(active_theme)
             self.graphical.theme = new_theme
@@ -384,10 +382,11 @@ class Preferences(object):
                 float(self.graphical.theme['height']) * 100
             )
             self.config.set("visual", "theme", str(active_theme))
-            self.graphical.status.set_text(_('Style Changed to \
-%s' % (active_theme)))
             self.presetscombobox.set_active(active_theme_id)
         self.graphical.apply_theme()
+        self.graphical.status.set_text(_('Style Changed to \
+%s' % (active_theme)))
+
     def show(self):
         """display the preferences dialog"""
         self.dlg = self.wTree.get_widget("dialog-preferences")
