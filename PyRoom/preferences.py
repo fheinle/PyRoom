@@ -215,8 +215,9 @@ class Preferences(object):
         for i in self.pyroom_config.themeslist:
             self.stylesvalues['%s' % (i)] = self.startingvalue
             self.startingvalue = self.startingvalue + 1
-            i = i.capitalize()
-            self.presetscombobox.append_text(i)
+            current_loading_theme = Theme(i)
+            theme_name = current_loading_theme['name']
+            self.presetscombobox.append_text(theme_name)
         self.presetscombobox.set_active(self.stylesvalues[self.activestyle])
         self.fill_pref_dialog()
 
@@ -335,8 +336,10 @@ class Preferences(object):
 
     def presetchanged(self, widget, mode=None):
         """some presets have changed, apply those"""
-        active_theme = self.presetscombobox.get_active_text().lower()
         active_theme_id = self.presetscombobox.get_active()
+        for key, value in self.stylesvalues.iteritems():
+            if value == active_theme_id:
+                active_theme = key
         if active_theme_id == 0:
             self.getcustomdata()
             custom_theme = Theme('custom')
