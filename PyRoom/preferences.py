@@ -229,7 +229,6 @@ class Preferences(object):
                 "on_close": self.kill_preferences
                 }
         self.wTree.signal_autoconnect(dic)
-        self.linenumbers.connect('toggled', self.togglelines)
         self.showborderbutton.connect('toggled', self.toggleborder)
         self.autosave.connect('toggled', self.toggleautosave)
         self.autosave_spinbutton.connect('value-changed', self.toggleautosave)
@@ -410,11 +409,6 @@ class Preferences(object):
         self.graphical.boxin.set_border_width(
             self.pyroom_config.showborderstate
         )
-
-    def togglelines(self, widget):
-        """show line numbers"""
-        opposite_state = not self.graphical.textbox.get_show_line_numbers()
-        self.graphical.textbox.set_show_line_numbers(opposite_state)
 
     def changelinespacing(self, widget):
         """Change line spacing"""
