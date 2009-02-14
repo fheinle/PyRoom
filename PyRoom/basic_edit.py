@@ -145,6 +145,14 @@ class UndoableBuffer(gtk.TextBuffer):
         self.connect('delete-range', self.on_delete_range)
         self.connect('begin_user_action', self.on_begin_user_action)
 
+    @property
+    def can_undo(self):
+        return bool(self.undo_stack)
+
+    @property
+    def can_redo(self):
+        return bool(self.redo_stack)
+
     def on_insert_text(self, textbuffer, text_iter, text, length):
         if self.not_undoable_action:
             return
