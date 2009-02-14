@@ -97,6 +97,89 @@ def define_keybindings(edit_instance):
         translated_bindings[hardware_keycode] = value
     return translated_bindings
 
+class UndoableInsert(object):
+    """something that has been inserted into our textbuffer"""
+    def __init__(self, text_iter, text, length):
+        self.offset = text_iter.get_offset()
+        self.text = text
+        self.length = length
+        if self.length > 1 or self.text in ("\r", "\n", " "):
+            self.mergeable = False
+        else:
+            self.mergeable = True
+
+class UndoableDelete(object):
+    """something that has ben deleted from our textbuffer"""
+    def __init__(self, text_buffer, start_iter, end_iter):
+        self.deleted_text = text_buffer.get_text(start_iter, end_iter)
+        self.start = start_iter.get_offset()
+        self.end = end_iter.get_offset()
+        # need to find out if backspace or delete key has been used
+        # so we don't mess up during redo
+        insert_iter = text_buffer.get_iter_at_mark(text_buffer.get_insert())
+        if insert_iter.get_offset() <= self.start:
+            self.delete_key_used = True
+        else:
+            self.delete_key_used = False
+        if self.end - self.start > 1 or self.deleted_text in ("\r", "\n", " "):
+            self.mergeable = False
+        else:
+            self.mergeable = True
+
+class UndoableBuffer(gtk.TextBuffer):
+    """text buffer with added undo capabilities
+
+    designed as a drop-in replacement for gtksourceview,
+    at least as far as undo is concerned"""
+    
+    def __init__(self):
+        """
+        we'll need empty stacks for undo/redo 
+        """
+        gtk.TextBuffer.__init__(self)
+        self.undo_stack = []
+        self.redo_stack = []
+        self.modified = False
+        self.not_undoable_action = False
+        self.connect('insert-text', self.on_insert_text)
+        self.connect('delete-range', self.on_delete_range)
+        self.connect('begin_user_action', self.on_begin_user_action)
+
+    def on_insert_text(self, textbuffer, text_iter, text, length):
+        if self.not_undoable_action:
+            return
+        self.undo_stack.append(
+            UndoableInsert(text_iter, text, length)
+        )
+        
+    def on_delete_range(self, text_buffer, start_iter, end_iter):
+        if self.not_undoable_action:
+            return
+        self.undo_stack.append(
+            UndoableDelete(text_buffer, start_iter, end_iter)
+        )
+
+    def on_begin_user_action(self, *args, **kwargs):
+        pass
+
+    def begin_not_undoable_action(self):
+        """don't record the next actions
+        
+        toggles self.not_undoable_action"""
+        self.not_undoable_action = True        
+
+    def end_not_undoable_action(self):
+        """record next actions
+        
+        toggles self.not_undoable_action"""
+        self.not_undoable_action = False
+    
+    def undo(self):
+        pass
+
+    def redo(self):
+        pass
+
 class BasicEdit(object):
     """editing logic that gets passed around"""
 
