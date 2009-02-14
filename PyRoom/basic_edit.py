@@ -118,9 +118,6 @@ class BasicEdit(object):
 
         self.textbox.connect('key-press-event', self.key_press_event)
 
-        # Set line numbers visible, set linespacing
-        self.textbox.set_show_line_numbers(int(self.config.get("visual",
-                                               "linenumber")))
         self.textbox.set_pixels_below_lines(
             int(self.config.get("visual", "linespacing"))
         )
@@ -178,7 +175,7 @@ class BasicEdit(object):
         # this sucks, shouldn't have to call this here, textbox should
         # have its background and padding color from GUI().__init__() already
         self.gui.apply_theme()
-
+    
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
         if event.state & gtk.gdk.CONTROL_MASK:
