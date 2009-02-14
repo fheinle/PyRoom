@@ -27,7 +27,6 @@ within this file
 
 import gtk
 import gtk.glade
-import gtksourceview2
 import os
 import urllib
 
@@ -378,7 +377,7 @@ continue editing your document.")
     def new_buffer(self):
         """ Create a new buffer """
 
-        buf = gtksourceview2.Buffer()
+        buf = UndoableBuffer()
         buf.filename = FILE_UNNAMED
         self.buffers.insert(self.current + 1, buf)
         buf.place_cursor(buf.get_end_iter())
