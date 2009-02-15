@@ -181,6 +181,7 @@ class UndoableBuffer(gtk.TextBuffer):
             return
         if not isinstance(prev_insert, UndoableInsert):
             self.undo_stack.append(prev_insert)
+            self.undo_stack.append(undo_action)
             return
         if can_be_merged(prev_insert, undo_action):
             prev_insert.length += undo_action.length
@@ -191,11 +192,26 @@ class UndoableBuffer(gtk.TextBuffer):
             self.undo_stack.append(undo_action)
         
     def on_delete_range(self, text_buffer, start_iter, end_iter):
+        def can_be_merged(prev, cur):
+            if prev.delete_key_used != cur.delete_key_used:
+                return False
+            if prev.start != cur.start and prev.start != cur.end:
+                return False
+            return True
         if self.not_undoable_action:
             return
-        self.undo_stack.append(
-            UndoableDelete(text_buffer, start_iter, end_iter)
-        )
+        undo_action = UndoableDelete(text_buffer, start_iter, end_iter)
+        try:
+            prev_delete = self.undo_stack.pop()
+        except IndexError:
+            self.undo_stack.append(undo_action)
+            return
+        if not isinstance(prev_delete, UndoableDelete):
+            self.undo_stack.append(prev_delete)
+            self.undo_stack.append(undo_action)
+            return
+        self.undo_stack.append(undo_action)
+        print can_be_merged(prev_delete, undo_action)
 
     def on_begin_user_action(self, *args, **kwargs):
         pass
