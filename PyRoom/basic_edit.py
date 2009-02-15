@@ -329,7 +329,7 @@ class BasicEdit(object):
         """ Display buffer information on status label for 5 seconds """
 
         buf = self.buffers[self.current]
-        if buf.can_undo() or buf.can_redo():
+        if buf.can_undo or buf.can_redo:
             status = _(' (modified)')
         else:
             status = ''
@@ -348,7 +348,7 @@ class BasicEdit(object):
         """ Undo last typing """
 
         buf = self.textbox.get_buffer()
-        if buf.can_undo():
+        if buf.can_undo:
             buf.undo()
         else:
             self.status.set_text(_('Nothing more to undo!'))
@@ -357,7 +357,7 @@ class BasicEdit(object):
         """ Redo last typing """
 
         buf = self.textbox.get_buffer()
-        if buf.can_redo():
+        if buf.can_redo:
             buf.redo()
         else:
             self.status.set_text(_('Nothing more to redo!'))
@@ -521,7 +521,7 @@ continue editing your document.")
     def close_dialog(self):
         """ask for confirmation if there are unsaved contents"""
         buf = self.buffers[self.current]
-        if buf.can_undo() or buf.can_redo():
+        if buf.can_undo or buf.can_redo:
             self.dialog.show()
         else:
             self.close_buffer()
@@ -596,7 +596,7 @@ continue editing your document.")
         count = 0
         ret = False
         for buf in self.buffers:
-            if (buf.can_undo() or buf.can_redo()) and \
+            if (buf.can_undo or buf.can_redo) and \
             not buf.get_text(buf.get_start_iter(),
                                  buf.get_end_iter()) == '':
                 count = count + 1
@@ -613,7 +613,7 @@ continue editing your document.")
         """save before quitting"""
         self.quitdialog.hide()
         for buf in self.buffers:
-            if buf.can_undo() or buf.can_redo():
+            if buf.can_undo or buf.can_redo:
                 if buf.filename == FILE_UNNAMED:
                     self.save_file_as()
                 else:
