@@ -154,11 +154,44 @@ class UndoableBuffer(gtk.TextBuffer):
         return bool(self.redo_stack)
 
     def on_insert_text(self, textbuffer, text_iter, text, length):
+        def can_be_merged(prev, cur):
+            """see if we can merge inserts here
+
+            can't merge when user set the input bar somewhere else
+            can't merge across word boundaries"""
+            WHITESPACE = (' ', '\t')
+            print "cur.text: " + cur.text
+            print "prev.text: " + prev.text
+            if cur.offset != (prev.offset + prev.length):
+                return False
+            if cur.text in WHITESPACE and not prev.text in WHITESPACE:
+                return False
+            elif prev.text in WHITESPACE and not cur.text in WHITESPACE:
+                return False
+            return True
+
         if self.not_undoable_action:
             return
-        self.undo_stack.append(
-            UndoableInsert(text_iter, text, length)
-        )
+        undo_action = UndoableInsert(text_iter, text, length)
+        try:
+            prev_insert = self.undo_stack.pop()
+        except IndexError:
+            print "first add"
+            self.undo_stack.append(undo_action)
+            return
+        if not isinstance(prev_insert, UndoableInsert):
+            print "prev delete"
+            self.undo_stack.append(prev_insert)
+            return
+        if can_be_merged(prev_insert, undo_action):
+            print "can be merged"
+            prev_insert.length += undo_action.length
+            prev_insert.text += undo_action.text
+            self.undo_stack.append(prev_insert)
+        else:
+            print "not merging"
+            self.undo_stack.append(prev_insert)
+            self.undo_stack.append(undo_action)
         
     def on_delete_range(self, text_buffer, start_iter, end_iter):
         if self.not_undoable_action:
@@ -266,7 +299,7 @@ class BasicEdit(object):
         # this sucks, shouldn't have to call this here, textbox should
         # have its background and padding color from GUI().__init__() already
         self.gui.apply_theme()
-    
+
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
         if event.state & gtk.gdk.CONTROL_MASK:
