@@ -157,7 +157,7 @@ class UndoableBuffer(gtk.TextBuffer):
         def can_be_merged(prev, cur):
             """see if we can merge inserts here
 
-            can't merge if prev and cur are not mergeable in fir first place
+            can't merge if prev and cur are not mergeable in the first place
             can't merge when user set the input bar somewhere else
             can't merge across word boundaries"""
             WHITESPACE = (' ', '\t')
@@ -193,11 +193,24 @@ class UndoableBuffer(gtk.TextBuffer):
         
     def on_delete_range(self, text_buffer, start_iter, end_iter):
         def can_be_merged(prev, cur):
+            """see if we can merge deletions here
+
+            can't merge if delete and backspace key were both used
+            can't merge across word boundaries"""
+
+            WHITESPACE = (' ', '\t')
             if prev.delete_key_used != cur.delete_key_used:
                 return False
             if prev.start != cur.start and prev.start != cur.end:
                 return False
+            if cur.deleted_text not in WHITESPACE and \
+               prev.deleted_text in WHITESPACE:
+                return False
+            elif cur.deleted_text in WHITESPACE and \
+               prev.deleted_text not in WHITESPACE:
+                return False
             return True
+
         if self.not_undoable_action:
             return
         undo_action = UndoableDelete(text_buffer, start_iter, end_iter)
@@ -210,8 +223,18 @@ class UndoableBuffer(gtk.TextBuffer):
             self.undo_stack.append(prev_delete)
             self.undo_stack.append(undo_action)
             return
-        self.undo_stack.append(undo_action)
-        print can_be_merged(prev_delete, undo_action)
+        if can_be_merged(prev_delete, undo_action):
+            if prev_delete.start == undo_action.start: # delete key used
+                prev_delete.deleted_text += undo_action.deleted_text
+                prev_delete.end += (undo_action.end - undo_action.start)
+            else: # Backspace used
+                prev_delete.deleted_text = "%s%s" % (undo_action.deleted_text,
+                                                     prev_delete.deleted_text)
+                prev_delete.start = undo_action.start
+            self.undo_stack.append(prev_delete)
+        else:
+            self.undo_stack.append(prev_delete)
+            self.undo_stack.append(undo_action)
 
     def on_begin_user_action(self, *args, **kwargs):
         pass
