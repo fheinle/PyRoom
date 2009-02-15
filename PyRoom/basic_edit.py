@@ -141,6 +141,7 @@ class UndoableBuffer(gtk.TextBuffer):
         self.redo_stack = []
         self.modified = False
         self.not_undoable_action = False
+        self.undo_in_progress = False
         self.connect('insert-text', self.on_insert_text)
         self.connect('delete-range', self.on_delete_range)
         self.connect('begin_user_action', self.on_begin_user_action)
@@ -171,7 +172,8 @@ class UndoableBuffer(gtk.TextBuffer):
                 return False
             return True
         
-        self.redo_stack = []
+        if not self.undo_in_progress:
+            self.redo_stack = []
         if self.not_undoable_action:
             return
         undo_action = UndoableInsert(text_iter, text, length)
@@ -212,7 +214,8 @@ class UndoableBuffer(gtk.TextBuffer):
                 return False
             return True
 
-        self.redo_stack = []
+        if not self.undo_in_progress:
+            self.redo_stack = []
         if self.not_undoable_action:
             return
         undo_action = UndoableDelete(text_buffer, start_iter, end_iter)
@@ -257,6 +260,7 @@ class UndoableBuffer(gtk.TextBuffer):
         if not self.undo_stack:
             return
         self.begin_not_undoable_action()
+        self.undo_in_progress = True
         undo_action = self.undo_stack.pop()
         self.redo_stack.append(undo_action)
         if isinstance(undo_action, UndoableInsert):
@@ -269,9 +273,24 @@ class UndoableBuffer(gtk.TextBuffer):
             start = self.get_iter_at_offset(undo_action.start)
             self.insert(start, undo_action.deleted_text)
         self.end_not_undoable_action()
+        self.undo_in_progress = False
 
     def redo(self):
-        pass
+        if not self.redo_stack:
+            return
+        self.begin_not_undoable_action()
+        self.undo_in_progress = True
+        redo_action = self.redo_stack.pop()
+        self.undo_stack.append(redo_action)
+        if isinstance(redo_action, UndoableInsert):
+            start = self.get_iter_at_offset(redo_action.offset)
+            self.insert(start, redo_action.text)
+        else:
+            start = self.get_iter_at_offset(redo_action.start)
+            stop = self.get_iter_at_offset(redo_action.stop)
+            self.delete(start, stop)
+        self.end_not_undoable_action()
+        self.undo_in_progress = False
 
 class BasicEdit(object):
     """editing logic that gets passed around"""
