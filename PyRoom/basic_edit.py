@@ -157,9 +157,12 @@ class UndoableBuffer(gtk.TextBuffer):
         def can_be_merged(prev, cur):
             """see if we can merge inserts here
 
+            can't merge if prev and cur are not mergeable in fir first place
             can't merge when user set the input bar somewhere else
             can't merge across word boundaries"""
             WHITESPACE = (' ', '\t')
+            if not cur.mergeable or not prev.mergeable:
+                return False
             if cur.offset != (prev.offset + prev.length):
                 return False
             if cur.text in WHITESPACE and not prev.text in WHITESPACE:
