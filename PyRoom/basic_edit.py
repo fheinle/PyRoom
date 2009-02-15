@@ -252,7 +252,21 @@ class UndoableBuffer(gtk.TextBuffer):
         self.not_undoable_action = False
     
     def undo(self):
-        pass
+        if not self.undo_stack:
+            return
+        self.begin_not_undoable_action()
+        undo_action = self.undo_stack.pop()
+        self.redo_stack.append(undo_action)
+        if isinstance(undo_action, UndoableInsert):
+            start = self.get_iter_at_offset(undo_action.offset)
+            stop = self.get_iter_at_offset(
+                undo_action.offset + undo_action.length
+            )
+            self.delete(start, stop)
+        else:
+            start = self.get_iter_at_offset(undo_action.start)
+            self.insert(start, undo_action.deleted_text)
+        self.end_not_undoable_action()
 
     def redo(self):
         pass
