@@ -287,7 +287,7 @@ class UndoableBuffer(gtk.TextBuffer):
             self.insert(start, redo_action.text)
         else:
             start = self.get_iter_at_offset(redo_action.start)
-            stop = self.get_iter_at_offset(redo_action.stop)
+            stop = self.get_iter_at_offset(redo_action.end)
             self.delete(start, stop)
         self.end_not_undoable_action()
         self.undo_in_progress = False
