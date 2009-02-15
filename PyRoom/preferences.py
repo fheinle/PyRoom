@@ -39,7 +39,6 @@ import autosave
 DEFAULT_CONF = {
     'visual':{
         'theme':'green',
-        'linenumber':'0',
         'showborder':'1',
         'linespacing':'2',
     },
@@ -159,7 +158,6 @@ class Preferences(object):
         self.widthpreference = self.wTree.get_widget("widthtext")
         self.widthpreference.set_range(5, 95)
         self.presetscombobox = self.wTree.get_widget("presetscombobox")
-        self.linenumbers = self.wTree.get_widget("linescheck")
         self.showborderbutton = self.wTree.get_widget("showborder")
         self.autosave = self.wTree.get_widget("autosavetext")
         self.autosave_spinbutton = self.wTree.get_widget("autosavetime")
@@ -178,7 +176,6 @@ class Preferences(object):
 
         # Getting preferences from conf file
         self.activestyle = self.config.get("visual", "theme")
-        self.linesstate = self.config.get("visual", "linenumber")
         self.pyroom_config.showborderstate = self.config.get(
             "visual", "showborder"
         )
@@ -189,7 +186,6 @@ class Preferences(object):
             autosave.autosave_time = self.autosavetime
         else:
             autosave.autosave_time = 0
-        self.linesstate = int(self.linesstate)
         self.pyroom_config.showborderstate = int(
             self.pyroom_config.showborderstate
         )
@@ -198,7 +194,6 @@ class Preferences(object):
         # Set up pyroom from conf file
         self.linespacing_spinbutton.set_value(int(self.linespacing))
         self.autosave_spinbutton.set_value(float(self.autosavetime))
-        self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
         self.showborderbutton.set_active(self.pyroom_config.showborderstate)
         self.toggleautosave(self.autosave)
@@ -265,17 +260,11 @@ class Preferences(object):
     def set_preferences(self, widget, data=None):
         """save preferences"""
         self.getcustomdata()
-        self.linenumberspref = self.linenumbers.get_active()
         self.autosavepref = self.autosave.get_active()
-        if self.linenumberspref == True:
-            self.linenumberspref = 1
-        else:
-            self.linenumberspref = 0
         if self.autosavepref == True:
             self.autosavepref = 1
         else:
             self.autosavepref = 0
-        self.config.set("visual", "linenumber", str(self.linenumberspref))
         self.config.set("editor", "autosave", str(self.autosavepref))
         self.config.set("visual", "linespacing", str(int(self.linespacing)))
 
