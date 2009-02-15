@@ -269,9 +269,15 @@ class UndoableBuffer(gtk.TextBuffer):
                 undo_action.offset + undo_action.length
             )
             self.delete(start, stop)
+            self.place_cursor(start)
         else:
             start = self.get_iter_at_offset(undo_action.start)
+            stop = self.get_iter_at_offset(undo_action.end)
             self.insert(start, undo_action.deleted_text)
+            if undo_action.delete_key_used:
+                self.place_cursor(start)
+            else:
+                self.place_cursor(stop)
         self.end_not_undoable_action()
         self.undo_in_progress = False
 
@@ -285,10 +291,15 @@ class UndoableBuffer(gtk.TextBuffer):
         if isinstance(redo_action, UndoableInsert):
             start = self.get_iter_at_offset(redo_action.offset)
             self.insert(start, redo_action.text)
+            new_cursor_pos = self.get_iter_at_offset(
+                redo_action.offset + redo_action.length
+            )
+            self.place_cursor(new_cursor_pos)
         else:
             start = self.get_iter_at_offset(redo_action.start)
             stop = self.get_iter_at_offset(redo_action.end)
             self.delete(start, stop)
+            self.place_cursor(start)
         self.end_not_undoable_action()
         self.undo_in_progress = False
 
