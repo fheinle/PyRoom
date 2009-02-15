@@ -652,4 +652,3 @@ continue editing your document.")
         """cleanup before quitting"""
         autosave.autosave_quit()
         self.gui.quit()
-# EOF
