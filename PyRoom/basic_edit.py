@@ -170,7 +170,8 @@ class UndoableBuffer(gtk.TextBuffer):
             elif prev.text in WHITESPACE and not cur.text in WHITESPACE:
                 return False
             return True
-
+        
+        self.redo_stack = []
         if self.not_undoable_action:
             return
         undo_action = UndoableInsert(text_iter, text, length)
@@ -211,6 +212,7 @@ class UndoableBuffer(gtk.TextBuffer):
                 return False
             return True
 
+        self.redo_stack = []
         if self.not_undoable_action:
             return
         undo_action = UndoableDelete(text_buffer, start_iter, end_iter)
