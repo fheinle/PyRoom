@@ -160,8 +160,6 @@ class UndoableBuffer(gtk.TextBuffer):
             can't merge when user set the input bar somewhere else
             can't merge across word boundaries"""
             WHITESPACE = (' ', '\t')
-            print "cur.text: " + cur.text
-            print "prev.text: " + prev.text
             if cur.offset != (prev.offset + prev.length):
                 return False
             if cur.text in WHITESPACE and not prev.text in WHITESPACE:
@@ -176,20 +174,16 @@ class UndoableBuffer(gtk.TextBuffer):
         try:
             prev_insert = self.undo_stack.pop()
         except IndexError:
-            print "first add"
             self.undo_stack.append(undo_action)
             return
         if not isinstance(prev_insert, UndoableInsert):
-            print "prev delete"
             self.undo_stack.append(prev_insert)
             return
         if can_be_merged(prev_insert, undo_action):
-            print "can be merged"
             prev_insert.length += undo_action.length
             prev_insert.text += undo_action.text
             self.undo_stack.append(prev_insert)
         else:
-            print "not merging"
             self.undo_stack.append(prev_insert)
             self.undo_stack.append(undo_action)
         
