@@ -114,6 +114,11 @@ class BasicEdit(object):
         self.status = self.gui.status
         self.window = self.gui.window
         self.textbox = self.gui.textbox
+        self.UNNAMED_FILENAME = UNNAMED_FILENAME
+
+        self.autosave_timeout_id = ''
+        self.autosave_elapsed = ''
+        self.autosave_time = ''
 
         self.new_buffer()
 
