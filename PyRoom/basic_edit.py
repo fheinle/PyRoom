@@ -114,11 +114,10 @@ class BasicEdit(object):
         self.status = self.gui.status
         self.window = self.gui.window
         self.textbox = self.gui.textbox
-        self.UNNAMED_FILENAME = UNNAMED_FILENAME
+        self.UNNAMED_FILENAME = FILE_UNNAMED
 
         self.autosave_timeout_id = ''
         self.autosave_elapsed = ''
-        self.autosave_time = ''
 
         self.new_buffer()
 
@@ -138,7 +137,7 @@ class BasicEdit(object):
         )
                 
         # Autosave timer object
-        autosave.autosave_init(self)
+        autosave.start_autosave(self)
 
         self.window.show_all()
         self.window.fullscreen()
@@ -499,6 +498,6 @@ continue editing your document.")
 
     def quit(self):
         """cleanup before quitting"""
-        autosave.autosave_quit()
+        autosave.stop_autosave(self)
         self.gui.quit()
 # EOF
