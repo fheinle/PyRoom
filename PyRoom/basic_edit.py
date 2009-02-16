@@ -134,7 +134,7 @@ class UndoableBuffer(gtk.TextBuffer):
     
     def __init__(self):
         """
-        we'll need empty stacks for undo/redo 
+        we'll need empty stacks for undo/redo and some state keeping
         """
         gtk.TextBuffer.__init__(self)
         self.undo_stack = []
@@ -156,8 +156,9 @@ class UndoableBuffer(gtk.TextBuffer):
 
     def on_insert_text(self, textbuffer, text_iter, text, length):
         def can_be_merged(prev, cur):
-            """see if we can merge inserts here
+            """see if we can merge multiple inserts here
 
+            will try to merge words or whitespace
             can't merge if prev and cur are not mergeable in the first place
             can't merge when user set the input bar somewhere else
             can't merge across word boundaries"""
@@ -171,7 +172,7 @@ class UndoableBuffer(gtk.TextBuffer):
             elif prev.text in WHITESPACE and not cur.text in WHITESPACE:
                 return False
             return True
-        
+
         if not self.undo_in_progress:
             self.redo_stack = []
         if self.not_undoable_action:
@@ -196,8 +197,9 @@ class UndoableBuffer(gtk.TextBuffer):
         
     def on_delete_range(self, text_buffer, start_iter, end_iter):
         def can_be_merged(prev, cur):
-            """see if we can merge deletions here
+            """see if we can merge multiple deletions here
 
+            will try to merge words or whitespace
             can't merge if delete and backspace key were both used
             can't merge across word boundaries"""
 
@@ -257,6 +259,9 @@ class UndoableBuffer(gtk.TextBuffer):
         self.not_undoable_action = False
     
     def undo(self):
+        """undo inserts or deletions
+
+        undone actions are being moved to redo stack"""
         if not self.undo_stack:
             return
         self.begin_not_undoable_action()
@@ -282,6 +287,9 @@ class UndoableBuffer(gtk.TextBuffer):
         self.undo_in_progress = False
 
     def redo(self):
+        """redo inserts or deletions
+
+        redone actions are moved to undo stack"""
         if not self.redo_stack:
             return
         self.begin_not_undoable_action()
