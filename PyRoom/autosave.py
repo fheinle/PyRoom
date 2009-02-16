@@ -35,9 +35,10 @@ def start_autosave(edit_instance):
 def stop_autosave(edit_instance):
     """stop the autosave timer and remove backup files"""
     for buf in edit_instance.buffers:
+        backup_filename = buf.filename + "~"
         if not buf.filename == edit_instance.UNNAMED_FILENAME and \
-           os.path.isfile(buf.filename + "~"):
-            os.remove(buf.filename)
+           os.path.isfile(backup_filename):
+            os.remove(backup_filename)
     gobject.source_remove(edit_instance.autosave_timeout_id)
 
 def autosave_timeout(edit_instance):
