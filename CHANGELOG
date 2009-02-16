@@ -16,6 +16,7 @@ Bugfixes
 --------
 * disable background pixmaps that some gtk themes use (LP:#309773)
 * actually use name field in theme files instead of filenames (LP:#323617)
+* avoid deprecation warning when starting pyroom (LP:#330043)
 
 pyroom 0.3.2 (2008-12-03)
 =========================
