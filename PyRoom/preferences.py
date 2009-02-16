@@ -183,7 +183,10 @@ class Preferences(object):
             "visual", "showborder"
         )
         self.autosavestate = self.config.get("editor", "autosave")
-        self.autosave_time = self.config.get("editor", "autosavetime")
+        if int(self.autosavestate) == 1:
+            self.autosave_time = self.config.get("editor", "autosavetime")
+        else:
+            self.autosave_time = 0
         self.linespacing = self.config.get("visual", "linespacing")
         self.linesstate = int(self.linesstate)
         self.pyroom_config.showborderstate = int(
@@ -276,8 +279,8 @@ class Preferences(object):
         self.config.set("editor", "autosave", str(self.autosavepref))
         self.config.set("visual", "linespacing", str(int(self.linespacing)))
 
-        self.autosave_time = self.autosave_spinbutton.get_value_as_int()
-        self.config.set("editor", "autosavetime", str(self.autosave_time))
+        autosave_time = self.autosave_spinbutton.get_value_as_int()
+        self.config.set("editor", "autosavetime", str(autosave_time))
 
         if self.presetscombobox.get_active_text().lower() == 'custom':
             custom_theme = open(os.path.join(
@@ -427,7 +430,6 @@ class Preferences(object):
             self.autosave_time = self.autosave_spinbutton.get_value_as_int()
         else:
             self.autosave_spinbutton.set_sensitive(False)
-            self.autosave_spinbutton.set_value(0)
             self.autosave_time = 0
 
     def QuitEvent(self, widget, data=None):
