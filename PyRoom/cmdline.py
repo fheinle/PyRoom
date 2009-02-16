@@ -47,7 +47,6 @@ locales_path = os.path.join(
 gettext.install(locales_path)
 
 import PyRoom
-import autosave
 from basic_edit import BasicEdit
 from pyroom_error import handle_error
 from preferences import PyroomConfig
@@ -60,7 +59,6 @@ def main():
     sys.excepthook = handle_error
 
     files = []
-    autosave.autosave_time = pyroom_config.config.get('editor', 'autosavetime')
 
     # Get commandline args
     parser = OptionParser(usage = _('%prog [-v] \
@@ -68,17 +66,7 @@ def main():
                         version = '%prog ' + __VERSION__,
                         description = _('PyRoom lets you edit text files \
 simply and efficiently in a full-screen window, with no distractions.'))
-    parser.set_defaults(
-                        autosave_time = pyroom_config.config.get('editor',
-                                                        'autosavetime')
-                       )
-    parser.add_option('-a', '--autosave',
-                    type = 'int', action = 'store', dest = 'autosave_time',
-                    help = _('Specify the amount of time, in minutes, to \
-                              automatically save your work.'))
     (options, args) = parser.parse_args()
-
-    autosave.autosave_time = options.autosave_time
     files = args
 
     # Create relevant buffers for file and load them
