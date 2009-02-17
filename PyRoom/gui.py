@@ -64,17 +64,12 @@ class Theme(dict):
 
     def save(self, filename):
         """save a theme"""
-        absolute_filename = os.path.join(
-            xdg_data_home,
-            'pyroom',
-            'themes',
-            filename + '.theme'
-        )
         theme_file = ConfigParser.SafeConfigParser()
         theme_file.add_section('theme')
         for key, value in self.iteritems():
-            theme_file.set('theme', key, value)
-        theme_file.write(open(absolute_filename, 'w'))
+            theme_file.set('theme', key, str(value))
+        theme_file.set('theme', 'name', os.path.basename(filename))
+        theme_file.write(open(filename + '.theme', 'w'))
 
 class FadeLabel(gtk.Label):
     """ GTK Label with timed fade out effect """
