@@ -164,6 +164,7 @@ class Preferences(object):
         self.autosave = self.wTree.get_widget("autosavetext")
         self.autosave_spinbutton = self.wTree.get_widget("autosavetime")
         self.linespacing_spinbutton = self.wTree.get_widget("linespacing")
+        self.save_custom_button = self.wTree.get_widget("save_custom_theme")
 
         self.graphical = gui
 
@@ -218,6 +219,8 @@ class Preferences(object):
             current_loading_theme = Theme(i)
             theme_name = current_loading_theme['name']
             self.presetscombobox.append_text(theme_name)
+        if self.activestyle == 'custom':
+            self.save_custom_button.set_sensitive(True)
         self.presetscombobox.set_active(self.stylesvalues[self.activestyle])
         self.fill_pref_dialog()
 
@@ -245,6 +248,7 @@ class Preferences(object):
         self.paddingpreference.connect('value-changed', self.customchanged)
         self.heightpreference.connect('value-changed', self.customchanged)
         self.widthpreference.connect('value-changed', self.customchanged)
+        self.save_custom_button.connect('clicked', self.save_custom_theme)
 
     def getcustomdata(self):
         """reads custom themes"""
@@ -262,6 +266,29 @@ class Preferences(object):
         self.paddingname = self.paddingpreference.get_value_as_int()
         self.heightname = self.heightpreference.get_value() / 100.0
         self.widthname = self.widthpreference.get_value() / 100.0
+
+    def save_custom_theme(self, widget, data=None):
+        chooser = gtk.FileChooserDialog('PyRoom', self.window, 
+            gtk.FILE_CHOOSER_ACTION_SAVE,
+            buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
+            gtk.STOCK_SAVE, gtk.RESPONSE_OK)
+        )
+        chooser.set_default_response(gtk.RESPONSE_OK)
+        chooser.set_current_folder(self.pyroom_config.themes_dir)
+        filter_pattern = gtk.FileFilter()
+        filter_pattern.add_pattern('*.theme')
+        filter_pattern.set_name('Theme Files')
+        chooser.add_filter(filter_pattern)
+        res = chooser.run()
+        if res == gtk.RESPONSE_OK:
+            theme_filename = chooser.get_filename()
+            self.graphical.theme.save(theme_filename)
+        chooser.destroy()
+        theme_name = os.path.basename(theme_filename)
+        theme_id = max(self.stylesvalues.values()) + 1
+        self.presetscombobox.append_text(theme_name)
+        self.stylesvalues.update({theme_name: theme_id})
+        self.presetscombobox.set_active(theme_id)
 
     def set_preferences(self, widget, data=None):
         """save preferences"""
@@ -360,6 +387,7 @@ class Preferences(object):
 
             self.config.set("visual", "theme", str(active_theme))
             self.graphical.theme = custom_theme
+            self.save_custom_button.set_sensitive(True)
         else:
             new_theme = Theme(active_theme)
             self.graphical.theme = new_theme
@@ -386,6 +414,8 @@ class Preferences(object):
             )
             self.config.set("visual", "theme", str(active_theme))
             self.presetscombobox.set_active(active_theme_id)
+            self.save_custom_button.set_sensitive(False)
+
         self.graphical.apply_theme()
         self.graphical.status.set_text(_('Style Changed to \
 %s' % (active_theme)))
