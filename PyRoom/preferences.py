@@ -184,12 +184,11 @@ class Preferences(object):
             "visual", "showborder"
         )
         self.autosavestate = self.config.get("editor", "autosave")
-        self.autosavetime = self.config.get("editor", "autosavetime")
-        self.linespacing = self.config.get("visual", "linespacing")
-        if self.autosavestate == 1:
-            autosave.autosave_time = self.autosavetime
+        if int(self.autosavestate) == 1:
+            self.autosave_time = self.config.get("editor", "autosavetime")
         else:
-            autosave.autosave_time = 0
+            self.autosave_time = 0
+        self.linespacing = self.config.get("visual", "linespacing")
         self.linesstate = int(self.linesstate)
         self.pyroom_config.showborderstate = int(
             self.pyroom_config.showborderstate
@@ -198,7 +197,7 @@ class Preferences(object):
 
         # Set up pyroom from conf file
         self.linespacing_spinbutton.set_value(int(self.linespacing))
-        self.autosave_spinbutton.set_value(float(self.autosavetime))
+        self.autosave_spinbutton.set_value(float(self.autosave_time))
         self.linenumbers.set_active(self.linesstate)
         self.autosave.set_active(self.autosavestate)
         self.showborderbutton.set_active(self.pyroom_config.showborderstate)
@@ -307,8 +306,8 @@ class Preferences(object):
         self.config.set("editor", "autosave", str(self.autosavepref))
         self.config.set("visual", "linespacing", str(int(self.linespacing)))
 
-        autosave.autosave_time = self.autosave_spinbutton.get_value_as_int()
-        self.config.set("editor", "autosavetime", str(autosave.autosave_time))
+        autosave_time = self.autosave_spinbutton.get_value_as_int()
+        self.config.set("editor", "autosavetime", str(autosave_time))
 
         if self.presetscombobox.get_active_text().lower() == 'custom':
             custom_theme = open(os.path.join(
@@ -458,10 +457,10 @@ class Preferences(object):
         """enable or disable autosave"""
         if self.autosave.get_active():
             self.autosave_spinbutton.set_sensitive(True)
-            autosave.autosave_time = self.autosave_spinbutton.get_value_as_int()
+            self.autosave_time = self.autosave_spinbutton.get_value_as_int()
         else:
             self.autosave_spinbutton.set_sensitive(False)
-            autosave.autosave_time = 0
+            self.autosave_time = 0
 
     def QuitEvent(self, widget, data=None):
         """quit our app"""
