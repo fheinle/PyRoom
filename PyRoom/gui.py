@@ -27,7 +27,6 @@ Additionally allows user to apply custom settings
 import gtk
 import gobject
 import pango
-import gtksourceview2
 import gtk.glade
 import ConfigParser
 import os
@@ -144,7 +143,7 @@ class GUI(object):
         self.window.connect('delete_event', self.delete_event)
         self.window.connect('destroy', self.destroy)
 
-        self.textbox = gtksourceview2.View()
+        self.textbox = gtk.TextView()
         self.textbox.connect('scroll-event', self.scroll_event)
         self.textbox.set_wrap_mode(gtk.WRAP_WORD)
 

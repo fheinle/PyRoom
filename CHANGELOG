@@ -8,12 +8,14 @@ User visible changes
 * recently used files are now remembered (LP:#315873)
 * saving of custom themes (LP:#321057)
 * autosave now saves filename.txt~ instead of to /tmp (LP:#323621)
+* removed line numbering (dropped gtksourceview, see LP:#297155)
 
 Noteable background changes
 ---------------------------
 
 * new method of theme lookup and application (LP:#326108)
 * rewrote autosave mechanism (LP:#330045)
+* dropped dependency on gtksourceview (LP:#297155)
 
 Bugfixes
 --------
