@@ -499,30 +499,7 @@ Open those instead of the original file?''')
 
         res = chooser.run()
         if res == gtk.RESPONSE_OK:
-            buf = self.new_buffer()
-            buf.filename = chooser.get_filename()
-            try:
-                buffer_file = open(buf.filename, 'r')
-                buf = self.buffers[self.current]
-                buf.begin_not_undoable_action()
-                utf8 = unicode(buffer_file.read(), 'utf-8')
-                buf.set_text(utf8)
-                buf.end_not_undoable_action()
-                buffer_file.close()
-                self.status.set_text(_('File %s open')
-                         % buf.filename)
-            except IOError, (errno, strerror):
-                errortext = _('Unable to open %(filename)s.' % {
-                                'filename': buf.filename})
-                if errno == 2:
-                    errortext += _(' The file does not exist.')
-                elif errno == 13:
-                    errortext += _(' You do not have permission to \
-open the file.')
-                raise PyroomError(errortext)
-            except:
-                raise PyroomError(_('Unable to open %s\n'
-                                 % buf.filename))
+            self.open_file_no_chooser(chooser.get_filename())
         else:
             self.status.set_text(_('Closed, no files selected'))
         chooser.destroy()
