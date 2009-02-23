@@ -654,6 +654,14 @@ continue editing your document.")
 
     def close_buffer(self):
         """ Close current buffer """
+        autosave_fname = autosave.get_autosave_filename(
+            self.buffers[self.current].filename
+        )
+        if os.path.isfile(autosave_fname):
+            try:
+                os.remove(autosave_fname)
+            except OSError:
+                raise PyroomError(_('Could not delete autosave file.'))
         if len(self.buffers) > 1:
             self.buffers.pop(self.current)
             self.current = min(len(self.buffers) - 1, self.current)
