@@ -448,6 +448,46 @@ class BasicEdit(object):
         opposite_state = not self.textbox.get_show_line_numbers()
         self.textbox.set_show_line_numbers(opposite_state)
 
+    def ask_restore(self):
+        """ask if backups should be restored
+        
+        returns True if proposal is accepted
+        returns False in any other case (declined/dialog closed)"""
+        restore_dialog = gtk.Dialog(
+            title=_('Restore backup?'),
+            parent=self.window,
+            flags=gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+            buttons=(
+                gtk.STOCK_DISCARD, gtk.RESPONSE_REJECT,
+                gtk.STOCK_OPEN, gtk.RESPONSE_ACCEPT
+            )
+        )
+        question_asked = gtk.Label(
+            _('''Backup information for this file has been found.
+Open those instead of the original file?''')
+        )
+        question_asked.set_line_wrap(True)
+
+        question_sign = gtk.image_new_from_stock(
+            stock_id=gtk.STOCK_DIALOG_QUESTION,
+            size=gtk.ICON_SIZE_DIALOG
+        )
+        question_sign.show()
+
+        hbox = gtk.HBox()
+        hbox.pack_start(question_sign, True, True, 0)
+        hbox.pack_start(question_asked, True, True, 0)
+        hbox.show()
+        restore_dialog.vbox.pack_start(
+            hbox, True, True, 0
+        )
+
+        restore_dialog.set_default_response(gtk.RESPONSE_ACCEPT)
+        restore_dialog.show_all()
+        resp = restore_dialog.run()
+        restore_dialog.destroy()
+        return resp == gtk.STOCK_OPEN
+
     def open_file(self):
         """ Open file """
 
