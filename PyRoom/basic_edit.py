@@ -448,6 +448,46 @@ class BasicEdit(object):
         opposite_state = not self.textbox.get_show_line_numbers()
         self.textbox.set_show_line_numbers(opposite_state)
 
+    def ask_restore(self):
+        """ask if backups should be restored
+        
+        returns True if proposal is accepted
+        returns False in any other case (declined/dialog closed)"""
+        restore_dialog = gtk.Dialog(
+            title=_('Restore backup?'),
+            parent=self.window,
+            flags=gtk.DIALOG_MODAL | gtk.DIALOG_DESTROY_WITH_PARENT,
+            buttons=(
+                gtk.STOCK_DISCARD, gtk.RESPONSE_REJECT,
+                gtk.STOCK_OPEN, gtk.RESPONSE_ACCEPT
+            )
+        )
+        question_asked = gtk.Label(
+            _('''Backup information for this file has been found.
+Open those instead of the original file?''')
+        )
+        question_asked.set_line_wrap(True)
+
+        question_sign = gtk.image_new_from_stock(
+            stock_id=gtk.STOCK_DIALOG_QUESTION,
+            size=gtk.ICON_SIZE_DIALOG
+        )
+        question_sign.show()
+
+        hbox = gtk.HBox()
+        hbox.pack_start(question_sign, True, True, 0)
+        hbox.pack_start(question_asked, True, True, 0)
+        hbox.show()
+        restore_dialog.vbox.pack_start(
+            hbox, True, True, 0
+        )
+
+        restore_dialog.set_default_response(gtk.RESPONSE_ACCEPT)
+        restore_dialog.show_all()
+        resp = restore_dialog.run()
+        restore_dialog.destroy()
+        return resp == -3
+
     def open_file(self):
         """ Open file """
 
@@ -459,40 +499,30 @@ class BasicEdit(object):
 
         res = chooser.run()
         if res == gtk.RESPONSE_OK:
-            buf = self.new_buffer()
-            buf.filename = chooser.get_filename()
-            try:
-                buffer_file = open(buf.filename, 'r')
-                buf = self.buffers[self.current]
-                buf.begin_not_undoable_action()
-                utf8 = unicode(buffer_file.read(), 'utf-8')
-                buf.set_text(utf8)
-                buf.end_not_undoable_action()
-                buffer_file.close()
-                self.status.set_text(_('File %s open')
-                         % buf.filename)
-            except IOError, (errno, strerror):
-                errortext = _('Unable to open %(filename)s.' % {
-                                'filename': buf.filename})
-                if errno == 2:
-                    errortext += _(' The file does not exist.')
-                elif errno == 13:
-                    errortext += _(' You do not have permission to \
-open the file.')
-                raise PyroomError(errortext)
-            except:
-                raise PyroomError(_('Unable to open %s\n'
-                                 % buf.filename))
+            self.open_file_no_chooser(chooser.get_filename())
         else:
             self.status.set_text(_('Closed, no files selected'))
         chooser.destroy()
 
     def open_file_no_chooser(self, filename):
         """ Open specified file """
+        def check_backup(filename):
+            """check if restore from backup is an option
+
+            returns backup filename if there's a backup file and
+                    user wants to restore from it, else original filename
+            """
+            fname = autosave.get_autosave_filename(filename) 
+            if os.path.isfile(fname):
+                if self.ask_restore():
+                    return fname
+            return filename
         buf = self.new_buffer()
         buf.filename = filename
+        filename_to_open = check_backup(filename)
+        
         try:
-            buffer_file = open(buf.filename, 'r')
+            buffer_file = open(filename_to_open, 'r')
             buf = self.buffers[self.current]
             buf.begin_not_undoable_action()
             utf8 = unicode(buffer_file.read(), 'utf-8')
@@ -501,16 +531,16 @@ open the file.')
             buffer_file.close()
         except IOError, (errno, strerror):
             errortext = _('Unable to open %(filename)s.' % {
-                'filename': buf.filename})
+                'filename': filename_to_open})
             if errno == 13:
                 errortext += _(' You do not have permission to open \
 the file.')
             if not errno == 2:
                 raise PyroomError(errortext)
         except:
-            raise PyroomError(_('Unable to open %s\n' % buf.filename))
+            raise PyroomError(_('Unable to open %s\n' % filename_to_open))
         else:
-            self.status.set_text(_('File %s open') % buf.filename)
+            self.status.set_text(_('File %s open') % filename_to_open)
 
     def save_file(self):
         """ Save file """
@@ -624,10 +654,15 @@ continue editing your document.")
 
     def close_buffer(self):
         """ Close current buffer """
-
-
+        autosave_fname = autosave.get_autosave_filename(
+            self.buffers[self.current].filename
+        )
+        if os.path.isfile(autosave_fname):
+            try:
+                os.remove(autosave_fname)
+            except OSError:
+                raise PyroomError(_('Could not delete autosave file.'))
         if len(self.buffers) > 1:
-
             self.buffers.pop(self.current)
             self.current = min(len(self.buffers) - 1, self.current)
             self.set_buffer(self.current)

@@ -35,10 +35,10 @@ def start_autosave(edit_instance):
 def stop_autosave(edit_instance):
     """stop the autosave timer and remove backup files"""
     for buf in edit_instance.buffers:
-        backup_filename = buf.filename + "~"
+        autosave_fn = get_autosave_filename(buf.filename)
         if not buf.filename == edit_instance.UNNAMED_FILENAME and \
-           os.path.isfile(backup_filename):
-            os.remove(backup_filename)
+           os.path.isfile(autosave_fn):
+            os.remove(autosave_fn)
     gobject.source_remove(edit_instance.autosave_timeout_id)
 
 def autosave_timeout(edit_instance):
@@ -52,11 +52,23 @@ def autosave_timeout(edit_instance):
             edit_instance.autosave_elapsed += 1
     return True
 
+def get_autosave_filename(filename):
+    """get the filename autosave would happen to"""
+    SUFFIX = ".pyroom-autosave"
+    autosave_filename = os.path.join(
+        os.path.dirname(filename),
+        ".%s%s" % (os.path.basename(filename), SUFFIX)
+    )
+    return autosave_filename
+
 def autosave(edit_instance):
     """save all open files that have been saved before"""
     for buf in edit_instance.buffers:
         if not buf.filename == edit_instance.UNNAMED_FILENAME:
-            backup_file = open(buf.filename + '~', 'w')
+            backup_file = open(
+                get_autosave_filename(buf.filename),
+                'w'
+            )
             try:
                 backup_file.write(
                     buf.get_text(buf.get_start_iter(), buf.get_end_iter())
