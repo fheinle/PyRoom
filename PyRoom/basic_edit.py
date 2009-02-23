@@ -486,7 +486,7 @@ Open those instead of the original file?''')
         restore_dialog.show_all()
         resp = restore_dialog.run()
         restore_dialog.destroy()
-        return resp == gtk.STOCK_OPEN
+        return resp == -3
 
     def open_file(self):
         """ Open file """
@@ -506,10 +506,23 @@ Open those instead of the original file?''')
 
     def open_file_no_chooser(self, filename):
         """ Open specified file """
+        def check_backup(filename):
+            """check if restore from backup is an option
+
+            returns backup filename if there's a backup file and
+                    user wants to restore from it, else original filename
+            """
+            fname = autosave.get_autosave_filename(filename) 
+            if os.path.isfile(fname):
+                if self.ask_restore():
+                    return fname
+            return filename
         buf = self.new_buffer()
         buf.filename = filename
+        filename_to_open = check_backup(filename)
+        
         try:
-            buffer_file = open(buf.filename, 'r')
+            buffer_file = open(filename_to_open, 'r')
             buf = self.buffers[self.current]
             buf.begin_not_undoable_action()
             utf8 = unicode(buffer_file.read(), 'utf-8')
@@ -518,16 +531,16 @@ Open those instead of the original file?''')
             buffer_file.close()
         except IOError, (errno, strerror):
             errortext = _('Unable to open %(filename)s.' % {
-                'filename': buf.filename})
+                'filename': filename_to_open})
             if errno == 13:
                 errortext += _(' You do not have permission to open \
 the file.')
             if not errno == 2:
                 raise PyroomError(errortext)
         except:
-            raise PyroomError(_('Unable to open %s\n' % buf.filename))
+            raise PyroomError(_('Unable to open %s\n' % filename_to_open))
         else:
-            self.status.set_text(_('File %s open') % buf.filename)
+            self.status.set_text(_('File %s open') % filename_to_open)
 
     def save_file(self):
         """ Save file """
@@ -641,10 +654,7 @@ continue editing your document.")
 
     def close_buffer(self):
         """ Close current buffer """
-
-
         if len(self.buffers) > 1:
-
             self.buffers.pop(self.current)
             self.current = min(len(self.buffers) - 1, self.current)
             self.set_buffer(self.current)
