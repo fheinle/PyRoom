@@ -143,13 +143,13 @@ class Preferences(object):
     """our main preferences object, to be passed around where needed"""
     def __init__(self, gui, pyroom_config):
         self.pyroom_config = pyroom_config
+        self.graphical = gui
         self.wTree = gtk.glade.XML(os.path.join(
             pyroom_config.pyroom_absolute_path, "interface.glade"),
             "dialog-preferences")
 
         # Defining widgets needed
         self.window = self.wTree.get_widget("dialog-preferences")
-        self.fontpreference = self.wTree.get_widget("fontbutton")
         self.colorpreference = self.wTree.get_widget("colorbutton")
         self.textboxbgpreference = self.wTree.get_widget("textboxbgbutton")
         self.bgpreference = self.wTree.get_widget("bgbutton")
@@ -165,8 +165,12 @@ class Preferences(object):
         self.autosave_spinbutton = self.wTree.get_widget("autosavetime")
         self.linespacing_spinbutton = self.wTree.get_widget("linespacing")
         self.save_custom_button = self.wTree.get_widget("save_custom_theme")
-
-        self.graphical = gui
+        self.custom_font_preference = self.wTree.get_widget("fontbutton1")
+        self.font_radios = {
+            'doc':self.wTree.get_widget("radio_doc_font"),
+            'mono':self.wTree.get_widget("radio_mono_font"),
+            'custom':self.wTree.get_widget("radio_custom_font")
+        }
 
         # Setting up config parser
         self.customfile = FailsafeConfigParser()
@@ -235,7 +239,6 @@ class Preferences(object):
             'value-changed', self.changelinespacing
         )
         self.presetscombobox.connect('changed', self.presetchanged)
-        self.fontpreference.connect('font-set', self.customchanged)
         self.colorpreference.connect('color-set', self.customchanged)
         self.textboxbgpreference.connect('color-set', self.customchanged)
         self.bgpreference.connect('color-set', self.customchanged)
@@ -247,7 +250,6 @@ class Preferences(object):
 
     def getcustomdata(self):
         """reads custom themes"""
-        self.fontname = self.fontpreference.get_font_name()
         self.fontsize = int(self.fontname[-2:])
         self.fontname = self.fontname[:-2]
         self.colorname = gtk.gdk.Color.to_string(
@@ -335,7 +337,6 @@ class Preferences(object):
         parse_color = lambda x: gtk.gdk.color_parse(
             self.graphical.theme[x]
         )
-        self.fontpreference.set_font_name(self.fontname)
         self.colorpreference.set_color(parse_color('foreground'))
         self.textboxbgpreference.set_color(parse_color('textboxbg'))
         self.bgpreference.set_color(parse_color('background'))
@@ -387,7 +388,6 @@ class Preferences(object):
             parse_color = lambda x: gtk.gdk.color_parse(
                 self.graphical.theme[x]
             )
-            self.fontpreference.set_font_name(self.fontname)
             self.colorpreference.set_color(parse_color('foreground'))
             self.textboxbgpreference.set_color(parse_color('textboxbg'))
             self.bgpreference.set_color(parse_color('background'))
