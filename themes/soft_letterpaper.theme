@@ -1,0 +1,11 @@
+[theme]
+name = Soft LetterPaper
+background = #e6e6e6
+textboxbg = #f2f2f2
+foreground = #212121
+linenumbers = #5E4803
+border = #6f6f6f
+info = #AE8400
+padding = 8
+width = 0.46
+height = 0.75
