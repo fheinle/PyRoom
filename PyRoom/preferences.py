@@ -41,6 +41,8 @@ DEFAULT_CONF = {
         'theme':'green',
         'showborder':'1',
         'linespacing':'2',
+        'custom_font':'Sans 12',
+        'use_font_type':'custom',
     },
     'editor':{
         'session':'True',
