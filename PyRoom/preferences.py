@@ -150,11 +150,7 @@ class Preferences(object):
             pyroom_config.pyroom_absolute_path, "interface.glade"),
             "dialog-preferences")
 
-        try:
-            import gconf
-            self.gconf_client = gconf.Client()
-        except ImportError:
-            self.gconf_client = False
+        self.gnome_fonts = self.get_gnome_fonts()
         # Defining widgets needed
         self.window = self.wTree.get_widget("dialog-preferences")
         self.colorpreference = self.wTree.get_widget("colorbutton")
@@ -182,7 +178,7 @@ class Preferences(object):
         }
         for widget in self.font_radios.values():
             if not widget.get_name() == 'radio_custom_font':
-                widget.set_sensitive(bool(self.gconf_client))
+                widget.set_sensitive(bool(self.gnome_fonts))
 
         # Setting up config parser
         self.customfile = FailsafeConfigParser()
@@ -265,6 +261,25 @@ class Preferences(object):
         self.custom_font_preference.connect('font-set', self.change_font)
         self.set_font()
 
+    def get_gnome_fonts(self):
+        """test if gnome font settings exist"""
+        try:
+            import gconf
+        except ImportError:
+            return
+        gconf_client = gconf.Client()
+        fonts = {'document':'', 'monospace':''}
+        try:
+            for font in fonts.keys():
+                fonts[font] = gconf_client.get_value(
+                    '/desktop/gnome/interface/%s_font_name' % 
+                    font
+                )
+        except ValueError:
+            return
+        else:
+            return fonts
+
     def change_font(self, widget):
         if widget.get_name() in ('fontbutton1', 'radio_custom_font'):
             self.custom_font_preference.set_sensitive(True)
@@ -280,14 +295,11 @@ class Preferences(object):
     def set_font(self):
         """set font according to settings"""
         if self.config.get('visual', 'use_font_type') == 'custom' or\
-           not self.gconf_client:
+           not self.gnome_fonts:
             new_font = self.config.get('visual', 'custom_font')
         else:
             font_type = self.config.get('visual', 'use_font_type')
-            new_font = self.gconf_client.get_value(
-                '/desktop/gnome/interface/%s_font_name' % 
-                font_type
-            )
+            new_font = self.gnome_fonts[font_type]
         self.graphical.textbox.modify_font(pango.FontDescription(new_font))
         
     def getcustomdata(self):
