@@ -256,6 +256,17 @@ class Preferences(object):
         self.heightpreference.connect('value-changed', self.customchanged)
         self.widthpreference.connect('value-changed', self.customchanged)
         self.save_custom_button.connect('clicked', self.save_custom_theme)
+        for widget in self.font_radios.values():
+            widget.connect('toggled', self.change_font)
+
+    def change_font(self, widget):
+        if widget.get_name() == 'radio_custom_font':
+            new_font = self.custom_font_preference.get_font_name()
+        else:
+            new_font = self.gconf_client.get_value(
+                '/desktop/gnome/interface/%s_font_name' % 
+                widget.get_name().split('_')[1]
+            )
         
     def getcustomdata(self):
         """reads custom themes"""
