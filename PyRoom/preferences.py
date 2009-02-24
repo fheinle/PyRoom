@@ -260,6 +260,7 @@ class Preferences(object):
         for widget in self.font_radios.values():
             widget.connect('toggled', self.change_font)
         self.custom_font_preference.connect('font-set', self.change_font)
+        self.set_font()
 
     def change_font(self, widget):
         if widget.get_name() in ('fontbutton1', 'radio_custom_font'):
@@ -268,11 +269,20 @@ class Preferences(object):
             self.config.set('visual', 'custom_font', new_font)
         else:
             font_type = widget.get_name().split('_')[1]
+            self.config.set('visual', 'use_font_type', font_type)
+        self.set_font()
+    
+    def set_font(self):
+        """set font according to settings"""
+        if self.config.get('visual', 'use_font_type') == 'custom' or\
+           not self.gconf_client:
+            new_font = self.config.get('visual', 'custom_font')
+        else:
+            font_type = self.config.get('visual', 'use_font_type')
             new_font = self.gconf_client.get_value(
                 '/desktop/gnome/interface/%s_font_name' % 
                 font_type
             )
-            self.config.set('visual', 'use_font_type', font_type)
         self.graphical.textbox.modify_font(pango.FontDescription(new_font))
         
     def getcustomdata(self):
