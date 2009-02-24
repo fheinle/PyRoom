@@ -57,3 +57,4 @@ Bugfixes
 * switching buffer scrolls to cursor position (LP:#270350)
 * cursor placed at file bottom on opened files (LP:#188908)
 * allow using pyroom for opening files from GUIS (LP:#282009)
+* consistent capitalisation of themes (LP:#334004)
