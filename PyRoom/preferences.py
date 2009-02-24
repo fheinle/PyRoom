@@ -144,6 +144,7 @@ class Preferences(object):
     """our main preferences object, to be passed around where needed"""
     def __init__(self, gui, pyroom_config):
         self.pyroom_config = pyroom_config
+        self.config = self.pyroom_config.config
         self.graphical = gui
         self.wTree = gtk.glade.XML(os.path.join(
             pyroom_config.pyroom_absolute_path, "interface.glade"),
@@ -172,13 +173,16 @@ class Preferences(object):
         self.linespacing_spinbutton = self.wTree.get_widget("linespacing")
         self.save_custom_button = self.wTree.get_widget("save_custom_theme")
         self.custom_font_preference = self.wTree.get_widget("fontbutton1")
+        if not self.config.get('visual', 'use_font_type') == 'custom':
+            self.custom_font_preference.set_sensitive(False)
         self.font_radios = {
             'document':self.wTree.get_widget("radio_document_font"),
             'monospace':self.wTree.get_widget("radio_monospace_font"),
             'custom':self.wTree.get_widget("radio_custom_font")
         }
         for widget in self.font_radios.values():
-            widget.set_sensitive(bool(self.gconf_client))
+            if not widget.get_name() == 'radio_custom_font':
+                widget.set_sensitive(bool(self.gconf_client))
 
         # Setting up config parser
         self.customfile = FailsafeConfigParser()
@@ -187,7 +191,6 @@ class Preferences(object):
         )
         if not self.customfile.has_section('theme'):
             self.customfile.add_section('theme')
-        self.config = self.pyroom_config.config
 
         # Getting preferences from conf file
         self.activestyle = self.config.get("visual", "theme")
@@ -264,10 +267,12 @@ class Preferences(object):
 
     def change_font(self, widget):
         if widget.get_name() in ('fontbutton1', 'radio_custom_font'):
+            self.custom_font_preference.set_sensitive(True)
             new_font = self.custom_font_preference.get_font_name()
             self.config.set('visual', 'use_font_type', 'custom')
             self.config.set('visual', 'custom_font', new_font)
         else:
+            self.custom_font_preference.set_sensitive(False)
             font_type = widget.get_name().split('_')[1]
             self.config.set('visual', 'use_font_type', font_type)
         self.set_font()
