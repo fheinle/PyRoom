@@ -176,6 +176,8 @@ class Preferences(object):
             'mono':self.wTree.get_widget("radio_mono_font"),
             'custom':self.wTree.get_widget("radio_custom_font")
         }
+        for widget in self.font_radios.values():
+            widget.set_sensitive(bool(self.gconf_client))
 
         # Setting up config parser
         self.customfile = FailsafeConfigParser()
@@ -207,9 +209,11 @@ class Preferences(object):
         self.autosave_spinbutton.set_value(float(self.autosave_time))
         self.autosave.set_active(self.autosavestate)
         self.showborderbutton.set_active(self.pyroom_config.showborderstate)
+        font_type = self.config.get('visual', 'use_font_type')
+        self.font_radios[font_type].set_active(True)
+        
         self.toggleautosave(self.autosave)
 
-        
         self.window.set_transient_for(self.graphical.window)
 
         self.stylesvalues = {'custom': 0}
@@ -252,7 +256,7 @@ class Preferences(object):
         self.heightpreference.connect('value-changed', self.customchanged)
         self.widthpreference.connect('value-changed', self.customchanged)
         self.save_custom_button.connect('clicked', self.save_custom_theme)
-
+        
     def getcustomdata(self):
         """reads custom themes"""
         self.fontsize = int(self.fontname[-2:])
