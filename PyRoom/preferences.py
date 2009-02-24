@@ -148,6 +148,11 @@ class Preferences(object):
             pyroom_config.pyroom_absolute_path, "interface.glade"),
             "dialog-preferences")
 
+        try:
+            import gconf
+            self.gconf_client = gconf.Client()
+        except ImportError:
+            self.gconf_client = False
         # Defining widgets needed
         self.window = self.wTree.get_widget("dialog-preferences")
         self.colorpreference = self.wTree.get_widget("colorbutton")
