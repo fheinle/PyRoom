@@ -28,6 +28,7 @@ theme created via the dialog
 
 import gtk
 import gtk.glade
+import pango
 import os
 from ConfigParser import SafeConfigParser, NoOptionError
 from xdg.BaseDirectory import xdg_config_home, xdg_data_home
@@ -41,6 +42,8 @@ DEFAULT_CONF = {
         'theme':'green',
         'showborder':'1',
         'linespacing':'2',
+        'custom_font':'Sans 12',
+        'use_font_type':'custom',
     },
     'editor':{
         'session':'True',
@@ -141,13 +144,19 @@ class Preferences(object):
     """our main preferences object, to be passed around where needed"""
     def __init__(self, gui, pyroom_config):
         self.pyroom_config = pyroom_config
+        self.config = self.pyroom_config.config
+        self.graphical = gui
         self.wTree = gtk.glade.XML(os.path.join(
             pyroom_config.pyroom_absolute_path, "interface.glade"),
             "dialog-preferences")
 
+        try:
+            import gconf
+            self.gconf_client = gconf.Client()
+        except ImportError:
+            self.gconf_client = False
         # Defining widgets needed
         self.window = self.wTree.get_widget("dialog-preferences")
-        self.fontpreference = self.wTree.get_widget("fontbutton")
         self.colorpreference = self.wTree.get_widget("colorbutton")
         self.textboxbgpreference = self.wTree.get_widget("textboxbgbutton")
         self.bgpreference = self.wTree.get_widget("bgbutton")
@@ -163,8 +172,17 @@ class Preferences(object):
         self.autosave_spinbutton = self.wTree.get_widget("autosavetime")
         self.linespacing_spinbutton = self.wTree.get_widget("linespacing")
         self.save_custom_button = self.wTree.get_widget("save_custom_theme")
-
-        self.graphical = gui
+        self.custom_font_preference = self.wTree.get_widget("fontbutton1")
+        if not self.config.get('visual', 'use_font_type') == 'custom':
+            self.custom_font_preference.set_sensitive(False)
+        self.font_radios = {
+            'document':self.wTree.get_widget("radio_document_font"),
+            'monospace':self.wTree.get_widget("radio_monospace_font"),
+            'custom':self.wTree.get_widget("radio_custom_font")
+        }
+        for widget in self.font_radios.values():
+            if not widget.get_name() == 'radio_custom_font':
+                widget.set_sensitive(bool(self.gconf_client))
 
         # Setting up config parser
         self.customfile = FailsafeConfigParser()
@@ -173,7 +191,6 @@ class Preferences(object):
         )
         if not self.customfile.has_section('theme'):
             self.customfile.add_section('theme')
-        self.config = self.pyroom_config.config
 
         # Getting preferences from conf file
         self.activestyle = self.config.get("visual", "theme")
@@ -196,9 +213,11 @@ class Preferences(object):
         self.autosave_spinbutton.set_value(float(self.autosave_time))
         self.autosave.set_active(self.autosavestate)
         self.showborderbutton.set_active(self.pyroom_config.showborderstate)
+        font_type = self.config.get('visual', 'use_font_type')
+        self.font_radios[font_type].set_active(True)
+        
         self.toggleautosave(self.autosave)
 
-        
         self.window.set_transient_for(self.graphical.window)
 
         self.stylesvalues = {'custom': 0}
@@ -233,7 +252,6 @@ class Preferences(object):
             'value-changed', self.changelinespacing
         )
         self.presetscombobox.connect('changed', self.presetchanged)
-        self.fontpreference.connect('font-set', self.customchanged)
         self.colorpreference.connect('color-set', self.customchanged)
         self.textboxbgpreference.connect('color-set', self.customchanged)
         self.bgpreference.connect('color-set', self.customchanged)
@@ -242,12 +260,38 @@ class Preferences(object):
         self.heightpreference.connect('value-changed', self.customchanged)
         self.widthpreference.connect('value-changed', self.customchanged)
         self.save_custom_button.connect('clicked', self.save_custom_theme)
+        for widget in self.font_radios.values():
+            widget.connect('toggled', self.change_font)
+        self.custom_font_preference.connect('font-set', self.change_font)
+        self.set_font()
 
+    def change_font(self, widget):
+        if widget.get_name() in ('fontbutton1', 'radio_custom_font'):
+            self.custom_font_preference.set_sensitive(True)
+            new_font = self.custom_font_preference.get_font_name()
+            self.config.set('visual', 'use_font_type', 'custom')
+            self.config.set('visual', 'custom_font', new_font)
+        else:
+            self.custom_font_preference.set_sensitive(False)
+            font_type = widget.get_name().split('_')[1]
+            self.config.set('visual', 'use_font_type', font_type)
+        self.set_font()
+    
+    def set_font(self):
+        """set font according to settings"""
+        if self.config.get('visual', 'use_font_type') == 'custom' or\
+           not self.gconf_client:
+            new_font = self.config.get('visual', 'custom_font')
+        else:
+            font_type = self.config.get('visual', 'use_font_type')
+            new_font = self.gconf_client.get_value(
+                '/desktop/gnome/interface/%s_font_name' % 
+                font_type
+            )
+        self.graphical.textbox.modify_font(pango.FontDescription(new_font))
+        
     def getcustomdata(self):
         """reads custom themes"""
-        self.fontname = self.fontpreference.get_font_name()
-        self.fontsize = int(self.fontname[-2:])
-        self.fontname = self.fontname[:-2]
         self.colorname = gtk.gdk.Color.to_string(
                                 self.colorpreference.get_color())
         self.textboxbgname = gtk.gdk.Color.to_string(
@@ -306,8 +350,6 @@ class Preferences(object):
             self.customfile.set("theme", "foreground", self.colorname)
             self.customfile.set("theme", "textboxbg", self.textboxbgname)
             self.customfile.set("theme", "border", self.bordername)
-            self.customfile.set("theme", "font", self.fontname)
-            self.customfile.set("theme", "fontsize", str(self.fontsize))
             self.customfile.set("theme", "padding", str(self.paddingname))
             self.customfile.set("theme", "width", str(self.widthname))
             self.customfile.set("theme", "height", str(self.heightname))
@@ -326,14 +368,12 @@ class Preferences(object):
         self.presetchanged(widget)
 
     def fill_pref_dialog(self):
-        self.fontname = "%s %s" % (
-            self.graphical.theme["font"],
-            self.graphical.theme["fontsize"]
+        self.custom_font_preference.set_font_name(
+            self.config.get('visual', 'custom_font')
         )
         parse_color = lambda x: gtk.gdk.color_parse(
             self.graphical.theme[x]
         )
-        self.fontpreference.set_font_name(self.fontname)
         self.colorpreference.set_color(parse_color('foreground'))
         self.textboxbgpreference.set_color(parse_color('textboxbg'))
         self.bgpreference.set_color(parse_color('background'))
@@ -365,8 +405,6 @@ class Preferences(object):
                     'lines': self.colorname,
                     'border': self.bordername,
                     'info': self.colorname,
-                    'font': self.fontname,
-                    'fontsize': self.fontsize,
                     'padding': self.paddingname,
                     'height': self.heightname,
                     'width': self.widthname,
@@ -378,14 +416,9 @@ class Preferences(object):
         else:
             new_theme = Theme(active_theme)
             self.graphical.theme = new_theme
-            self.fontname = "%s %s" % (
-                self.graphical.theme["font"],
-                self.graphical.theme["fontsize"]
-            )
             parse_color = lambda x: gtk.gdk.color_parse(
                 self.graphical.theme[x]
             )
-            self.fontpreference.set_font_name(self.fontname)
             self.colorpreference.set_color(parse_color('foreground'))
             self.textboxbgpreference.set_color(parse_color('textboxbg'))
             self.bgpreference.set_color(parse_color('background'))

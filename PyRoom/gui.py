@@ -197,13 +197,7 @@ class GUI(object):
 
         padding = int(self.theme['padding'])
         self.textbox.set_border_width(padding)
-
-        # Font
-        font_and_size = "%s %d" % (self.theme['font'],
-                                   float(self.theme['fontsize'])
-                                  )
-        self.textbox.modify_font(pango.FontDescription(font_and_size))
-
+        
         # Screen geometry
         screen = gtk.gdk.screen_get_default() 
         root_window = screen.get_root_window() 

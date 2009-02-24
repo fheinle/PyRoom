@@ -10,6 +10,9 @@ User visible changes
 * autosave now saves filename.txt~ instead of to /tmp (LP:#323621)
 * removed line numbering (dropped gtksourceview, see LP:#297155)
 * offer to restore from autosave backups (LP:#330260)
+* per-theme fonts replaced with global font selection
+  also offers to use gnome default fonts if applicable, i.e. if gconf
+  bindings for gconf are available (LP:#303431)
 
 Noteable background changes
 ---------------------------
