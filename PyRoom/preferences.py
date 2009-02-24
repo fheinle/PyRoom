@@ -272,13 +272,11 @@ class Preferences(object):
                 '/desktop/gnome/interface/%s_font_name' % 
                 font_type
             )
-            self.config.set('visual', 'use_font_type', new_font)
+            self.config.set('visual', 'use_font_type', font_type)
         self.graphical.textbox.modify_font(pango.FontDescription(new_font))
         
     def getcustomdata(self):
         """reads custom themes"""
-        self.fontsize = int(self.fontname[-2:])
-        self.fontname = self.fontname[:-2]
         self.colorname = gtk.gdk.Color.to_string(
                                 self.colorpreference.get_color())
         self.textboxbgname = gtk.gdk.Color.to_string(
@@ -337,8 +335,6 @@ class Preferences(object):
             self.customfile.set("theme", "foreground", self.colorname)
             self.customfile.set("theme", "textboxbg", self.textboxbgname)
             self.customfile.set("theme", "border", self.bordername)
-            self.customfile.set("theme", "font", self.fontname)
-            self.customfile.set("theme", "fontsize", str(self.fontsize))
             self.customfile.set("theme", "padding", str(self.paddingname))
             self.customfile.set("theme", "width", str(self.widthname))
             self.customfile.set("theme", "height", str(self.heightname))
@@ -357,9 +353,8 @@ class Preferences(object):
         self.presetchanged(widget)
 
     def fill_pref_dialog(self):
-        self.fontname = "%s %s" % (
-            self.graphical.theme["font"],
-            self.graphical.theme["fontsize"]
+        self.custom_font_preference.set_font_name(
+            self.config.get('visual', 'custom_font')
         )
         parse_color = lambda x: gtk.gdk.color_parse(
             self.graphical.theme[x]
@@ -395,8 +390,6 @@ class Preferences(object):
                     'lines': self.colorname,
                     'border': self.bordername,
                     'info': self.colorname,
-                    'font': self.fontname,
-                    'fontsize': self.fontsize,
                     'padding': self.paddingname,
                     'height': self.heightname,
                     'width': self.widthname,
@@ -408,10 +401,6 @@ class Preferences(object):
         else:
             new_theme = Theme(active_theme)
             self.graphical.theme = new_theme
-            self.fontname = "%s %s" % (
-                self.graphical.theme["font"],
-                self.graphical.theme["fontsize"]
-            )
             parse_color = lambda x: gtk.gdk.color_parse(
                 self.graphical.theme[x]
             )
