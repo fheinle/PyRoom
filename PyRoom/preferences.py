@@ -172,8 +172,8 @@ class Preferences(object):
         self.save_custom_button = self.wTree.get_widget("save_custom_theme")
         self.custom_font_preference = self.wTree.get_widget("fontbutton1")
         self.font_radios = {
-            'doc':self.wTree.get_widget("radio_doc_font"),
-            'mono':self.wTree.get_widget("radio_mono_font"),
+            'document':self.wTree.get_widget("radio_document_font"),
+            'monospace':self.wTree.get_widget("radio_monospace_font"),
             'custom':self.wTree.get_widget("radio_custom_font")
         }
         for widget in self.font_radios.values():

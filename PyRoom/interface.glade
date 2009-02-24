@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Tue Feb 24 13:56:14 2009 -->
+<!--Generated with glade3 3.4.5 on Tue Feb 24 14:47:55 2009 -->
 <glade-interface>
   <widget class="GtkDialog" id="dialog-preferences">
     <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
@@ -238,7 +238,7 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkRadioButton" id="radio_doc_font">
+                          <widget class="GtkRadioButton" id="radio_document_font">
                             <property name="visible">True</property>
                             <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
@@ -271,7 +271,7 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkRadioButton" id="radio_mono_font">
+                          <widget class="GtkRadioButton" id="radio_monospace_font">
                             <property name="visible">True</property>
                             <property name="sensitive">False</property>
                             <property name="can_focus">True</property>
@@ -279,7 +279,7 @@
                             <property name="use_underline">True</property>
                             <property name="response_id">0</property>
                             <property name="draw_indicator">True</property>
-                            <property name="group">radio_doc_font</property>
+                            <property name="group">radio_document_font</property>
                           </widget>
                           <packing>
                             <property name="position">1</property>
@@ -313,7 +313,7 @@
                             <property name="response_id">0</property>
                             <property name="active">True</property>
                             <property name="draw_indicator">True</property>
-                            <property name="group">radio_doc_font</property>
+                            <property name="group">radio_document_font</property>
                           </widget>
                           <packing>
                             <property name="position">1</property>
@@ -387,13 +387,18 @@
                         <property name="visible">True</property>
                         <property name="n_columns">3</property>
                         <child>
-                          <widget class="GtkLabel" id="presetslabel">
+                          <widget class="GtkButton" id="save_custom_theme">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">Presets:</property>
-                            <property name="justify">GTK_JUSTIFY_CENTER</property>
+                            <property name="sensitive">False</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="label" translatable="yes">_Save</property>
+                            <property name="use_underline">True</property>
+                            <property name="response_id">0</property>
                           </widget>
                           <packing>
-                            <property name="y_options"></property>
+                            <property name="left_attach">2</property>
+                            <property name="right_attach">3</property>
                           </packing>
                         </child>
                         <child>
@@ -408,18 +413,13 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkButton" id="save_custom_theme">
+                          <widget class="GtkLabel" id="presetslabel">
                             <property name="visible">True</property>
-                            <property name="sensitive">False</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="label" translatable="yes">_Save</property>
-                            <property name="use_underline">True</property>
-                            <property name="response_id">0</property>
+                            <property name="label" translatable="yes">Presets:</property>
+                            <property name="justify">GTK_JUSTIFY_CENTER</property>
                           </widget>
                           <packing>
-                            <property name="left_attach">2</property>
-                            <property name="right_attach">3</property>
+                            <property name="y_options"></property>
                           </packing>
                         </child>
                       </widget>
@@ -463,161 +463,34 @@
                         <property name="column_spacing">6</property>
                         <property name="homogeneous">True</property>
                         <child>
-                          <widget class="GtkColorButton" id="textboxbgbutton">
+                          <widget class="GtkHBox" id="hbox13">
                             <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="receives_default">True</property>
-                            <property name="response_id">0</property>
-                            <property name="color">#000000000000</property>
+                            <child>
+                              <widget class="GtkSpinButton" id="widthtext">
+                                <property name="visible">True</property>
+                                <property name="can_focus">True</property>
+                                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                                <property name="adjustment">5 5 95 1 10 0</property>
+                                <property name="climb_rate">1</property>
+                              </widget>
+                            </child>
+                            <child>
+                              <widget class="GtkLabel" id="label18">
+                                <property name="visible">True</property>
+                                <property name="label" translatable="yes"> %</property>
+                              </widget>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">False</property>
+                                <property name="position">1</property>
+                              </packing>
+                            </child>
                           </widget>
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="right_attach">2</property>
-                            <property name="top_attach">2</property>
-                            <property name="bottom_attach">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="textboxbackground">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Textbox background</property>
-                          </widget>
-                          <packing>
-                            <property name="top_attach">2</property>
-                            <property name="bottom_attach">3</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="bglabel">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Background color:</property>
-                            <property name="use_underline">True</property>
-                            <property name="justify">GTK_JUSTIFY_CENTER</property>
-                            <property name="mnemonic_widget">bgbutton</property>
-                            <property name="width_chars">10</property>
-                          </widget>
-                          <packing>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="borderlabel">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Border color:</property>
-                            <property name="justify">GTK_JUSTIFY_CENTER</property>
-                            <property name="width_chars">10</property>
-                          </widget>
-                          <packing>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="colorlabel">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Text color:</property>
-                            <property name="justify">GTK_JUSTIFY_CENTER</property>
-                            <property name="width_chars">10</property>
-                          </widget>
-                          <packing>
-                            <property name="top_attach">3</property>
-                            <property name="bottom_attach">4</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="paddinglabel">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Padding:</property>
-                            <property name="justify">GTK_JUSTIFY_CENTER</property>
-                            <property name="width_chars">10</property>
-                          </widget>
-                          <packing>
-                            <property name="top_attach">6</property>
-                            <property name="bottom_attach">7</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="heightlabel">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Height:</property>
-                            <property name="width_chars">10</property>
-                          </widget>
-                          <packing>
-                            <property name="top_attach">4</property>
-                            <property name="bottom_attach">5</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkLabel" id="widthlabel">
-                            <property name="visible">True</property>
-                            <property name="label" translatable="yes">Width:</property>
-                            <property name="justify">GTK_JUSTIFY_CENTER</property>
-                            <property name="width_chars">10</property>
-                          </widget>
-                          <packing>
                             <property name="top_attach">5</property>
                             <property name="bottom_attach">6</property>
-                            <property name="y_options"></property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkColorButton" id="bgbutton">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="response_id">0</property>
-                            <property name="use_alpha">True</property>
-                          </widget>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkColorButton" id="borderbutton">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="response_id">0</property>
-                            <property name="use_alpha">True</property>
-                          </widget>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">1</property>
-                            <property name="bottom_attach">2</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkColorButton" id="colorbutton">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="response_id">0</property>
-                            <property name="use_alpha">True</property>
-                            <signal name="color_set" handler="on_colorbutton1_color_set"/>
-                          </widget>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">3</property>
-                            <property name="bottom_attach">4</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <widget class="GtkSpinButton" id="paddingtext">
-                            <property name="visible">True</property>
-                            <property name="can_focus">True</property>
-                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                            <property name="adjustment">0 0 100 1 10 0</property>
-                            <property name="climb_rate">1</property>
-                          </widget>
-                          <packing>
-                            <property name="left_attach">1</property>
-                            <property name="right_attach">2</property>
-                            <property name="top_attach">6</property>
-                            <property name="bottom_attach">7</property>
                           </packing>
                         </child>
                         <child>
@@ -652,34 +525,161 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="GtkHBox" id="hbox13">
+                          <widget class="GtkSpinButton" id="paddingtext">
                             <property name="visible">True</property>
-                            <child>
-                              <widget class="GtkSpinButton" id="widthtext">
-                                <property name="visible">True</property>
-                                <property name="can_focus">True</property>
-                                <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
-                                <property name="adjustment">5 5 95 1 10 0</property>
-                                <property name="climb_rate">1</property>
-                              </widget>
-                            </child>
-                            <child>
-                              <widget class="GtkLabel" id="label18">
-                                <property name="visible">True</property>
-                                <property name="label" translatable="yes"> %</property>
-                              </widget>
-                              <packing>
-                                <property name="expand">False</property>
-                                <property name="fill">False</property>
-                                <property name="position">1</property>
-                              </packing>
-                            </child>
+                            <property name="can_focus">True</property>
+                            <property name="events">GDK_POINTER_MOTION_MASK | GDK_POINTER_MOTION_HINT_MASK | GDK_BUTTON_PRESS_MASK | GDK_BUTTON_RELEASE_MASK</property>
+                            <property name="adjustment">0 0 100 1 10 0</property>
+                            <property name="climb_rate">1</property>
                           </widget>
                           <packing>
                             <property name="left_attach">1</property>
                             <property name="right_attach">2</property>
+                            <property name="top_attach">6</property>
+                            <property name="bottom_attach">7</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkColorButton" id="colorbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="response_id">0</property>
+                            <property name="use_alpha">True</property>
+                            <signal name="color_set" handler="on_colorbutton1_color_set"/>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">3</property>
+                            <property name="bottom_attach">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkColorButton" id="borderbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="response_id">0</property>
+                            <property name="use_alpha">True</property>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">1</property>
+                            <property name="bottom_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkColorButton" id="bgbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="response_id">0</property>
+                            <property name="use_alpha">True</property>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="widthlabel">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Width:</property>
+                            <property name="justify">GTK_JUSTIFY_CENTER</property>
+                            <property name="width_chars">10</property>
+                          </widget>
+                          <packing>
                             <property name="top_attach">5</property>
                             <property name="bottom_attach">6</property>
+                            <property name="y_options"></property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="heightlabel">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Height:</property>
+                            <property name="width_chars">10</property>
+                          </widget>
+                          <packing>
+                            <property name="top_attach">4</property>
+                            <property name="bottom_attach">5</property>
+                            <property name="y_options"></property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="paddinglabel">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Padding:</property>
+                            <property name="justify">GTK_JUSTIFY_CENTER</property>
+                            <property name="width_chars">10</property>
+                          </widget>
+                          <packing>
+                            <property name="top_attach">6</property>
+                            <property name="bottom_attach">7</property>
+                            <property name="y_options"></property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="colorlabel">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Text color:</property>
+                            <property name="justify">GTK_JUSTIFY_CENTER</property>
+                            <property name="width_chars">10</property>
+                          </widget>
+                          <packing>
+                            <property name="top_attach">3</property>
+                            <property name="bottom_attach">4</property>
+                            <property name="y_options"></property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="borderlabel">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Border color:</property>
+                            <property name="justify">GTK_JUSTIFY_CENTER</property>
+                            <property name="width_chars">10</property>
+                          </widget>
+                          <packing>
+                            <property name="top_attach">1</property>
+                            <property name="bottom_attach">2</property>
+                            <property name="y_options"></property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="bglabel">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Background color:</property>
+                            <property name="use_underline">True</property>
+                            <property name="justify">GTK_JUSTIFY_CENTER</property>
+                            <property name="mnemonic_widget">bgbutton</property>
+                            <property name="width_chars">10</property>
+                          </widget>
+                          <packing>
+                            <property name="y_options"></property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkLabel" id="textboxbackground">
+                            <property name="visible">True</property>
+                            <property name="label" translatable="yes">Textbox background</property>
+                          </widget>
+                          <packing>
+                            <property name="top_attach">2</property>
+                            <property name="bottom_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <widget class="GtkColorButton" id="textboxbgbutton">
+                            <property name="visible">True</property>
+                            <property name="can_focus">True</property>
+                            <property name="receives_default">True</property>
+                            <property name="response_id">0</property>
+                            <property name="color">#000000000000</property>
+                          </widget>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="right_attach">2</property>
+                            <property name="top_attach">2</property>
+                            <property name="bottom_attach">3</property>
                           </packing>
                         </child>
                       </widget>
