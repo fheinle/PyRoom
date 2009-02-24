@@ -28,6 +28,7 @@ theme created via the dialog
 
 import gtk
 import gtk.glade
+import pango
 import os
 from ConfigParser import SafeConfigParser, NoOptionError
 from xdg.BaseDirectory import xdg_config_home, xdg_data_home
@@ -258,15 +259,17 @@ class Preferences(object):
         self.save_custom_button.connect('clicked', self.save_custom_theme)
         for widget in self.font_radios.values():
             widget.connect('toggled', self.change_font)
+        self.custom_font_preference.connect('font-set', self.change_font)
 
     def change_font(self, widget):
-        if widget.get_name() == 'radio_custom_font':
+        if widget.get_name() in ('fontbutton1', 'radio_custom_font'):
             new_font = self.custom_font_preference.get_font_name()
         else:
             new_font = self.gconf_client.get_value(
                 '/desktop/gnome/interface/%s_font_name' % 
                 widget.get_name().split('_')[1]
             )
+        self.graphical.textbox.modify_font(pango.FontDescription(new_font))
         
     def getcustomdata(self):
         """reads custom themes"""
