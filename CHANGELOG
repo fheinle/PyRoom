@@ -13,6 +13,7 @@ User visible changes
 * per-theme fonts replaced with global font selection
   also offers to use gnome default fonts if applicable, i.e. if gconf
   bindings for gconf are available (LP:#303431)
+* allow indenting of paragraph beginnings (LP:#331405)
 
 Noteable background changes
 ---------------------------
