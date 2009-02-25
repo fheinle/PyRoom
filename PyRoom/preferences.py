@@ -463,6 +463,14 @@ class Preferences(object):
         self.dlg = self.wTree.get_widget("dialog-preferences")
         self.dlg.show()
 
+    def toggle_indent(self, widget):
+        """toggle textbox indent"""
+        if self.config.get('visual', 'indent') == '1':
+            self.config.set('visual', 'indent', '0')
+        else:
+            self.config.set('visual', 'indent', '1')
+        self.graphical.apply_theme()
+
     def toggleborder(self, widget):
         """toggle border display"""
         #FIXME just workaround, we should drop pyroom_config entirely
