@@ -298,6 +298,7 @@ class Preferences(object):
             font_type = widget.get_name().split('_')[1]
             self.config.set('visual', 'use_font_type', font_type)
         self.set_font()
+        self.graphical.apply_theme()
     
     def set_font(self):
         """set font according to settings"""
