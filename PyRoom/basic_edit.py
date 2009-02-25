@@ -443,11 +443,6 @@ class BasicEdit(object):
         else:
             self.status.set_text(_('Nothing more to redo!'))
 
-    def toggle_lines(self):
-        """ Toggle lines number """
-        opposite_state = not self.textbox.get_show_line_numbers()
-        self.textbox.set_show_line_numbers(opposite_state)
-
     def ask_restore(self):
         """ask if backups should be restored
         
