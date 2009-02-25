@@ -44,6 +44,7 @@ DEFAULT_CONF = {
         'linespacing':'2',
         'custom_font':'Sans 12',
         'use_font_type':'custom',
+        'indent':0,
     },
     'editor':{
         'session':'True',
