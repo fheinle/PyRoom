@@ -167,6 +167,9 @@ class Preferences(object):
         self.autosave = self.wTree.get_widget("autosavetext")
         self.autosave_spinbutton = self.wTree.get_widget("autosavetime")
         self.linespacing_spinbutton = self.wTree.get_widget("linespacing")
+        self.indent_check = self.wTree.get_widget("indent_check")
+        if self.config.get('visual', 'indent') == '1':
+            self.indent_check.set_active(True)
         self.save_custom_button = self.wTree.get_widget("save_custom_theme")
         self.custom_font_preference = self.wTree.get_widget("fontbutton1")
         if not self.config.get('visual', 'use_font_type') == 'custom':
@@ -246,6 +249,9 @@ class Preferences(object):
         self.autosave_spinbutton.connect('value-changed', self.toggleautosave)
         self.linespacing_spinbutton.connect(
             'value-changed', self.changelinespacing
+        )
+        self.indent_check.connect(
+            'toggled', self.toggle_indent
         )
         self.presetscombobox.connect('changed', self.presetchanged)
         self.colorpreference.connect('color-set', self.customchanged)
