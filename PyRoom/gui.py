@@ -241,6 +241,16 @@ class GUI(object):
             self.boxin.set_border_width(1)
             self.boxout.set_border_width(1)
 
+        # Indent
+        if self.config.get('visual', 'indent') == '1':
+            pango_context = self.textbox.get_pango_context()
+            current_font_size = pango_context.\
+                    get_font_description().\
+                    get_size() / 1024
+            self.textbox.set_indent(current_font_size * 2)
+        else:
+            self.textbox.set_indent(0)
+
     def quit(self):
         """ quit pyroom """
         gtk.main_quit()
