@@ -28,6 +28,8 @@ Bugfixes
 * actually use name field in theme files instead of filenames (LP:#323617)
 * avoid deprecation warning when starting pyroom (LP:#330043)
 * stop autosaving when told to (LP:#329888)
+* stop fading working incorrectly with dark on light themes (LP:#323613)
+* removed outdated information from README (LP:#334958)
 
 pyroom 0.3.2 (2008-12-03)
 =========================

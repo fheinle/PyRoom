@@ -38,26 +38,11 @@ To run pyroom and instruct it to load some existing files, type:
 
   $ pyroom /path/to/file1 /other/path/to/file2
 
-===Graphical Styles===
-
-The default style is "green", which is a green text color in a black background. You can change the chosen style by typing:
-
-  $ pyroom [--style={style name}]
-
-For instance:
-
-  $ pyroom --style=blue
-
-At the time of writing, the available styles are:
-  * blue
-  * green
-  * darkgreen
-
 === Example Usage ===
 
-For example, to load PyRoom and instruct it to use the "darkgreen" style and to load the files "article.txt" and "blogpost.txt", type the following:
+For example, to load PyRoom and instruct it to load the files "article.txt" and "blogpost.txt", type the following:
 
-  $ pyroom --style=darkgreen article.txt blog.txt
+  $ pyroom article.txt blog.txt
 
 ==== Key Bindings ====
 
@@ -65,7 +50,6 @@ There are a few keys allowing you to perform a few useful commands:
 
   * Control-H: Show help in a new buffer
   * Control-I: Show buffer information
-  * Control-L: Toggle line number
   * Control-N: Create a new buffer
   * Control-O: Open a file in a new buffer
   * Control-Q: Quit
