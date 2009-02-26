@@ -1,20 +1,29 @@
 ====== PyRoom Project ======
 
-PyRoom is a fullscreen simple text editor, without a toolbar, a menubar or anything that would distract the user from his most important task: writing.
+PyRoom is a fullscreen simple text editor, without a toolbar, a menubar or
+anything that would distract the user from his most important task: writing.
 
 ===== Dependencies =====
 
-PyRoom depends on Python, PyGTK and gtksourceview. Please refer to your system documentation for information on how to install these modules if they're not currently available.
+PyRoom depends on Python, PyGTK and XDG bindings for Python (python-xdg. Please
+refer to your system documentation for information on how to install these
+modules if they're not currently available.
+
+====== Optional dependency ======
+
+In order to use GNOME default fonts in PyRoom, gconf bindings (python-gconf)
+are recommended.
 
 ===== Installing and Running =====
 
-PyRoom is available as a seutptools enabled package. Installation procedures for those are easy:
+PyRoom is available as a distutils enabled package. Installation procedures
+for those are easy:
 
 Either unpack the tarball 
     
-    $ tar xvfz pyroom.tar.gz
+    $ tar xvfz pyroom*.tar.gz
 
-or check out our bazaar branch for a development version (we try to keep those 
+or check out our bazaar branch for a development version (we try to keep those
 unbroken and ready for production use)
     
     $ bzr branch lp:pyroom
@@ -40,7 +49,8 @@ To run pyroom and instruct it to load some existing files, type:
 
 === Example Usage ===
 
-For example, to load PyRoom and instruct it to load the files "article.txt" and "blogpost.txt", type the following:
+For example, to load PyRoom and instruct it to load the files "article.txt" and
+"blogpost.txt", type the following:
 
   $ pyroom article.txt blog.txt
 
