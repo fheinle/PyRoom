@@ -415,7 +415,7 @@ class BasicEdit(object):
         else:
             status = ''
         self.status.set_text(_('Buffer %(buffer_id)d: %(buffer_name)s\
-%(status)s, %(char_count)d byte(s), %(word_count)d word(s)\
+%(status)s, %(char_count)d character(s), %(word_count)d word(s)\
 , %(lines)d line(s)') % {
             'buffer_id': self.current + 1,
             'buffer_name': buf.filename,
@@ -525,15 +525,16 @@ Open those instead of the original file?''')
             buf.end_not_undoable_action()
             buffer_file.close()
         except IOError, (errno, strerror):
-            errortext = _('Unable to open %(filename)s.' % {
-                'filename': filename_to_open})
+            errortext = _('Unable to open %(filename)s.') % {
+                'filename': filename_to_open
+            }
             if errno == 13:
                 errortext += _(' You do not have permission to open \
 the file.')
             if not errno == 2:
                 raise PyroomError(errortext)
         except:
-            raise PyroomError(_('Unable to open %s\n' % filename_to_open))
+            raise PyroomError(_('Unable to open %s\n') % filename_to_open)
         else:
             self.status.set_text(_('File %s open') % filename_to_open)
 
@@ -563,15 +564,14 @@ the file.')
             else:
                 self.save_file_as()
         except IOError, (errno, strerror):
-            errortext = _('Unable to save %(filename)s.' % {
-                'filename': buf.filename})
+            errortext = _('Unable to save %(filename)s.') % {
+                'filename': buf.filename}
             if errno == 13:
                 errortext += _(' You do not have permission to write to \
 the file.')
             raise PyroomError(errortext)
         except:
-            raise PyroomError(_('Unable to save %s\n'
-                            % buf.filename))
+            raise PyroomError(_('Unable to save %s\n') % buf.filename)
 
     def save_file_as(self):
         """ Save file as """
@@ -673,9 +673,10 @@ continue editing your document.")
             self.textbox.set_buffer(buf)
             if hasattr(self, 'status'):
                 self.status.set_text(
-                    _('Switching to buffer %(buffer_id)d (%(buffer_name)s)'
+                    _('Switching to buffer %(buffer_id)d (%(buffer_name)s)')
                     % {'buffer_id': self.current + 1,
-                       'buffer_name': buf.filename}))
+                       'buffer_name': buf.filename}
+                )
 
     def next_buffer(self):
         """ Switch to next buffer """

@@ -79,7 +79,8 @@ simply and efficiently in a full-screen window, with no distractions.'))
 
     pyroom.set_buffer(buffnum)
     pyroom.status.set_text(
-        _('Welcome to Pyroom %s, type Control-H for help' % __VERSION__))
+        _('Welcome to Pyroom %s, type Control-H for help') % __VERSION__
+    )
     gtk.main()
 
 if __name__ == '__main__':

@@ -334,7 +334,7 @@ class Preferences(object):
         chooser.set_current_folder(self.pyroom_config.themes_dir)
         filter_pattern = gtk.FileFilter()
         filter_pattern.add_pattern('*.theme')
-        filter_pattern.set_name('Theme Files')
+        filter_pattern.set_name(_('Theme Files'))
         chooser.add_filter(filter_pattern)
         res = chooser.run()
         if res == gtk.RESPONSE_OK:
@@ -458,7 +458,7 @@ class Preferences(object):
 
         self.graphical.apply_theme()
         self.graphical.status.set_text(_('Style Changed to \
-%s' % (active_theme)))
+%s') % (active_theme))
 
     def show(self):
         """display the preferences dialog"""
