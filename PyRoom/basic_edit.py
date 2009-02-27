@@ -72,7 +72,7 @@ Commands:
 ---------
 %s
 
-""" % KEY_BINDINGS)
+""") % KEY_BINDINGS
 
 def define_keybindings(edit_instance):
     """define keybindings, respectively to keyboard layout"""
