@@ -209,7 +209,7 @@
                         <child>
                           <widget class="GtkLabel" id="label21">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">    </property>
+                            <property name="label" translatable="no">    </property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -259,7 +259,7 @@
                         <child>
                           <widget class="GtkLabel" id="label13">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">    </property>
+                            <property name="label" translatable="no">    </property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -292,7 +292,7 @@
                         <child>
                           <widget class="GtkLabel" id="label19">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">    </property>
+                            <property name="label" translatable="no">    </property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
@@ -326,7 +326,7 @@
                         <child>
                           <widget class="GtkLabel" id="label20">
                             <property name="visible">True</property>
-                            <property name="label" translatable="yes">    </property>
+                            <property name="label" translatable="no">    </property>
                           </widget>
                           <packing>
                             <property name="expand">False</property>
