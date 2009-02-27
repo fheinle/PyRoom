@@ -32,19 +32,11 @@ Based on code posted on ubuntu forums by NoWhereMan (www.nowhereland.it)
 """
 
 import gettext
-import locale
-locale.setlocale(locale.LC_ALL, '')
 from optparse import OptionParser
 import sys
 import os
 
 import gtk
-
-locales_path = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
-    'locales'
-)
-gettext.install(locales_path)
 
 import PyRoom
 from basic_edit import BasicEdit
