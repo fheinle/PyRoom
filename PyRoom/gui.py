@@ -32,7 +32,7 @@ import ConfigParser
 import os
 from sys import platform
 if platform == 'win32':
-    data_home = os.environ['APPDATA'],
+    data_home = os.environ['APPDATA']
 else:
     from xdg.BaseDirectory import xdg_data_home as data_home
 
