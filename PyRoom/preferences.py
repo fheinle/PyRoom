@@ -33,7 +33,7 @@ import os
 from ConfigParser import SafeConfigParser, NoOptionError
 from sys import platform
 if platform == 'win32':
-    data_home, config_home = (os.environ['APPDIR'],) * 2
+    data_home, config_home = (os.environ['APPDATA'],) * 2
 else:
     from xdg.BaseDirectory import xdg_config_home as config_home
     from xdg.BaseDirectory import xdg_data_home as data_home
