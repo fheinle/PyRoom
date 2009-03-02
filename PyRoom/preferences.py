@@ -31,7 +31,12 @@ import gtk.glade
 import pango
 import os
 from ConfigParser import SafeConfigParser, NoOptionError
-from xdg.BaseDirectory import xdg_config_home, xdg_data_home
+from sys import platform
+if platform == 'win32':
+    data_home, config_home = (os.environ['APPDIR'],) * 2
+else:
+    from xdg.BaseDirectory import xdg_config_home as config_home
+    from xdg.BaseDirectory import xdg_data_home as data_home
 
 from gui import Theme
 from pyroom_error import PyroomError
@@ -87,8 +92,8 @@ class PyroomConfig(object):
 
     def __init__(self):
         self.pyroom_absolute_path = os.path.dirname(os.path.abspath(__file__))
-        self.conf_dir = os.path.join(xdg_config_home, 'pyroom')
-        self.data_dir = os.path.join(xdg_data_home, 'pyroom')
+        self.conf_dir = os.path.join(config_home, 'pyroom')
+        self.data_dir = os.path.join(data_home, 'pyroom')
         self.themes_dir  = os.path.join(self.data_dir, 'themes')
         self.global_themes_dir = '/usr/share/pyroom/themes'
         # if we are not using a global installation,

@@ -30,7 +30,11 @@ import pango
 import gtk.glade
 import ConfigParser
 import os
-from xdg.BaseDirectory import xdg_data_home
+from sys import platform
+if platform == 'win32':
+    data_home = os.environ['APPDATA'],
+else:
+    from xdg.BaseDirectory import xdg_data_home as data_home
 
 from pyroom_error import PyroomError
 
@@ -48,7 +52,7 @@ class Theme(dict):
         """lookup theme_filename for given theme_name
 
         order of preference is homedir, global dir, source dir (if available)"""
-        local_directory = os.path.join(xdg_data_home, 'pyroom', 'themes')
+        local_directory = os.path.join(data_home, 'pyroom', 'themes')
         global_directory = '/usr/share/pyroom/themes' # FIXME: platform
         # in case PyRoom is run without installation
         fallback_directory = os.path.join(
