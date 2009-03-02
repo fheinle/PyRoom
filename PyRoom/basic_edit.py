@@ -323,7 +323,10 @@ class BasicEdit(object):
             gui=self.gui,
             pyroom_config=pyroom_config
         )
-        self.recent_manager = gtk.recent_manager_get_default()
+        try:
+            self.recent_manager = gtk.recent_manager_get_default()
+        except AttributeError:
+            self.recent_manager = None
         self.status = self.gui.status
         self.window = self.gui.window
         self.textbox = self.gui.textbox
@@ -547,16 +550,17 @@ the file.')
                 txt = buf.get_text(buf.get_start_iter(),
                                      buf.get_end_iter())
                 buffer_file.write(txt)
-                self.recent_manager.add_full(
-                    "file://" + urllib.quote(buf.filename),
-                    {
-                        'mime_type':'text/plain',
-                        'app_name':'pyroom',
-                        'app_exec':'%F',
-                        'is_private':False,
-                        'display_name':os.path.basename(buf.filename),
-                    }
-                )
+                if self.recent_manager:
+                    self.recent_manager.add_full(
+                        "file://" + urllib.quote(buf.filename),
+                        {
+                            'mime_type':'text/plain',
+                            'app_name':'pyroom',
+                            'app_exec':'%F',
+                            'is_private':False,
+                            'display_name':os.path.basename(buf.filename),
+                        }
+                    )
                 buffer_file.close()
                 buf.begin_not_undoable_action()
                 buf.end_not_undoable_action()

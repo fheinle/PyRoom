@@ -32,6 +32,7 @@ Bugfixes
 * stop fading working incorrectly with dark on light themes (LP:#323613)
 * removed outdated information from README (LP:#334958)
 * consistent capitalisation of themes (LP:#334004)
+* made RecentManager use optional (LP:#336814)
 
 pyroom 0.3.2 (2008-12-03)
 =========================
