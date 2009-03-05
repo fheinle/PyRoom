@@ -99,11 +99,14 @@ class PyroomConfig(object):
         # if we are not using a global installation,
         # take the themes directly from sources
         if not os.path.isdir(self.global_themes_dir) :
-            self.global_themes_dir = os.path.join(
-                self.pyroom_absolute_path,
-                '..',
-                'themes'
-            )
+            if platform == 'win32':
+                self.global_themes_dir = ''
+            else:
+                self.global_themes_dir = os.path.join(
+                    self.pyroom_absolute_path,
+                    '..',
+                    'themes'
+                )
         self.conf_file = os.path.join(self.conf_dir, 'pyroom.conf')
         self.config = FailsafeConfigParser()
         self.build_default_conf()
