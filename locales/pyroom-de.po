@@ -393,7 +393,7 @@ msgstr "Zwischenspeicherungsdatei konnte nicht gelöscht werden."
 #: trunk/PyRoom/basic_edit.py:676
 #, python-format
 msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
-msgstr "In den Puffer %(buffer_id)d (%(buffer_name)s) wechseln"
+msgstr "Zu Fenster %(buffer_id)d (%(buffer_name)s) gewechselt"
 
 #~ msgid ""
 #~ "PyRoom - an adaptation of write room\n"
