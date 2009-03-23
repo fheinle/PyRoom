@@ -1,0 +1,529 @@
+# French translation of pyroom.
+# Copyright (C) 2007-2008 NoWhereMan, Nicolas Rougier, Bruno Bord
+# This file is distributed under the same license as the pyroom package.
+#
+# Bruno Bord <bruno@jehaisleprintemps.net>, 2008.
+# elpettan (Launchpad nick) <elpettan@free.fr>, 2008.
+# TuniX12 (Launchpad nick) <sedra12@gmail.com>, 2008.
+# Robert-André Mauchin <zebob.m@pengzone.org>, 2008.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PyRoom\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2009-02-27 11:29+0100\n"
+"PO-Revision-Date: 2009-03-17 12:26+0000\n"
+"Last-Translator: Lionel Dricot <ploum@ploum.net>\n"
+"Language-Team: Bruno Bord <bruno@jehaisleprintemps.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-03-23 08:48+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: trunk/PyRoom/interface.glade.h:2
+msgid " %"
+msgstr " %"
+
+#: trunk/PyRoom/interface.glade.h:3
+msgid " minutes."
+msgstr " minutes."
+
+#: trunk/PyRoom/interface.glade.h:4
+msgid "<b>Autosave</b>"
+msgstr "Enregistrement automatique"
+
+#: trunk/PyRoom/interface.glade.h:5
+msgid "<b>Display</b>"
+msgstr "<b>Affichage</b>"
+
+#: trunk/PyRoom/interface.glade.h:6
+msgid "<b>Text font</b>"
+msgstr "<b>Police du texte</b>"
+
+#: trunk/PyRoom/interface.glade.h:7
+msgid "<b>Themes</b>"
+msgstr "<b>Thèmes</b>"
+
+#: trunk/PyRoom/interface.glade.h:8
+msgid ""
+"<b>Warning!</b>\n"
+"You are about to close your current document leaving unsaved changes. If you "
+"continue, any changes will be lost."
+msgstr ""
+"<b>Alerte !</b>\n"
+"Vous êtes sur le point de fermer votre document courant sans enregistrer ses "
+"dernières modifications. Si vous choisissez de poursuivre, toutes vos "
+"modifications seront perdues."
+
+#: trunk/PyRoom/interface.glade.h:10
+msgid ""
+"<b>Warning!</b>\n"
+"You are about to quit leaving documents with unsaved changes. If you "
+"continue, you will loose any changes that you have made."
+msgstr ""
+"<b>Alerte !</b>\n"
+"Vous êtes sur le point de fermer des documents sans enregistrer leurs "
+"dernières modifications. Si vous choisissez de poursuivre, toutes vos "
+"modifications seront perdues."
+
+#: trunk/PyRoom/interface.glade.h:12
+msgid "Autosave files every "
+msgstr "Enregistrement automatique des fichiers toutes les "
+
+#: trunk/PyRoom/interface.glade.h:13
+msgid "Background color:"
+msgstr "Couleur de fond"
+
+#: trunk/PyRoom/interface.glade.h:14
+msgid "Border color:"
+msgstr "Couleur de bordure :"
+
+#: trunk/PyRoom/interface.glade.h:15
+msgid "Close without saving"
+msgstr "Fermer sans enregistrer"
+
+#: trunk/PyRoom/interface.glade.h:16
+msgid "Custom"
+msgstr "Personnalisé"
+
+#: trunk/PyRoom/interface.glade.h:17
+msgid "Default _document font"
+msgstr "Police par défaut de _document"
+
+#: trunk/PyRoom/interface.glade.h:18
+msgid "Default _monospace font"
+msgstr "Police par défaut à chasse _fixe"
+
+#: trunk/PyRoom/interface.glade.h:19
+msgid "General"
+msgstr "Général"
+
+#: trunk/PyRoom/interface.glade.h:20
+msgid "Height:"
+msgstr "Hauteur :"
+
+#: trunk/PyRoom/interface.glade.h:21
+msgid "Indent new paragraphs"
+msgstr "Indenter les nouveaux paragraphes"
+
+#: trunk/PyRoom/interface.glade.h:22
+msgid "Modify line spacing (in pixels)"
+msgstr "Modifier l'interligne (en pixels)"
+
+#: trunk/PyRoom/interface.glade.h:23
+msgid "Padding:"
+msgstr "Marge intérieure :"
+
+#: trunk/PyRoom/interface.glade.h:24
+msgid "Presets:"
+msgstr "Préréglages :"
+
+#: trunk/PyRoom/interface.glade.h:25
+msgid "Pyroom Preferences"
+msgstr "Préférences de Pyroom"
+
+#: trunk/PyRoom/interface.glade.h:26
+msgid "Save changes?"
+msgstr "Enregistrer les modifications ?"
+
+#: trunk/PyRoom/interface.glade.h:27
+msgid "Select a font"
+msgstr "Sélectionner une police"
+
+#: trunk/PyRoom/interface.glade.h:28
+msgid "Show border"
+msgstr "Montrer la bordure"
+
+#: trunk/PyRoom/interface.glade.h:29
+msgid "Text color:"
+msgstr "Couleur du texte :"
+
+#: trunk/PyRoom/interface.glade.h:30
+msgid "Textbox background"
+msgstr "Fond de la boîte de texte"
+
+#: trunk/PyRoom/interface.glade.h:31
+msgid "Theme"
+msgstr "Thème"
+
+#: trunk/PyRoom/interface.glade.h:32
+msgid "Width:"
+msgstr "Largeur :"
+
+#: trunk/PyRoom/interface.glade.h:33
+msgid "_Custom font"
+msgstr "Police _personnalisée"
+
+#: trunk/PyRoom/interface.glade.h:34
+msgid "_Save"
+msgstr "Enregi_strer"
+
+#: trunk/PyRoom/preferences.py:337
+msgid "Theme Files"
+msgstr "Fichiers de thème"
+
+#: trunk/PyRoom/preferences.py:383
+msgid "Could not save preferences file."
+msgstr "Impossible d'enregistrer le fichier des préférences"
+
+#: trunk/PyRoom/preferences.py:460
+#, python-format
+msgid "Style Changed to %s"
+msgstr "Style changé en %s"
+
+#: trunk/PyRoom/gui.py:42
+#, python-format
+msgid "theme not found: %s"
+msgstr "thème introuvable : %s"
+
+#: trunk/PyRoom/pyroom_error.py:42
+msgid ""
+"There has been an uncaught exception in pyroom.\n"
+"\n"
+"This is most likely a programming error. Please submit a bug report to "
+"launchpad"
+msgstr ""
+"Il y a eu une exception inattendue dans pyroom.\n"
+"\n"
+"C'est probablement une erreur de programmation. Merci de rapporter ce bogue "
+"via launchpad"
+
+#: trunk/PyRoom/pyroom_error.py:49
+msgid "Error"
+msgstr "Erreur"
+
+#: trunk/PyRoom/pyroom_error.py:52
+msgid "Details..."
+msgstr "Informations..."
+
+#: trunk/PyRoom/cmdline.py:64
+msgid "%prog [-v] [file1] [file2]..."
+msgstr "%prog [-v] [fichier1] [fichier2]..."
+
+#: trunk/PyRoom/cmdline.py:67
+msgid ""
+"PyRoom lets you edit text files simply and efficiently in a full-screen "
+"window, with no distractions."
+msgstr ""
+"PyRoom vous permet de saisir des fichiers texte simplement et efficacement "
+"dans une fenêtre plein-écran, sans être distrait."
+
+#: trunk/PyRoom/cmdline.py:82
+#, python-format
+msgid "Welcome to Pyroom %s, type Control-H for help"
+msgstr "Bienvenue dans Pyroom %s, tapez Controle-H pour avoir de l'aide"
+
+#: trunk/PyRoom/autosave.py:77
+#, python-format
+msgid "Could not autosave file %s"
+msgstr "Impossible d'enregistrer automatiquement le fichier %s"
+
+#: trunk/PyRoom/basic_edit.py:38
+msgid "* Unnamed *"
+msgstr "* Inconnu *"
+
+#: trunk/PyRoom/basic_edit.py:41
+msgid "Control-H: Show help in a new buffer"
+msgstr "Control-H : montre l'aide dans un document"
+
+#: trunk/PyRoom/basic_edit.py:42
+msgid "Control-I: Show buffer information"
+msgstr "Control-I : montre les informations du document"
+
+#: trunk/PyRoom/basic_edit.py:43
+msgid "Control-P: Shows Preferences dialog"
+msgstr "Control-P : montre le dialogue des préférences"
+
+#: trunk/PyRoom/basic_edit.py:44
+msgid "Control-N: Create a new buffer"
+msgstr "Control-N : crée un nouveau document"
+
+#: trunk/PyRoom/basic_edit.py:45
+msgid "Control-O: Open a file in a new buffer"
+msgstr "Control-O : ouvre un fichier dans un nouveau document"
+
+#: trunk/PyRoom/basic_edit.py:46
+msgid "Control-Q: Quit"
+msgstr "Control-Q : quitte"
+
+#: trunk/PyRoom/basic_edit.py:47
+msgid "Control-S: Save current buffer"
+msgstr "Control-S : enregistre le document courant"
+
+#: trunk/PyRoom/basic_edit.py:48
+msgid "Control-Shift-S: Save current buffer as"
+msgstr "Control-Shift-S : enregistre le document courant sous..."
+
+#: trunk/PyRoom/basic_edit.py:49
+msgid "Control-W: Close buffer and exit if it was the last buffer"
+msgstr ""
+"Control-W : ferme le document et quitte si c'était le dernier document ouvert"
+
+#: trunk/PyRoom/basic_edit.py:50
+msgid "Control-Y: Redo last typing"
+msgstr "Control-Y : refaire la dernière frappe"
+
+#: trunk/PyRoom/basic_edit.py:51
+msgid "Control-Z: Undo last typing"
+msgstr "Control-Z : annuler la dernière frappe"
+
+#: trunk/PyRoom/basic_edit.py:52
+msgid "Control-Page Up: Switch to previous buffer"
+msgstr "Control-Page-Haut : aller au document précédent"
+
+#: trunk/PyRoom/basic_edit.py:53
+msgid "Control-Page Down: Switch to next buffer"
+msgstr "Control-Page-Bas :aller au document suivant"
+
+#: trunk/PyRoom/basic_edit.py:56
+#, python-format
+msgid ""
+"PyRoom - distraction free writing\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord and the PyRoom team\n"
+"\n"
+"Welcome to PyRoom and distraction-free writing.\n"
+"\n"
+"To hide this help window, press Control-W.\n"
+"\n"
+"PyRoom stays out of your way with formatting options and buttons, \n"
+"it is largely keyboard controlled, via shortcuts. You can find a list\n"
+"of available keyboard shortcuts later.\n"
+"\n"
+"If enabled in preferences, pyroom will save your files automatically every\n"
+"few minutes or when you press the keyboard shortcut.\n"
+"\n"
+"Commands:\n"
+"---------\n"
+"%s\n"
+"\n"
+msgstr ""
+"PyRoom - distraction free writing\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord et l'équipe PyRoom\n"
+"\n"
+"Bienvenue dans PyRoom et l'écriture libre de toute distraction.\n"
+"\n"
+"Pour fermer cette fenêtre d'aide, appuyez sur Controle-W.\n"
+"\n"
+"PyRoom vous permet de vous abstraire des options de formatage et des "
+"boutons.\n"
+"Son interface est largement orientée sur les contrôles par raccourcis "
+"clavier.\n"
+"Vous trouverez une liste de ces raccourcis ci-dessous.\n"
+"\n"
+"Si vous avez activé l'option, pyroom enregistrera régulièrement vos fichiers "
+"de façon automatique\n"
+"ou lorsque vous presserez le raccourci pour enregistrer..\n"
+"\n"
+"\n"
+"Commandes :\n"
+"---------\n"
+"%s\n"
+"\n"
+
+#: trunk/PyRoom/basic_edit.py:414
+msgid " (modified)"
+msgstr " (modifié)"
+
+#: trunk/PyRoom/basic_edit.py:417
+#, python-format
+msgid ""
+"Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d "
+"character(s), %(word_count)d word(s), %(lines)d line(s)"
+msgstr ""
+"Document %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d "
+"caractère(s), %(word_count)d mot(s), %(lines)d ligne(s)"
+
+#: trunk/PyRoom/basic_edit.py:435
+msgid "Nothing more to undo!"
+msgstr "Rien à annuler !"
+
+#: trunk/PyRoom/basic_edit.py:444
+msgid "Nothing more to redo!"
+msgstr "Rien à refaire !"
+
+#: trunk/PyRoom/basic_edit.py:452
+msgid "Restore backup?"
+msgstr "Restaurer la copie de sauvegarde ?"
+
+#: trunk/PyRoom/basic_edit.py:461
+msgid ""
+"Backup information for this file has been found.\n"
+"Open those instead of the original file?"
+msgstr ""
+"Des informations sur la sauvegarde ont été trouvées.\n"
+"Les ouvrir au lieu d'ouvrir le fichier original ?"
+
+#: trunk/PyRoom/basic_edit.py:499 trunk/PyRoom/basic_edit.py:592
+msgid "Closed, no files selected"
+msgstr "Fermé, aucun fichier sélectionné"
+
+#: trunk/PyRoom/basic_edit.py:528
+#, python-format
+msgid "Unable to open %(filename)s."
+msgstr "Impossible d'ouvrir %(filename)s."
+
+#: trunk/PyRoom/basic_edit.py:532
+msgid " You do not have permission to open the file."
+msgstr " Vous n'avez pas la permission d'ouvrir le fichier."
+
+#: trunk/PyRoom/basic_edit.py:537
+#, python-format
+msgid "Unable to open %s\n"
+msgstr "Impossible d'ouvrir %s\n"
+
+#: trunk/PyRoom/basic_edit.py:539
+#, python-format
+msgid "File %s open"
+msgstr "Fichier %s ouvert"
+
+#: trunk/PyRoom/basic_edit.py:563
+#, python-format
+msgid "File %s saved"
+msgstr "Fichier %s enregistré"
+
+#: trunk/PyRoom/basic_edit.py:567
+#, python-format
+msgid "Unable to save %(filename)s."
+msgstr "Impossible d'enregistrer %(filename)s."
+
+#: trunk/PyRoom/basic_edit.py:570
+msgid " You do not have permission to write to the file."
+msgstr " Vous n'avez pas la permission d'écrire sur le fichier."
+
+#: trunk/PyRoom/basic_edit.py:574
+#, python-format
+msgid "Unable to save %s\n"
+msgstr "Impossible d'enregistrer %s\n"
+
+#: trunk/PyRoom/basic_edit.py:659
+msgid "Could not delete autosave file."
+msgstr "Impossible de supprimer la sauvegarde automatique."
+
+#: trunk/PyRoom/basic_edit.py:676
+#, python-format
+msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
+msgstr "Passage au tampon %(buffer_id)d (%(buffer_name)s)"
+
+#~ msgid ""
+#~ "PyRoom - an adaptation of write room\n"
+#~ "Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+#~ "Copyright (c) 2008 Bruno Bord\n"
+#~ "\n"
+#~ "This program is free software: you can redistribute it and/or modify it "
+#~ "under\n"
+#~ "the terms of the GNU General Public License as published by the Free "
+#~ "Software\n"
+#~ "Foundation, either version 3 of the License, or (at your option) any later\n"
+#~ "version.\n"
+#~ "\n"
+#~ "Usage:\n"
+#~ "------\n"
+#~ "\n"
+#~ "pyroom.py [-style] file1 file2 ...\n"
+#~ "style can be either 'blue', 'green', 'darkgreen'\n"
+#~ "\n"
+#~ "\n"
+#~ "Commands:\n"
+#~ "---------\n"
+#~ "Control-H: Show help in a new buffer\n"
+#~ "Control-I: Show buffer information\n"
+#~ "Control-L: Toggle line number\n"
+#~ "Control-N: Create a new buffer\n"
+#~ "Control-O: Open a file in a new buffer\n"
+#~ "Control-Q: Quit\n"
+#~ "Control-S: Save current buffer\n"
+#~ "Control-Shift-S: Save current buffer as\n"
+#~ "Control-W: Close buffer and exit if it was the last buffer\n"
+#~ "Control-Y: Redo last typing\n"
+#~ "Control-Z: Undo last typing\n"
+#~ "Control-Left: Switch to previous buffer\n"
+#~ "Control-Right: Switch to next buffer\n"
+#~ "Control-Plus: Increases font size\n"
+#~ "Control-Minus: Decreases font size\n"
+#~ "\n"
+#~ "Warnings:\n"
+#~ "---------\n"
+#~ "No autosave.\n"
+#~ "No question whether to close a modified buffer or not\n"
+#~ msgstr ""
+#~ "PyRoom - une adaptation de write room\n"
+#~ "Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+#~ "Copyright (c) 2008 Bruno Bord\n"
+#~ "\n"
+#~ "Ce programme est un logiciel libre : vous pouvez le redistribuer et/ou le "
+#~ "modifier conformément aux dispositions de la Licence Publique Générale GNU "
+#~ "telle que l'a publiée la Free Software Foundation, dans la version 3 de la "
+#~ "licence, ou toute version ultérieure (à votre choix).\n"
+#~ "\n"
+#~ "\n"
+#~ "Utilisation :\n"
+#~ "-------------\n"
+#~ "\n"
+#~ "pyroom.py [-style] fichier1 fichier2 ...\n"
+#~ "le style peut être « blue », « green », « darkgreen »\n"
+#~ "\n"
+#~ "\n"
+#~ "Commandes :\n"
+#~ "-----------\n"
+#~ "\n"
+#~ "Ctrl+H : Affiche l'aide dans un nouveau tampon\n"
+#~ "Ctrl+I : Affiche les informations du tampon\n"
+#~ "Ctrl+L : Bascule l'affichage des numéros de ligne\n"
+#~ "Ctrl+N : Crée un nouveau tampon\n"
+#~ "Ctrl+O : Ouvre un fichier dans un nouveau tampon\n"
+#~ "Ctrl+Q : Quitter\n"
+#~ "Ctrl+S : Enregistre le tampon actuel\n"
+#~ "Ctrl+Maj-S : Enregistrer le tampon actuel sous...\n"
+#~ "Ctrl+W : Ferme le tampon actuel, et quitte si celui-ci était le dernier\n"
+#~ "Ctrl+Y : Rétablit la dernière frappe\n"
+#~ "Ctrl+Z : Annule la dernière frappe\n"
+#~ "Ctrl+Gauche : Bascule vers le tampon précédent\n"
+#~ "Ctrl+Droit : Bascule vers le tampon suivant\n"
+#~ "Ctrl+Plus : Augmente la taille de la police\n"
+#~ "Ctrl+Moins : Diminue la taille de la police\n"
+#~ "\n"
+#~ "\n"
+#~ "Avertissements :\n"
+#~ "----------------\n"
+#~ "\n"
+#~ "Aucun enregistrement automatique.\n"
+#~ "Aucune confirmation demandée lors de la fermeture d'un tampon, modifié ou "
+#~ "non.\n"
+
+#~ msgid "Welcome to PyRoom 1.0, type Control-H for help"
+#~ msgstr "Bienvenue dans PyRoom 1.0, appuyez sur Ctrl+H pour obtenir de l'aide"
+
+#~ msgid ""
+#~ "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), "
+#~ "%(word_count)d word(s), %(lines)d line(s)"
+#~ msgstr ""
+#~ "Document %(buffer_id)d : %(buffer_name)s%(status)s, %(char_count)d octet(s), "
+#~ "%(word_count)d mot(s), %(lines)d lignes(s)"
+
+#~ msgid "No more undo!"
+#~ msgstr "Plus rien à annuler !"
+
+#~ msgid "No more redo!"
+#~ msgstr "Plus rien à rétablir !"
+
+#~ msgid ""
+#~ "Unable to open %(filename)s\n"
+#~ " %(traceback)s\n"
+#~ msgstr ""
+#~ "Impossible d'ouvrir le fichier %(filename)s\n"
+#~ "%(traceback)s\n"
+
+#~ msgid "Failed to open %s"
+#~ msgstr "Échec lors de l'ouverture de %s"
+
+#~ msgid "Font size increased"
+#~ msgstr "Taille de la police agrandie"
+
+#~ msgid "Font size decreased"
+#~ msgstr "Taille de la police réduite"
+
+#~ msgid "Unable to open %(filename)s %(traceback)s"
+#~ msgstr "Impossible d'ouvrir le fichier %(filename)s %(traceback)s"

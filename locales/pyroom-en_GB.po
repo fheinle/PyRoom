@@ -1,12 +1,16 @@
-#, fuzzy
+# English (United Kingdom) translation for pyroom
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the pyroom package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.4\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: pyroom\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-02-27 11:29+0100\n"
-"PO-Revision-Date: 2009-02-27 12:00+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-03-17 02:12+0000\n"
+"Last-Translator: Florian Heinle <launchpad@planet-tiax.de>\n"
+"Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,27 +19,27 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:2
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #: trunk/PyRoom/interface.glade.h:3
 msgid " minutes."
-msgstr ""
+msgstr " minutes."
 
 #: trunk/PyRoom/interface.glade.h:4
 msgid "<b>Autosave</b>"
-msgstr ""
+msgstr "<b>Autosave</b>"
 
 #: trunk/PyRoom/interface.glade.h:5
 msgid "<b>Display</b>"
-msgstr ""
+msgstr "<b>Display</b>"
 
 #: trunk/PyRoom/interface.glade.h:6
 msgid "<b>Text font</b>"
-msgstr ""
+msgstr "<b>Text font</b>"
 
 #: trunk/PyRoom/interface.glade.h:7
 msgid "<b>Themes</b>"
-msgstr ""
+msgstr "<b>Themes</b>"
 
 #: trunk/PyRoom/interface.glade.h:8
 msgid ""
@@ -43,6 +47,9 @@ msgid ""
 "You are about to close your current document leaving unsaved changes. If you "
 "continue, any changes will be lost."
 msgstr ""
+"<b>Warning!</b>\n"
+"You are about to close your current document leaving unsaved changes. If you "
+"continue, any changes will be lost."
 
 #: trunk/PyRoom/interface.glade.h:10
 msgid ""
@@ -50,116 +57,119 @@ msgid ""
 "You are about to quit leaving documents with unsaved changes. If you "
 "continue, you will loose any changes that you have made."
 msgstr ""
+"<b>Warning!</b>\n"
+"You are about to quit leaving documents with unsaved changes. If you "
+"continue, you will lose any changes that you have made."
 
 #: trunk/PyRoom/interface.glade.h:12
 msgid "Autosave files every "
-msgstr ""
+msgstr "Autosave files every "
 
 #: trunk/PyRoom/interface.glade.h:13
 msgid "Background color:"
-msgstr ""
+msgstr "Background color:"
 
 #: trunk/PyRoom/interface.glade.h:14
 msgid "Border color:"
-msgstr ""
+msgstr "Border color:"
 
 #: trunk/PyRoom/interface.glade.h:15
 msgid "Close without saving"
-msgstr ""
+msgstr "Close without saving"
 
 #: trunk/PyRoom/interface.glade.h:16
 msgid "Custom"
-msgstr ""
+msgstr "Custom"
 
 #: trunk/PyRoom/interface.glade.h:17
 msgid "Default _document font"
-msgstr ""
+msgstr "Default _document font"
 
 #: trunk/PyRoom/interface.glade.h:18
 msgid "Default _monospace font"
-msgstr ""
+msgstr "Default _monospace font"
 
 #: trunk/PyRoom/interface.glade.h:19
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: trunk/PyRoom/interface.glade.h:20
 msgid "Height:"
-msgstr ""
+msgstr "Height:"
 
 #: trunk/PyRoom/interface.glade.h:21
 msgid "Indent new paragraphs"
-msgstr ""
+msgstr "Indent new paragraphs"
 
 #: trunk/PyRoom/interface.glade.h:22
 msgid "Modify line spacing (in pixels)"
-msgstr ""
+msgstr "Modify line spacing (in pixels)"
 
 #: trunk/PyRoom/interface.glade.h:23
 msgid "Padding:"
-msgstr ""
+msgstr "Padding:"
 
 #: trunk/PyRoom/interface.glade.h:24
 msgid "Presets:"
-msgstr ""
+msgstr "Presets:"
 
 #: trunk/PyRoom/interface.glade.h:25
 msgid "Pyroom Preferences"
-msgstr ""
+msgstr "Pyroom Preferences"
 
 #: trunk/PyRoom/interface.glade.h:26
 msgid "Save changes?"
-msgstr ""
+msgstr "Save changes?"
 
 #: trunk/PyRoom/interface.glade.h:27
 msgid "Select a font"
-msgstr ""
+msgstr "Select a font"
 
 #: trunk/PyRoom/interface.glade.h:28
 msgid "Show border"
-msgstr ""
+msgstr "Show border"
 
 #: trunk/PyRoom/interface.glade.h:29
 msgid "Text color:"
-msgstr ""
+msgstr "Text color:"
 
 #: trunk/PyRoom/interface.glade.h:30
 msgid "Textbox background"
-msgstr ""
+msgstr "Textbox background"
 
 #: trunk/PyRoom/interface.glade.h:31
 msgid "Theme"
-msgstr ""
+msgstr "Theme"
 
 #: trunk/PyRoom/interface.glade.h:32
 msgid "Width:"
-msgstr ""
+msgstr "Width:"
 
 #: trunk/PyRoom/interface.glade.h:33
 msgid "_Custom font"
-msgstr ""
+msgstr "_Custom font"
 
 #: trunk/PyRoom/interface.glade.h:34
 msgid "_Save"
-msgstr ""
+msgstr "_Save"
 
 #: trunk/PyRoom/preferences.py:337
 msgid "Theme Files"
-msgstr ""
+msgstr "Theme Files"
 
 #: trunk/PyRoom/preferences.py:383
 msgid "Could not save preferences file."
-msgstr ""
+msgstr "Could not save preferences file."
 
 #: trunk/PyRoom/preferences.py:460
 #, python-format
 msgid "Style Changed to %s"
-msgstr ""
+msgstr "Style Changed to %s"
 
 #: trunk/PyRoom/gui.py:42
 #, python-format
 msgid "theme not found: %s"
-msgstr ""
+msgstr "theme not found: %s"
 
 #: trunk/PyRoom/pyroom_error.py:42
 msgid ""
@@ -168,90 +178,96 @@ msgid ""
 "This is most likely a programming error. Please submit a bug report to "
 "launchpad"
 msgstr ""
+"There has been an uncaught exception in pyroom.\n"
+"\n"
+"This is most likely a programming error. Please submit a bug report to "
+"launchpad"
 
 #: trunk/PyRoom/pyroom_error.py:49
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #: trunk/PyRoom/pyroom_error.py:52
 msgid "Details..."
-msgstr ""
+msgstr "Details..."
 
 #: trunk/PyRoom/cmdline.py:64
 msgid "%prog [-v] [file1] [file2]..."
-msgstr ""
+msgstr "%prog [-v] [file1] [file2]..."
 
 #: trunk/PyRoom/cmdline.py:67
 msgid ""
 "PyRoom lets you edit text files simply and efficiently in a full-screen "
 "window, with no distractions."
 msgstr ""
+"PyRoom lets you edit text files simply and efficiently in a full-screen "
+"window, with no distractions."
 
 #: trunk/PyRoom/cmdline.py:82
 #, python-format
 msgid "Welcome to Pyroom %s, type Control-H for help"
-msgstr ""
+msgstr "Welcome to Pyroom %s, type Control-H for help"
 
 #: trunk/PyRoom/autosave.py:77
 #, python-format
 msgid "Could not autosave file %s"
-msgstr ""
+msgstr "Could not autosave file %s"
 
 #: trunk/PyRoom/basic_edit.py:38
 msgid "* Unnamed *"
-msgstr ""
+msgstr "* Unnamed *"
 
 #: trunk/PyRoom/basic_edit.py:41
 msgid "Control-H: Show help in a new buffer"
-msgstr ""
+msgstr "Control-H: Show help in a new buffer"
 
 #: trunk/PyRoom/basic_edit.py:42
 msgid "Control-I: Show buffer information"
-msgstr ""
+msgstr "Control-I: Show buffer information"
 
 #: trunk/PyRoom/basic_edit.py:43
 msgid "Control-P: Shows Preferences dialog"
-msgstr ""
+msgstr "Control-P: Shows Preferences dialog"
 
 #: trunk/PyRoom/basic_edit.py:44
 msgid "Control-N: Create a new buffer"
-msgstr ""
+msgstr "Control-N: Create a new buffer"
 
 #: trunk/PyRoom/basic_edit.py:45
 msgid "Control-O: Open a file in a new buffer"
-msgstr ""
+msgstr "Control-O: Open a file in a new buffer"
 
 #: trunk/PyRoom/basic_edit.py:46
 msgid "Control-Q: Quit"
-msgstr ""
+msgstr "Control-Q: Quit"
 
 #: trunk/PyRoom/basic_edit.py:47
 msgid "Control-S: Save current buffer"
-msgstr ""
+msgstr "Control-S: Save current buffer"
 
 #: trunk/PyRoom/basic_edit.py:48
 msgid "Control-Shift-S: Save current buffer as"
-msgstr ""
+msgstr "Control-Shift-S: Save current buffer as"
 
 #: trunk/PyRoom/basic_edit.py:49
 msgid "Control-W: Close buffer and exit if it was the last buffer"
-msgstr ""
+msgstr "Control-W: Close buffer and exit if it was the last buffer"
 
 #: trunk/PyRoom/basic_edit.py:50
 msgid "Control-Y: Redo last typing"
-msgstr ""
+msgstr "Control-Y: Redo last typing"
 
 #: trunk/PyRoom/basic_edit.py:51
 msgid "Control-Z: Undo last typing"
-msgstr ""
+msgstr "Control-Z: Undo last typing"
 
 #: trunk/PyRoom/basic_edit.py:52
 msgid "Control-Page Up: Switch to previous buffer"
-msgstr ""
+msgstr "Control-Page Up: Switch to previous buffer"
 
 #: trunk/PyRoom/basic_edit.py:53
 msgid "Control-Page Down: Switch to next buffer"
-msgstr ""
+msgstr "Control-Page Down: Switch to next buffer"
 
 #: trunk/PyRoom/basic_edit.py:56
 #, python-format
@@ -276,10 +292,29 @@ msgid ""
 "%s\n"
 "\n"
 msgstr ""
+"PyRoom - distraction free writing\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord and the PyRoom team\n"
+"\n"
+"Welcome to PyRoom and distraction-free writing.\n"
+"\n"
+"To hide this help window, press Control-W.\n"
+"\n"
+"PyRoom stays out of your way with formatting options and buttons, \n"
+"it is largely keyboard controlled, via shortcuts. You can find a list\n"
+"of available keyboard shortcuts later.\n"
+"\n"
+"If enabled in preferences, pyroom will save your files automatically every\n"
+"few minutes or when you press the keyboard shortcut.\n"
+"\n"
+"Commands:\n"
+"---------\n"
+"%s\n"
+"\n"
 
 #: trunk/PyRoom/basic_edit.py:414
 msgid " (modified)"
-msgstr ""
+msgstr " (modified)"
 
 #: trunk/PyRoom/basic_edit.py:417
 #, python-format
@@ -287,72 +322,83 @@ msgid ""
 "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d "
 "character(s), %(word_count)d word(s), %(lines)d line(s)"
 msgstr ""
+"Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d "
+"character(s), %(word_count)d word(s), %(lines)d line(s)"
 
 #: trunk/PyRoom/basic_edit.py:435
 msgid "Nothing more to undo!"
-msgstr ""
+msgstr "No changes left to undo!"
 
 #: trunk/PyRoom/basic_edit.py:444
 msgid "Nothing more to redo!"
-msgstr ""
+msgstr "No changes left to redo!"
 
 #: trunk/PyRoom/basic_edit.py:452
 msgid "Restore backup?"
-msgstr ""
+msgstr "Restore backup?"
 
 #: trunk/PyRoom/basic_edit.py:461
 msgid ""
 "Backup information for this file has been found.\n"
 "Open those instead of the original file?"
 msgstr ""
+"Backup information for this file has been found.\n"
+"Open those instead of the original file?"
 
 #: trunk/PyRoom/basic_edit.py:499 trunk/PyRoom/basic_edit.py:592
 msgid "Closed, no files selected"
-msgstr ""
+msgstr "Closed, no files selected"
 
 #: trunk/PyRoom/basic_edit.py:528
 #, python-format
 msgid "Unable to open %(filename)s."
-msgstr ""
+msgstr "Unable to open %(filename)s."
 
 #: trunk/PyRoom/basic_edit.py:532
 msgid " You do not have permission to open the file."
-msgstr ""
+msgstr " You do not have permission to open the file."
 
 #: trunk/PyRoom/basic_edit.py:537
 #, python-format
 msgid "Unable to open %s\n"
-msgstr ""
+msgstr "Unable to open %s\n"
 
 #: trunk/PyRoom/basic_edit.py:539
 #, python-format
 msgid "File %s open"
-msgstr ""
+msgstr "File %s open"
 
 #: trunk/PyRoom/basic_edit.py:563
 #, python-format
 msgid "File %s saved"
-msgstr ""
+msgstr "File %s saved"
 
 #: trunk/PyRoom/basic_edit.py:567
 #, python-format
 msgid "Unable to save %(filename)s."
-msgstr ""
+msgstr "Unable to save %(filename)s."
 
 #: trunk/PyRoom/basic_edit.py:570
 msgid " You do not have permission to write to the file."
-msgstr ""
+msgstr " You do not have permission to write to the file."
 
 #: trunk/PyRoom/basic_edit.py:574
 #, python-format
 msgid "Unable to save %s\n"
-msgstr ""
+msgstr "Unable to save %s\n"
 
 #: trunk/PyRoom/basic_edit.py:659
 msgid "Could not delete autosave file."
-msgstr ""
+msgstr "Could not delete autosave file."
 
 #: trunk/PyRoom/basic_edit.py:676
 #, python-format
 msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
-msgstr ""
+msgstr "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
+
+#~ msgid ""
+#~ "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), "
+#~ "%(word_count)d word(s), %(lines)d line(s)"
+#~ msgstr ""
+#~ "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), "
+#~ "%(word_count)d word(s), %(lines)d line(s)"

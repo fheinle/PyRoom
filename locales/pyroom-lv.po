@@ -1,12 +1,16 @@
-#, fuzzy
+# Latvian translation for pyroom
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the pyroom package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.4\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: pyroom\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-02-27 11:29+0100\n"
-"PO-Revision-Date: 2009-02-27 12:00+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-03-17 02:02+0000\n"
+"Last-Translator: Kristaps <retail@inbox.lv>\n"
+"Language-Team: Latvian <lv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -199,7 +203,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:38
 msgid "* Unnamed *"
-msgstr ""
+msgstr "Nenosaukts"
 
 #: trunk/PyRoom/basic_edit.py:41
 msgid "Control-H: Show help in a new buffer"
@@ -279,7 +283,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:414
 msgid " (modified)"
-msgstr ""
+msgstr " (labots)"
 
 #: trunk/PyRoom/basic_edit.py:417
 #, python-format
@@ -332,7 +336,7 @@ msgstr ""
 #: trunk/PyRoom/basic_edit.py:563
 #, python-format
 msgid "File %s saved"
-msgstr ""
+msgstr "Fails %s saglabāts"
 
 #: trunk/PyRoom/basic_edit.py:567
 #, python-format
@@ -356,3 +360,10 @@ msgstr ""
 #, python-format
 msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
 msgstr ""
+
+#~ msgid "Welcome to PyRoom 1.0, type Control-H for help"
+#~ msgstr ""
+#~ "Esiet sveicinats PyRoom 1.0, ievadiet taustiņu-H lai saņemtu palīdzību"
+
+#~ msgid "Failed to open %s"
+#~ msgstr "Neizdevās atvērt %s"

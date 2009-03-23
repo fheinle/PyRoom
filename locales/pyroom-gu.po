@@ -1,0 +1,397 @@
+# Gujarati translation for pyroom
+# Copyright (c) 2009 Rosetta Contributors and Canonical Ltd 2009
+# This file is distributed under the same license as the pyroom package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pyroom\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2009-02-27 11:29+0100\n"
+"PO-Revision-Date: 2009-03-18 05:33+0000\n"
+"Last-Translator: Kartik Mistry <Unknown>\n"
+"Language-Team: Gujarati <gu@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2009-03-23 08:48+0000\n"
+"X-Generator: Launchpad (build Unknown)\n"
+
+#: trunk/PyRoom/interface.glade.h:2
+msgid " %"
+msgstr " %"
+
+#: trunk/PyRoom/interface.glade.h:3
+msgid " minutes."
+msgstr " મિનિટો"
+
+#: trunk/PyRoom/interface.glade.h:4
+msgid "<b>Autosave</b>"
+msgstr "<b>આપમેળે સંગ્રહો</b>"
+
+#: trunk/PyRoom/interface.glade.h:5
+msgid "<b>Display</b>"
+msgstr "<b>દેખાવ</b>"
+
+#: trunk/PyRoom/interface.glade.h:6
+msgid "<b>Text font</b>"
+msgstr "<b>લખાણ ફોન્ટ</b>"
+
+#: trunk/PyRoom/interface.glade.h:7
+msgid "<b>Themes</b>"
+msgstr "<b>થીમ્સ</b>"
+
+#: trunk/PyRoom/interface.glade.h:8
+msgid ""
+"<b>Warning!</b>\n"
+"You are about to close your current document leaving unsaved changes. If you "
+"continue, any changes will be lost."
+msgstr ""
+"<b>ચેતવણી!</b>\n"
+"તમે તમારો હાલનો દસ્તાવેજ ન સંગ્રહ કરેલ ફેરફારો સાથે બંધ કરવા જઇ રહ્યા છો. જો "
+"તમે આગળ વધશો તો, કોઇપણ ફેરફારો ગુમાવી દેશો."
+
+#: trunk/PyRoom/interface.glade.h:10
+msgid ""
+"<b>Warning!</b>\n"
+"You are about to quit leaving documents with unsaved changes. If you "
+"continue, you will loose any changes that you have made."
+msgstr ""
+"<b>ચેતવણી!</b>\n"
+"તમે તમારો હાલનો દસ્તાવેજ ન સંગ્રહ કરેલ ફેરફારો સાથે બહાર નીકળવા જઇ રહ્યા છો. "
+"જો તમે આગળ વધશો તો, તમે કરેલ કોઇપણ ફેરફારો ગુમાવી દેશો."
+
+#: trunk/PyRoom/interface.glade.h:12
+msgid "Autosave files every "
+msgstr "આ સમયાંતરે ફાઇલો આપમેળે સંગ્રહો "
+
+#: trunk/PyRoom/interface.glade.h:13
+msgid "Background color:"
+msgstr "પાશ્વભાગ રંગ:"
+
+#: trunk/PyRoom/interface.glade.h:14
+msgid "Border color:"
+msgstr "કિનારી રંગ:"
+
+#: trunk/PyRoom/interface.glade.h:15
+msgid "Close without saving"
+msgstr "સંગ્રહ કર્યા વગર બંધ કરો"
+
+#: trunk/PyRoom/interface.glade.h:16
+msgid "Custom"
+msgstr "પોતાનું"
+
+#: trunk/PyRoom/interface.glade.h:17
+msgid "Default _document font"
+msgstr "મૂળભૂત_લખાણ ફોન્ટ"
+
+#: trunk/PyRoom/interface.glade.h:18
+msgid "Default _monospace font"
+msgstr "મૂળભૂત_મોનોસ્પેસ ફોન્ટ"
+
+#: trunk/PyRoom/interface.glade.h:19
+msgid "General"
+msgstr "સામાન્ય"
+
+#: trunk/PyRoom/interface.glade.h:20
+msgid "Height:"
+msgstr "ઉંચાઇ:"
+
+#: trunk/PyRoom/interface.glade.h:21
+msgid "Indent new paragraphs"
+msgstr "નવા ફકરાઓ ગોઠવો"
+
+#: trunk/PyRoom/interface.glade.h:22
+msgid "Modify line spacing (in pixels)"
+msgstr "લીટી જગ્યાઓ બદલો (પિક્સેલમાં)"
+
+#: trunk/PyRoom/interface.glade.h:23
+msgid "Padding:"
+msgstr "પેડિંગ:"
+
+#: trunk/PyRoom/interface.glade.h:24
+msgid "Presets:"
+msgstr "પહેલેથી ગોઠવેલ:"
+
+#: trunk/PyRoom/interface.glade.h:25
+msgid "Pyroom Preferences"
+msgstr "પાયરૂમ પ્રાથમિકતાઓ"
+
+#: trunk/PyRoom/interface.glade.h:26
+msgid "Save changes?"
+msgstr "ફેરફારો સંગ્રહશો?"
+
+#: trunk/PyRoom/interface.glade.h:27
+msgid "Select a font"
+msgstr "ફોન્ટ પસંદ કરો"
+
+#: trunk/PyRoom/interface.glade.h:28
+msgid "Show border"
+msgstr "કિનારી બતાવો"
+
+#: trunk/PyRoom/interface.glade.h:29
+msgid "Text color:"
+msgstr "લખાણ રંગ:"
+
+#: trunk/PyRoom/interface.glade.h:30
+msgid "Textbox background"
+msgstr "લખાણ પાશ્વભાગ"
+
+#: trunk/PyRoom/interface.glade.h:31
+msgid "Theme"
+msgstr "થીમ"
+
+#: trunk/PyRoom/interface.glade.h:32
+msgid "Width:"
+msgstr "પહોળાઇ:"
+
+#: trunk/PyRoom/interface.glade.h:33
+msgid "_Custom font"
+msgstr "પોતાના ફોન્ટ (_C)"
+
+#: trunk/PyRoom/interface.glade.h:34
+msgid "_Save"
+msgstr "સંગ્રહ કરો (_S)"
+
+#: trunk/PyRoom/preferences.py:337
+msgid "Theme Files"
+msgstr "થીમ ફાઇલ્સ"
+
+#: trunk/PyRoom/preferences.py:383
+msgid "Could not save preferences file."
+msgstr "પ્રાથમિકતા ફાઇલ સંગ્રહ કરી શકાતી નથી."
+
+#: trunk/PyRoom/preferences.py:460
+#, python-format
+msgid "Style Changed to %s"
+msgstr "શૈલી %s માં બદલાઇ ગઇ"
+
+#: trunk/PyRoom/gui.py:42
+#, python-format
+msgid "theme not found: %s"
+msgstr "થીમ મળી નહી: %s"
+
+#: trunk/PyRoom/pyroom_error.py:42
+msgid ""
+"There has been an uncaught exception in pyroom.\n"
+"\n"
+"This is most likely a programming error. Please submit a bug report to "
+"launchpad"
+msgstr ""
+"પાયરૂમમાં ન પકડાયેલ એક્સેપ્સન હતું.\n"
+"\n"
+"આ મોટાભાગે પ્રોગ્રામિંગ ક્ષતિ હોઇ શકે છે. મહેરબાની કરી લોન્ચપેડમાં ક્ષતિ "
+"અહેવાલ આપો"
+
+#: trunk/PyRoom/pyroom_error.py:49
+msgid "Error"
+msgstr "ક્ષતિ"
+
+#: trunk/PyRoom/pyroom_error.py:52
+msgid "Details..."
+msgstr "વિગતો..."
+
+#: trunk/PyRoom/cmdline.py:64
+msgid "%prog [-v] [file1] [file2]..."
+msgstr "%prog [-v] [file1] [file2]..."
+
+#: trunk/PyRoom/cmdline.py:67
+msgid ""
+"PyRoom lets you edit text files simply and efficiently in a full-screen "
+"window, with no distractions."
+msgstr ""
+"પાયરૂમ તમે લખાણ ફાઇલો સરળ અને સરસ રીતે પૂર્ણ-સ્ક્રિન વિન્ડોમાં લખવાની સગવડ, "
+"કોઇપણ ખલેલો વગર આપે છે."
+
+#: trunk/PyRoom/cmdline.py:82
+#, python-format
+msgid "Welcome to Pyroom %s, type Control-H for help"
+msgstr "પાયરૂમ %s માં તમારું સ્વાગત છે, મદદ માટે Control-H દબાવો"
+
+#: trunk/PyRoom/autosave.py:77
+#, python-format
+msgid "Could not autosave file %s"
+msgstr "ફાઇલ %s આપમેળે સંગ્રહ કરી શકાતી નથી"
+
+#: trunk/PyRoom/basic_edit.py:38
+msgid "* Unnamed *"
+msgstr "* નામ વગરનું *"
+
+#: trunk/PyRoom/basic_edit.py:41
+msgid "Control-H: Show help in a new buffer"
+msgstr "Control-H: નવા બફરમાં મદદ બતાવે છે"
+
+#: trunk/PyRoom/basic_edit.py:42
+msgid "Control-I: Show buffer information"
+msgstr "Control-I: બફર માહિતી બતાવે છે"
+
+#: trunk/PyRoom/basic_edit.py:43
+msgid "Control-P: Shows Preferences dialog"
+msgstr "Control-P: પ્રાથમિકતા સંવાદ બતાવે છે"
+
+#: trunk/PyRoom/basic_edit.py:44
+msgid "Control-N: Create a new buffer"
+msgstr "Control-N: નવું બફર બનાવો"
+
+#: trunk/PyRoom/basic_edit.py:45
+msgid "Control-O: Open a file in a new buffer"
+msgstr "Control-O: ફાઇલને નવા બફરમાં ખોલે છે"
+
+#: trunk/PyRoom/basic_edit.py:46
+msgid "Control-Q: Quit"
+msgstr "Control-Q: બહાર નીકળો"
+
+#: trunk/PyRoom/basic_edit.py:47
+msgid "Control-S: Save current buffer"
+msgstr "Control-S: હાલનું બફર સંગ્રહે છે"
+
+#: trunk/PyRoom/basic_edit.py:48
+msgid "Control-Shift-S: Save current buffer as"
+msgstr "Control-Shift-S: હાલનાં બફરને આ રીતે સંગ્રહ કરો"
+
+#: trunk/PyRoom/basic_edit.py:49
+msgid "Control-W: Close buffer and exit if it was the last buffer"
+msgstr "Control-W: બફર બંધ કરો અને જો એ છેલ્લું બફર હોય તો બહાર નીકળો"
+
+#: trunk/PyRoom/basic_edit.py:50
+msgid "Control-Y: Redo last typing"
+msgstr "Control-Y: છેલ્લું લખેલ ફરી લાવો"
+
+#: trunk/PyRoom/basic_edit.py:51
+msgid "Control-Z: Undo last typing"
+msgstr "Control-Z: છેલ્લું લખેલ પાછું ફેરવો"
+
+#: trunk/PyRoom/basic_edit.py:52
+msgid "Control-Page Up: Switch to previous buffer"
+msgstr "Control-Page Up: પહેલાનાં બફરમાં જાવ"
+
+#: trunk/PyRoom/basic_edit.py:53
+msgid "Control-Page Down: Switch to next buffer"
+msgstr "Control-Page Down: આગળનાં બફરમાં જાવ"
+
+#: trunk/PyRoom/basic_edit.py:56
+#, python-format
+msgid ""
+"PyRoom - distraction free writing\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord and the PyRoom team\n"
+"\n"
+"Welcome to PyRoom and distraction-free writing.\n"
+"\n"
+"To hide this help window, press Control-W.\n"
+"\n"
+"PyRoom stays out of your way with formatting options and buttons, \n"
+"it is largely keyboard controlled, via shortcuts. You can find a list\n"
+"of available keyboard shortcuts later.\n"
+"\n"
+"If enabled in preferences, pyroom will save your files automatically every\n"
+"few minutes or when you press the keyboard shortcut.\n"
+"\n"
+"Commands:\n"
+"---------\n"
+"%s\n"
+"\n"
+msgstr ""
+"પાયરૂમ - ખલેલ વગરનું લખાણ\n"
+"કોપીરાઇટ (c) ૨૦૦૭ Nicolas Rougier, NoWhereMan\n"
+"કોપીરાઇટ (c) ૨૦૦૮ Bruno Bord અને the PyRoom team\n"
+"\n"
+"પાયરૂમ અને ખલેલ-વગરનાં લખાણમાં તમારું સ્વાગત છે.\n"
+"\n"
+"આ મદદ વિન્ડો છુપાવવા માટે, Control-W દબાવો.\n"
+"\n"
+"PyRoom stays out of your way with formatting options and buttons, \n"
+"it is largely keyboard controlled, via shortcuts. You can find a list\n"
+"of available keyboard shortcuts later.\n"
+"\n"
+"If enabled in preferences, pyroom will save your files automatically every\n"
+"few minutes or when you press the keyboard shortcut.\n"
+"\n"
+"આદેશો:\n"
+"---------\n"
+"%s\n"
+"\n"
+
+#: trunk/PyRoom/basic_edit.py:414
+msgid " (modified)"
+msgstr " (બદલેલ)"
+
+#: trunk/PyRoom/basic_edit.py:417
+#, python-format
+msgid ""
+"Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d "
+"character(s), %(word_count)d word(s), %(lines)d line(s)"
+msgstr ""
+"બફર %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d character(s), "
+"%(word_count)d word(s), %(lines)d line(s)"
+
+#: trunk/PyRoom/basic_edit.py:435
+msgid "Nothing more to undo!"
+msgstr "પાછું લાવવા માટે વધુ નથી!"
+
+#: trunk/PyRoom/basic_edit.py:444
+msgid "Nothing more to redo!"
+msgstr "ફરી કરવા માટે વધુ નથી!"
+
+#: trunk/PyRoom/basic_edit.py:452
+msgid "Restore backup?"
+msgstr "બેકઅપ પાછો લાવશો?"
+
+#: trunk/PyRoom/basic_edit.py:461
+msgid ""
+"Backup information for this file has been found.\n"
+"Open those instead of the original file?"
+msgstr ""
+"આ ફાઇલ માટે બેકઅપ માહિતી મળી છે.\n"
+"શું મૂળ ફાઇલને બદલે તે ખોલશો?"
+
+#: trunk/PyRoom/basic_edit.py:499 trunk/PyRoom/basic_edit.py:592
+msgid "Closed, no files selected"
+msgstr "બંધ કરેલ, કોઇ ફાઇલો પસંદ કરેલ નથી"
+
+#: trunk/PyRoom/basic_edit.py:528
+#, python-format
+msgid "Unable to open %(filename)s."
+msgstr "%(filename)s ખોલવામાં અસક્ષમ."
+
+#: trunk/PyRoom/basic_edit.py:532
+msgid " You do not have permission to open the file."
+msgstr " તમને ફાઇલ ખોલવાની પરવાનગી નથી."
+
+#: trunk/PyRoom/basic_edit.py:537
+#, python-format
+msgid "Unable to open %s\n"
+msgstr "%s ખોલવામાં અસક્ષમ\n"
+
+#: trunk/PyRoom/basic_edit.py:539
+#, python-format
+msgid "File %s open"
+msgstr "ફાઇલ %s ખૂલ્લી"
+
+#: trunk/PyRoom/basic_edit.py:563
+#, python-format
+msgid "File %s saved"
+msgstr "ફાઇલ %s સંગ્રહ થઇ ગઇ"
+
+#: trunk/PyRoom/basic_edit.py:567
+#, python-format
+msgid "Unable to save %(filename)s."
+msgstr "%(filename)s સંગ્રહવામાં અસક્ષમ."
+
+#: trunk/PyRoom/basic_edit.py:570
+msgid " You do not have permission to write to the file."
+msgstr " તમને આ ફાઇલમાં લખવાની પરવાનગી નથી."
+
+#: trunk/PyRoom/basic_edit.py:574
+#, python-format
+msgid "Unable to save %s\n"
+msgstr "%s સંગ્રહ કરવામાં અસક્ષમ\n"
+
+#: trunk/PyRoom/basic_edit.py:659
+msgid "Could not delete autosave file."
+msgstr "આપમેળેસંગ્રહ ફાઇલ દૂર કરી શકાતી નથી."
+
+#: trunk/PyRoom/basic_edit.py:676
+#, python-format
+msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
+msgstr "બફર %(buffer_id)d (%(buffer_name)s) માં ફેરવે છે"

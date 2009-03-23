@@ -9,10 +9,13 @@ PyRoom depends on Python, PyGTK and XDG bindings for Python (python-xdg. Please
 refer to your system documentation for information on how to install these
 modules if they're not currently available.
 
-====== Optional dependency ======
+====== Optional dependencies ======
 
 In order to use GNOME default fonts in PyRoom, gconf bindings (python-gconf)
 are recommended.
+
+If you're installing manually from our tarball and want to use PyRoom in your
+own language, you'll need to install gettext.
 
 ===== Installing and Running =====
 
@@ -70,11 +73,9 @@ There are a few keys allowing you to perform a few useful commands:
   * Control-Z: Undo last typing
   * Control-Page Up: Switch to previous buffer
   * Control-Page Down: Switch to next buffer
-  * Control-Plus: Increases font size
-  * Control-Minus: Decreases font size
 
 ===== Want to know more? =====
 
-  * Pyroom Website: http://pyroom.org
-  * Pyroom project page on Launchpad: https://launchpad.net/pyroom
-  * Pyroom Wiki: http://wiki.pyroom.org/doku.php
+  * PyRoom Website: http://pyroom.org
+  * PyRoom project page on Launchpad: https://launchpad.net/pyroom
+  * PyRoom IRC-Channel: irc://irc.freenode.net/pyroom - #pyroom on FreeNode

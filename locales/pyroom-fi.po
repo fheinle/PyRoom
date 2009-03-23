@@ -1,12 +1,16 @@
-#, fuzzy
+# Finnish translation for pyroom
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the pyroom package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.4\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: pyroom\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-02-27 11:29+0100\n"
-"PO-Revision-Date: 2009-02-27 12:00+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-03-07 16:48+0000\n"
+"Last-Translator: Ilari Oras <happo1472583@gmail.com>\n"
+"Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,15 +19,15 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:2
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #: trunk/PyRoom/interface.glade.h:3
 msgid " minutes."
-msgstr ""
+msgstr " minuuttia."
 
 #: trunk/PyRoom/interface.glade.h:4
 msgid "<b>Autosave</b>"
-msgstr ""
+msgstr "<b>Autotallenna</b>"
 
 #: trunk/PyRoom/interface.glade.h:5
 msgid "<b>Display</b>"
@@ -31,11 +35,11 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:6
 msgid "<b>Text font</b>"
-msgstr ""
+msgstr "<b>Tekstin fontti</b>"
 
 #: trunk/PyRoom/interface.glade.h:7
 msgid "<b>Themes</b>"
-msgstr ""
+msgstr "<b>Teemat</b>"
 
 #: trunk/PyRoom/interface.glade.h:8
 msgid ""
@@ -43,13 +47,16 @@ msgid ""
 "You are about to close your current document leaving unsaved changes. If you "
 "continue, any changes will be lost."
 msgstr ""
+"<b>Varoitus!</b>\n"
+"Olet sulkemassa nykyistä dokumenttia tallentamatta. Jos suljet nyt, kaikki "
+"muutokset menetetään."
 
 #: trunk/PyRoom/interface.glade.h:10
 msgid ""
 "<b>Warning!</b>\n"
 "You are about to quit leaving documents with unsaved changes. If you "
 "continue, you will loose any changes that you have made."
-msgstr ""
+msgstr "."
 
 #: trunk/PyRoom/interface.glade.h:12
 msgid "Autosave files every "
@@ -57,7 +64,7 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:13
 msgid "Background color:"
-msgstr ""
+msgstr "Taustan väri:"
 
 #: trunk/PyRoom/interface.glade.h:14
 msgid "Border color:"
@@ -65,7 +72,7 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:15
 msgid "Close without saving"
-msgstr ""
+msgstr "Sulje tallentamatta"
 
 #: trunk/PyRoom/interface.glade.h:16
 msgid "Custom"
@@ -105,15 +112,15 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:25
 msgid "Pyroom Preferences"
-msgstr ""
+msgstr "Pyroomin asetukset"
 
 #: trunk/PyRoom/interface.glade.h:26
 msgid "Save changes?"
-msgstr ""
+msgstr "Tallenna muutokset?"
 
 #: trunk/PyRoom/interface.glade.h:27
 msgid "Select a font"
-msgstr ""
+msgstr "Valitse fontti"
 
 #: trunk/PyRoom/interface.glade.h:28
 msgid "Show border"
@@ -121,15 +128,15 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:29
 msgid "Text color:"
-msgstr ""
+msgstr "Tekstin väri:"
 
 #: trunk/PyRoom/interface.glade.h:30
 msgid "Textbox background"
-msgstr ""
+msgstr "Tekstilaatikon taustaväri"
 
 #: trunk/PyRoom/interface.glade.h:31
 msgid "Theme"
-msgstr ""
+msgstr "Teema"
 
 #: trunk/PyRoom/interface.glade.h:32
 msgid "Width:"
@@ -141,25 +148,25 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:34
 msgid "_Save"
-msgstr ""
+msgstr "_Tallenna"
 
 #: trunk/PyRoom/preferences.py:337
 msgid "Theme Files"
-msgstr ""
+msgstr "Teeman tiedostot"
 
 #: trunk/PyRoom/preferences.py:383
 msgid "Could not save preferences file."
-msgstr ""
+msgstr "Ei voitu tallentaa asetustiedostoa."
 
 #: trunk/PyRoom/preferences.py:460
 #, python-format
 msgid "Style Changed to %s"
-msgstr ""
+msgstr "Tyyli vaihdettu %s een"
 
 #: trunk/PyRoom/gui.py:42
 #, python-format
 msgid "theme not found: %s"
-msgstr ""
+msgstr "ei löydetty: %s"
 
 #: trunk/PyRoom/pyroom_error.py:42
 msgid ""
@@ -171,7 +178,7 @@ msgstr ""
 
 #: trunk/PyRoom/pyroom_error.py:49
 msgid "Error"
-msgstr ""
+msgstr "Virhe"
 
 #: trunk/PyRoom/pyroom_error.py:52
 msgid "Details..."
@@ -190,16 +197,16 @@ msgstr ""
 #: trunk/PyRoom/cmdline.py:82
 #, python-format
 msgid "Welcome to Pyroom %s, type Control-H for help"
-msgstr ""
+msgstr "Tervetuloa Pyroom %sn, paina Control-H saadaksesi apua."
 
 #: trunk/PyRoom/autosave.py:77
 #, python-format
 msgid "Could not autosave file %s"
-msgstr ""
+msgstr "Ei voitu tallentaa automaattisesti tiedostoa %s"
 
 #: trunk/PyRoom/basic_edit.py:38
 msgid "* Unnamed *"
-msgstr ""
+msgstr "* Nimetön *"
 
 #: trunk/PyRoom/basic_edit.py:41
 msgid "Control-H: Show help in a new buffer"
@@ -223,7 +230,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:46
 msgid "Control-Q: Quit"
-msgstr ""
+msgstr "Control-Q: Sulje"
 
 #: trunk/PyRoom/basic_edit.py:47
 msgid "Control-S: Save current buffer"
@@ -279,7 +286,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:414
 msgid " (modified)"
-msgstr ""
+msgstr " (muokattu)"
 
 #: trunk/PyRoom/basic_edit.py:417
 #, python-format
@@ -308,7 +315,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:499 trunk/PyRoom/basic_edit.py:592
 msgid "Closed, no files selected"
-msgstr ""
+msgstr "Suljettu, ei tiedostoja valittu"
 
 #: trunk/PyRoom/basic_edit.py:528
 #, python-format
@@ -322,17 +329,17 @@ msgstr ""
 #: trunk/PyRoom/basic_edit.py:537
 #, python-format
 msgid "Unable to open %s\n"
-msgstr ""
+msgstr "Tiedostoa %s ei voi avata\n"
 
 #: trunk/PyRoom/basic_edit.py:539
 #, python-format
 msgid "File %s open"
-msgstr ""
+msgstr "Tiedosto %s auki"
 
 #: trunk/PyRoom/basic_edit.py:563
 #, python-format
 msgid "File %s saved"
-msgstr ""
+msgstr "Tiedosto %s tallennettu"
 
 #: trunk/PyRoom/basic_edit.py:567
 #, python-format
@@ -355,4 +362,123 @@ msgstr ""
 #: trunk/PyRoom/basic_edit.py:676
 #, python-format
 msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
-msgstr ""
+msgstr "Siirrytään puskuriin %(buffer_id)d (%(buffer_name)s)"
+
+#~ msgid ""
+#~ "PyRoom - an adaptation of write room\n"
+#~ "Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+#~ "Copyright (c) 2008 Bruno Bord\n"
+#~ "\n"
+#~ "This program is free software: you can redistribute it and/or modify it "
+#~ "under\n"
+#~ "the terms of the GNU General Public License as published by the Free "
+#~ "Software\n"
+#~ "Foundation, either version 3 of the License, or (at your option) any later\n"
+#~ "version.\n"
+#~ "\n"
+#~ "Usage:\n"
+#~ "------\n"
+#~ "\n"
+#~ "pyroom.py [-style] file1 file2 ...\n"
+#~ "style can be either 'blue', 'green', 'darkgreen'\n"
+#~ "\n"
+#~ "\n"
+#~ "Commands:\n"
+#~ "---------\n"
+#~ "Control-H: Show help in a new buffer\n"
+#~ "Control-I: Show buffer information\n"
+#~ "Control-L: Toggle line number\n"
+#~ "Control-N: Create a new buffer\n"
+#~ "Control-O: Open a file in a new buffer\n"
+#~ "Control-Q: Quit\n"
+#~ "Control-S: Save current buffer\n"
+#~ "Control-Shift-S: Save current buffer as\n"
+#~ "Control-W: Close buffer and exit if it was the last buffer\n"
+#~ "Control-Y: Redo last typing\n"
+#~ "Control-Z: Undo last typing\n"
+#~ "Control-Left: Switch to previous buffer\n"
+#~ "Control-Right: Switch to next buffer\n"
+#~ "Control-Plus: Increases font size\n"
+#~ "Control-Minus: Decreases font size\n"
+#~ "\n"
+#~ "Warnings:\n"
+#~ "---------\n"
+#~ "No autosave.\n"
+#~ "No question whether to close a modified buffer or not\n"
+#~ msgstr ""
+#~ "PyRoom - an adaptation of write room\n"
+#~ "Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+#~ "Copyright (c) 2008 Bruno Bord\n"
+#~ "\n"
+#~ "This program is free software: you can redistribute it and/or modify it "
+#~ "under\n"
+#~ "the terms of the GNU General Public License as published by the Free "
+#~ "Software\n"
+#~ "Foundation, either version 3 of the License, or (at your option) any later\n"
+#~ "version.\n"
+#~ "\n"
+#~ "Käyttö:\n"
+#~ "------\n"
+#~ "\n"
+#~ "pyroom.py [-tyyli] tiedosto1 tiedosto2 ...\n"
+#~ "tyyli voi olla joko 'blue', 'green' tai 'darkgreen'\n"
+#~ "\n"
+#~ "\n"
+#~ "Komennot:\n"
+#~ "---------\n"
+#~ "Ctrl-H: Näytä ohje uudessa puskurissa\n"
+#~ "Ctrl-I: Näytä tietoja aktiivisesta puskurista\n"
+#~ "Ctrl-L: Käännä käyttöön tai pois käytöstä rivinumero\n"
+#~ "Ctrl-N: Luo uusi puskuri\n"
+#~ "Ctrl-O: Avaa tiedosto uuteen puskuriin\n"
+#~ "Ctrl-Q: Lopeta\n"
+#~ "Ctrl-S: Tallenna aktiivinen puskuri\n"
+#~ "Ctrl-Vaihto-S: Tallenna aktiivinen puskuri nimellä\n"
+#~ "Ctrl-W: Sulje puskuri ja poistu ohjelmasta, jos suljettu puskuri oli "
+#~ "viimeinen\n"
+#~ "Ctrl-Y: Tee uudelleen viimeisin muutos\n"
+#~ "Ctrl-Z: Kumoa viimeisin muutos\n"
+#~ "Ctrl-Nuoli vasemmalle: Vaihda edelliseen puskuriin\n"
+#~ "Ctrl-Nuoli oikealle: Vaihda seuraavaan puskuriin\n"
+#~ "Ctrl-Plus: Kasvata kirjasimen kokoa\n"
+#~ "Ctrl-Miinus: Pienennä kirjasimen kokoa\n"
+#~ "\n"
+#~ "Varoitukset:\n"
+#~ "---------\n"
+#~ "Ei automaattitallennusta.\n"
+#~ "Muokattua puskuria suljettaessa ei kysytä varmistusta.\n"
+
+#~ msgid "Welcome to PyRoom 1.0, type Control-H for help"
+#~ msgstr "Tervetuloa PyRoom 1.0:aan, paina Ctrl-H saadaksesi ohjeita"
+
+#~ msgid ""
+#~ "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), "
+#~ "%(word_count)d word(s), %(lines)d line(s)"
+#~ msgstr ""
+#~ "Puskuri %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d tavu(a), "
+#~ "%(word_count)d sana(a), %(lines)d rivi(ä)"
+
+#~ msgid "No more undo!"
+#~ msgstr "Ei enempää kumottavaa!"
+
+#~ msgid "No more redo!"
+#~ msgstr "Ei enempää uudelleentehtävää!"
+
+#~ msgid ""
+#~ "Unable to open %(filename)s\n"
+#~ " %(traceback)s\n"
+#~ msgstr ""
+#~ "Tiedostoa %(filename)s ei voi avata\n"
+#~ " %(traceback)s\n"
+
+#~ msgid "Failed to open %s"
+#~ msgstr "Tiedoston %s avaaminen ei onnistunut"
+
+#~ msgid "Font size increased"
+#~ msgstr "Kirjasimen kokoa kasvatettu"
+
+#~ msgid "Font size decreased"
+#~ msgstr "Kirjasimen kokoa pienennetty"
+
+#~ msgid "Unable to open %(filename)s %(traceback)s"
+#~ msgstr "Tiedostoa %(filename)s ei voi avata %(traceback)s"

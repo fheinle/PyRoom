@@ -1,12 +1,16 @@
-#, fuzzy
+# Greek translation for pyroom
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the pyroom package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.4\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: pyroom\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-02-27 11:29+0100\n"
-"PO-Revision-Date: 2009-02-27 12:00+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-03-21 12:26+0000\n"
+"Last-Translator: Alex Natsios <Unknown>\n"
+"Language-Team: Greek <el@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,15 +19,15 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:2
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #: trunk/PyRoom/interface.glade.h:3
 msgid " minutes."
-msgstr ""
+msgstr " λεπτά"
 
 #: trunk/PyRoom/interface.glade.h:4
 msgid "<b>Autosave</b>"
-msgstr ""
+msgstr "Αυτόματη αποθήκευση"
 
 #: trunk/PyRoom/interface.glade.h:5
 msgid "<b>Display</b>"
@@ -35,7 +39,7 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:7
 msgid "<b>Themes</b>"
-msgstr ""
+msgstr "<b>Θέματα</b>"
 
 #: trunk/PyRoom/interface.glade.h:8
 msgid ""
@@ -43,6 +47,9 @@ msgid ""
 "You are about to close your current document leaving unsaved changes. If you "
 "continue, any changes will be lost."
 msgstr ""
+"<b>Προσοχή!</b>\n"
+"ετοιμάζεστε να κλείσετε το παρών έγγραφο αφήνοντας μη αποθηκευμένες αλλαγές. "
+"Αν συνεχίσετε, οποια αλλαγή κάνατε θα χαθεί."
 
 #: trunk/PyRoom/interface.glade.h:10
 msgid ""
@@ -50,26 +57,29 @@ msgid ""
 "You are about to quit leaving documents with unsaved changes. If you "
 "continue, you will loose any changes that you have made."
 msgstr ""
+"Προσοχή!\n"
+"ετοιμάζεστε να κλείσετε αφήνοντας έγγραφα με μη αποθηκευμένες αλλαγές. Αν "
+"συνεχίσετε, οποια αλλαγή κάνατε θα χαθεί."
 
 #: trunk/PyRoom/interface.glade.h:12
 msgid "Autosave files every "
-msgstr ""
+msgstr "Αυτόματη αποθήκευση κάθε "
 
 #: trunk/PyRoom/interface.glade.h:13
 msgid "Background color:"
-msgstr ""
+msgstr "Χρώμα παρασκηνίου:"
 
 #: trunk/PyRoom/interface.glade.h:14
 msgid "Border color:"
-msgstr ""
+msgstr "Χρώμα περιγράμματος:"
 
 #: trunk/PyRoom/interface.glade.h:15
 msgid "Close without saving"
-msgstr ""
+msgstr "Κλείσιμο χωρίς αποθήκευση"
 
 #: trunk/PyRoom/interface.glade.h:16
 msgid "Custom"
-msgstr ""
+msgstr "Προσαρμοσμένη"
 
 #: trunk/PyRoom/interface.glade.h:17
 msgid "Default _document font"
@@ -81,11 +91,11 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:19
 msgid "General"
-msgstr ""
+msgstr "Γενικά"
 
 #: trunk/PyRoom/interface.glade.h:20
 msgid "Height:"
-msgstr ""
+msgstr "Ύψος:"
 
 #: trunk/PyRoom/interface.glade.h:21
 msgid "Indent new paragraphs"
@@ -93,23 +103,23 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:22
 msgid "Modify line spacing (in pixels)"
-msgstr ""
+msgstr "Επεξεργασία αποστάσεων γραμμών"
 
 #: trunk/PyRoom/interface.glade.h:23
 msgid "Padding:"
-msgstr ""
+msgstr "Πλατφορμάρισμα"
 
 #: trunk/PyRoom/interface.glade.h:24
 msgid "Presets:"
-msgstr ""
+msgstr "Προεπιλογές:"
 
 #: trunk/PyRoom/interface.glade.h:25
 msgid "Pyroom Preferences"
-msgstr ""
+msgstr "Προτιμήσεις Pyroom"
 
 #: trunk/PyRoom/interface.glade.h:26
 msgid "Save changes?"
-msgstr ""
+msgstr "Αποθήκευση αλλαγών;"
 
 #: trunk/PyRoom/interface.glade.h:27
 msgid "Select a font"
@@ -121,7 +131,7 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:29
 msgid "Text color:"
-msgstr ""
+msgstr "Χρώμα κειμένου:"
 
 #: trunk/PyRoom/interface.glade.h:30
 msgid "Textbox background"
@@ -129,11 +139,11 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:31
 msgid "Theme"
-msgstr ""
+msgstr "Θέμα"
 
 #: trunk/PyRoom/interface.glade.h:32
 msgid "Width:"
-msgstr ""
+msgstr "Πλάτος:"
 
 #: trunk/PyRoom/interface.glade.h:33
 msgid "_Custom font"
@@ -149,12 +159,12 @@ msgstr ""
 
 #: trunk/PyRoom/preferences.py:383
 msgid "Could not save preferences file."
-msgstr ""
+msgstr "Αδυναμία αποθήκευσης αρχείου προτιμήσεων"
 
 #: trunk/PyRoom/preferences.py:460
 #, python-format
 msgid "Style Changed to %s"
-msgstr ""
+msgstr "Το στυλ άλλαξε σε %s"
 
 #: trunk/PyRoom/gui.py:42
 #, python-format
@@ -168,14 +178,18 @@ msgid ""
 "This is most likely a programming error. Please submit a bug report to "
 "launchpad"
 msgstr ""
+"Υπήρξε άγνωστη \"εξαίρεση\" του pyroom.\n"
+"\n"
+"Αυτό είναι πιθανότατα ένα σφάλμα προγραμματισμού. Παρακαλείσθε να υποβάλετε "
+"μια αναφορά σφάλματος στο launchpad"
 
 #: trunk/PyRoom/pyroom_error.py:49
 msgid "Error"
-msgstr ""
+msgstr "Σφάλμα"
 
 #: trunk/PyRoom/pyroom_error.py:52
 msgid "Details..."
-msgstr ""
+msgstr "Λεπτομέρειες..."
 
 #: trunk/PyRoom/cmdline.py:64
 msgid "%prog [-v] [file1] [file2]..."
@@ -186,72 +200,74 @@ msgid ""
 "PyRoom lets you edit text files simply and efficiently in a full-screen "
 "window, with no distractions."
 msgstr ""
+"Το PyRoom σας επιτρέπει να επεξεργαστείτε αρχεία κειμένου απλά και εύκολα σε "
+"ένα παράθυρο πλήρους οθόνης , δίχως αποσπάσεις."
 
 #: trunk/PyRoom/cmdline.py:82
 #, python-format
 msgid "Welcome to Pyroom %s, type Control-H for help"
-msgstr ""
+msgstr "Καλωσορίσατε στο Pyroom %s, πατήστε Control-H για βοήθεια"
 
 #: trunk/PyRoom/autosave.py:77
 #, python-format
 msgid "Could not autosave file %s"
-msgstr ""
+msgstr "Αδυναμία αυτόματης αποθήκευσης του αρχείου %s"
 
 #: trunk/PyRoom/basic_edit.py:38
 msgid "* Unnamed *"
-msgstr ""
+msgstr "* Ανώνυμο *"
 
 #: trunk/PyRoom/basic_edit.py:41
 msgid "Control-H: Show help in a new buffer"
-msgstr ""
+msgstr "COntrol-H: Εμφάνιση βοηθειας σε νέο στρώμα"
 
 #: trunk/PyRoom/basic_edit.py:42
 msgid "Control-I: Show buffer information"
-msgstr ""
+msgstr "Control-I: Εμφάνισε πληροφορίες στρώματος"
 
 #: trunk/PyRoom/basic_edit.py:43
 msgid "Control-P: Shows Preferences dialog"
-msgstr ""
+msgstr "Control-P: Εμφάνιση διαλόγου Προτιμήσεων"
 
 #: trunk/PyRoom/basic_edit.py:44
 msgid "Control-N: Create a new buffer"
-msgstr ""
+msgstr "Control-N: Δημιουργία νέου στρώματος"
 
 #: trunk/PyRoom/basic_edit.py:45
 msgid "Control-O: Open a file in a new buffer"
-msgstr ""
+msgstr "Control-O: Ανοιξε το αρχείο σε νέο στρώμα"
 
 #: trunk/PyRoom/basic_edit.py:46
 msgid "Control-Q: Quit"
-msgstr ""
+msgstr "Control-Q: Έξοδος"
 
 #: trunk/PyRoom/basic_edit.py:47
 msgid "Control-S: Save current buffer"
-msgstr ""
+msgstr "Control-S: Αποθήκευσε το τρέχων στρώμα"
 
 #: trunk/PyRoom/basic_edit.py:48
 msgid "Control-Shift-S: Save current buffer as"
-msgstr ""
+msgstr "Control-Shift-S: Αποθήκευσε σε νέο στρώμα"
 
 #: trunk/PyRoom/basic_edit.py:49
 msgid "Control-W: Close buffer and exit if it was the last buffer"
-msgstr ""
+msgstr "Control-W: Κλείσιμο στρώματος και έξοδος αν είναι το τελευταίο"
 
 #: trunk/PyRoom/basic_edit.py:50
 msgid "Control-Y: Redo last typing"
-msgstr ""
+msgstr "COntrol-Y: Επαναφορά τελευταίας κίνησης"
 
 #: trunk/PyRoom/basic_edit.py:51
 msgid "Control-Z: Undo last typing"
-msgstr ""
+msgstr "COntrol-Z: Αναίρεση τελευταίας κίνησης"
 
 #: trunk/PyRoom/basic_edit.py:52
 msgid "Control-Page Up: Switch to previous buffer"
-msgstr ""
+msgstr "Control-Page Up: Εναλλαγή σε προηγούμενο στρώμα"
 
 #: trunk/PyRoom/basic_edit.py:53
 msgid "Control-Page Down: Switch to next buffer"
-msgstr ""
+msgstr "Control-Page Down: Εναλλαγή σε επόμενο στρώμα"
 
 #: trunk/PyRoom/basic_edit.py:56
 #, python-format
@@ -279,7 +295,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:414
 msgid " (modified)"
-msgstr ""
+msgstr " (τροποποιημένο)"
 
 #: trunk/PyRoom/basic_edit.py:417
 #, python-format
@@ -290,11 +306,11 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:435
 msgid "Nothing more to undo!"
-msgstr ""
+msgstr "Τίποτα παραπάνω για αναίρεση"
 
 #: trunk/PyRoom/basic_edit.py:444
 msgid "Nothing more to redo!"
-msgstr ""
+msgstr "Τίποτα παραπάνω για επαναφορά"
 
 #: trunk/PyRoom/basic_edit.py:452
 msgid "Restore backup?"
@@ -308,45 +324,45 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:499 trunk/PyRoom/basic_edit.py:592
 msgid "Closed, no files selected"
-msgstr ""
+msgstr "Κλειστό, δεν έχουν επιλεχθέι αρχεία"
 
 #: trunk/PyRoom/basic_edit.py:528
 #, python-format
 msgid "Unable to open %(filename)s."
-msgstr ""
+msgstr "Αδύνατο να ανοίξει το αρχείο %(filename)s."
 
 #: trunk/PyRoom/basic_edit.py:532
 msgid " You do not have permission to open the file."
-msgstr ""
+msgstr " Δεν έχετε δικαιώματα να ανοίξετε το αρχείο"
 
 #: trunk/PyRoom/basic_edit.py:537
 #, python-format
 msgid "Unable to open %s\n"
-msgstr ""
+msgstr "Αποτυχία ανοίγματος του %s\n"
 
 #: trunk/PyRoom/basic_edit.py:539
 #, python-format
 msgid "File %s open"
-msgstr ""
+msgstr "Αρχείο %s ανοικτό"
 
 #: trunk/PyRoom/basic_edit.py:563
 #, python-format
 msgid "File %s saved"
-msgstr ""
+msgstr "Το αρχείο %s αποθηκεύτηκε"
 
 #: trunk/PyRoom/basic_edit.py:567
 #, python-format
 msgid "Unable to save %(filename)s."
-msgstr ""
+msgstr "Αδυναμία αποθήκευσης %(filename)s."
 
 #: trunk/PyRoom/basic_edit.py:570
 msgid " You do not have permission to write to the file."
-msgstr ""
+msgstr " Δεν έχετε δικαιώματα να επεξεργαστείτε αυτό το αρχείο"
 
 #: trunk/PyRoom/basic_edit.py:574
 #, python-format
 msgid "Unable to save %s\n"
-msgstr ""
+msgstr "Αδυναμία αποθήκευσης %s\n"
 
 #: trunk/PyRoom/basic_edit.py:659
 msgid "Could not delete autosave file."
@@ -355,4 +371,11 @@ msgstr ""
 #: trunk/PyRoom/basic_edit.py:676
 #, python-format
 msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
-msgstr ""
+msgstr "Εναλλαγή στο στρώμα %(buffer_id)d (%(buffer_name)s)"
+
+#~ msgid ""
+#~ "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), "
+#~ "%(word_count)d word(s), %(lines)d line(s)"
+#~ msgstr ""
+#~ "Στρώμα %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), "
+#~ "%(word_count)d λεξη/εις, %(lines)d γραμμη/ες"
