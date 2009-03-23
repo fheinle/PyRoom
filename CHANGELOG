@@ -1,9 +1,10 @@
-pyroom trunk ()
+pyroom 0.4 (2009-03-23)
 ===============
 
 User visible changes
 --------------------
 
+* PyRoom has been translated into many languages (LP:#261086)
 * create nonexistant files if necessary (LP:#307257)
 * recently used files are now remembered (LP:#315873)
 * saving of custom themes (LP:#321057)
@@ -14,6 +15,7 @@ User visible changes
   also offers to use gnome default fonts if applicable, i.e. if gconf
   bindings for gconf are available (LP:#303431)
 * allow indenting of paragraph beginnings (LP:#331405)
+
 
 Noteable background changes
 ---------------------------
@@ -33,6 +35,8 @@ Bugfixes
 * removed outdated information from README (LP:#334958)
 * consistent capitalisation of themes (LP:#334004)
 * made RecentManager use optional (LP:#336814)
+* fading label should work every time now (LP:#328075)
+* window compatibility (LP:#336834, LP#336814)
 
 pyroom 0.3.2 (2008-12-03)
 =========================
