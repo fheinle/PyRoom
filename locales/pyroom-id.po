@@ -1,12 +1,16 @@
-#, fuzzy
+# Indonesian translation for pyroom
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the pyroom package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.4\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: pyroom\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-02-27 11:29+0100\n"
-"PO-Revision-Date: 2009-02-27 12:00+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-03-17 02:01+0000\n"
+"Last-Translator: Florian Heinle <launchpad@planet-tiax.de>\n"
+"Language-Team: Indonesian <id@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -199,7 +203,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:38
 msgid "* Unnamed *"
-msgstr ""
+msgstr "* Tidak bernama *"
 
 #: trunk/PyRoom/basic_edit.py:41
 msgid "Control-H: Show help in a new buffer"
@@ -279,7 +283,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:414
 msgid " (modified)"
-msgstr ""
+msgstr " (dimodifikasi)"
 
 #: trunk/PyRoom/basic_edit.py:417
 #, python-format
@@ -308,7 +312,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:499 trunk/PyRoom/basic_edit.py:592
 msgid "Closed, no files selected"
-msgstr ""
+msgstr "Ditutup, tidak ada berkas yang dipilih"
 
 #: trunk/PyRoom/basic_edit.py:528
 #, python-format
@@ -322,17 +326,17 @@ msgstr ""
 #: trunk/PyRoom/basic_edit.py:537
 #, python-format
 msgid "Unable to open %s\n"
-msgstr ""
+msgstr "Tidak dapat membuka %s\n"
 
 #: trunk/PyRoom/basic_edit.py:539
 #, python-format
 msgid "File %s open"
-msgstr ""
+msgstr "Berkas %s dibuka"
 
 #: trunk/PyRoom/basic_edit.py:563
 #, python-format
 msgid "File %s saved"
-msgstr ""
+msgstr "Berkas %s disimpan"
 
 #: trunk/PyRoom/basic_edit.py:567
 #, python-format
@@ -356,3 +360,31 @@ msgstr ""
 #, python-format
 msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
 msgstr ""
+
+#~ msgid "Welcome to PyRoom 1.0, type Control-H for help"
+#~ msgstr "Selamat datang di PyRoom 1.0, ketik Control-H untuk bantuan"
+
+#~ msgid "No more undo!"
+#~ msgstr "Tidak ada lagi undo!"
+
+#~ msgid "No more redo!"
+#~ msgstr "Tidak ada lagi redo!"
+
+#~ msgid ""
+#~ "Unable to open %(filename)s\n"
+#~ " %(traceback)s\n"
+#~ msgstr ""
+#~ "Tidak dapat membuka %(filename)s\n"
+#~ " %(traceback)s\n"
+
+#~ msgid "Failed to open %s"
+#~ msgstr "Gagal membuka %s"
+
+#~ msgid "Font size increased"
+#~ msgstr "Ukuran fonta ditambah"
+
+#~ msgid "Font size decreased"
+#~ msgstr "Ukuran fonta dikurangi"
+
+#~ msgid "Unable to open %(filename)s %(traceback)s"
+#~ msgstr "Tidak dapat membuka %(filename)s %(traceback)s"

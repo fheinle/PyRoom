@@ -1,12 +1,16 @@
-#, fuzzy
+# Swedish translation for pyroom
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the pyroom package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.4\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: pyroom\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-02-27 11:29+0100\n"
-"PO-Revision-Date: 2009-02-27 12:00+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-03-05 14:36+0000\n"
+"Last-Translator: Florian Heinle <launchpad@planet-tiax.de>\n"
+"Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -199,7 +203,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:38
 msgid "* Unnamed *"
-msgstr ""
+msgstr "* Namnlös *"
 
 #: trunk/PyRoom/basic_edit.py:41
 msgid "Control-H: Show help in a new buffer"
@@ -279,7 +283,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:414
 msgid " (modified)"
-msgstr ""
+msgstr " (ändrad)"
 
 #: trunk/PyRoom/basic_edit.py:417
 #, python-format
@@ -308,7 +312,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:499 trunk/PyRoom/basic_edit.py:592
 msgid "Closed, no files selected"
-msgstr ""
+msgstr "Stängd, inga filer valda"
 
 #: trunk/PyRoom/basic_edit.py:528
 #, python-format
@@ -322,17 +326,17 @@ msgstr ""
 #: trunk/PyRoom/basic_edit.py:537
 #, python-format
 msgid "Unable to open %s\n"
-msgstr ""
+msgstr "Kan inte öppna %s\n"
 
 #: trunk/PyRoom/basic_edit.py:539
 #, python-format
 msgid "File %s open"
-msgstr ""
+msgstr "Filen %s öppnad"
 
 #: trunk/PyRoom/basic_edit.py:563
 #, python-format
 msgid "File %s saved"
-msgstr ""
+msgstr "Filen %s sparades"
 
 #: trunk/PyRoom/basic_edit.py:567
 #, python-format
@@ -355,4 +359,118 @@ msgstr ""
 #: trunk/PyRoom/basic_edit.py:676
 #, python-format
 msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
-msgstr ""
+msgstr "Växlar till buffert %(buffer_id)d (%(buffer_name)s)"
+
+#~ msgid ""
+#~ "PyRoom - an adaptation of write room\n"
+#~ "Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+#~ "Copyright (c) 2008 Bruno Bord\n"
+#~ "\n"
+#~ "This program is free software: you can redistribute it and/or modify it "
+#~ "under\n"
+#~ "the terms of the GNU General Public License as published by the Free "
+#~ "Software\n"
+#~ "Foundation, either version 3 of the License, or (at your option) any later\n"
+#~ "version.\n"
+#~ "\n"
+#~ "Usage:\n"
+#~ "------\n"
+#~ "\n"
+#~ "pyroom.py [-style] file1 file2 ...\n"
+#~ "style can be either 'blue', 'green', 'darkgreen'\n"
+#~ "\n"
+#~ "\n"
+#~ "Commands:\n"
+#~ "---------\n"
+#~ "Control-H: Show help in a new buffer\n"
+#~ "Control-I: Show buffer information\n"
+#~ "Control-L: Toggle line number\n"
+#~ "Control-N: Create a new buffer\n"
+#~ "Control-O: Open a file in a new buffer\n"
+#~ "Control-Q: Quit\n"
+#~ "Control-S: Save current buffer\n"
+#~ "Control-Shift-S: Save current buffer as\n"
+#~ "Control-W: Close buffer and exit if it was the last buffer\n"
+#~ "Control-Y: Redo last typing\n"
+#~ "Control-Z: Undo last typing\n"
+#~ "Control-Left: Switch to previous buffer\n"
+#~ "Control-Right: Switch to next buffer\n"
+#~ "Control-Plus: Increases font size\n"
+#~ "Control-Minus: Decreases font size\n"
+#~ "\n"
+#~ "Warnings:\n"
+#~ "---------\n"
+#~ "No autosave.\n"
+#~ "No question whether to close a modified buffer or not\n"
+#~ msgstr ""
+#~ "PyRoom - en anpassning av av write room\n"
+#~ "Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+#~ "Copyright (c) 2008 Bruno Bord\n"
+#~ "\n"
+#~ "Det här programmet är fri mjukvara: Du får vidaredistribuera den och/eller "
+#~ "modifiera den enligt de villkor som anges av GNU General Public License som "
+#~ "publicerats av Free Software Foundation, version 3 av licensen, eller "
+#~ "senare.\n"
+#~ "\n"
+#~ "Användande:\n"
+#~ "-----\n"
+#~ "\n"
+#~ "pyroom.py [-färg] file1 file2 ...\n"
+#~ "färg kan vara 'blue', 'green' eller 'darkgreen'\n"
+#~ "\n"
+#~ "Kommandon:\n"
+#~ "---------\n"
+#~ "Control-H: Visa hjälp i en ny buffer\n"
+#~ "Control-I: Visa information om buffer\n"
+#~ "Control-L: Växla visning av radnummer\n"
+#~ "Control-N: Skapa en ny buffer\n"
+#~ "Control-O: Öppna en fil i en ny buffer\n"
+#~ "Control-Q: Avsluta\n"
+#~ "Control-S: Spara aktuell buffer\n"
+#~ "Control-Shift-S: Spara aktuell buffer som\n"
+#~ "Control-W: Stäng buffer och avsluta om det var den sista\n"
+#~ "Control-Y: Upprepa senast skrivning\n"
+#~ "Control-Z: Ångra senast skrivning\n"
+#~ "Control-Left: Växla till föregående buffer\n"
+#~ "Control-Right: Växla till nästa buffer\n"
+#~ "Control-Plus: Öka teckenstorlek\n"
+#~ "Control-Minus: Minska teckenstorlek\n"
+#~ "\n"
+#~ "Observera:\n"
+#~ "Innehållet sparas inte automatiskt\n"
+#~ "Du blir inte tillfrågad om att spara en ändrad buffer vid avslut\n"
+
+#~ msgid "Welcome to PyRoom 1.0, type Control-H for help"
+#~ msgstr "Välkommen till PyRoom 1.0, tryck Control-H för hjälp"
+
+#~ msgid ""
+#~ "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), "
+#~ "%(word_count)d word(s), %(lines)d line(s)"
+#~ msgstr ""
+#~ "Buffert %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d tecken, "
+#~ "%(word_count)d ord, %(lines)d rad(er)"
+
+#~ msgid "No more undo!"
+#~ msgstr "Kan inte ångra mer"
+
+#~ msgid "No more redo!"
+#~ msgstr "Inga fler gör om!"
+
+#~ msgid ""
+#~ "Unable to open %(filename)s\n"
+#~ " %(traceback)s\n"
+#~ msgstr ""
+#~ "Kan inte öppna fil %(filename)s\n"
+#~ "%(traceback)s\n"
+
+#~ msgid "Failed to open %s"
+#~ msgstr "Misslyckades att öppna %s"
+
+#~ msgid "Font size increased"
+#~ msgstr "Typsnittsstorlek ökad"
+
+#~ msgid "Font size decreased"
+#~ msgstr "Typsnittsstorlek minskad"
+
+#~ msgid "Unable to open %(filename)s %(traceback)s"
+#~ msgstr "Kunde inte öppna %(filename)s %(traceback)s"

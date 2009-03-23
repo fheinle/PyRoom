@@ -1,12 +1,16 @@
-#, fuzzy
+# Basque translation for pyroom
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the pyroom package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.4\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: pyroom\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-02-27 11:29+0100\n"
-"PO-Revision-Date: 2009-02-27 12:00+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-03-05 14:09+0000\n"
+"Last-Translator: elpettan <elpettan@free.fr>\n"
+"Language-Team: Basque <eu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -199,7 +203,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:38
 msgid "* Unnamed *"
-msgstr ""
+msgstr "* Izen gabe *"
 
 #: trunk/PyRoom/basic_edit.py:41
 msgid "Control-H: Show help in a new buffer"
@@ -279,7 +283,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:414
 msgid " (modified)"
-msgstr ""
+msgstr " (aldatua)"
 
 #: trunk/PyRoom/basic_edit.py:417
 #, python-format
@@ -308,7 +312,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:499 trunk/PyRoom/basic_edit.py:592
 msgid "Closed, no files selected"
-msgstr ""
+msgstr "Itxia, fitxategirik ez da"
 
 #: trunk/PyRoom/basic_edit.py:528
 #, python-format
@@ -322,17 +326,17 @@ msgstr ""
 #: trunk/PyRoom/basic_edit.py:537
 #, python-format
 msgid "Unable to open %s\n"
-msgstr ""
+msgstr "%s ezin da ideki\n"
 
 #: trunk/PyRoom/basic_edit.py:539
 #, python-format
 msgid "File %s open"
-msgstr ""
+msgstr "Fitxategi %s idekia da"
 
 #: trunk/PyRoom/basic_edit.py:563
 #, python-format
 msgid "File %s saved"
-msgstr ""
+msgstr "%s fitxategia babestua izan da"
 
 #: trunk/PyRoom/basic_edit.py:567
 #, python-format
@@ -355,4 +359,121 @@ msgstr ""
 #: trunk/PyRoom/basic_edit.py:676
 #, python-format
 msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
-msgstr ""
+msgstr "%(buffer_id)d (%(buffer_name)s) buffer-era joaiten"
+
+#~ msgid ""
+#~ "PyRoom - an adaptation of write room\n"
+#~ "Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+#~ "Copyright (c) 2008 Bruno Bord\n"
+#~ "\n"
+#~ "This program is free software: you can redistribute it and/or modify it "
+#~ "under\n"
+#~ "the terms of the GNU General Public License as published by the Free "
+#~ "Software\n"
+#~ "Foundation, either version 3 of the License, or (at your option) any later\n"
+#~ "version.\n"
+#~ "\n"
+#~ "Usage:\n"
+#~ "------\n"
+#~ "\n"
+#~ "pyroom.py [-style] file1 file2 ...\n"
+#~ "style can be either 'blue', 'green', 'darkgreen'\n"
+#~ "\n"
+#~ "\n"
+#~ "Commands:\n"
+#~ "---------\n"
+#~ "Control-H: Show help in a new buffer\n"
+#~ "Control-I: Show buffer information\n"
+#~ "Control-L: Toggle line number\n"
+#~ "Control-N: Create a new buffer\n"
+#~ "Control-O: Open a file in a new buffer\n"
+#~ "Control-Q: Quit\n"
+#~ "Control-S: Save current buffer\n"
+#~ "Control-Shift-S: Save current buffer as\n"
+#~ "Control-W: Close buffer and exit if it was the last buffer\n"
+#~ "Control-Y: Redo last typing\n"
+#~ "Control-Z: Undo last typing\n"
+#~ "Control-Left: Switch to previous buffer\n"
+#~ "Control-Right: Switch to next buffer\n"
+#~ "Control-Plus: Increases font size\n"
+#~ "Control-Minus: Decreases font size\n"
+#~ "\n"
+#~ "Warnings:\n"
+#~ "---------\n"
+#~ "No autosave.\n"
+#~ "No question whether to close a modified buffer or not\n"
+#~ msgstr ""
+#~ "Pyroom - write room-en moldaketa bat\n"
+#~ "Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+#~ "Copyright (c) 2008 Bruno Bord\n"
+#~ "\n"
+#~ "Programo hau software librea da: Banatzen eta/edo aldatzen ahal duzu, GNU "
+#~ "orokor publiko baimenaren mailetan, Free Software Foundation-ek argitaratu "
+#~ "dun bezala, baimena 3-garen bertsioan edo, (zure aukeraz) edozoin bertsio "
+#~ "berrietan.\n"
+#~ "\n"
+#~ "Erabilpena:\n"
+#~ "---------------\n"
+#~ "\n"
+#~ "pyroom.py [-style] file1 file2 ...\n"
+#~ "style izaten ahal da 'blue', 'green', 'darkgreen'\n"
+#~ "\n"
+#~ "Zuzendariak:\n"
+#~ "------------------\n"
+#~ "\n"
+#~ "Control-H: Laguntza erakuts buffer berri batean\n"
+#~ "Control-I: Buffer-aren informazioak erakuts\n"
+#~ "Control-L: Lerroren zenbakiak erakuts edo gorde\n"
+#~ "Control-N: Buffer berri bat sortu\n"
+#~ "Control-O: Fitxategi bat sortu buffer berri batean\n"
+#~ "Control-Q: Alde egin\n"
+#~ "Control-S: Oraingo buffera babestu\n"
+#~ "Control-Shift-S: Oraingo buffera babestu izena emanez\n"
+#~ "Control-W: Buffera itxi eta alde egin azken buffera baldin bada\n"
+#~ "Control-Y: Azken zapaketa beregin\n"
+#~ "Control-Z: Azken zapaketa desegin\n"
+#~ "Control-Left: Aintzineko buffer-era joan\n"
+#~ "Control-Right: Hurrengo buffer-era joan\n"
+#~ "Control-Plus: Letrak haunditu\n"
+#~ "Control-Minus: Letrak ttikitu\n"
+#~ "\n"
+#~ "Oharpenak:\n"
+#~ "----------------\n"
+#~ "\n"
+#~ "Pyroom-ek fitxategiak ez du babesten bakarrik.\n"
+#~ "Buffer aldatu bat itxieran ez da galderik.\n"
+
+#~ msgid "Welcome to PyRoom 1.0, type Control-H for help"
+#~ msgstr "Ongi etorri PyRoom 1.0-an. Laguntza ikusteko zapazazu Control-H"
+
+#~ msgid ""
+#~ "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), "
+#~ "%(word_count)d word(s), %(lines)d line(s)"
+#~ msgstr ""
+#~ "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d byte(s), "
+#~ "%(word_count)d hitz, %(lines)d lerro"
+
+#~ msgid "No more undo!"
+#~ msgstr "Desegin gehiago ez da!"
+
+#~ msgid "No more redo!"
+#~ msgstr "Beregin gehiago ez da!"
+
+#~ msgid ""
+#~ "Unable to open %(filename)s\n"
+#~ " %(traceback)s\n"
+#~ msgstr ""
+#~ "%(filename)s ezin da ideki\n"
+#~ "%(traceback)s\n"
+
+#~ msgid "Failed to open %s"
+#~ msgstr "%s idekitzean huts egin"
+
+#~ msgid "Font size increased"
+#~ msgstr "Letrak haundituak izan dira"
+
+#~ msgid "Font size decreased"
+#~ msgstr "Letrak ttikituak izan dira"
+
+#~ msgid "Unable to open %(filename)s %(traceback)s"
+#~ msgstr "%(filename)s ezin da ideki %(traceback)s"

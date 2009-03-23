@@ -1,12 +1,16 @@
-#, fuzzy
+# Norwegian Nynorsk translation for pyroom
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008
+# This file is distributed under the same license as the pyroom package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2008.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: 0.4\n"
-"Report-Msgid-Bugs-To: \n"
+"Project-Id-Version: pyroom\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-02-27 11:29+0100\n"
-"PO-Revision-Date: 2009-02-27 12:00+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2009-03-17 02:09+0000\n"
+"Last-Translator: Arild Ringøy <arild@ringoy.org>\n"
+"Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -199,7 +203,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:38
 msgid "* Unnamed *"
-msgstr ""
+msgstr "* Namnlaus *"
 
 #: trunk/PyRoom/basic_edit.py:41
 msgid "Control-H: Show help in a new buffer"
@@ -279,7 +283,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:414
 msgid " (modified)"
-msgstr ""
+msgstr " (endra)"
 
 #: trunk/PyRoom/basic_edit.py:417
 #, python-format
@@ -308,7 +312,7 @@ msgstr ""
 
 #: trunk/PyRoom/basic_edit.py:499 trunk/PyRoom/basic_edit.py:592
 msgid "Closed, no files selected"
-msgstr ""
+msgstr "Stengd, ingen filer vald"
 
 #: trunk/PyRoom/basic_edit.py:528
 #, python-format
@@ -322,7 +326,7 @@ msgstr ""
 #: trunk/PyRoom/basic_edit.py:537
 #, python-format
 msgid "Unable to open %s\n"
-msgstr ""
+msgstr "Kan ikkje opne %s\n"
 
 #: trunk/PyRoom/basic_edit.py:539
 #, python-format
@@ -332,7 +336,7 @@ msgstr ""
 #: trunk/PyRoom/basic_edit.py:563
 #, python-format
 msgid "File %s saved"
-msgstr ""
+msgstr "Fila %s vart lagra"
 
 #: trunk/PyRoom/basic_edit.py:567
 #, python-format
@@ -356,3 +360,25 @@ msgstr ""
 #, python-format
 msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
 msgstr ""
+
+#~ msgid "Welcome to PyRoom 1.0, type Control-H for help"
+#~ msgstr "Velkomen til PyRoom 1.0, tast Control-H for hjelp"
+
+#~ msgid "No more undo!"
+#~ msgstr "Ikkje meir å angra!"
+
+#~ msgid "No more redo!"
+#~ msgstr "Ikkje meir å gjera om att!"
+
+#~ msgid ""
+#~ "Unable to open %(filename)s\n"
+#~ " %(traceback)s\n"
+#~ msgstr ""
+#~ "Kan ikkje opna %(filename)s\n"
+#~ "%(traceback)s\n"
+
+#~ msgid "Font size increased"
+#~ msgstr "Auka skriftstorleik"
+
+#~ msgid "Font size decreased"
+#~ msgstr "Minka skriftstorleik"
