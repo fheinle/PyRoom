@@ -13,6 +13,8 @@ from os.path import pardir, abspath, dirname, join
 
 GETTEXT_DOMAIN = 'pyroom'
 LOCALE_PATH = abspath(join(dirname(__file__), pardir, 'locales'))
+if not os.path.isdir(LOCALE_PATH):
+    LOCALE_PATH = '/usr/share/locale'
 
 # setup translation
 languages_used = []
