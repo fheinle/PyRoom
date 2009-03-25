@@ -348,12 +348,12 @@ class Preferences(object):
         if res == gtk.RESPONSE_OK:
             theme_filename = chooser.get_filename()
             self.graphical.theme.save(theme_filename)
+            theme_name = os.path.basename(theme_filename)
+            theme_id = max(self.stylesvalues.values()) + 1
+            self.presetscombobox.append_text(theme_name)
+            self.stylesvalues.update({theme_name: theme_id})
+            self.presetscombobox.set_active(theme_id)
         chooser.destroy()
-        theme_name = os.path.basename(theme_filename)
-        theme_id = max(self.stylesvalues.values()) + 1
-        self.presetscombobox.append_text(theme_name)
-        self.stylesvalues.update({theme_name: theme_id})
-        self.presetscombobox.set_active(theme_id)
 
     def set_preferences(self, widget, data=None):
         """save preferences"""
