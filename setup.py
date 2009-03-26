@@ -7,9 +7,6 @@ import os
 import glob
 from subprocess import call
 
-import PyRoom
-
-
 author = 'The Pyroom Team'
 url = 'http://www.pyroom.org'
 
@@ -45,7 +42,7 @@ class InstallData(install_data):
 
 setup(
   name='PyRoom',
-  version = PyRoom.__VERSION__,
+  version = '0.4.1',
   url = url,
   author = author,
   description = 'PyRoom is a distraction-free, fullscreen text editor',
