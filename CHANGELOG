@@ -1,5 +1,16 @@
+pyroom 0.4.1 (2009-03-26)
+=========================
+
+Bugfixes
+--------
+* restored python2.4 compatibility (LP:#348613)
+* use correct path for locales (LP:#348927)
+* don't fail when canceling theme save dialog (LP:#348470)
+* fixed untranslatable string (LP:#348931)
+* removed gtk as a build dependency (LP:#348742)
+
 pyroom 0.4 (2009-03-23)
-===============
+=======================
 
 User visible changes
 --------------------
