@@ -465,8 +465,8 @@ class Preferences(object):
             self.save_custom_button.set_sensitive(False)
 
         self.graphical.apply_theme()
-        self.graphical.status.set_text(_('Style Changed to \
-%s') % (active_theme))
+        self.graphical.status.set_text(_('Style Changed to %s') %
+                                        (active_theme))
 
     def show(self):
         """display the preferences dialog"""
