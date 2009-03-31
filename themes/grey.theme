@@ -3,7 +3,6 @@ name = Grey
 background = #e2e2e2
 textboxbg = #e2e2e2
 foreground = #212121
-linenumbers = #5E4803
 border = #6f6f6f
 info = #AE8400
 padding = 8

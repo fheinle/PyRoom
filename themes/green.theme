@@ -3,7 +3,6 @@ name = Green
 background = #000000
 textboxbg = #000000
 foreground = #00ff00
-linenumbers = #007700
 border = #003300
 info = #00ff00
 padding = 8

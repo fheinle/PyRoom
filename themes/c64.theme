@@ -3,7 +3,6 @@ name = c64
 background = #10009C
 textboxbg = #10009C
 foreground = #9C9CFF
-linenumbers = #3B3BBD
 border = #3B3BBD
 info = #7373FF
 padding = 8
