@@ -3,7 +3,6 @@ name = Lo Contrast
 background = #6F6F6F
 textboxbg = #6F6F6F
 foreground = #212121
-linenumbers = #2F455B
 border = #2F455B
 info = #C44700
 padding = 8

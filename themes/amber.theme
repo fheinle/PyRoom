@@ -3,7 +3,6 @@ name = Amber
 background = #151000
 textboxbg = #151000
 foreground = #AE8400
-linenumbers = #5E4803
 border = #5E4803
 info = #AE8400
 padding = 8

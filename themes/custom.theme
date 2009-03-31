@@ -3,7 +3,6 @@ name = custom
 background = #101000
 textboxbg = #101000
 foreground = #9c9c9c
-linenumbers = #5E4803
 border = #101000
 info = #AE8400
 padding = 8

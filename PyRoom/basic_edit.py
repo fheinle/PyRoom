@@ -74,22 +74,52 @@ Commands:
 
 """) % KEY_BINDINGS
 
+def dispatch(*args, **kwargs):
+    """call the method passed as args[1] without passing other arguments"""
+    def eat(accel_group, acceleratable, keyval, modifier):
+        """eat all the extra arguments
+
+        this is ugly, but it works with the code we already had
+        before we changed to AccelGroup et al"""
+        args[0]()
+        pass
+    return eat
+
+def make_accel_group(edit_instance):
+    keybindings = {
+        'h': edit_instance.show_help,
+        'i': edit_instance.show_info,
+        'n': edit_instance.new_buffer,
+        'o': edit_instance.open_file,
+        'p': edit_instance.preferences.show,
+        'q': edit_instance.dialog_quit,
+        's': edit_instance.save_file,
+        'w': edit_instance.close_dialog,
+        'y': edit_instance.redo,
+        'z': edit_instance.undo,
+    }
+    ag = gtk.AccelGroup()
+    for key, value in keybindings.items():
+        ag.connect_group(
+            ord(key),
+            gtk.gdk.CONTROL_MASK,
+            gtk.ACCEL_VISIBLE,
+            dispatch(value)
+        )
+    ag.connect_group(
+        ord('s'),
+        gtk.gdk.CONTROL_MASK|gtk.gdk.SHIFT_MASK,
+        gtk.ACCEL_VISIBLE,
+        dispatch(edit_instance.save_file_as)
+    )
+    return ag
+
 def define_keybindings(edit_instance):
     """define keybindings, respectively to keyboard layout"""
     keymap = gtk.gdk.keymap_get_default()
     basic_bindings = {
         gtk.keysyms.Page_Up: edit_instance.prev_buffer,
         gtk.keysyms.Page_Down: edit_instance.next_buffer,
-        gtk.keysyms.H: edit_instance.show_help,
-        gtk.keysyms.I: edit_instance.show_info,
-        gtk.keysyms.N: edit_instance.new_buffer,
-        gtk.keysyms.O: edit_instance.open_file,
-        gtk.keysyms.P: edit_instance.preferences.show,
-        gtk.keysyms.Q: edit_instance.dialog_quit,
-        gtk.keysyms.S: edit_instance.save_file,
-        gtk.keysyms.W: edit_instance.close_dialog,
-        gtk.keysyms.Y: edit_instance.redo,
-        gtk.keysyms.Z: edit_instance.undo,
     }
     translated_bindings = {}
     for key, value in basic_bindings.items():
@@ -329,6 +359,7 @@ class BasicEdit(object):
             self.recent_manager = None
         self.status = self.gui.status
         self.window = self.gui.window
+        self.window.add_accel_group(make_accel_group(self))
         self.textbox = self.gui.textbox
         self.UNNAMED_FILENAME = FILE_UNNAMED
 
@@ -401,11 +432,8 @@ class BasicEdit(object):
         """ key press event dispatcher """
         if event.state & gtk.gdk.CONTROL_MASK:
             if event.hardware_keycode in self.keybindings:
-                if self.keybindings[event.hardware_keycode] == self.save_file\
-                    and event.state & gtk.gdk.SHIFT_MASK:
-                    self.save_file_as()
-                else:
-                    self.keybindings[event.hardware_keycode]()
+                # FIXME: streamline this again
+                self.keybindings[event.hardware_keycode]()
                 return True
         return False
 
