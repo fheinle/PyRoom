@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: pyroom\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-02-27 11:29+0100\n"
-"PO-Revision-Date: 2009-03-17 00:59+0000\n"
-"Last-Translator: Florian Heinle <launchpad@planet-tiax.de>\n"
+"PO-Revision-Date: 2009-03-27 00:37+0000\n"
+"Last-Translator: Fehmican Imırgı <fcanimirgi@gmail.com>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2009-03-23 08:48+0000\n"
+"X-Launchpad-Export-Date: 2009-04-02 13:00+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #: trunk/PyRoom/interface.glade.h:2
 msgid " %"
-msgstr ""
+msgstr " %"
 
 #: trunk/PyRoom/interface.glade.h:3
 msgid " minutes."
@@ -27,15 +27,15 @@ msgstr " dakika."
 
 #: trunk/PyRoom/interface.glade.h:4
 msgid "<b>Autosave</b>"
-msgstr "<b>Otomatik Kaydet</b>"
+msgstr "<b>Otomatik kayıt</b>"
 
 #: trunk/PyRoom/interface.glade.h:5
 msgid "<b>Display</b>"
-msgstr ""
+msgstr "<b>Görünüm</b>"
 
 #: trunk/PyRoom/interface.glade.h:6
 msgid "<b>Text font</b>"
-msgstr ""
+msgstr "<b>Yazıtipi</b>"
 
 #: trunk/PyRoom/interface.glade.h:7
 msgid "<b>Themes</b>"
@@ -63,7 +63,7 @@ msgstr ""
 
 #: trunk/PyRoom/interface.glade.h:12
 msgid "Autosave files every "
-msgstr "Dosyaları her bu zamanda kaydet: "
+msgstr "Dosyaları her "
 
 #: trunk/PyRoom/interface.glade.h:13
 msgid "Background color:"
@@ -71,7 +71,7 @@ msgstr "Arkaplan rengi:"
 
 #: trunk/PyRoom/interface.glade.h:14
 msgid "Border color:"
-msgstr "Kenar rengi:"
+msgstr "Çerçeve rengi:"
 
 #: trunk/PyRoom/interface.glade.h:15
 msgid "Close without saving"
@@ -83,11 +83,11 @@ msgstr "Özel"
 
 #: trunk/PyRoom/interface.glade.h:17
 msgid "Default _document font"
-msgstr ""
+msgstr "Öntanımlı _döküman yazıtipi"
 
 #: trunk/PyRoom/interface.glade.h:18
 msgid "Default _monospace font"
-msgstr ""
+msgstr "Öntanımlı _monospace yazıtipi"
 
 #: trunk/PyRoom/interface.glade.h:19
 msgid "General"
@@ -99,15 +99,15 @@ msgstr "Yükseklik:"
 
 #: trunk/PyRoom/interface.glade.h:21
 msgid "Indent new paragraphs"
-msgstr ""
+msgstr "Yeni paragrafları girintile"
 
 #: trunk/PyRoom/interface.glade.h:22
 msgid "Modify line spacing (in pixels)"
-msgstr "Satır boşluğunu değiştir (pixel değerinde)"
+msgstr "Satır boşluğunu değiştir (piksel değerinde)"
 
 #: trunk/PyRoom/interface.glade.h:23
 msgid "Padding:"
-msgstr "Yan Boşluk:"
+msgstr "Yazı ve çerçeve arasındaki boşluk:"
 
 #: trunk/PyRoom/interface.glade.h:24
 msgid "Presets:"
@@ -115,19 +115,19 @@ msgstr "Öntanımlı ayarlar:"
 
 #: trunk/PyRoom/interface.glade.h:25
 msgid "Pyroom Preferences"
-msgstr "PyRoom Seçenekler"
+msgstr "PyRoom Seçenekleri"
 
 #: trunk/PyRoom/interface.glade.h:26
 msgid "Save changes?"
-msgstr "Değişiklikleri Kaydet?"
+msgstr "Değişiklikler kaydedilsin mi?"
 
 #: trunk/PyRoom/interface.glade.h:27
 msgid "Select a font"
-msgstr ""
+msgstr "Bir yazıtipi seçin"
 
 #: trunk/PyRoom/interface.glade.h:28
 msgid "Show border"
-msgstr ""
+msgstr "Çerçeveyi göster"
 
 #: trunk/PyRoom/interface.glade.h:29
 msgid "Text color:"
@@ -135,7 +135,7 @@ msgstr "Yazı rengi:"
 
 #: trunk/PyRoom/interface.glade.h:30
 msgid "Textbox background"
-msgstr ""
+msgstr "Yazı arkaplan rengi"
 
 #: trunk/PyRoom/interface.glade.h:31
 msgid "Theme"
@@ -147,15 +147,15 @@ msgstr "Genişlik:"
 
 #: trunk/PyRoom/interface.glade.h:33
 msgid "_Custom font"
-msgstr ""
+msgstr "Özel yazıtipi"
 
 #: trunk/PyRoom/interface.glade.h:34
 msgid "_Save"
-msgstr ""
+msgstr "Kaydet"
 
 #: trunk/PyRoom/preferences.py:337
 msgid "Theme Files"
-msgstr ""
+msgstr "Tema dosyaları"
 
 #: trunk/PyRoom/preferences.py:383
 msgid "Could not save preferences file."
@@ -169,7 +169,7 @@ msgstr "Biçim %s olarak değiştirildi"
 #: trunk/PyRoom/gui.py:42
 #, python-format
 msgid "theme not found: %s"
-msgstr ""
+msgstr "%s teması bulunamadı."
 
 #: trunk/PyRoom/pyroom_error.py:42
 msgid ""
@@ -192,15 +192,15 @@ msgstr "Ayrıntılar..."
 
 #: trunk/PyRoom/cmdline.py:64
 msgid "%prog [-v] [file1] [file2]..."
-msgstr ""
+msgstr "%prog [-v] [dosya1] [dosya2]..."
 
 #: trunk/PyRoom/cmdline.py:67
 msgid ""
 "PyRoom lets you edit text files simply and efficiently in a full-screen "
 "window, with no distractions."
 msgstr ""
-"PyRoom yazılarınızı basitçe ve etkili bir şekilde tüm ekranı kaplayan "
-"pencerede oyalanmadan yazmanıza izin verir."
+"PyRoom yazılarınızı basitçe ve etkili bir şekilde, tüm ekranı kaplayan bir "
+"pencerede, oyalanmadan yazmanıza izin verir."
 
 #: trunk/PyRoom/cmdline.py:82
 #, python-format
@@ -292,6 +292,26 @@ msgid ""
 "%s\n"
 "\n"
 msgstr ""
+"PyRoom - dikkat dağıtmayan yazma programı\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord ve PyRoom ekibi\n"
+"\n"
+"PyRoom'a hoşgeldiniz.\n"
+"\n"
+"Bu yardım penceresinden çıkmak için Control-W'ya basın.\n"
+"\n"
+"PyRoom karşınıza dikkatinizi dağıtacak butonlar ve format\n"
+"seçenekleri çıkarmaz ve çoğunlukla klavyenizden kısayollar\n"
+"aracılığıyla kullanırsınız. Kısayolların listesini aşağıda \n"
+"bulabilirsiniz.\n"
+"\n"
+"Eğer seçeneklerden ayarlarsanız, PyRoom her birkaç\n"
+"dakikada bir otomatik olarak dosyanızı kaydeder.\n"
+"\n"
+"Kısayollar:\n"
+"---------\n"
+"%s\n"
+"\n"
 
 #: trunk/PyRoom/basic_edit.py:414
 msgid " (modified)"
@@ -303,6 +323,8 @@ msgid ""
 "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d "
 "character(s), %(word_count)d word(s), %(lines)d line(s)"
 msgstr ""
+"%(buffer_id)d. yazı: %(buffer_name)s%(status)s, %(char_count)d karakter, "
+"%(word_count)d sözcük, %(lines)d satır"
 
 #: trunk/PyRoom/basic_edit.py:435
 msgid "Nothing more to undo!"
@@ -314,13 +336,15 @@ msgstr "İleri alınacak bir şey yok!"
 
 #: trunk/PyRoom/basic_edit.py:452
 msgid "Restore backup?"
-msgstr ""
+msgstr "Yedekten geri yüklensin mi?"
 
 #: trunk/PyRoom/basic_edit.py:461
 msgid ""
 "Backup information for this file has been found.\n"
 "Open those instead of the original file?"
 msgstr ""
+"Bu dosya için bir yedek bulundu.\n"
+"Dosyanın orjinal hali yerine yedek açılsın mı?"
 
 #: trunk/PyRoom/basic_edit.py:499 trunk/PyRoom/basic_edit.py:592
 msgid "Closed, no files selected"
@@ -366,7 +390,7 @@ msgstr "%s yazılamadı\n"
 
 #: trunk/PyRoom/basic_edit.py:659
 msgid "Could not delete autosave file."
-msgstr ""
+msgstr "Otomatik kayıt dosyası silinemedi."
 
 #: trunk/PyRoom/basic_edit.py:676
 #, python-format
