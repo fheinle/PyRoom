@@ -1,4 +1,4 @@
-pyroom 0.4.1 (2009-03-26)
+pyroom 0.4.1 (2009-04-02)
 =========================
 
 Bugfixes
@@ -8,6 +8,12 @@ Bugfixes
 * don't fail when canceling theme save dialog (LP:#348470)
 * fixed untranslatable string (LP:#348931)
 * removed gtk as a build dependency (LP:#348742)
+* fixed keyboard shortcuts on non-qwert layouts (LP:#349715)
+* don't offer to save unchanged buffers (LP:#353718)
+
+Noteable background changes
+---------------------------
+* switched to gtk accelerators for shortcuts (re: LP:#349715)
 
 pyroom 0.4 (2009-03-23)
 =======================
