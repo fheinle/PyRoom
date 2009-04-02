@@ -224,6 +224,7 @@ class UndoableBuffer(gtk.TextBuffer):
         else:
             self.undo_stack.append(prev_insert)
             self.undo_stack.append(undo_action)
+        self.modified = True
         
     def on_delete_range(self, text_buffer, start_iter, end_iter):
         def can_be_merged(prev, cur):
@@ -272,6 +273,7 @@ class UndoableBuffer(gtk.TextBuffer):
         else:
             self.undo_stack.append(prev_delete)
             self.undo_stack.append(undo_action)
+        self.modified = True
 
     def on_begin_user_action(self, *args, **kwargs):
         pass
@@ -315,6 +317,7 @@ class UndoableBuffer(gtk.TextBuffer):
                 self.place_cursor(stop)
         self.end_not_undoable_action()
         self.undo_in_progress = False
+        self.modified = True
 
     def redo(self):
         """redo inserts or deletions
@@ -340,6 +343,7 @@ class UndoableBuffer(gtk.TextBuffer):
             self.place_cursor(start)
         self.end_not_undoable_action()
         self.undo_in_progress = False
+        self.modified = True
 
 class BasicEdit(object):
     """editing logic that gets passed around"""
@@ -441,7 +445,7 @@ class BasicEdit(object):
         """ Display buffer information on status label for 5 seconds """
 
         buf = self.buffers[self.current]
-        if buf.can_undo or buf.can_redo:
+        if buf.modified:
             status = _(' (modified)')
         else:
             status = ''
@@ -604,6 +608,7 @@ the file.')
             raise PyroomError(errortext)
         except:
             raise PyroomError(_('Unable to save %s\n') % buf.filename)
+        buf.modified = False
 
     def save_file_as(self):
         """ Save file as """
@@ -659,7 +664,7 @@ continue editing your document.")
     def close_dialog(self):
         """ask for confirmation if there are unsaved contents"""
         buf = self.buffers[self.current]
-        if buf.can_undo or buf.can_redo:
+        if buf.modified:
             self.dialog.show()
         else:
             self.close_buffer()
@@ -740,9 +745,7 @@ continue editing your document.")
         count = 0
         ret = False
         for buf in self.buffers:
-            if (buf.can_undo or buf.can_redo) and \
-            not buf.get_text(buf.get_start_iter(),
-                                 buf.get_end_iter()) == '':
+            if buf.modified:
                 count = count + 1
         if count > 0:
             self.quitdialog.show()
@@ -757,7 +760,7 @@ continue editing your document.")
         """save before quitting"""
         self.quitdialog.hide()
         for buf in self.buffers:
-            if buf.can_undo or buf.can_redo:
+            if buf.modified:
                 if buf.filename == FILE_UNNAMED:
                     self.save_file_as()
                 else:
