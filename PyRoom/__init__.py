@@ -2,7 +2,10 @@
 
 __VERSION__ = '0.4.1'
 import locale
-locale.setlocale(locale.LC_ALL, '')
+try :
+    locale.setlocale(locale.LC_ALL, '')
+except :
+    locale.setlocale(locale.LC_ALL, 'C')
 
 import gettext
 import gtk
