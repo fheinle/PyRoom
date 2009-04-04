@@ -34,8 +34,11 @@ class InstallData(install_data):
     
     def find_mo_files(self):
         data_files = []
-        for mo in glob.glob(os.path.join(MO_DIR, '*', 'pyroom.mo')):
+        for mo in glob.glob(os.path.join(MO_DIR, '*', 'LC_MESSAGES', 'pyroom.mo')):
             lang = os.path.basename(os.path.dirname(mo))
+            lang = os.path.basename(
+                os.path.realpath(os.path.join(os.path.dirname(mo), '..'))
+            )
             dest = os.path.join('share', 'locale', lang, 'LC_MESSAGES')
             data_files.append((dest, [mo]))
         return data_files

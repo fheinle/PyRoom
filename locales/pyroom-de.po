@@ -205,7 +205,7 @@ msgstr ""
 #: trunk/PyRoom/cmdline.py:82
 #, python-format
 msgid "Welcome to Pyroom %s, type Control-H for help"
-msgstr "Willkommen bei PyRoom %s, Strg+H bildet die Hilfe ein."
+msgstr "Willkommen bei PyRoom %s, Strg+H blendet die Hilfe ein."
 
 #: trunk/PyRoom/autosave.py:77
 #, python-format
