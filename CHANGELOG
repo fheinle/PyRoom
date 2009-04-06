@@ -1,3 +1,10 @@
+pyroom 0.4.1 (2009-04-06)
+=========================
+Updated tarball with fixed installer
+ 
+Bugfixes
+--------
+* fix locales installation (LP:#355272)
 pyroom 0.4.1 (2009-04-02)
 =========================
 
