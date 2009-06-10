@@ -166,7 +166,7 @@ class GUI(object):
         self.scrolled = gtk.ScrolledWindow()
         self.boxin.add(self.scrolled)
         self.scrolled.add(self.textbox)
-        self.scrolled.set_policy(gtk.POLICY_NEVER, gtk.POLICY_NEVER)
+        self.scrolled.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_NEVER)
         self.scrolled.show()
         self.scrolled.set_property('resize-mode', gtk.RESIZE_PARENT)
         self.textbox.set_property('resize-mode', gtk.RESIZE_PARENT)
