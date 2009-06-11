@@ -1,6 +1,11 @@
 pyroom 0.4.2 (not yet released)
 ===============================
 
+User visible changes
+--------------------
+* add scrollbars if wordlength>linelength (LP:#371660)
+* touchup for themes tab (thanks Fehmican Imırgı) (LP:#362535)
+
 Bugfixes
 --------
 * fixed crash on startup if more than 1 language in $LANGUAGE (LP:#367990, #365477)
