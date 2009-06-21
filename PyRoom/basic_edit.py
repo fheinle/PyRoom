@@ -619,6 +619,7 @@ the file.')
                 buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
                 gtk.STOCK_SAVE, gtk.RESPONSE_OK))
         chooser.set_default_response(gtk.RESPONSE_OK)
+        chooser.set_do_overwrite_confirmation(True)
         if buf.filename != FILE_UNNAMED:
             chooser.set_filename(buf.filename)
         res = chooser.run()
