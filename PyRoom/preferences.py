@@ -197,6 +197,10 @@ class Preferences(object):
             'monospace':self.wTree.get_widget("radio_monospace_font"),
             'custom':self.wTree.get_widget("radio_custom_font")
         }
+        self.orientation_radios = {
+                'top':self.wTree.get_widget('orientation_top'),
+                'center':self.wTree.get_widget('orientation_center'),
+                }
         for widget in self.font_radios.values():
             if not widget.get_name() == 'radio_custom_font':
                 widget.set_sensitive(bool(self.gnome_fonts))
@@ -232,7 +236,9 @@ class Preferences(object):
         self.showborderbutton.set_active(self.pyroom_config.showborderstate)
         font_type = self.config.get('visual', 'use_font_type')
         self.font_radios[font_type].set_active(True)
-        
+        self.orientation_radios[
+                self.config.get('visual', 'orientation')
+                ].set_active(True)
         self.toggleautosave(self.autosave)
 
         self.window.set_transient_for(self.graphical.window)
@@ -282,6 +288,8 @@ class Preferences(object):
         self.save_custom_button.connect('clicked', self.save_custom_theme)
         for widget in self.font_radios.values():
             widget.connect('toggled', self.change_font)
+        for widget in self.orientation_radios.values():
+            widget.connect('toggled', self.change_orientation)
         self.custom_font_preference.connect('font-set', self.change_font)
         self.set_font()
 
@@ -303,6 +311,17 @@ class Preferences(object):
             return
         else:
             return fonts
+
+    def change_orientation(self, widget):
+        """change orientation of the main textbox"""
+        orientation = widget.get_name().split('_')[1]
+        self.config.set('visual', 'alignment', orientation)
+        self.graphical.align.set(
+                xalign=0.5,
+                yalign=ORIENTATION[orientation],
+                xscale=0,
+                yscale=0
+        )
 
     def change_font(self, widget):
         if widget.get_name() in ('fontbutton1', 'radio_custom_font'):
