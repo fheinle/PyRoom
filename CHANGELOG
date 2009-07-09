@@ -1,6 +1,11 @@
 pyroom 0.4.2 (not yet released)
 ===============================
 
+User visible changes
+--------------------
+* ask for confirmation on file overwrite, (LP:#390285)
+* add horizontal scrollbar if words are longer than lines (LP:#371660)
+
 Bugfixes
 --------
 * fixed crash on startup if more than 1 language in $LANGUAGE (LP:#367990, #365477)
