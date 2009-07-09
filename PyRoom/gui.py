@@ -153,13 +153,13 @@ class GUI(object):
 
         self.fixed = gtk.Fixed()
         self.vbox = gtk.VBox()
-        align = gtk.Alignment(xalign=0.5,
+        self.align = gtk.Alignment(xalign=0.5,
                 yalign=pyroom_config.orientation,
                 xscale=0,
                 yscale=0
         )
-        align.add(self.vbox)
-        self.window.add(align)
+        self.align.add(self.vbox)
+        self.window.add(self.align)
 
         self.boxout = gtk.EventBox()
         self.boxout.set_border_width(1)
