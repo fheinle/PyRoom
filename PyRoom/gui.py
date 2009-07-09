@@ -153,8 +153,13 @@ class GUI(object):
 
         self.fixed = gtk.Fixed()
         self.vbox = gtk.VBox()
-        self.window.add(self.fixed)
-        self.fixed.put(self.vbox, 0, 0)
+        align = gtk.Alignment(xalign=0.5,
+                yalign=pyroom_config.orientation,
+                xscale=0,
+                yscale=0
+        )
+        align.add(self.vbox)
+        self.window.add(align)
 
         self.boxout = gtk.EventBox()
         self.boxout.set_border_width(1)
@@ -219,10 +224,6 @@ class GUI(object):
             int(width_percentage * screen_width),
             int(height_percentage * screen_height)
         )
-        self.fixed.move(self.vbox,
-                        int(((1 - width_percentage) * screen_width) / 2),
-                        int(((1 - height_percentage) * screen_height) / 2)
-                       )
 
         parse_color = lambda x: gtk.gdk.color_parse(self.theme[x])
         # Colors
