@@ -42,6 +42,12 @@ from gui import Theme
 from pyroom_error import PyroomError
 import autosave
 
+ORIENTATION = {
+        'top':0,
+        'center':0.5,
+        'bottom':1,
+        }
+
 DEFAULT_CONF = {
     'visual':{
         'theme':'green',
@@ -50,6 +56,7 @@ DEFAULT_CONF = {
         'custom_font':'Sans 12',
         'use_font_type':'custom',
         'indent':0,
+        'orientation':'center',
     },
     'editor':{
         'session':'True',
@@ -86,7 +93,6 @@ class FailsafeConfigParser(SafeConfigParser):
             else:
                 return default_value
 
-            
 class PyroomConfig(object):
     """Fetches (and/or) builds basic configuration files/dirs."""
 
@@ -113,6 +119,9 @@ class PyroomConfig(object):
         self.config.readfp(open(self.conf_file, 'r'))
         self.themeslist = self.read_themes_list()
         self.showborderstate = self.config.get('visual', 'showborder')
+        self.orientation = ORIENTATION[
+                self.config.get('visual', 'orientation')
+                ]
 
     def build_default_conf(self):
         """builds necessary default conf.
