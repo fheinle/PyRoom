@@ -1,0 +1,366 @@
+# Traditional Chinese translation for pyroom.
+# Copyright (c) 2008 Rosetta Contributors and Canonical Ltd 2008.
+# This file is distributed under the same license as the pyroom package.
+# Bingxin Shen <dionydonny@gmail.com>, 2009.
+# Wei-Lun Chao <chaoweilun@gmail.com>, 2009.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: pyroom 0.4.1\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2009-02-27 11:29+0100\n"
+"PO-Revision-Date: 2009-06-20 19:21+0800\n"
+"Last-Translator: Wei-Lun Chao <chaoweilun@gmail.com>\n"
+"Language-Team: Chinese (traditional) <zh-l10n@linux.org.tw>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: trunk/PyRoom/interface.glade.h:2
+msgid " %"
+msgstr " %"
+
+#: trunk/PyRoom/interface.glade.h:3
+msgid " minutes."
+msgstr " 分鐘。"
+
+#: trunk/PyRoom/interface.glade.h:4
+msgid "<b>Autosave</b>"
+msgstr "<b>自動儲存</b>"
+
+#: trunk/PyRoom/interface.glade.h:5
+msgid "<b>Display</b>"
+msgstr "<b>顯示</b>"
+
+#: trunk/PyRoom/interface.glade.h:6
+msgid "<b>Text font</b>"
+msgstr "<b>文字字型</b>"
+
+#: trunk/PyRoom/interface.glade.h:7
+msgid "<b>Themes</b>"
+msgstr "<b>主題</b>"
+
+#: trunk/PyRoom/interface.glade.h:8
+msgid ""
+"<b>Warning!</b>\n"
+"You are about to close your current document leaving unsaved changes. If you continue, any changes will be lost."
+msgstr ""
+"<b>警告！</b>\n"
+"您正試圖關閉一個尚未儲存的文件。如果繼續，該文件的所有變更將會丟失。"
+
+#: trunk/PyRoom/interface.glade.h:10
+msgid ""
+"<b>Warning!</b>\n"
+"You are about to quit leaving documents with unsaved changes. If you continue, you will loose any changes that you have made."
+msgstr ""
+"<b>警告！</b>\n"
+"您正試圖離開 PyRoom，而尚有檔案未被儲存。如果繼續，所有的變更將會丟失。"
+
+#: trunk/PyRoom/interface.glade.h:12
+msgid "Autosave files every "
+msgstr "自動儲存檔案於每 "
+
+#: trunk/PyRoom/interface.glade.h:13
+msgid "Background color:"
+msgstr "背景顏色:"
+
+#: trunk/PyRoom/interface.glade.h:14
+msgid "Border color:"
+msgstr "邊框顏色:"
+
+#: trunk/PyRoom/interface.glade.h:15
+msgid "Close without saving"
+msgstr "不儲存並離開"
+
+#: trunk/PyRoom/interface.glade.h:16
+msgid "Custom"
+msgstr "自訂"
+
+#: trunk/PyRoom/interface.glade.h:17
+msgid "Default _document font"
+msgstr "預設文件字型(_D)"
+
+#: trunk/PyRoom/interface.glade.h:18
+msgid "Default _monospace font"
+msgstr "預設等寬字型(_M)"
+
+#: trunk/PyRoom/interface.glade.h:19
+msgid "General"
+msgstr "一般"
+
+#: trunk/PyRoom/interface.glade.h:20
+msgid "Height:"
+msgstr "高度:"
+
+#: trunk/PyRoom/interface.glade.h:21
+msgid "Indent new paragraphs"
+msgstr "段首縮排"
+
+#: trunk/PyRoom/interface.glade.h:22
+msgid "Modify line spacing (in pixels)"
+msgstr "修改列間距(單位:像素)"
+
+#: trunk/PyRoom/interface.glade.h:23
+msgid "Padding:"
+msgstr "頁邊距:"
+
+#: trunk/PyRoom/interface.glade.h:24
+msgid "Presets:"
+msgstr "名稱:"
+
+#: trunk/PyRoom/interface.glade.h:25
+msgid "Pyroom Preferences"
+msgstr "Pyroom 偏好設定"
+
+#: trunk/PyRoom/interface.glade.h:26
+msgid "Save changes?"
+msgstr "是否儲存變更？"
+
+#: trunk/PyRoom/interface.glade.h:27
+msgid "Select a font"
+msgstr "選擇字型"
+
+#: trunk/PyRoom/interface.glade.h:28
+msgid "Show border"
+msgstr "顯示邊框"
+
+#: trunk/PyRoom/interface.glade.h:29
+msgid "Text color:"
+msgstr "文字顏色:"
+
+#: trunk/PyRoom/interface.glade.h:30
+msgid "Textbox background"
+msgstr "文字區背景"
+
+#: trunk/PyRoom/interface.glade.h:31
+msgid "Theme"
+msgstr "主題"
+
+#: trunk/PyRoom/interface.glade.h:32
+msgid "Width:"
+msgstr "寬度:"
+
+#: trunk/PyRoom/interface.glade.h:33
+msgid "_Custom font"
+msgstr "自訂字型(_C)"
+
+#: trunk/PyRoom/interface.glade.h:34
+msgid "_Save"
+msgstr "儲存(_S)"
+
+#: trunk/PyRoom/preferences.py:337
+msgid "Theme Files"
+msgstr "主題檔案"
+
+#: trunk/PyRoom/preferences.py:383
+msgid "Could not save preferences file."
+msgstr "無法儲存設定"
+
+#: trunk/PyRoom/preferences.py:460
+#, python-format
+msgid "Style Changed to %s"
+msgstr "樣式變更為 %s"
+
+#: trunk/PyRoom/gui.py:42
+#, python-format
+msgid "theme not found: %s"
+msgstr "主題找不到: %s"
+
+#: trunk/PyRoom/pyroom_error.py:42
+msgid ""
+"There has been an uncaught exception in pyroom.\n\n"
+"This is most likely a programming error. Please submit a bug report to launchpad"
+msgstr ""
+"pyroom 中出現未擷取異常。\n"
+"這可能是一個程式設計錯誤。請在 launchpad 上提交一個錯誤報告"
+
+#: trunk/PyRoom/pyroom_error.py:49
+msgid "Error"
+msgstr "錯誤"
+
+#: trunk/PyRoom/pyroom_error.py:52
+msgid "Details..."
+msgstr "詳細…"
+
+#: trunk/PyRoom/cmdline.py:64
+msgid "%prog [-v] [file1] [file2]..."
+msgstr "%prog [-v] [檔案1] [檔案2]…"
+
+#: trunk/PyRoom/cmdline.py:67
+msgid "PyRoom lets you edit text files simply and efficiently in a full-screen window, with no distractions."
+msgstr "PyRoom 提供一個簡潔而高效的全螢幕文字編輯環境，使您可以專注於寫作。"
+
+#: trunk/PyRoom/cmdline.py:82
+#, python-format
+msgid "Welcome to Pyroom %s, type Control-H for help"
+msgstr "歡迎使用 Pyroom %s， 請按 Control-H 獲得輔助"
+
+#: trunk/PyRoom/autosave.py:77
+#, python-format
+msgid "Could not autosave file %s"
+msgstr "無法自動儲存檔案 %s"
+
+#: trunk/PyRoom/basic_edit.py:38
+msgid "* Unnamed *"
+msgstr "* 未命名 *"
+
+#: trunk/PyRoom/basic_edit.py:41
+msgid "Control-H: Show help in a new buffer"
+msgstr "Control-H: 在新緩衝區中顯示輔助"
+
+#: trunk/PyRoom/basic_edit.py:42
+msgid "Control-I: Show buffer information"
+msgstr "Control-I: 顯示緩衝區資訊"
+
+#: trunk/PyRoom/basic_edit.py:43
+msgid "Control-P: Shows Preferences dialog"
+msgstr "Control-P: 開啟設定視窗"
+
+#: trunk/PyRoom/basic_edit.py:44
+msgid "Control-N: Create a new buffer"
+msgstr "Control-N: 新增一個緩衝區"
+
+#: trunk/PyRoom/basic_edit.py:45
+msgid "Control-O: Open a file in a new buffer"
+msgstr "Control-O: 開啟檔案 (在新的緩衝區中)"
+
+#: trunk/PyRoom/basic_edit.py:46
+msgid "Control-Q: Quit"
+msgstr "Control-Q: 離開"
+
+#: trunk/PyRoom/basic_edit.py:47
+msgid "Control-S: Save current buffer"
+msgstr "Control-S: 儲存目前緩衝區"
+
+#: trunk/PyRoom/basic_edit.py:48
+msgid "Control-Shift-S: Save current buffer as"
+msgstr "Control-Shift-S: 目前緩衝區另存為"
+
+#: trunk/PyRoom/basic_edit.py:49
+msgid "Control-W: Close buffer and exit if it was the last buffer"
+msgstr "Control-W: 關閉目前緩衝區，如果僅有一個緩衝區，則離開 PyRoom"
+
+#: trunk/PyRoom/basic_edit.py:50
+msgid "Control-Y: Redo last typing"
+msgstr "Control-Y: 重做上次輸入"
+
+#: trunk/PyRoom/basic_edit.py:51
+msgid "Control-Z: Undo last typing"
+msgstr "Control-Z: 撤銷上次輸入"
+
+#: trunk/PyRoom/basic_edit.py:52
+msgid "Control-Page Up: Switch to previous buffer"
+msgstr "Control-Page Up: 切換到上一個緩衝區"
+
+#: trunk/PyRoom/basic_edit.py:53
+msgid "Control-Page Down: Switch to next buffer"
+msgstr "Control-Page Down: 切換到下一個緩衝區"
+
+#: trunk/PyRoom/basic_edit.py:56
+#, python-format
+msgid ""
+"PyRoom - distraction free writing\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord and the PyRoom team\n\n"
+"Welcome to PyRoom and distraction-free writing.\n\n"
+"To hide this help window, press Control-W.\n\n"
+"PyRoom stays out of your way with formatting options and buttons, \n"
+"it is largely keyboard controlled, via shortcuts. You can find a list\n"
+"of available keyboard shortcuts later.\n\n"
+"If enabled in preferences, pyroom will save your files automatically every\n"
+"few minutes or when you press the keyboard shortcut.\n\n"
+"Commands:\n"
+"---------\n"
+"%s\n\n"
+msgstr ""
+"PyRoom - 專注寫作\n"
+"Copyright (c) 2007 Nicolas Rougier, NoWhereMan\n"
+"Copyright (c) 2008 Bruno Bord and the PyRoom team\n\n"
+"歡迎使用 PyRoom 專注寫作軟體。\n\n"
+"按 Control-W 關閉此輔助視窗。\n\n"
+"PyRoom 使您不再被格式設定和按鈕打擾，幾乎所有的作業，均能透過快捷鍵作業用鍵盤來完成。您可以在下面找到一個快捷鍵清單。\n\n"
+"如果您在設定中開啟了自動儲存選項，PyRoom 會每隔幾分鐘或在您按下快捷鍵的時候自動幫您儲存檔案。\n\n"
+"快捷鍵清單:\n"
+"---------\n"
+"%s\n\n"
+
+#: trunk/PyRoom/basic_edit.py:414
+msgid " (modified)"
+msgstr " (已修改)"
+
+#: trunk/PyRoom/basic_edit.py:417
+#, python-format
+msgid "Buffer %(buffer_id)d: %(buffer_name)s%(status)s, %(char_count)d character(s), %(word_count)d word(s), %(lines)d line(s)"
+msgstr "緩衝區 %(buffer_id)d: %(buffer_name)s%(status)s，%(char_count)d 個字元，%(word_count)d 個單字，%(lines)d 列"
+
+#: trunk/PyRoom/basic_edit.py:435
+msgid "Nothing more to undo!"
+msgstr "沒有什麼可以撤銷！"
+
+#: trunk/PyRoom/basic_edit.py:444
+msgid "Nothing more to redo!"
+msgstr "沒有什麼可以重做！"
+
+#: trunk/PyRoom/basic_edit.py:452
+msgid "Restore backup?"
+msgstr "恢復為備份的內容？"
+
+#: trunk/PyRoom/basic_edit.py:461
+msgid ""
+"Backup information for this file has been found.\n"
+"Open those instead of the original file?"
+msgstr ""
+"找到了此檔案的備份資訊。\n"
+"是否用備份替代原檔案？"
+
+#: trunk/PyRoom/basic_edit.py:499 trunk/PyRoom/basic_edit.py:592
+msgid "Closed, no files selected"
+msgstr "已關閉，未選擇任何檔案"
+
+#: trunk/PyRoom/basic_edit.py:528
+#, python-format
+msgid "Unable to open %(filename)s."
+msgstr "無法開啟檔案 %(filename)s。"
+
+#: trunk/PyRoom/basic_edit.py:532
+msgid " You do not have permission to open the file."
+msgstr " 您沒有開啟此檔案的權限。"
+
+#: trunk/PyRoom/basic_edit.py:537
+#, python-format
+msgid "Unable to open %s\n"
+msgstr "無法開啟 %s\n"
+
+#: trunk/PyRoom/basic_edit.py:539
+#, python-format
+msgid "File %s open"
+msgstr "檔案 %s 已開啟"
+
+#: trunk/PyRoom/basic_edit.py:563
+#, python-format
+msgid "File %s saved"
+msgstr "檔案 %s 已儲存"
+
+#: trunk/PyRoom/basic_edit.py:567
+#, python-format
+msgid "Unable to save %(filename)s."
+msgstr "無法儲存檔案 %(filename)s。"
+
+#: trunk/PyRoom/basic_edit.py:570
+msgid " You do not have permission to write to the file."
+msgstr " 您沒有權限寫入此檔案。"
+
+#: trunk/PyRoom/basic_edit.py:574
+#, python-format
+msgid "Unable to save %s\n"
+msgstr "無法儲存 %s\n"
+
+#: trunk/PyRoom/basic_edit.py:659
+msgid "Could not delete autosave file."
+msgstr "無法刪除自動儲存檔案。"
+
+#: trunk/PyRoom/basic_edit.py:676
+#, python-format
+msgid "Switching to buffer %(buffer_id)d (%(buffer_name)s)"
+msgstr "切換到緩衝區：%(buffer_id)d (%(buffer_name)s)"
