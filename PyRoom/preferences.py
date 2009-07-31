@@ -58,12 +58,24 @@ DEFAULT_CONF = {
     },
 }
 
-def calculate_real_tab_width(textview, tab_size):
-    """calculate the width of `tab_size` spaces in the current font"""
-    tab_string = tab_size * '0'
-    layout = pango.Layout(textview.get_pango_context())
-    layout.set_text(tab_string)
-    return layout.get_size()[0]
+def get_gnome_fonts():
+    """test if gnome font settings exist"""
+    try:
+        import gconf
+    except ImportError:
+        return
+    gconf_client = gconf.Client()
+    fonts = {'document':'', 'monospace':''}
+    try:
+        for font in fonts.keys():
+            fonts[font] = gconf_client.get_value(
+                '/desktop/gnome/interface/%s_font_name' % 
+                font
+            )
+    except ValueError:
+        return
+    else:
+        return fonts
 
 class FailsafeConfigParser(SafeConfigParser):
     """
@@ -98,6 +110,7 @@ class PyroomConfig(object):
     """Fetches (and/or) builds basic configuration files/dirs."""
 
     def __init__(self):
+        self.gnome_fonts = get_gnome_fonts()
         self.pyroom_absolute_path = os.path.dirname(os.path.abspath(__file__))
         self.conf_dir = os.path.join(config_home, 'pyroom')
         self.data_dir = os.path.join(data_home, 'pyroom')
@@ -166,7 +179,6 @@ class Preferences(object):
             pyroom_config.pyroom_absolute_path, "interface.glade"),
             "dialog-preferences")
 
-        self.gnome_fonts = self.get_gnome_fonts()
         # Defining widgets needed
         self.window = self.wTree.get_widget("dialog-preferences")
         self.colorpreference = self.wTree.get_widget("colorbutton")
@@ -197,7 +209,7 @@ class Preferences(object):
         }
         for widget in self.font_radios.values():
             if not widget.get_name() == 'radio_custom_font':
-                widget.set_sensitive(bool(self.gnome_fonts))
+                widget.set_sensitive(bool(get_gnome_fonts()))
 
         # Setting up config parser
         self.customfile = FailsafeConfigParser()
@@ -281,26 +293,6 @@ class Preferences(object):
         for widget in self.font_radios.values():
             widget.connect('toggled', self.change_font)
         self.custom_font_preference.connect('font-set', self.change_font)
-        self.set_font()
-
-    def get_gnome_fonts(self):
-        """test if gnome font settings exist"""
-        try:
-            import gconf
-        except ImportError:
-            return
-        gconf_client = gconf.Client()
-        fonts = {'document':'', 'monospace':''}
-        try:
-            for font in fonts.keys():
-                fonts[font] = gconf_client.get_value(
-                    '/desktop/gnome/interface/%s_font_name' % 
-                    font
-                )
-        except ValueError:
-            return
-        else:
-            return fonts
 
     def change_font(self, widget):
         if widget.get_name() in ('fontbutton1', 'radio_custom_font'):
@@ -312,25 +304,8 @@ class Preferences(object):
             self.custom_font_preference.set_sensitive(False)
             font_type = widget.get_name().split('_')[1]
             self.config.set('visual', 'use_font_type', font_type)
-        self.set_font()
         self.graphical.apply_theme()
     
-    def set_font(self):
-        """set font according to settings"""
-        if self.config.get('visual', 'use_font_type') == 'custom' or\
-           not self.gnome_fonts:
-            new_font = self.config.get('visual', 'custom_font')
-        else:
-            font_type = self.config.get('visual', 'use_font_type')
-            new_font = self.gnome_fonts[font_type]
-        self.graphical.textbox.modify_font(pango.FontDescription(new_font))
-        tab_width = pango.TabArray(1, False)
-        tab_width.set_tab(0, pango.TAB_LEFT,
-                calculate_real_tab_width(self.graphical.textbox, 4)
-        )
-        self.graphical.textbox.set_tabs(tab_width)
-
-        
     def getcustomdata(self):
         """reads custom themes"""
         self.colorname = gtk.gdk.Color.to_string(

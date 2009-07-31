@@ -38,6 +38,13 @@ else:
 
 from pyroom_error import PyroomError
 
+def calculate_real_tab_width(textview, tab_size):
+    """calculate the width of `tab_size` spaces in the current font"""
+    tab_string = tab_size * '0'
+    layout = pango.Layout(textview.get_pango_context())
+    layout.set_text(tab_string)
+    return layout.get_size()[0]
+
 class Theme(dict):
     """basically a dict with some utility methods"""
     def __init__(self, theme_name):
@@ -132,6 +139,7 @@ class GUI(object):
 
     def __init__(self, pyroom_config, edit_instance):
         self.config = pyroom_config.config # FIXME: use pyroom_config itself
+        self.pyroom_config = pyroom_config
         # Theme
         theme_name = self.config.get('visual', 'theme')
         self.theme = Theme(theme_name)
@@ -244,6 +252,22 @@ class GUI(object):
         else:
             self.boxin.set_border_width(1)
             self.boxout.set_border_width(1)
+
+        # Fonts
+        if self.config.get('visual', 'use_font_type') == 'custom' or\
+           not self.pyroom_config.gnome_fonts:
+            new_font = self.config.get('visual', 'custom_font')
+        else:
+            font_type = self.config.get('visual', 'use_font_type')
+            new_font = self.pyroom_config.gnome_fonts[font_type]
+        self.textbox.modify_font(pango.FontDescription(new_font))
+        tab_width = pango.TabArray(1, False)
+        tab_width.set_tab(0, pango.TAB_LEFT,
+                calculate_real_tab_width(self.textbox, 4)
+        )
+        self.textbox.set_tabs(tab_width)
+
+        
 
         # Indent
         if self.config.get('visual', 'indent') == '1':
