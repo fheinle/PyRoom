@@ -220,18 +220,17 @@ class Preferences(object):
 
         # Getting preferences from conf file
         active_style = self.config.get("visual", "theme")
-        self.autosavestate = self.config.get("editor", "autosave")
-        if int(self.autosavestate) == 1:
-            self.autosave_time = self.config.get("editor", "autosavetime")
+        if self.config.getint('editor', 'autosave'):
+            self.autosave_time = self.config.get('editor', 'autosavetime')
+            self.autosave.set_active(1)
         else:
             self.autosave_time = 0
-        self.linespacing = self.config.get("visual", "linespacing")
-        self.autosavestate = int(self.autosavestate)
+            self.autosave.set_active(0)
 
+        self.linespacing = self.config.get("visual", "linespacing")
         # Set up pyroom from conf file
         self.linespacing_spinbutton.set_value(int(self.linespacing))
         self.autosave_spinbutton.set_value(float(self.autosave_time))
-        self.autosave.set_active(self.autosavestate)
         self.showborderbutton.set_active(
                 self.config.getint('visual', 'showborder')
         )
