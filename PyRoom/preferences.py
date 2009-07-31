@@ -219,7 +219,7 @@ class Preferences(object):
             self.customfile.add_section('theme')
 
         # Getting preferences from conf file
-        self.activestyle = self.config.get("visual", "theme")
+        active_style = self.config.get("visual", "theme")
         self.autosavestate = self.config.get("editor", "autosave")
         if int(self.autosavestate) == 1:
             self.autosave_time = self.config.get("editor", "autosavetime")
@@ -254,9 +254,9 @@ class Preferences(object):
             current_loading_theme = Theme(i)
             theme_name = current_loading_theme['name']
             self.presetscombobox.append_text(theme_name)
-        if self.activestyle == 'custom':
+        if active_style == 'custom':
             self.save_custom_button.set_sensitive(True)
-        self.presetscombobox.set_active(self.stylesvalues[self.activestyle])
+        self.presetscombobox.set_active(self.stylesvalues[active_style])
         self.fill_pref_dialog()
 
         # Connecting interface's signals
