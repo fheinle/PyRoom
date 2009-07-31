@@ -373,17 +373,7 @@ class BasicEdit(object):
         self.new_buffer()
 
         self.textbox.connect('key-press-event', self.key_press_event)
-
-        self.textbox.set_pixels_below_lines(
-            int(self.config.get("visual", "linespacing"))
-        )
-        self.textbox.set_pixels_above_lines(
-            int(self.config.get("visual", "linespacing"))
-        )
-        self.textbox.set_pixels_inside_wrap(
-            int(self.config.get("visual", "linespacing"))
-        )
-                
+                        
         # Autosave timer object
         autosave.start_autosave(self)
 

@@ -227,9 +227,10 @@ class Preferences(object):
             self.autosave_time = 0
             self.autosave.set_active(0)
 
-        self.linespacing = self.config.get("visual", "linespacing")
         # Set up pyroom from conf file
-        self.linespacing_spinbutton.set_value(int(self.linespacing))
+        self.linespacing_spinbutton.set_value(int(
+            self.config.get('visual', 'linespacing')
+        ))
         self.autosave_spinbutton.set_value(float(self.autosave_time))
         self.showborderbutton.set_active(
                 self.config.getint('visual', 'showborder')
@@ -346,7 +347,6 @@ class Preferences(object):
         else:
             self.autosavepref = 0
         self.config.set("editor", "autosave", str(self.autosavepref))
-        self.config.set("visual", "linespacing", str(int(self.linespacing)))
 
         autosave_time = self.autosave_spinbutton.get_value_as_int()
         self.config.set("editor", "autosavetime", str(autosave_time))
@@ -476,11 +476,9 @@ class Preferences(object):
 
     def changelinespacing(self, widget):
         """Change line spacing"""
-        self.linespacing = self.linespacing_spinbutton.get_value()
-        self.graphical.textbox.set_pixels_below_lines(int(self.linespacing))
-        self.graphical.textbox.set_pixels_above_lines(int(self.linespacing))
-        self.graphical.textbox.set_pixels_inside_wrap(int(self.linespacing))
-        
+        linespacing = self.linespacing_spinbutton.get_value()
+        self.config.set("visual", "linespacing", str(int(linespacing)))
+        self.graphical.apply_theme()
 
     def toggleautosave(self, widget):
         """enable or disable autosave"""

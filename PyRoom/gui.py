@@ -267,8 +267,6 @@ class GUI(object):
         )
         self.textbox.set_tabs(tab_width)
 
-        
-
         # Indent
         if self.config.get('visual', 'indent') == '1':
             pango_context = self.textbox.get_pango_context()
@@ -278,6 +276,14 @@ class GUI(object):
             self.textbox.set_indent(current_font_size * 2)
         else:
             self.textbox.set_indent(0)
+
+        # linespacing
+        linespacing = self.config.getint('visual', 'linespacing')
+        self.textbox.set_pixels_below_lines(linespacing)
+        self.textbox.set_pixels_above_lines(linespacing)
+        self.textbox.set_pixels_inside_wrap(linespacing)
+
+
 
     def quit(self):
         """ quit pyroom """
