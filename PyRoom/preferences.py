@@ -58,6 +58,13 @@ DEFAULT_CONF = {
     },
 }
 
+def calculate_real_tab_width(textview, tab_size):
+    """calculate the width of `tab_size` spaces in the current font"""
+    tab_string = tab_size * '0'
+    layout = pango.Layout(textview.get_pango_context())
+    layout.set_text(tab_string)
+    return layout.get_size()[0]
+
 class FailsafeConfigParser(SafeConfigParser):
     """
     Config parser that returns default values 
@@ -317,6 +324,12 @@ class Preferences(object):
             font_type = self.config.get('visual', 'use_font_type')
             new_font = self.gnome_fonts[font_type]
         self.graphical.textbox.modify_font(pango.FontDescription(new_font))
+        tab_width = pango.TabArray(1, False)
+        tab_width.set_tab(0, pango.TAB_LEFT,
+                calculate_real_tab_width(self.graphical.textbox, 4)
+        )
+        self.graphical.textbox.set_tabs(tab_width)
+
         
     def getcustomdata(self):
         """reads custom themes"""
