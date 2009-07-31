@@ -25,6 +25,7 @@ provide autosave functions
 import gobject
 from pyroom_error import PyroomError
 import os
+from globals import config
 
 def start_autosave(edit_instance):
     """start the autosave timer"""
@@ -43,9 +44,9 @@ def stop_autosave(edit_instance):
 
 def autosave_timeout(edit_instance):
     """see if we have to autosave open files"""
-    if edit_instance.preferences.autosave_time:
+    if config.getint('editor', 'autosavetime'):
         if edit_instance.autosave_elapsed >= \
-           edit_instance.preferences.autosave_time * 60:
+           config.getint('editor', 'autosavetime') * 60:
             autosave(edit_instance)
             edit_instance.autosave_elapsed = 0
         else:

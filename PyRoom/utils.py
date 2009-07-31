@@ -27,7 +27,6 @@ from ConfigParser import SafeConfigParser, NoOptionError
 # avoiding circular imports, actual import is below!
 # from globals import state
 
-
 DEFAULT_CONF = {
     'visual':{
         'theme':'green',

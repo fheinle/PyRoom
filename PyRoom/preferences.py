@@ -89,18 +89,14 @@ class Preferences(object):
 
         # Getting preferences from conf file
         active_style = config.get("visual", "theme")
-        if config.getint('editor', 'autosave'):
-            self.autosave_time = config.get('editor', 'autosavetime')
-            self.autosave.set_active(1)
-        else:
-            self.autosave_time = 0
-            self.autosave.set_active(0)
+        self.autosave.set_active(config.getint('editor', 'autosave'))
 
         # Set up pyroom from conf file
         self.linespacing_spinbutton.set_value(int(
             config.get('visual', 'linespacing')
         ))
-        self.autosave_spinbutton.set_value(float(self.autosave_time))
+        self.autosave_spinbutton.set_value(float(
+            config.get('editor', 'autosavetime')))
         self.showborderbutton.set_active(
                 config.getint('visual', 'showborder')
         )
@@ -336,10 +332,13 @@ class Preferences(object):
         """enable or disable autosave"""
         if self.autosave.get_active():
             self.autosave_spinbutton.set_sensitive(True)
-            self.autosave_time = self.autosave_spinbutton.get_value_as_int()
+            autosave_time = self.autosave_spinbutton.get_value_as_int()
+            config.set('editor', 'autosavee', '1')
         else:
             self.autosave_spinbutton.set_sensitive(False)
-            self.autosave_time = 0
+            autosave_time = 0
+            config.set('editor', 'autosave', '0')
+        config.set('editor', 'autosavetime', str(autosave_time))
 
     def QuitEvent(self, widget, data=None):
         """quit our app"""
