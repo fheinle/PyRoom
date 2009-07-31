@@ -28,14 +28,10 @@ theme created via the dialog
 
 import gtk
 import gtk.glade
-import pango
 import os
-from ConfigParser import SafeConfigParser, NoOptionError
-from sys import platform
 
 from gui import Theme
 from pyroom_error import PyroomError
-import autosave
 from globals import state, config
 from utils import get_themes_list, FailsafeConfigParser
 
@@ -167,18 +163,20 @@ class Preferences(object):
     
     def get_custom_data(self):
         """reads custom themes"""
-        foreground = gtk.gdk.Color.to_string(
-                                self.colorpreference.get_color())
-        textboxbg = gtk.gdk.Color.to_string(
-                                self.textboxbgpreference.get_color())
-        background = gtk.gdk.Color.to_string(
-                               self.bgpreference.get_color())
-        border = gtk.gdk.Color.to_string(
-                               self.borderpreference.get_color())
-        padding = self.paddingpreference.get_value_as_int()
-        height = self.heightpreference.get_value() / 100.0
-        width = self.widthpreference.get_value() / 100.0
-        return dict(locals())
+        custom_settings = dict(
+            foreground = gtk.gdk.Color.to_string(
+                                    self.colorpreference.get_color()),
+            textboxbg = gtk.gdk.Color.to_string(
+                                    self.textboxbgpreference.get_color()),
+            background = gtk.gdk.Color.to_string(
+                                   self.bgpreference.get_color()),
+            border = gtk.gdk.Color.to_string(
+                                   self.borderpreference.get_color()),
+            padding = self.paddingpreference.get_value_as_int(),
+            height = self.heightpreference.get_value() / 100.0,
+            width = self.widthpreference.get_value() / 100.0,
+        )
+        return custom_settings
 
     def save_custom_theme(self, widget, data=None):
         chooser = gtk.FileChooserDialog('PyRoom', self.window, 
@@ -205,13 +203,8 @@ class Preferences(object):
 
     def set_preferences(self, widget, data=None):
         """save preferences"""
-        self.autosavepref = self.autosave.get_active()
-        if self.autosavepref == True:
-            self.autosavepref = 1
-        else:
-            self.autosavepref = 0
-        config.set("editor", "autosave", str(self.autosavepref))
-
+        autosavepref = int(self.autosave.get_active())
+        config.set("editor", "autosave", str(autosavepref))
         autosave_time = self.autosave_spinbutton.get_value_as_int()
         config.set("editor", "autosavetime", str(autosave_time))
 
@@ -234,11 +227,11 @@ class Preferences(object):
         """triggered when custom themes are changed, reloads style"""
         self.presetscombobox.set_active(0)
         for key, value in self.get_custom_data().iteritems():
-            if not key == 'self':
-                self.customfile.set('theme', key, str(value))
+            self.customfile.set('theme', key, str(value))
         self.presetchanged(widget)
 
     def fill_pref_dialog(self):
+        """load config into the dialog"""
         self.custom_font_preference.set_font_name(
             config.get('visual', 'custom_font')
         )
