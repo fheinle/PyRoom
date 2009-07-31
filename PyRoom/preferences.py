@@ -132,7 +132,6 @@ class PyroomConfig(object):
         self.build_default_conf()
         self.config.readfp(open(self.conf_file, 'r'))
         self.themeslist = self.read_themes_list()
-        self.showborderstate = self.config.get('visual', 'showborder')
 
     def build_default_conf(self):
         """builds necessary default conf.
@@ -221,25 +220,21 @@ class Preferences(object):
 
         # Getting preferences from conf file
         self.activestyle = self.config.get("visual", "theme")
-        self.pyroom_config.showborderstate = self.config.get(
-            "visual", "showborder"
-        )
         self.autosavestate = self.config.get("editor", "autosave")
         if int(self.autosavestate) == 1:
             self.autosave_time = self.config.get("editor", "autosavetime")
         else:
             self.autosave_time = 0
         self.linespacing = self.config.get("visual", "linespacing")
-        self.pyroom_config.showborderstate = int(
-            self.pyroom_config.showborderstate
-        )
         self.autosavestate = int(self.autosavestate)
 
         # Set up pyroom from conf file
         self.linespacing_spinbutton.set_value(int(self.linespacing))
         self.autosave_spinbutton.set_value(float(self.autosave_time))
         self.autosave.set_active(self.autosavestate)
-        self.showborderbutton.set_active(self.pyroom_config.showborderstate)
+        self.showborderbutton.set_active(
+                self.config.getint('visual', 'showborder')
+        )
         font_type = self.config.get('visual', 'use_font_type')
         self.font_radios[font_type].set_active(True)
         
@@ -472,18 +467,13 @@ class Preferences(object):
     def toggleborder(self, widget):
         """toggle border display"""
         #FIXME just workaround, we should drop pyroom_config entirely
-        if self.pyroom_config.showborderstate:
-            self.pyroom_config.showborderstate = 0
-            self.config.set('visual', 'showborder', '0')
+        borderstate = self.config.getint('visual', 'showborder')
+        if borderstate:
+            opposite = 0
         else:
-            self.pyroom_config.showborderstate = 1
-            self.config.set('visual', 'showborder', '1')
-        self.graphical.boxout.set_border_width(
-            self.pyroom_config.showborderstate
-        )
-        self.graphical.boxin.set_border_width(
-            self.pyroom_config.showborderstate
-        )
+            opposite = 1
+        self.config.set('visual', 'showborder', str(opposite))
+        self.graphical.apply_theme()
 
     def changelinespacing(self, widget):
         """Change line spacing"""
