@@ -243,14 +243,14 @@ class Preferences(object):
         self.window.set_transient_for(self.graphical.window)
 
         self.stylesvalues = {'custom': 0}
-        self.startingvalue = 1
+        startingvalue = 1
 
 
         self.graphical.theme = Theme(self.config.get('visual', 'theme'))
         # Add themes to combobox
         for i in self.pyroom_config.themeslist:
-            self.stylesvalues['%s' % (i)] = self.startingvalue
-            self.startingvalue = self.startingvalue + 1
+            self.stylesvalues['%s' % (i)] = startingvalue
+            startingvalue += 1
             current_loading_theme = Theme(i)
             theme_name = current_loading_theme['name']
             self.presetscombobox.append_text(theme_name)
