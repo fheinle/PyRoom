@@ -28,7 +28,6 @@ Configuration, state keeping, etc
 
 import os
 from sys import platform
-from ConfigParser import SafeConfigParser
 
 if platform == 'win32':
     data_home, config_home = (os.environ['APPDATA'],) * 2

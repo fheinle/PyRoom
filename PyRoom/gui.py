@@ -49,6 +49,7 @@ def calculate_real_tab_width(textview, tab_size):
 class Theme(dict):
     """basically a dict with some utility methods"""
     def __init__(self, theme_name):
+        dict.__init__(self)
         theme_filename = self._lookup_theme(theme_name)
         if not theme_filename:
             raise PyroomError(_('theme not found: %s') % theme_name)

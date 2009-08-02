@@ -51,9 +51,6 @@ class FailsafeConfigParser(SafeConfigParser):
     running on legacy configuration files. Second reason: standard 
     'defaults' behaviour of ConfigParser is stupid, doesn't allow for 
     sections and works with a lot of magic. 
-
-    XXX: we really really should come up with a preferences system that is
-    sane on a more global level
     """
     def get(self, section, option):
         """

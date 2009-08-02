@@ -150,6 +150,7 @@ class Preferences(object):
         self.custom_font_preference.connect('font-set', self.change_font)
 
     def change_font(self, widget):
+        """apply changed fonts"""
         if widget.get_name() in ('fontbutton1', 'radio_custom_font'):
             self.custom_font_preference.set_sensitive(True)
             new_font = self.custom_font_preference.get_font_name()
@@ -179,6 +180,7 @@ class Preferences(object):
         return custom_settings
 
     def save_custom_theme(self, widget, data=None):
+        """write the current custom theme to disk"""
         chooser = gtk.FileChooserDialog('PyRoom', self.window, 
             gtk.FILE_CHOOSER_ACTION_SAVE,
             buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,

@@ -77,6 +77,6 @@ def autosave(edit_instance):
                     )
                 except IOError:
                     raise PyroomError(_("Could not autosave file %s") % 
-                                        filename)
+                                        buf.filename)
             finally:
                 backup_file.close()

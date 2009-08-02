@@ -31,10 +31,8 @@ Based on code posted on ubuntu forums by NoWhereMan (www.nowhereland.it)
 :license: GNU General Public License, version 3 or later
 """
 
-import gettext
 from optparse import OptionParser
 import sys
-import os
 
 import gtk
 

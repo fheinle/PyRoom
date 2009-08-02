@@ -426,7 +426,6 @@ class BasicEdit(object):
         """ key press event dispatcher """
         if event.state & gtk.gdk.CONTROL_MASK:
             if event.hardware_keycode in self.keybindings:
-                # FIXME: streamline this again
                 self.keybindings[event.hardware_keycode]()
                 return True
         return False
