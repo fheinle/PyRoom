@@ -37,6 +37,7 @@ else:
     from xdg.BaseDirectory import xdg_data_home as data_home
 
 from pyroom_error import PyroomError
+from globals import state, config
 
 def calculate_real_tab_width(textview, tab_size):
     """calculate the width of `tab_size` spaces in the current font"""
@@ -48,6 +49,7 @@ def calculate_real_tab_width(textview, tab_size):
 class Theme(dict):
     """basically a dict with some utility methods"""
     def __init__(self, theme_name):
+        dict.__init__(self)
         theme_filename = self._lookup_theme(theme_name)
         if not theme_filename:
             raise PyroomError(_('theme not found: %s') % theme_name)
@@ -137,9 +139,8 @@ class FadeLabel(gtk.Label):
 class GUI(object):
     """our basic global gui object"""
 
-    def __init__(self, pyroom_config, edit_instance):
-        self.config = pyroom_config.config # FIXME: use pyroom_config itself
-        self.pyroom_config = pyroom_config
+    def __init__(self, edit_instance):
+        self.config = config
         # Theme
         theme_name = self.config.get('visual', 'theme')
         self.theme = Theme(theme_name)
@@ -255,19 +256,17 @@ class GUI(object):
 
         # Fonts
         if self.config.get('visual', 'use_font_type') == 'custom' or\
-           not self.pyroom_config.gnome_fonts:
+           not state['gnome_fonts']:
             new_font = self.config.get('visual', 'custom_font')
         else:
             font_type = self.config.get('visual', 'use_font_type')
-            new_font = self.pyroom_config.gnome_fonts[font_type]
+            new_font = state['gnome_fonts'][font_type]
         self.textbox.modify_font(pango.FontDescription(new_font))
         tab_width = pango.TabArray(1, False)
         tab_width.set_tab(0, pango.TAB_LEFT,
                 calculate_real_tab_width(self.textbox, 4)
         )
         self.textbox.set_tabs(tab_width)
-
-        
 
         # Indent
         if self.config.get('visual', 'indent') == '1':
@@ -278,6 +277,14 @@ class GUI(object):
             self.textbox.set_indent(current_font_size * 2)
         else:
             self.textbox.set_indent(0)
+
+        # linespacing
+        linespacing = self.config.getint('visual', 'linespacing')
+        self.textbox.set_pixels_below_lines(linespacing)
+        self.textbox.set_pixels_above_lines(linespacing)
+        self.textbox.set_pixels_inside_wrap(linespacing)
+
+
 
     def quit(self):
         """ quit pyroom """

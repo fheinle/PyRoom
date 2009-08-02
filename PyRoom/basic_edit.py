@@ -34,6 +34,7 @@ from pyroom_error import PyroomError
 from gui import GUI
 from preferences import Preferences
 import autosave
+from globals import state, config
 
 FILE_UNNAMED = _('* Unnamed *')
 
@@ -348,14 +349,13 @@ class UndoableBuffer(gtk.TextBuffer):
 class BasicEdit(object):
     """editing logic that gets passed around"""
 
-    def __init__(self, pyroom_config):
+    def __init__(self):
         self.current = 0
         self.buffers = []
-        self.config = pyroom_config.config
-        self.gui = GUI(pyroom_config, self)
+        self.config = config
+        self.gui = GUI(self)
         self.preferences = Preferences(
             gui=self.gui,
-            pyroom_config=pyroom_config
         )
         try:
             self.recent_manager = gtk.recent_manager_get_default()
@@ -373,17 +373,7 @@ class BasicEdit(object):
         self.new_buffer()
 
         self.textbox.connect('key-press-event', self.key_press_event)
-
-        self.textbox.set_pixels_below_lines(
-            int(self.config.get("visual", "linespacing"))
-        )
-        self.textbox.set_pixels_above_lines(
-            int(self.config.get("visual", "linespacing"))
-        )
-        self.textbox.set_pixels_inside_wrap(
-            int(self.config.get("visual", "linespacing"))
-        )
-                
+                        
         # Autosave timer object
         autosave.start_autosave(self)
 
@@ -404,7 +394,7 @@ class BasicEdit(object):
 
         # Defines the glade file functions for use on closing a buffer
         self.wTree = gtk.glade.XML(os.path.join(
-            pyroom_config.pyroom_absolute_path, "interface.glade"),
+            state['absolute_path'], "interface.glade"),
             "SaveBuffer")
         self.dialog = self.wTree.get_widget("SaveBuffer")
         self.dialog.set_transient_for(self.window)
@@ -417,7 +407,7 @@ class BasicEdit(object):
 
         #Defines the glade file functions for use on exit
         self.aTree = gtk.glade.XML(os.path.join(
-            pyroom_config.pyroom_absolute_path, "interface.glade"),
+            state['absolute_path'], "interface.glade"),
             "QuitSave")
         self.quitdialog = self.aTree.get_widget("QuitSave")
         self.quitdialog.set_transient_for(self.window)
@@ -436,7 +426,6 @@ class BasicEdit(object):
         """ key press event dispatcher """
         if event.state & gtk.gdk.CONTROL_MASK:
             if event.hardware_keycode in self.keybindings:
-                # FIXME: streamline this again
                 self.keybindings[event.hardware_keycode]()
                 return True
         return False

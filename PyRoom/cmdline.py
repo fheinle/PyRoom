@@ -31,21 +31,16 @@ Based on code posted on ubuntu forums by NoWhereMan (www.nowhereland.it)
 :license: GNU General Public License, version 3 or later
 """
 
-import gettext
 from optparse import OptionParser
 import sys
-import os
 
 import gtk
 
 import PyRoom
 from basic_edit import BasicEdit
 from pyroom_error import handle_error
-from preferences import PyroomConfig
 
 __VERSION__ = PyRoom.__VERSION__
-
-pyroom_config = PyroomConfig()
 
 def main():
     sys.excepthook = handle_error
@@ -62,7 +57,7 @@ simply and efficiently in a full-screen window, with no distractions.'))
     files = args
 
     # Create relevant buffers for file and load them
-    pyroom = BasicEdit(pyroom_config=pyroom_config)
+    pyroom = BasicEdit()
     buffnum = 0
     if len(files):
         for filename in files:
