@@ -353,18 +353,17 @@ class BasicEdit(object):
         self.current = 0
         self.buffers = []
         self.config = config
-        self.gui = GUI(self)
-        self.preferences = Preferences(
-            gui=self.gui,
-        )
+        gui = GUI()
+        state['gui'] = gui
+        self.preferences = Preferences()
         try:
             self.recent_manager = gtk.recent_manager_get_default()
         except AttributeError:
             self.recent_manager = None
-        self.status = self.gui.status
-        self.window = self.gui.window
+        self.status = gui.status
+        self.window = gui.window
         self.window.add_accel_group(make_accel_group(self))
-        self.textbox = self.gui.textbox
+        self.textbox = gui.textbox
         self.UNNAMED_FILENAME = FILE_UNNAMED
 
         self.autosave_timeout_id = ''
@@ -420,7 +419,7 @@ class BasicEdit(object):
         self.keybindings = define_keybindings(self)
         # this sucks, shouldn't have to call this here, textbox should
         # have its background and padding color from GUI().__init__() already
-        self.gui.apply_theme()
+        gui.apply_theme()
 
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
@@ -713,7 +712,7 @@ continue editing your document.")
         else:
             self.current = 0
         self.set_buffer(self.current)
-        self.gui.textbox.scroll_to_mark(
+        state['gui'].textbox.scroll_to_mark(
             self.buffers[self.current].get_insert(),
             0.0,
         )
@@ -726,7 +725,7 @@ continue editing your document.")
         else:
             self.current = len(self.buffers) - 1
         self.set_buffer(self.current)
-        self.gui.textbox.scroll_to_mark(
+        state['gui'].textbox.scroll_to_mark(
             self.buffers[self.current].get_insert(),
             0.0,
         )
@@ -765,4 +764,4 @@ continue editing your document.")
     def quit(self):
         """cleanup before quitting"""
         autosave.stop_autosave(self)
-        self.gui.quit()
+        state['gui'].quit()

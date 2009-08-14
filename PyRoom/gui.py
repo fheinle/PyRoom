@@ -139,14 +139,12 @@ class FadeLabel(gtk.Label):
 class GUI(object):
     """our basic global gui object"""
 
-    def __init__(self, edit_instance):
+    def __init__(self):
         self.config = config
         # Theme
         theme_name = self.config.get('visual', 'theme')
         self.theme = Theme(theme_name)
-
         self.status = FadeLabel()
-        self.edit_instance = edit_instance
         
         # Main window
 
@@ -292,7 +290,7 @@ class GUI(object):
 
     def delete_event(self, widget, event, data=None):
         """ Quit """
-        self.edit_instance.dialog_quit()
+        state['edit_instance'].dialog_quit()
         return True
 
     def destroy(self, widget, data=None):

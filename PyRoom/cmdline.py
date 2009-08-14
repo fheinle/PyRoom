@@ -39,6 +39,7 @@ import gtk
 import PyRoom
 from basic_edit import BasicEdit
 from pyroom_error import handle_error
+from globals import state
 
 __VERSION__ = PyRoom.__VERSION__
 
@@ -57,15 +58,15 @@ simply and efficiently in a full-screen window, with no distractions.'))
     files = args
 
     # Create relevant buffers for file and load them
-    pyroom = BasicEdit()
+    state['edit_instance'] = BasicEdit()
     buffnum = 0
     if len(files):
         for filename in files:
-            pyroom.open_file_no_chooser(filename)
+            state['edit_instance'].open_file_no_chooser(filename)
             buffnum += 1
 
-    pyroom.set_buffer(buffnum)
-    pyroom.status.set_text(
+    state['edit_instance'].set_buffer(buffnum)
+    state['edit_instance'].status.set_text(
         _('Welcome to Pyroom %s, type Control-H for help') % __VERSION__
     )
     gtk.main()
