@@ -587,6 +587,7 @@ the file.')
                 self.status.set_text(_('File %s saved') % buf.filename)
             else:
                 self.save_file_as()
+                return
         except IOError, (errno, strerror):
             errortext = _('Unable to save %(filename)s.') % {
                 'filename': buf.filename}
