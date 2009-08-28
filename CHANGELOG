@@ -7,10 +7,15 @@ User visible changes
 * add horizontal scrollbar if words are longer than lines (LP:#371660)
 * touchup for themes tab (thanks Fehmican Imırgı) (LP:#362535)
 * changed tab width to 4 spaces (LP:#363386)
+* top orientation of textbox possible (LP:#363390)
 
 Bugfixes
 --------
 * fixed crash on startup if more than 1 language in $LANGUAGE (LP:#367990, #365477)
+
+Noteable background changes
+---------------------------
+* changed the way configuration and state keeping is handled (LP:#407349)
 
 pyroom 0.4.1 (2009-04-06)
 =========================

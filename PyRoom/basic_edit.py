@@ -34,6 +34,7 @@ from pyroom_error import PyroomError
 from gui import GUI
 from preferences import Preferences
 import autosave
+from globals import state, config
 
 FILE_UNNAMED = _('* Unnamed *')
 
@@ -348,23 +349,21 @@ class UndoableBuffer(gtk.TextBuffer):
 class BasicEdit(object):
     """editing logic that gets passed around"""
 
-    def __init__(self, pyroom_config):
+    def __init__(self):
         self.current = 0
         self.buffers = []
-        self.config = pyroom_config.config
-        self.gui = GUI(pyroom_config, self)
-        self.preferences = Preferences(
-            gui=self.gui,
-            pyroom_config=pyroom_config
-        )
+        self.config = config
+        gui = GUI()
+        state['gui'] = gui
+        self.preferences = Preferences()
         try:
             self.recent_manager = gtk.recent_manager_get_default()
         except AttributeError:
             self.recent_manager = None
-        self.status = self.gui.status
-        self.window = self.gui.window
+        self.status = gui.status
+        self.window = gui.window
         self.window.add_accel_group(make_accel_group(self))
-        self.textbox = self.gui.textbox
+        self.textbox = gui.textbox
         self.UNNAMED_FILENAME = FILE_UNNAMED
 
         self.autosave_timeout_id = ''
@@ -373,17 +372,7 @@ class BasicEdit(object):
         self.new_buffer()
 
         self.textbox.connect('key-press-event', self.key_press_event)
-
-        self.textbox.set_pixels_below_lines(
-            int(self.config.get("visual", "linespacing"))
-        )
-        self.textbox.set_pixels_above_lines(
-            int(self.config.get("visual", "linespacing"))
-        )
-        self.textbox.set_pixels_inside_wrap(
-            int(self.config.get("visual", "linespacing"))
-        )
-                
+                        
         # Autosave timer object
         autosave.start_autosave(self)
 
@@ -404,7 +393,7 @@ class BasicEdit(object):
 
         # Defines the glade file functions for use on closing a buffer
         self.wTree = gtk.glade.XML(os.path.join(
-            pyroom_config.pyroom_absolute_path, "interface.glade"),
+            state['absolute_path'], "interface.glade"),
             "SaveBuffer")
         self.dialog = self.wTree.get_widget("SaveBuffer")
         self.dialog.set_transient_for(self.window)
@@ -417,7 +406,7 @@ class BasicEdit(object):
 
         #Defines the glade file functions for use on exit
         self.aTree = gtk.glade.XML(os.path.join(
-            pyroom_config.pyroom_absolute_path, "interface.glade"),
+            state['absolute_path'], "interface.glade"),
             "QuitSave")
         self.quitdialog = self.aTree.get_widget("QuitSave")
         self.quitdialog.set_transient_for(self.window)
@@ -430,13 +419,12 @@ class BasicEdit(object):
         self.keybindings = define_keybindings(self)
         # this sucks, shouldn't have to call this here, textbox should
         # have its background and padding color from GUI().__init__() already
-        self.gui.apply_theme()
+        gui.apply_theme()
 
     def key_press_event(self, widget, event):
         """ key press event dispatcher """
         if event.state & gtk.gdk.CONTROL_MASK:
             if event.hardware_keycode in self.keybindings:
-                # FIXME: streamline this again
                 self.keybindings[event.hardware_keycode]()
                 return True
         return False
@@ -599,6 +587,7 @@ the file.')
                 self.status.set_text(_('File %s saved') % buf.filename)
             else:
                 self.save_file_as()
+                return
         except IOError, (errno, strerror):
             errortext = _('Unable to save %(filename)s.') % {
                 'filename': buf.filename}
@@ -724,7 +713,7 @@ continue editing your document.")
         else:
             self.current = 0
         self.set_buffer(self.current)
-        self.gui.textbox.scroll_to_mark(
+        state['gui'].textbox.scroll_to_mark(
             self.buffers[self.current].get_insert(),
             0.0,
         )
@@ -737,7 +726,7 @@ continue editing your document.")
         else:
             self.current = len(self.buffers) - 1
         self.set_buffer(self.current)
-        self.gui.textbox.scroll_to_mark(
+        state['gui'].textbox.scroll_to_mark(
             self.buffers[self.current].get_insert(),
             0.0,
         )
@@ -776,4 +765,4 @@ continue editing your document.")
     def quit(self):
         """cleanup before quitting"""
         autosave.stop_autosave(self)
-        self.gui.quit()
+        state['gui'].quit()
