@@ -23,7 +23,7 @@ helper functions
 """
 
 import os
-from ConfigParser import SafeConfigParser, NoOptionError
+from ConfigParser import SafeConfigParser, NoOptionError, NoSectionError
 # avoiding circular imports, actual import is below!
 # from globals import state
 
@@ -35,6 +35,7 @@ DEFAULT_CONF = {
         'custom_font':'Sans 12',
         'use_font_type':'custom',
         'indent':0,
+        'alignment':'center',
     },
     'editor':{
         'session':'True',
@@ -67,6 +68,9 @@ class FailsafeConfigParser(SafeConfigParser):
                 raise NoOptionError(option, section)
             else:
                 return default_value
+        except NoSectionError:
+            self.add_section(section)
+            return self.get(section, option)
 
 # yes imports that are not quite obvious suck but we need to avoid
 # circular imports here

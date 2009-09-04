@@ -39,6 +39,12 @@ else:
 from pyroom_error import PyroomError
 from globals import state, config
 
+ORIENTATION = {
+        'top':0,
+        'center':0.5,
+        'bottom':1,
+        }
+
 def calculate_real_tab_width(textview, tab_size):
     """calculate the width of `tab_size` spaces in the current font"""
     tab_string = tab_size * '0'
@@ -140,9 +146,8 @@ class GUI(object):
     """our basic global gui object"""
 
     def __init__(self):
-        self.config = config
         # Theme
-        theme_name = self.config.get('visual', 'theme')
+        theme_name = config.get('visual', 'theme')
         self.theme = Theme(theme_name)
         self.status = FadeLabel()
         
@@ -160,8 +165,9 @@ class GUI(object):
 
         self.fixed = gtk.Fixed()
         self.vbox = gtk.VBox()
-        self.window.add(self.fixed)
-        self.fixed.put(self.vbox, 0, 0)
+        self.align = gtk.Alignment()
+        self.align.add(self.vbox)
+        self.window.add(self.align)
 
         self.boxout = gtk.EventBox()
         self.boxout.set_border_width(1)
@@ -226,10 +232,6 @@ class GUI(object):
             int(width_percentage * screen_width),
             int(height_percentage * screen_height)
         )
-        self.fixed.move(self.vbox,
-                        int(((1 - width_percentage) * screen_width) / 2),
-                        int(((1 - height_percentage) * screen_height) / 2)
-                       )
 
         parse_color = lambda x: gtk.gdk.color_parse(self.theme[x])
         # Colors
@@ -245,7 +247,7 @@ class GUI(object):
         self.textbox.modify_fg(gtk.STATE_NORMAL, parse_color('foreground'))
 
         # Border
-        if not int(self.config.get('visual', 'showborder')):
+        if not int(config.get('visual', 'showborder')):
             self.boxin.set_border_width(0)
             self.boxout.set_border_width(0)
         else:
@@ -253,11 +255,11 @@ class GUI(object):
             self.boxout.set_border_width(1)
 
         # Fonts
-        if self.config.get('visual', 'use_font_type') == 'custom' or\
+        if config.get('visual', 'use_font_type') == 'custom' or\
            not state['gnome_fonts']:
-            new_font = self.config.get('visual', 'custom_font')
+            new_font = config.get('visual', 'custom_font')
         else:
-            font_type = self.config.get('visual', 'use_font_type')
+            font_type = config.get('visual', 'use_font_type')
             new_font = state['gnome_fonts'][font_type]
         self.textbox.modify_font(pango.FontDescription(new_font))
         tab_width = pango.TabArray(1, False)
@@ -267,7 +269,7 @@ class GUI(object):
         self.textbox.set_tabs(tab_width)
 
         # Indent
-        if self.config.get('visual', 'indent') == '1':
+        if config.get('visual', 'indent') == '1':
             pango_context = self.textbox.get_pango_context()
             current_font_size = pango_context.\
                     get_font_description().\
@@ -277,12 +279,18 @@ class GUI(object):
             self.textbox.set_indent(0)
 
         # linespacing
-        linespacing = self.config.getint('visual', 'linespacing')
+        linespacing = config.getint('visual', 'linespacing')
         self.textbox.set_pixels_below_lines(linespacing)
         self.textbox.set_pixels_above_lines(linespacing)
         self.textbox.set_pixels_inside_wrap(linespacing)
 
-
+        # alignment
+        self.align.set(
+            xalign=0.5,
+            yalign=ORIENTATION[config.get('visual', 'alignment')],
+            xscale=0,
+            yscale=0
+        )
 
     def quit(self):
         """ quit pyroom """
