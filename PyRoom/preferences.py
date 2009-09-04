@@ -102,7 +102,7 @@ class Preferences(object):
         font_type = config.get('visual', 'use_font_type')
         self.font_radios[font_type].set_active(True)
         self.orientation_radios[
-                config.get('visual', 'orientation')
+                config.get('visual', 'alignment')
                 ].set_active(True)
         self.toggleautosave(self.autosave)
 
