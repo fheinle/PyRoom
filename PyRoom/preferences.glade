@@ -650,7 +650,6 @@
                             <property name="receives_default">True</property>
                             <property name="use_alpha">True</property>
                             <property name="color">#000000000000</property>
-                            <signal name="color_set" handler="on_colorbutton1_color_set"/>
                           </object>
                           <packing>
                             <property name="left_attach">1</property>
@@ -1041,7 +1040,6 @@
                 <property name="receives_default">True</property>
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="on_button-ok_clicked"/>
-                <signal name="activate" handler="on_button-ok_activate"/>
               </object>
               <packing>
                 <property name="expand">False</property>
