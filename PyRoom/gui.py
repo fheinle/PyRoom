@@ -27,7 +27,6 @@ Additionally allows user to apply custom settings
 import gtk
 import gobject
 import pango
-import gtk.glade
 import ConfigParser
 import os
 from sys import platform
