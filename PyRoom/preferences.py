@@ -27,7 +27,6 @@ theme created via the dialog
 """
 
 import gtk
-import gtk.glade
 import os
 
 from gui import Theme
@@ -38,41 +37,41 @@ from utils import get_themes_list, FailsafeConfigParser
 class Preferences(object):
     """our main preferences object, to be passed around where needed"""
     def __init__(self):
-        self.wTree = gtk.glade.XML(os.path.join(
-            state['absolute_path'], "interface.glade"),
-            "dialog-preferences")
+        gladefile = os.path.join(state['absolute_path'], "preferences.glade")
+        builder = gtk.Builder()
+        builder.add_from_file(gladefile)
 
         # Defining widgets needed
-        self.window = self.wTree.get_widget("dialog-preferences")
-        self.colorpreference = self.wTree.get_widget("colorbutton")
-        self.textboxbgpreference = self.wTree.get_widget("textboxbgbutton")
-        self.bgpreference = self.wTree.get_widget("bgbutton")
-        self.borderpreference = self.wTree.get_widget("borderbutton")
-        self.paddingpreference = self.wTree.get_widget("paddingtext")
-        self.heightpreference = self.wTree.get_widget("heighttext")
+        self.window = builder.get_object("dialog-preferences")
+        self.colorpreference = builder.get_object("colorbutton")
+        self.textboxbgpreference = builder.get_object("textboxbgbutton")
+        self.bgpreference = builder.get_object("bgbutton")
+        self.borderpreference = builder.get_object("borderbutton")
+        self.paddingpreference = builder.get_object("paddingtext")
+        self.heightpreference = builder.get_object("heighttext")
         self.heightpreference.set_range(5, 95)
-        self.widthpreference = self.wTree.get_widget("widthtext")
+        self.widthpreference = builder.get_object("widthtext")
         self.widthpreference.set_range(5, 95)
-        self.presetscombobox = self.wTree.get_widget("presetscombobox")
-        self.showborderbutton = self.wTree.get_widget("showborder")
-        self.autosave = self.wTree.get_widget("autosavetext")
-        self.autosave_spinbutton = self.wTree.get_widget("autosavetime")
-        self.linespacing_spinbutton = self.wTree.get_widget("linespacing")
-        self.indent_check = self.wTree.get_widget("indent_check")
+        self.presetscombobox = builder.get_object("presetscombobox")
+        self.showborderbutton = builder.get_object("showborder")
+        self.autosave = builder.get_object("autosavetext")
+        self.autosave_spinbutton = builder.get_object("autosavetime")
+        self.linespacing_spinbutton = builder.get_object("linespacing")
+        self.indent_check = builder.get_object("indent_check")
         if config.get('visual', 'indent') == '1':
             self.indent_check.set_active(True)
-        self.save_custom_button = self.wTree.get_widget("save_custom_theme")
-        self.custom_font_preference = self.wTree.get_widget("fontbutton1")
+        self.save_custom_button = builder.get_object("save_custom_theme")
+        self.custom_font_preference = builder.get_object("fontbutton1")
         if not config.get('visual', 'use_font_type') == 'custom':
             self.custom_font_preference.set_sensitive(False)
         self.font_radios = {
-            'document':self.wTree.get_widget("radio_document_font"),
-            'monospace':self.wTree.get_widget("radio_monospace_font"),
-            'custom':self.wTree.get_widget("radio_custom_font")
+            'document':builder.get_object("radio_document_font"),
+            'monospace':builder.get_object("radio_monospace_font"),
+            'custom':builder.get_object("radio_custom_font")
         }
         self.orientation_radios = {
-                'top':self.wTree.get_widget('orientation_top'),
-                'center':self.wTree.get_widget('orientation_center'),
+                'top':builder.get_object('orientation_top'),
+                'center':builder.get_object('orientation_center'),
                 }
         for widget in self.font_radios.values():
             if not widget.get_name() == 'radio_custom_font':
@@ -131,7 +130,8 @@ class Preferences(object):
                 "on_button-close_clicked": self.kill_preferences,
                 "on_close": self.kill_preferences
                 }
-        self.wTree.signal_autoconnect(dic)
+        builder.connect_signals(dic)
+
         self.showborderbutton.connect('toggled', self.toggleborder)
         self.autosave.connect('toggled', self.toggleautosave)
         self.autosave_spinbutton.connect('value-changed', self.toggleautosave)
@@ -309,7 +309,7 @@ class Preferences(object):
 
     def show(self):
         """display the preferences dialog"""
-        self.dlg = self.wTree.get_widget("dialog-preferences")
+        self.dlg = self.window
         self.dlg.show()
 
     def toggle_indent(self, widget):
