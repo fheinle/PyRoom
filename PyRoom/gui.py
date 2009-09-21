@@ -63,6 +63,16 @@ class Theme(dict):
         theme_file.read(theme_filename)
         self.update(theme_file.items('theme'))
 
+    def __getitem__(self, item):
+        """get default values from our default theme
+
+        this is to handle custom themes from older versions"""
+        try:
+            return dict.__getitem__(self, item)
+        except KeyError:
+            default_theme = Theme('green')
+            return default_theme[item]
+
     def _lookup_theme(self, theme_name):
         """lookup theme_filename for given theme_name
 

@@ -12,6 +12,7 @@ User visible changes
 Bugfixes
 --------
 * fixed crash on startup if more than 1 language in $LANGUAGE (LP:#367990, #365477)
+* fixed crash when using older themes with missing keys (LP:#426490)
 
 Noteable background changes
 ---------------------------
