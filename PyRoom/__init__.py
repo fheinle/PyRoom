@@ -26,9 +26,8 @@ lang_in_env = os.environ.get('LANGUAGE', None)
 if lang_in_env:
     languages_used.extend(lang_in_env.split())
 
-for module in gettext:
-    module.bindtextdomain(GETTEXT_DOMAIN, LOCALE_PATH)
-    module.textdomain(GETTEXT_DOMAIN)
+gettext.bindtextdomain(GETTEXT_DOMAIN, LOCALE_PATH)
+gettext.textdomain(GETTEXT_DOMAIN)
 
 translation = gettext.translation(GETTEXT_DOMAIN, LOCALE_PATH,
                                   languages=languages_used,
