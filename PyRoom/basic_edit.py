@@ -26,7 +26,6 @@ within this file
 """
 
 import gtk
-import gtk.glade
 import os
 import urllib
 
@@ -391,31 +390,24 @@ class BasicEdit(object):
           max_height=monitor_geometry.height
         )
 
-        # Defines the glade file functions for use on closing a buffer
-        self.wTree = gtk.glade.XML(os.path.join(
-            state['absolute_path'], "interface.glade"),
-            "SaveBuffer")
-        self.dialog = self.wTree.get_widget("SaveBuffer")
+        # Defines the glade file functions for use on closing a buffer or exit
+        gladefile = os.path.join(state['absolute_path'], "interface.glade")
+        builder = gtk.Builder()
+        builder.add_from_file(gladefile)
+        self.dialog = builder.get_object("SaveBuffer")
         self.dialog.set_transient_for(self.window)
+        self.quitdialog = builder.get_object("QuitSave")
+        self.quitdialog.set_transient_for(self.window)
         dic = {
                 "on_button-close_clicked": self.unsave_dialog,
                 "on_button-cancel_clicked": self.cancel_dialog,
                 "on_button-save_clicked": self.save_dialog,
-                }
-        self.wTree.signal_autoconnect(dic)
-
-        #Defines the glade file functions for use on exit
-        self.aTree = gtk.glade.XML(os.path.join(
-            state['absolute_path'], "interface.glade"),
-            "QuitSave")
-        self.quitdialog = self.aTree.get_widget("QuitSave")
-        self.quitdialog.set_transient_for(self.window)
-        dic = {
                 "on_button-close2_clicked": self.quit_quit,
                 "on_button-cancel2_clicked": self.cancel_quit,
                 "on_button-save2_clicked": self.save_quit,
                 }
-        self.aTree.signal_autoconnect(dic)
+        builder.connect_signals(dic)
+
         self.keybindings = define_keybindings(self)
         # this sucks, shouldn't have to call this here, textbox should
         # have its background and padding color from GUI().__init__() already
