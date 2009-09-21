@@ -17,6 +17,7 @@ Bugfixes
 Noteable background changes
 ---------------------------
 * changed the way configuration and state keeping is handled (LP:#407349)
+* switched from libglade to gtkbuilder. Thanks Matthew Pirocchi!
 
 pyroom 0.4.1 (2009-04-06)
 =========================
