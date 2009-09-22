@@ -8,6 +8,7 @@ User visible changes
 * touchup for themes tab (thanks Fehmican Imırgı) (LP:#362535)
 * changed tab width to 4 spaces (LP:#363386)
 * top orientation of textbox possible (LP:#363390)
+* present current document's path in open_file dialog (LP:#428161)
 
 Bugfixes
 --------

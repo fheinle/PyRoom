@@ -506,7 +506,11 @@ Open those instead of the original file?''')
                 buttons=(gtk.STOCK_CANCEL, gtk.RESPONSE_CANCEL,
                 gtk.STOCK_OPEN, gtk.RESPONSE_OK))
         chooser.set_default_response(gtk.RESPONSE_OK)
-
+        buf = self.buffers[self.current]
+        if buf.filename != FILE_UNNAMED:
+            chooser.set_current_folder(
+                os.path.dirname(os.path.abspath(buf.filename)
+            ))
         res = chooser.run()
         if res == gtk.RESPONSE_OK:
             self.open_file_no_chooser(chooser.get_filename())
