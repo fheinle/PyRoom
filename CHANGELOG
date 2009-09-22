@@ -9,6 +9,7 @@ User visible changes
 * changed tab width to 4 spaces (LP:#363386)
 * top orientation of textbox possible (LP:#363390)
 * present current document's path in open_file dialog (LP:#428161)
+* try to suggest a likely path in file chooser dialogs (LP:#428161)
 
 Bugfixes
 --------

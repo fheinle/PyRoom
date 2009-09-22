@@ -74,6 +74,25 @@ Commands:
 
 """) % KEY_BINDINGS
 
+def get_likely_chooser_path(buffers, current):
+    """determine where the user might want to start browsing open/save dialogs
+
+    takes other buffer filenames into account, returns the closest one"""
+    if len(buffers) > 0:
+        # search in both directions for named buffers, backwards first
+        directions = (
+                (range(current, 0, -1)),
+                (range(current, len(buffers), 1))
+        )
+        for direction in directions:
+            for buf_num in direction:
+                if buffers[buf_num].filename != FILE_UNNAMED:
+                    return os.path.dirname(
+                            os.path.abspath(
+                             buffers[buf_num].filename
+                             )
+                            )
+
 def dispatch(*args, **kwargs):
     """call the method passed as args[1] without passing other arguments"""
     def eat(accel_group, acceleratable, keyval, modifier):
@@ -511,6 +530,10 @@ Open those instead of the original file?''')
             chooser.set_current_folder(
                 os.path.dirname(os.path.abspath(buf.filename)
             ))
+        else:
+            chooser_path = get_likely_chooser_path(self.buffers, self.current)
+            if chooser_path:
+                chooser.set_current_folder(chooser_path)
         res = chooser.run()
         if res == gtk.RESPONSE_OK:
             self.open_file_no_chooser(chooser.get_filename())
@@ -607,6 +630,10 @@ the file.')
         chooser.set_do_overwrite_confirmation(True)
         if buf.filename != FILE_UNNAMED:
             chooser.set_filename(buf.filename)
+        else:
+            chooser_path = get_likely_chooser_path(self.buffers, self.current)
+            if chooser_path:
+                chooser.set_current_folder(chooser_path)
         res = chooser.run()
         if res == gtk.RESPONSE_OK:
             buf.filename = chooser.get_filename()
