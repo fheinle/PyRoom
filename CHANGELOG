@@ -5,6 +5,7 @@ User visible changes
 --------------------
 * ask for confirmation on file overwrite, (LP:#390285)
 * add horizontal scrollbar if words are longer than lines (LP:#371660)
+* present current document's path in open_file dialog (LP:#428161)
 
 Bugfixes
 --------
