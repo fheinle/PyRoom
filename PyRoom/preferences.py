@@ -54,6 +54,7 @@ class Preferences(object):
         self.widthpreference.set_range(5, 95)
         self.presetscombobox = builder.get_object("presetscombobox")
         self.showborderbutton = builder.get_object("showborder")
+        self.showpathbutton = builder.get_object("showpath")
         self.autosave = builder.get_object("autosavetext")
         self.autosave_spinbutton = builder.get_object("autosavetime")
         self.linespacing_spinbutton = builder.get_object("linespacing")
@@ -98,6 +99,9 @@ class Preferences(object):
         self.showborderbutton.set_active(
                 config.getint('visual', 'showborder')
         )
+        self.showpathbutton.set_active(
+                config.getint('visual', 'showpath')
+        )
         font_type = config.get('visual', 'use_font_type')
         self.font_radios[font_type].set_active(True)
         self.orientation_radios[
@@ -133,6 +137,7 @@ class Preferences(object):
         builder.connect_signals(dic)
 
         self.showborderbutton.connect('toggled', self.toggleborder)
+        self.showpathbutton.connect('toggled', self.togglepath)
         self.autosave.connect('toggled', self.toggleautosave)
         self.autosave_spinbutton.connect('value-changed', self.toggleautosave)
         self.linespacing_spinbutton.connect(
@@ -329,6 +334,15 @@ class Preferences(object):
             opposite = 1
         config.set('visual', 'showborder', str(opposite))
         state['gui'].apply_theme()
+        
+    def togglepath(self, widget):
+        """toggle full path display in statusbar"""
+        pathstate = config.getint('visual', 'showpath')
+        if pathstate:
+            opposite = 0
+        else:
+            opposite = 1
+        config.set('visual', 'showpath', str(opposite))
 
     def changelinespacing(self, widget):
         """Change line spacing"""

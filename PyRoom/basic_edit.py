@@ -452,7 +452,7 @@ class BasicEdit(object):
 %(status)s, %(char_count)d character(s), %(word_count)d word(s)\
 , %(lines)d line(s)') % {
             'buffer_id': self.current + 1,
-            'buffer_name': buf.filename,
+            'buffer_name': buf.filename if int(config.get('visual', 'showpath')) else os.path.split(buf.filename)[1],
             'status': status,
             'char_count': buf.get_char_count(),
             'word_count': self.word_count(buf),

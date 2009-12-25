@@ -10,6 +10,7 @@ User visible changes
 * top orientation of textbox possible (LP:#363390)
 * present current document's path in open_file dialog (LP:#428161)
 * try to suggest a likely path in file chooser dialogs (LP:#428161)
+* allow toggling of full path/filename for info bar (LP:#500344)
 
 Bugfixes
 --------
