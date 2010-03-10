@@ -50,7 +50,7 @@ setup(
   author = author,
   description = 'PyRoom is a distraction-free, fullscreen text editor',
   packages = ['PyRoom',],
-  package_data = {'PyRoom':['interface.glade']},
+  package_data = {'PyRoom':['interface.glade', 'preferences.glade']},
   data_files = [
     ('/usr/share/pyroom/themes', glob.glob('themes/*.theme')),
     ('/usr/share/pyroom', ['pyroom.png']),
