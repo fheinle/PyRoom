@@ -64,6 +64,8 @@ simply and efficiently in a full-screen window, with no distractions.'))
         for filename in files:
             state['edit_instance'].open_file_no_chooser(filename)
             buffnum += 1
+    else:
+        state['edit_instance'].new_buffer()
 
     state['edit_instance'].set_buffer(buffnum)
     state['edit_instance'].status.set_text(

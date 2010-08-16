@@ -387,8 +387,6 @@ class BasicEdit(object):
         self.autosave_timeout_id = ''
         self.autosave_elapsed = ''
 
-        self.new_buffer()
-
         self.textbox.connect('key-press-event', self.key_press_event)
 
         # Autosave timer object
