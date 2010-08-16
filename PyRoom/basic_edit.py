@@ -61,7 +61,7 @@ Welcome to PyRoom and distraction-free writing.
 
 To hide this help window, press Control-W.
 
-PyRoom stays out of your way with formatting options and buttons, 
+PyRoom stays out of your way with formatting options and buttons,
 it is largely keyboard controlled, via shortcuts. You can find a list
 of available keyboard shortcuts later.
 
@@ -180,7 +180,7 @@ class UndoableBuffer(gtk.TextBuffer):
 
     designed as a drop-in replacement for gtksourceview,
     at least as far as undo is concerned"""
-    
+
     def __init__(self):
         """
         we'll need empty stacks for undo/redo and some state keeping
@@ -244,7 +244,7 @@ class UndoableBuffer(gtk.TextBuffer):
             self.undo_stack.append(prev_insert)
             self.undo_stack.append(undo_action)
         self.modified = True
-        
+
     def on_delete_range(self, text_buffer, start_iter, end_iter):
         def can_be_merged(prev, cur):
             """see if we can merge multiple deletions here
@@ -299,16 +299,16 @@ class UndoableBuffer(gtk.TextBuffer):
 
     def begin_not_undoable_action(self):
         """don't record the next actions
-        
+
         toggles self.not_undoable_action"""
-        self.not_undoable_action = True        
+        self.not_undoable_action = True
 
     def end_not_undoable_action(self):
         """record next actions
-        
+
         toggles self.not_undoable_action"""
         self.not_undoable_action = False
-    
+
     def undo(self):
         """undo inserts or deletions
 
@@ -390,7 +390,7 @@ class BasicEdit(object):
         self.new_buffer()
 
         self.textbox.connect('key-press-event', self.key_press_event)
-                        
+
         # Autosave timer object
         autosave.start_autosave(self)
 
@@ -404,10 +404,6 @@ class BasicEdit(object):
         current_monitor_number = screen.get_monitor_at_point(mouse_x, mouse_y)
         monitor_geometry = screen.get_monitor_geometry(current_monitor_number)
         self.window.move(monitor_geometry.x, monitor_geometry.y)
-        self.window.set_geometry_hints(None, min_width=monitor_geometry.width,
-          min_height=monitor_geometry.height, max_width=monitor_geometry.width,
-          max_height=monitor_geometry.height
-        )
 
         # Defines the glade file functions for use on closing a buffer or exit
         gladefile = os.path.join(state['absolute_path'], "interface.glade")
@@ -479,7 +475,7 @@ class BasicEdit(object):
 
     def ask_restore(self):
         """ask if backups should be restored
-        
+
         returns True if proposal is accepted
         returns False in any other case (declined/dialog closed)"""
         restore_dialog = gtk.Dialog(
@@ -549,7 +545,7 @@ Open those instead of the original file?''')
             returns backup filename if there's a backup file and
                     user wants to restore from it, else original filename
             """
-            fname = autosave.get_autosave_filename(filename) 
+            fname = autosave.get_autosave_filename(filename)
             if os.path.isfile(fname):
                 if self.ask_restore():
                     return fname
@@ -557,7 +553,7 @@ Open those instead of the original file?''')
         buf = self.new_buffer()
         buf.filename = filename
         filename_to_open = check_backup(filename)
-        
+
         try:
             buffer_file = open(filename_to_open, 'r')
             buf = self.buffers[self.current]
