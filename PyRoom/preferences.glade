@@ -1049,21 +1049,6 @@
             <property name="visible">True</property>
             <property name="layout_style">end</property>
             <child>
-              <object class="GtkButton" id="button-close">
-                <property name="label">gtk-cancel</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <signal name="clicked" handler="on_button-close_clicked"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">False</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkButton" id="button-ok">
                 <property name="label">gtk-ok</property>
                 <property name="visible">True</property>
@@ -1088,7 +1073,6 @@
       </object>
     </child>
     <action-widgets>
-      <action-widget response="0">button-close</action-widget>
       <action-widget response="0">button-ok</action-widget>
     </action-widgets>
   </object>

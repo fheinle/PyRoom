@@ -131,7 +131,6 @@ class Preferences(object):
         dic = {
                 "on_MainWindow_destroy": self.QuitEvent,
                 "on_button-ok_clicked": self.set_preferences,
-                "on_button-close_clicked": self.kill_preferences,
                 "on_close": self.kill_preferences
                 }
         builder.connect_signals(dic)
