@@ -4,7 +4,10 @@
 
 __VERSION__ = '0.4.2'
 import locale
-locale.setlocale(locale.LC_ALL, '')
+try :
+    locale.setlocale(locale.LC_ALL, '')
+except :
+    locale.setlocale(locale.LC_ALL, 'C')
 
 import gettext
 import gtk
@@ -19,7 +22,8 @@ if not os.path.isdir(LOCALE_PATH):
 
 # setup translation
 languages_used = []
-lc, encoding = locale.getdefaultlocale()
+lc, encoding = locale.getlocale()
+
 if lc:
     languages_used = [lc]
 lang_in_env = os.environ.get('LANGUAGE', None)
