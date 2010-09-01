@@ -41,6 +41,7 @@ KEY_BINDINGS = '\n'.join([
 _('Control-H: Show help in a new buffer'),
 _('Control-I: Show buffer information'),
 _('Control-P: Shows Preferences dialog'),
+_('Control-M: Minimize PyRoom'),
 _('Control-N: Create a new buffer'),
 _('Control-O: Open a file in a new buffer'),
 _('Control-Q: Quit'),
@@ -116,6 +117,7 @@ def make_accel_group(edit_instance):
         'w': edit_instance.close_dialog,
         'y': edit_instance.redo,
         'z': edit_instance.undo,
+        'm': edit_instance.dialog_minimize,
     }
     ag = gtk.AccelGroup()
     for key, value in keybindings.items():
@@ -783,3 +785,7 @@ continue editing your document.")
         """cleanup before quitting"""
         autosave.stop_autosave(self)
         state['gui'].quit()
+
+    def dialog_minimize(self):
+        """ Minimize (iconify) the window """
+        state['gui'].iconify()

@@ -11,6 +11,7 @@ User visible changes
 * present current document's path in open_file dialog (LP:#428161)
 * try to suggest a likely path in file chooser dialogs (LP:#428161)
 * allow toggling of full path/filename for info bar (LP:#500344)
+* added minimize-shortcut (LP:#547022)
 
 Bugfixes
 --------

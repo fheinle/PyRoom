@@ -338,3 +338,7 @@ class GUI(object):
             adj.value -= adj.step_increment
         else:
             adj.value = 0
+
+    def iconify(self):
+        """ Minimize (iconify) the window """
+        self.window.iconify()
