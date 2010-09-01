@@ -354,7 +354,7 @@ class Preferences(object):
         if self.autosave.get_active():
             self.autosave_spinbutton.set_sensitive(True)
             autosave_time = self.autosave_spinbutton.get_value_as_int()
-            config.set('editor', 'autosavee', '1')
+            config.set('editor', 'autosave', '1')
         else:
             self.autosave_spinbutton.set_sensitive(False)
             autosave_time = 0
