@@ -11,12 +11,15 @@ User visible changes
 * present current document's path in open_file dialog (LP:#428161)
 * try to suggest a likely path in file chooser dialogs (LP:#428161)
 * allow toggling of full path/filename for info bar (LP:#500344)
-* added minimize-shortcut (LP:#547022)
+* added minimize-shortcut. Thanks Justin Stout (LP:#547022)
+* removed nonfunctional cancel-button. Thanks Tony Martínez (LP:#619283)
+* no empty buffers when opening files. Thanks Tony Martínez (LP:#618329)
 
 Bugfixes
 --------
 * fixed crash on startup if more than 1 language in $LANGUAGE (LP:#367990, #365477)
 * fixed crash when using older themes with missing keys (LP:#426490)
+* fixed crash when changing fonts. Thanks chrelad (LP:#622793)
 
 Noteable background changes
 ---------------------------
