@@ -549,6 +549,8 @@ Open those instead of the original file?''')
             if os.path.isfile(fname):
                 if self.ask_restore():
                     return fname
+                else:
+                    os.remove(fname)
             return filename
         buf = self.new_buffer()
         buf.filename = filename

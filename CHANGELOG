@@ -21,6 +21,7 @@ Bugfixes
 * fixed crash when using older themes with missing keys (LP:#426490)
 * fixed crash when changing fonts. Thanks chrelad (LP:#622793)
 * fixed autosave stopped working. Thanks Thanks Tony Martínez (LP:#558347)
+* clean up discarded autosave files (LP:#628151)
 
 Noteable background changes
 ---------------------------
